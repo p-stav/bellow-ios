@@ -1,5 +1,5 @@
 //
-//  StartRippleTableViewCell.h
+//  StartPostTableViewCell.h
 //  Ripple
 //
 //  Created by Paul Stavropoulos on 1/27/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StartRippleTableViewCell : UITableViewCell
+@interface StartPostTableViewCell : UITableViewCell
 // @property (weak, nonatomic) IBOutlet UIImageView *cellTypeImage;
 @property (weak, nonatomic) IBOutlet UILabel *appendLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;

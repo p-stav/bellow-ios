@@ -1,5 +1,5 @@
 //
-//  RippleLevel.h
+//  BellowLevel.h
 //  Ripple
 //
 //  Created by Gal Oshri on 11/22/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RippleLevel : NSObject
+@interface BellowLevel : NSObject
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic) int minScore;

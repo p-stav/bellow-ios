@@ -7,7 +7,7 @@
 //
 
 #import "ExploreViewController.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "SwipeableCell.h"
 #import "UserSearchCell.h"
 #import "Ripple.h"
@@ -177,7 +177,7 @@
     [self.activityIndicator startAnimating];
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.trendingRipples= [RippleService getTopRipples:0];
+        self.trendingRipples= [BellowService getTopRipples:0];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // self.selectedDataSource = self.followingUsers;
@@ -364,7 +364,7 @@
             
         // call method to create ripples with block to reload
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSArray *newTrendingRipples = [RippleService getTopRipples:(int)[self.trendingRipples count]];
+            NSArray *newTrendingRipples = [BellowService getTopRipples:(int)[self.trendingRipples count]];
             
             if (newTrendingRipples.count < 26)
                 self.isAllTopRipples = YES;

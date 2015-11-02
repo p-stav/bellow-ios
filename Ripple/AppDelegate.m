@@ -15,7 +15,7 @@
 #import "Flurry.h"
 #import "NotificationsPage.h"
 #import "MapView.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <ParseFacebookUtilsV4/ParseFacebookUtilsV4.h>
@@ -206,7 +206,7 @@ BOOL isLaunch;
     UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        Ripple *ripple = [RippleService getRipple:rippleId];
+        Ripple *ripple = [BellowService getRipple:rippleId];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             MapView *rmv = [mainstoryboard instantiateViewControllerWithIdentifier:@"RippleMapView"];

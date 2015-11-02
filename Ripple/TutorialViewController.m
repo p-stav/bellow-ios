@@ -14,7 +14,7 @@
 #import "HomePage.h"
 #import <ParseFacebookUtilsV4/ParseFacebookUtilsV4.h>
 #import <ParseTwitterUtils/ParseTwitterUtils.h>
-#include "RippleService.h"
+#include "BellowService.h"
 
 
 
@@ -625,14 +625,14 @@
     
     if ([PFFacebookUtils isLinkedWithUser:user] && user[@"reach"]==nil)
     {
-        [RippleService getEmailFromFacebook];
+        [BellowService getEmailFromFacebook];
         [self presentUsernameAlert];
         
     }
     
     else if ([PFTwitterUtils isLinkedWithUser:user] && user[@"reach"] == nil)
     {
-        [RippleService getEmailFromTwitter];
+        [BellowService getEmailFromTwitter];
         [self presentUsernameAlert];
     }
     
@@ -723,12 +723,12 @@
         {
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 // make a call to see if username exists
-                int check = [RippleService checkUsername:[[alertView textFieldAtIndex:0] text]];
+                int check = [BellowService checkUsername:[[alertView textFieldAtIndex:0] text]];
                 
                 //referral
                 if (![[alertView textFieldAtIndex:1].text isEqualToString:@""])
                 {
-                    self.referralNum = [RippleService acceptReferral:[alertView textFieldAtIndex:1].text];
+                    self.referralNum = [BellowService acceptReferral:[alertView textFieldAtIndex:1].text];
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{

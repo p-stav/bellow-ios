@@ -8,11 +8,11 @@
 
 #import "MapView.h"
 #import "MiniRipple.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "Comment.h"
 #import "CommentTableViewCell.h"
 #import "TTTTimeIntervalFormatter.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "RippleLogInView.h"
 #import "RippleSignUpView.h"
 #import "ImageViewerViewController.h"
@@ -208,7 +208,7 @@
     {
         // get miniripples to display location circles
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            self.miniRipples = [RippleService getMiniRipplesGraph:self.ripple.rippleId];
+            self.miniRipples = [BellowService getMiniRipplesGraph:self.ripple.rippleId];
 
             dispatch_async( dispatch_get_main_queue(), ^{
                 [self addMiniRipplePaths];
@@ -359,7 +359,7 @@
     // grab comments
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
-        self.commentArray = [RippleService getRippleComments:self.ripple];
+        self.commentArray = [BellowService getRippleComments:self.ripple];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             [self.mapOverlayView setHidden:NO];
@@ -884,7 +884,7 @@
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Add code here to do background processing
             if (![self.ripple.rippleId isEqualToString:@"FakeRipple"])
-                [RippleService addComment:self.postCommentTextField.text forRipple:self.ripple];
+                [BellowService addComment:self.postCommentTextField.text forRipple:self.ripple];
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 // append this to commentsArray and add to table
@@ -930,9 +930,9 @@
     // [self.propagateButton.layer setZPosition:0.0];
     // [self.dismissButton.layer setZPosition:1.0];
     if (self.ripple.miniRippleId != nil)
-        [RippleService propagateRipple:self.ripple];
+        [BellowService propagateRipple:self.ripple];
     else
-        [RippleService propagateSwipeableRipple:self.ripple];
+        [BellowService propagateSwipeableRipple:self.ripple];
     
     self.ripple.actedUponState = 1;
     
@@ -969,9 +969,9 @@
     // [self.dismissButton.layer setZPosition:0.0];
     
     if (self.ripple.miniRippleId != nil)
-        [RippleService dismissRipple:self.ripple];
+        [BellowService dismissRipple:self.ripple];
     else
-        [RippleService dismissSwipeableRipple:self.ripple];
+        [BellowService dismissSwipeableRipple:self.ripple];
 
     self.ripple.actedUponState = 2;
     
@@ -1002,7 +1002,7 @@
 
 - (IBAction)deleteRipple:(UIButton *)sender {
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [RippleService deleteRipple:self.ripple];
+        [BellowService deleteRipple:self.ripple];
     });
     
     ProfilePageViewController *ppvc = (ProfilePageViewController *)[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
@@ -1144,7 +1144,7 @@
         {
             // flag this ripple
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [RippleService flagRipple:self.ripple.rippleId];
+                [BellowService flagRipple:self.ripple.rippleId];
             });
         }
     }

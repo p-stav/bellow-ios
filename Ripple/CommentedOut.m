@@ -128,7 +128,7 @@
 /**************LEVELCELLL FOR PROFILE PAGE
  LevelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"levelCell" forIndexPath:indexPath];
  
- RippleLevel *level = [self.userLevels objectAtIndex:[indexPath row]];
+ BellowLevel *level = [self.userLevels objectAtIndex:[indexPath row]];
  cell.levelLabel.text = level.name;
  cell.levelNumber.text = [NSString stringWithFormat:@"Level %d", [indexPath row]+1 ];
  cell.reachLabel.text = [NSString stringWithFormat:@"%dx reach",level.reach];

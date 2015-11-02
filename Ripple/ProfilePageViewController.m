@@ -13,9 +13,9 @@
 #import "MapView.h"
 #import "RippleLogInView.h"
 #import "RippleSignUpView.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "ImageCropping.h"
-#import "RippleLevel.h"
+#import "BellowLevel.h"
 #import "HeaderTableViewCell.h"
 #import "ImageViewerViewController.h"
 #import "WebViewViewController.h"
@@ -364,8 +364,8 @@ NSDictionary *socialMediaIconToName;
         {
             // this is someone else's profile page
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                self.user = [RippleService getUser:self.userId];
-                self.userLevels = [RippleService getRippleLevels];
+                self.user = [BellowService getUser:self.userId];
+                self.userLevels = [BellowService getRippleLevels];
                 
                 if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
                 {
@@ -394,7 +394,7 @@ NSDictionary *socialMediaIconToName;
             // Get My ripples
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 // Add code here to do background processing
-                self.userLevels = [RippleService getRippleLevels];
+                self.userLevels = [BellowService getRippleLevels];
                 self.selectedRippleArray = self.myRipples;
                 if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
                 {
@@ -469,7 +469,7 @@ NSDictionary *socialMediaIconToName;
     {
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Add code here to do background processing
-            self.myRipples = [RippleService getMyRipples:0 withSortMethod:0];
+            self.myRipples = [BellowService getMyRipples:0 withSortMethod:0];
             if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
             {
                 self.isAllMyRipples = YES;
@@ -491,7 +491,7 @@ NSDictionary *socialMediaIconToName;
         // Get spread ripples
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Add code here to do background processing
-            self.propagatedRipples = [RippleService getPropagatedRipples:0 withSortMethod:0];
+            self.propagatedRipples = [BellowService getPropagatedRipples:0 withSortMethod:0];
             
             if ([self.propagatedRipples count] < 25)// PARSE_PAGE_SIZE)
             {
@@ -512,7 +512,7 @@ NSDictionary *socialMediaIconToName;
     {
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Add code here to do background processing
-            self.myRipples = [RippleService getUserRipples:0 forUser:self.userId];
+            self.myRipples = [BellowService getUserRipples:0 forUser:self.userId];
             
             if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
             {
@@ -675,7 +675,7 @@ NSDictionary *socialMediaIconToName;
             }
             
             // points
-            RippleLevel *nextLevel = [self findLevel:1];
+            BellowLevel *nextLevel = [self findLevel:1];
             
             
             // setup following Label
@@ -741,8 +741,8 @@ NSDictionary *socialMediaIconToName;
     
     // calculate progress bar width
     double score = [self.currentUser[@"score"] doubleValue];
-    RippleLevel *nextLevel = [self findLevel:1];
-    RippleLevel *currentLevel = [self findLevel:0];
+    BellowLevel *nextLevel = [self findLevel:1];
+    BellowLevel *currentLevel = [self findLevel:0];
     double minScore = currentLevel.minScore;
     double maxScore = nextLevel.minScore;
     
@@ -763,7 +763,7 @@ NSDictionary *socialMediaIconToName;
     
 }
 
-- (RippleLevel *)findLevel: (int)whichLevel
+- (BellowLevel *)findLevel: (int)whichLevel
 {
     
     double score;
@@ -773,11 +773,11 @@ NSDictionary *socialMediaIconToName;
     else
         score = [self.user[@"score"] doubleValue];
     
-    RippleLevel *returnLevel;
+    BellowLevel *returnLevel;
     
     for (int i = 0; i < [self.userLevels count]; i++)
     {
-        RippleLevel *level = self.userLevels[i];
+        BellowLevel *level = self.userLevels[i];
         if (level.minScore > score)
         {
             if (whichLevel == 1)
@@ -1428,9 +1428,9 @@ NSDictionary *socialMediaIconToName;
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     NSArray *newMyRipples;
                     if (!self.userId)
-                        newMyRipples = [RippleService getMyRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
+                        newMyRipples = [BellowService getMyRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
                     else
-                        newMyRipples = [RippleService getUserRipples:(int)[self.selectedRippleArray count] forUser:self.userId];
+                        newMyRipples = [BellowService getUserRipples:(int)[self.selectedRippleArray count] forUser:self.userId];
                     
                     if (newMyRipples.count < 25) // PARSE_PAGE_SIZE)
                         self.isAllMyRipples = YES;
@@ -1451,7 +1451,7 @@ NSDictionary *socialMediaIconToName;
                 [self.indicatorFooter startAnimating];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     
-                    NSArray *newMyRipplesMostPopular = [RippleService getMyRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
+                    NSArray *newMyRipplesMostPopular = [BellowService getMyRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
                     
                     if (newMyRipplesMostPopular.count < 25) //PARSE_PAGE_SIZE)
                         self.isAllMyRipples = YES;
@@ -1472,7 +1472,7 @@ NSDictionary *socialMediaIconToName;
                 [self.indicatorFooter startAnimating];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     
-                    NSArray *newPropagatedRipples = [RippleService getPropagatedRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
+                    NSArray *newPropagatedRipples = [BellowService getPropagatedRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
                     
                     if (newPropagatedRipples.count < 25) //PARSE_PAGE_SIZE)
                         self.isAllPropagatedRipples = YES;
@@ -1493,7 +1493,7 @@ NSDictionary *socialMediaIconToName;
                 [self.indicatorFooter startAnimating];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     
-                    NSArray *newPropagatedRipplesMostPopular = [RippleService getPropagatedRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
+                    NSArray *newPropagatedRipplesMostPopular = [BellowService getPropagatedRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
                     
                     if (newPropagatedRipplesMostPopular.count < 25) //PARSE_PAGE_SIZE)
                         self.isAllPropagatedRipplesMostPopular = YES;
@@ -1529,7 +1529,7 @@ NSDictionary *socialMediaIconToName;
             {
                 dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     // Add code here to do background processing
-                    self.myRipples = [RippleService getMyRipples:0 withSortMethod:0];
+                    self.myRipples = [BellowService getMyRipples:0 withSortMethod:0];
                     self.selectedRippleArray = self.myRipples;
                     
                     if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
@@ -1559,7 +1559,7 @@ NSDictionary *socialMediaIconToName;
             {
                 dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     // Add code here to do background processing
-                    self.myRipplesMostPopular = [RippleService getMyRipples:0 withSortMethod:1];
+                    self.myRipplesMostPopular = [BellowService getMyRipples:0 withSortMethod:1];
                     self.selectedRippleArray = self.myRipplesMostPopular;
                     
                     if ([self.myRipplesMostPopular count] < 25) // PARSE_PAGE_SIZE)
@@ -1595,7 +1595,7 @@ NSDictionary *socialMediaIconToName;
                 // Get spread ripples
                 dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     // Add code here to do background processing
-                    self.propagatedRipples = [RippleService getPropagatedRipples:0 withSortMethod:0];
+                    self.propagatedRipples = [BellowService getPropagatedRipples:0 withSortMethod:0];
                     self.selectedRippleArray = self.propagatedRipples;
                     
                     if ([self.propagatedRipples count] < 25) // PARSE_PAGE_SIZE)
@@ -1627,7 +1627,7 @@ NSDictionary *socialMediaIconToName;
                 // Get spread ripples
                 dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     // Add code here to do background processing
-                    self.propagatedRipplesMostPopular = [RippleService getPropagatedRipples:0 withSortMethod:1];
+                    self.propagatedRipplesMostPopular = [BellowService getPropagatedRipples:0 withSortMethod:1];
                     self.selectedRippleArray = self.propagatedRipplesMostPopular;
                     
                     if ([self.propagatedRipplesMostPopular count] < 25) // PARSE_PAGE_SIZE)
@@ -1658,7 +1658,7 @@ NSDictionary *socialMediaIconToName;
     {
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Add code here to do background processing
-            self.myRipples = [RippleService getUserRipples:0 forUser:self.userId];
+            self.myRipples = [BellowService getUserRipples:0 forUser:self.userId];
             
             if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
             {
@@ -1721,7 +1721,7 @@ NSDictionary *socialMediaIconToName;
             }
             else if (self.myRipplesMostPopular == nil)
             {
-                self.myRipplesMostPopular = [RippleService getMyRipples:0 withSortMethod:sortMethod];
+                self.myRipplesMostPopular = [BellowService getMyRipples:0 withSortMethod:sortMethod];
                 self.selectedRippleArray = self.myRipplesMostPopular;
                 
                 
@@ -1743,7 +1743,7 @@ NSDictionary *socialMediaIconToName;
             }
             else if (self.propagatedRipplesMostPopular == nil)
             {
-                self.propagatedRipplesMostPopular = [RippleService getPropagatedRipples:0 withSortMethod:sortMethod];
+                self.propagatedRipplesMostPopular = [BellowService getPropagatedRipples:0 withSortMethod:sortMethod];
                 self.selectedRippleArray = self.propagatedRipplesMostPopular;
                 
                 
@@ -1874,7 +1874,7 @@ NSDictionary *socialMediaIconToName;
     
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-           [RippleService deleteRipple:ripple];
+           [BellowService deleteRipple:ripple];
     });
     
     [PFAnalytics trackEvent:@"RippleDeleted" dimensions:@{}];
@@ -1962,7 +1962,7 @@ NSDictionary *socialMediaIconToName;
         //referral
         if (user[@"additional"] != NULL)
         {
-            self.referralNum = [RippleService acceptReferral:user[@"additional"]];
+            self.referralNum = [BellowService acceptReferral:user[@"additional"]];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -2109,7 +2109,7 @@ NSDictionary *socialMediaIconToName;
                 // add!
                 [[PFUser currentUser][@"following"] addObject:self.userId];
                 [self.followButton setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
-                [RippleService addToFollowingNumber:self.userId];
+                [BellowService addToFollowingNumber:self.userId];
                 
                 // add to followingNum
                 [self.currentUser incrementKey:@"followingNumber"];
@@ -2121,7 +2121,7 @@ NSDictionary *socialMediaIconToName;
             // remove!
             [[PFUser currentUser][@"following"] removeObject:self.userId];
             [self.followButton setImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
-            [RippleService removeFromFollowingNumber:self.userId];
+            [BellowService removeFromFollowingNumber:self.userId];
             
             // remove from followingNum
             [self.currentUser incrementKey:@"followingNumber" byAmount:[NSNumber numberWithInt:-1]];
@@ -2135,7 +2135,7 @@ NSDictionary *socialMediaIconToName;
         [PFUser currentUser][@"following"] = following;
         
         [self.followButton setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
-        [RippleService addToFollowingNumber:self.userId];
+        [BellowService addToFollowingNumber:self.userId];
         
         // add to followingNum
         [self.currentUser incrementKey:@"followingNumber"];

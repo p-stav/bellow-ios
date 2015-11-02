@@ -7,9 +7,9 @@
 //
 
 #import "LevelsViewController.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "LevelCell.h"
-#import "RippleLevel.h"
+#import "BellowLevel.h"
 #import <Parse/Parse.h>
 
 @interface LevelsViewController ()
@@ -36,7 +36,7 @@
     // make call to get table data
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
-        self.levelsFromService = [RippleService getRippleLevels];
+        self.levelsFromService = [BellowService getRippleLevels];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             [self.levels addObjectsFromArray:self.levelsFromService];
@@ -65,7 +65,7 @@
 {
     LevelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"levelCell" forIndexPath:indexPath];
     
-    RippleLevel *level = [self.levels objectAtIndex:[indexPath row]];
+    BellowLevel *level = [self.levels objectAtIndex:[indexPath row]];
     cell.levelLabel.text = level.name;
     cell.levelNumber.text = [NSString stringWithFormat:@"Level %d", [indexPath row]+1 ];
     cell.reachLabel.text = [NSString stringWithFormat:@"%dx reach",level.reach];

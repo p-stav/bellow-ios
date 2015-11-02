@@ -7,7 +7,7 @@
 //
 
 #import "UserSearchCell.h"
-#import "RippleService.h"
+#import "BellowService.h"
 
 @implementation UserSearchCell
 
@@ -27,7 +27,7 @@
         self.isFollowing = NO;
         [self.followerImage setImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
         [[PFUser currentUser][@"following"] removeObject:self.objectId];
-        [RippleService removeFromFollowingNumber:self.objectId];
+        [BellowService removeFromFollowingNumber:self.objectId];
         
     }
     else
@@ -41,7 +41,7 @@
             NSMutableArray *following = [[NSMutableArray alloc] initWithObjects:self.objectId, nil];
             [PFUser currentUser][@"following"]  = following;
         }
-        [RippleService addToFollowingNumber:self.objectId];
+        [BellowService addToFollowingNumber:self.objectId];
     }
     
     

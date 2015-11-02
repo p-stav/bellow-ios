@@ -12,7 +12,7 @@
 #import "PendingRippleCell.h"
 #import "MyRippleCell.h"
 #import "WebViewViewController.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "ImageCropping.h"
 #import "RippleLogInView.h"
 #import "RippleSignUpView.h"
@@ -359,7 +359,7 @@ int PARSE_PAGE_SIZE = 25;
     // get settings data
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
-        [RippleService getSettings];
+        [BellowService getSettings];
     });
 
     
@@ -468,14 +468,14 @@ int PARSE_PAGE_SIZE = 25;
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Add code here to do background processing
             if (self.rippleSegmentControl.selectedSegmentIndex == 0)
-                self.pendingRipples = [RippleService getPendingRipples:0];
+                self.pendingRipples = [BellowService getPendingRipples:0];
             if (self.rippleSegmentControl.selectedSegmentIndex == 1)
             {
-                self.followingRipples = [RippleService getFollowingRipples];
+                self.followingRipples = [BellowService getFollowingRipples];
                 self.followingSkip = 0;
             }
             if (self.rippleSegmentControl.selectedSegmentIndex == 2)
-                self.topRipples  = [RippleService getTopRipples:0];
+                self.topRipples  = [BellowService getTopRipples:0];
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 // reload table and check if pending ripples
@@ -492,8 +492,8 @@ int PARSE_PAGE_SIZE = 25;
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             if (!self.finishedFirstUpdateView)
             {
-                self.followingRipples = [RippleService getFollowingRipples];
-                //self.topRipples  = [RippleService getTopRipples:0];
+                self.followingRipples = [BellowService getFollowingRipples];
+                //self.topRipples  = [BellowService getTopRipples:0];
                 
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [self checkBarrier];
@@ -1037,7 +1037,7 @@ int PARSE_PAGE_SIZE = 25;
 
             // call method to create ripples with block to reload
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSArray *newHomeRipples = [RippleService getPendingRipples:(int)[self.selectedRippleArray count]];
+                NSArray *newHomeRipples = [BellowService getPendingRipples:(int)[self.selectedRippleArray count]];
                 
                 if (newHomeRipples.count < PARSE_PAGE_SIZE)
                     self.isAllHomeRipples = YES;
@@ -1056,7 +1056,7 @@ int PARSE_PAGE_SIZE = 25;
             [self.indicatorFooter startAnimating];
             // call method to create ripples with block to reload
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSArray *newFollowingRipples = [RippleService getStoredFollowingRipples:self.followingSkip + 25];
+                NSArray *newFollowingRipples = [BellowService getStoredFollowingRipples:self.followingSkip + 25];
                 
                 if (newFollowingRipples.count < PARSE_PAGE_SIZE)
                     self.isAllFollowingRipples = YES;
@@ -1136,9 +1136,9 @@ int PARSE_PAGE_SIZE = 25;
     }
     
     if (self.rippleSegmentControl.selectedSegmentIndex ==0)
-        [RippleService dismissRipple:ripple];
+        [BellowService dismissRipple:ripple];
     else
-        [RippleService dismissSwipeableRipple:ripple];
+        [BellowService dismissSwipeableRipple:ripple];
     
     // check if first dismiss
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
@@ -1195,9 +1195,9 @@ int PARSE_PAGE_SIZE = 25;
     
     // cloud calls and notifications
     if (ripple.miniRippleId != nil)
-        [RippleService propagateRipple:ripple];
+        [BellowService propagateRipple:ripple];
     else
-        [RippleService propagateSwipeableRipple:ripple];
+        [BellowService propagateSwipeableRipple:ripple];
     
     ripple.numberPropagated += 1;
     ripple.actedUponState = 1;
@@ -1381,13 +1381,13 @@ int PARSE_PAGE_SIZE = 25;
         
         if ([self.rippleSegmentControl selectedSegmentIndex] == 0)
         {
-            self.pendingRipples = [RippleService getPendingRipples:0];
+            self.pendingRipples = [BellowService getPendingRipples:0];
             self.selectedRippleArray = self.pendingRipples;
         }
         
         else if (self.rippleSegmentControl.selectedSegmentIndex ==1)
         {
-            self.followingRipples = [RippleService getFollowingRipples];
+            self.followingRipples = [BellowService getFollowingRipples];
             self.selectedRippleArray = self.followingRipples;
         }
         
@@ -1786,7 +1786,7 @@ int PARSE_PAGE_SIZE = 25;
 - (void)addNotificationsBadge
 {
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        int badgeNumber = [RippleService getNotificationBadgeNumber];
+        int badgeNumber = [BellowService getNotificationBadgeNumber];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             UITabBarItem *tbi = (UITabBarItem *) [self.tabBarController.tabBar.items objectAtIndex:3];

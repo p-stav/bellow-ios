@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
 //
 
-#import "RipplePoint.h"
+#import "BellowPoint.h"
 
-@implementation RipplePoint
+@implementation BellowPoint
 
 @end

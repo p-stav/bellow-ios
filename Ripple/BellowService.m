@@ -1,16 +1,16 @@
 //
-//  RippleService.m
+//  BellowService.m
 //  Ripple
 //
 //  Created by Gal Oshri on 9/11/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
 //
 
-#import "RippleService.h"
+#import "BellowService.h"
 #import <Parse/Parse.h>
 #import "MiniRipple.h"
-#import "RippleLevel.h"
-#import "RipplePoint.h"
+#import "BellowLevel.h"
+#import "BellowPoint.h"
 #import "Comment.h"
 #import <AddressBook/AddressBook.h>
 #import "Notification.h"
@@ -18,7 +18,7 @@
 #import "PointsViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-@implementation RippleService
+@implementation BellowService
 
 +(int) checkUsername:(NSString *)username
 {
@@ -576,11 +576,11 @@
     NSArray *rippleLevelObjects = [rippleLevelQuery findObjects];
     
     NSMutableArray *rippleLevels = [[NSMutableArray alloc] init];
-    RippleLevel *level;
+    BellowLevel *level;
     
     for (PFObject *rippleLevelObject in rippleLevelObjects)
     {
-        level = [[RippleLevel alloc] init];
+        level = [[BellowLevel alloc] init];
         level.name = [NSString stringWithString:rippleLevelObject[@"name"]];
         level.minScore = [rippleLevelObject[@"minScore"] intValue];
         level.reach = [rippleLevelObject[@"reach"] intValue];
@@ -610,11 +610,11 @@
     NSArray *ripplePointObjects = [ripplePointQuery findObjects];
     
     NSMutableArray *ripplePoints = [[NSMutableArray alloc] init];
-    RipplePoint *point;
+    BellowPoint *point;
 
     for (PFObject *ripplePointObject in ripplePointObjects)
     {
-        point = [[RipplePoint alloc] init];
+        point = [[BellowPoint alloc] init];
         point.event = [NSString stringWithFormat:@"A ripple of yours spread %d times", [ripplePointObject[@"spread"] intValue]];
         point.points = [ripplePointObject[@"points"] intValue];
         [ripplePoints addObject:point];

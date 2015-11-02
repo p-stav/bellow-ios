@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RipplePoint : NSObject
+@interface BellowPoint : NSObject
 
 @property (strong, nonatomic) NSString *event;
 @property (nonatomic) int points;

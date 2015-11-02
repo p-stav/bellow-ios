@@ -7,7 +7,7 @@
 //
 
 #import <Parse/Parse.h>
-#import "RippleService.h"
+#import "BellowService.h"
 #import "SearchViewController.h"
 #import "Flurry.h"
 #import "ShareRippleSheet.h"
@@ -118,7 +118,7 @@
 {
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (![self.searchField.text isEqualToString:@""] && ![self.searchField.text isEqualToString:@" "])
-            self.searchResults = [RippleService getSearchResults:self.searchField.text];
+            self.searchResults = [BellowService getSearchResults:self.searchField.text];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             [self.activityIndicator stopAnimating];
@@ -186,7 +186,7 @@
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.searchResults = [RippleService getSearchResults:searchBar.text];
+        self.searchResults = [BellowService getSearchResults:searchBar.text];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             

@@ -9,7 +9,7 @@
 #import "StaticProfileTableTableViewController.h"
 #import "ShareRippleSheet.h"
 #import <Parse/Parse.h>
-#import "RippleService.h"
+#import "BellowService.h"
 #import "WebViewViewController.h"
 
 @interface StaticProfileTableTableViewController ()
@@ -105,7 +105,7 @@
         {
             // run service
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                self.referralNum = [RippleService acceptReferral:[[alertView textFieldAtIndex:0] text]];
+                self.referralNum = [BellowService acceptReferral:[[alertView textFieldAtIndex:0] text]];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // initiate user user refresh

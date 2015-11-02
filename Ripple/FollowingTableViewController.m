@@ -8,7 +8,7 @@
 
 #import "FollowingTableViewController.h"
 #import "ProfilePageViewController.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "UserSearchCell.h"
 #import "Flurry.h"
 
@@ -58,7 +58,7 @@
 - (void) updateView
 {
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.followingUsers = [RippleService getFollowingUsers];
+        self.followingUsers = [BellowService getFollowingUsers];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             [self.tableView reloadData];

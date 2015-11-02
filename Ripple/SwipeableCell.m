@@ -7,7 +7,7 @@
 //
 
 #import "SwipeableCell.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
 @implementation SwipeableCell
@@ -194,9 +194,9 @@ BOOL _propagateOnDragRelease;
     //self.ripple.actedUponState = 2;
     
     if (self.ripple.miniRippleId != nil)
-        [RippleService dismissRipple:self.ripple];
+        [BellowService dismissRipple:self.ripple];
     else
-        [RippleService dismissSwipeableRipple:self.ripple];
+        [BellowService dismissSwipeableRipple:self.ripple];
     
     [self.delegate rippleDismissed:self.ripple];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"swipedRipple" object:self.ripple];
@@ -245,9 +245,9 @@ BOOL _propagateOnDragRelease;
     
     // update ripple object
     if (self.ripple.miniRippleId != nil)
-        [RippleService propagateRipple:self.ripple];
+        [BellowService propagateRipple:self.ripple];
     else
-        [RippleService propagateSwipeableRipple:self.ripple];
+        [BellowService propagateSwipeableRipple:self.ripple];
     
     [self.delegate ripplePropagated:self.ripple];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"swipedRipple" object:self.ripple];

@@ -18,7 +18,7 @@
 		0D73282519C2CEC00076CD7F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D73282419C2CEC00076CD7F /* Security.framework */; };
 		0D73282719C2CEC90076CD7F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D73282619C2CEC90076CD7F /* StoreKit.framework */; };
 		0D73282919C2CED20076CD7F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D73282819C2CED20076CD7F /* SystemConfiguration.framework */; };
-		0D73282C19C2CF950076CD7F /* RippleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D73282B19C2CF950076CD7F /* RippleService.m */; };
+		0D73282C19C2CF950076CD7F /* BellowService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D73282B19C2CF950076CD7F /* BellowService.m */; };
 		0D73283319C2D3250076CD7F /* RippleLogInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D73283019C2D3250076CD7F /* RippleLogInView.m */; };
 		0D73283419C2D3250076CD7F /* RippleSignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D73283219C2D3250076CD7F /* RippleSignUpView.m */; };
 		0D73283719C2D63C0076CD7F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D73283619C2D63C0076CD7F /* Social.framework */; };
@@ -38,7 +38,7 @@
 		0DB855C51A1801DB008C824F /* TermsOfServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB855C41A1801DB008C824F /* TermsOfServiceView.m */; };
 		0DB855C81A1801EC008C824F /* PrivacyPolicyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB855C71A1801EC008C824F /* PrivacyPolicyView.m */; };
 		0DB855D11A19D34F008C824F /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB855D01A19D34F008C824F /* TTTTimeIntervalFormatter.m */; };
-		0DB855D71A2147F8008C824F /* RippleLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB855D61A2147F8008C824F /* RippleLevel.m */; };
+		0DB855D71A2147F8008C824F /* BellowLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB855D61A2147F8008C824F /* BellowLevel.m */; };
 		0DD5AB2119E7954F003CA91F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD5AB2019E7954F003CA91F /* MapKit.framework */; };
 		0DD5AB2419E91470003CA91F /* MiniRipple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5AB2319E91470003CA91F /* MiniRipple.m */; };
 		0DFB081619C17FC700A57630 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFB081519C17FC700A57630 /* Foundation.framework */; };
@@ -146,12 +146,12 @@
 		DADD00021A818CD300E49BC1 /* TwitterService.m in Sources */ = {isa = PBXBuildFile; fileRef = DADD00011A818CD300E49BC1 /* TwitterService.m */; };
 		DADD00041A840A2300E49BC1 /* verticalLine.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD00031A840A2300E49BC1 /* verticalLine.png */; };
 		DADDFFFA1A800B3200E49BC1 /* PointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADDFFF91A800B3200E49BC1 /* PointsViewController.m */; };
-		DADDFFFD1A800F3D00E49BC1 /* RipplePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DADDFFFC1A800F3D00E49BC1 /* RipplePoint.m */; };
+		DADDFFFD1A800F3D00E49BC1 /* BellowPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DADDFFFC1A800F3D00E49BC1 /* BellowPoint.m */; };
 		DAE13D531A0BE937005D59DE /* dismissButton.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE13D521A0BE937005D59DE /* dismissButton.png */; };
 		DAE13D601A0ED167005D59DE /* HomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE13D5F1A0ED167005D59DE /* HomePage.m */; };
 		DAE13D641A0ED1C6005D59DE /* PendingRippleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE13D631A0ED1C6005D59DE /* PendingRippleCell.m */; };
 		DAE13D661A0EF0C5005D59DE /* smallCircleFull.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE13D651A0EF0C5005D59DE /* smallCircleFull.png */; };
-		DAE171601A78005D00A2E89D /* StartRippleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE1715F1A78005D00A2E89D /* StartRippleTableViewCell.m */; };
+		DAE171601A78005D00A2E89D /* StartPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE1715F1A78005D00A2E89D /* StartPostTableViewCell.m */; };
 		DAE58C421A7E0177007C9A10 /* ImageCropping.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE58C411A7E0177007C9A10 /* ImageCropping.m */; };
 		DAE612431B8C47DB009D74D5 /* UserSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE612421B8C47DB009D74D5 /* UserSearchCell.xib */; };
 		DAE612461B8C4BBA009D74D5 /* FollowingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE612451B8C4BBA009D74D5 /* FollowingTableViewController.m */; };
@@ -186,8 +186,8 @@
 		0D73282419C2CEC00076CD7F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0D73282619C2CEC90076CD7F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0D73282819C2CED20076CD7F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		0D73282A19C2CF950076CD7F /* RippleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleService.h; sourceTree = "<group>"; };
-		0D73282B19C2CF950076CD7F /* RippleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleService.m; sourceTree = "<group>"; };
+		0D73282A19C2CF950076CD7F /* BellowService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BellowService.h; sourceTree = "<group>"; };
+		0D73282B19C2CF950076CD7F /* BellowService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BellowService.m; sourceTree = "<group>"; };
 		0D73282F19C2D3250076CD7F /* RippleLogInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleLogInView.h; sourceTree = "<group>"; };
 		0D73283019C2D3250076CD7F /* RippleLogInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleLogInView.m; sourceTree = "<group>"; };
 		0D73283119C2D3250076CD7F /* RippleSignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleSignUpView.h; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 		0D75505E1A8B1CFC00004282 /* rightArrowReal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrowReal.png; sourceTree = "<group>"; };
 		0D7550601A8B429900004282 /* latestIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = latestIcon.png; sourceTree = "<group>"; };
 		0D924A4319E790B800B6AACE /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
-		0D924A4419E790B800B6AACE /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
+		0D924A4419E790B800B6AACE /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MapView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0DA264C21AECBE3B00953CB2 /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
 		0DA264C31AECBE3B00953CB2 /* Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notification.m; sourceTree = "<group>"; };
 		0DA264C81AED882F00953CB2 /* NotificationsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsPage.h; sourceTree = "<group>"; };
@@ -209,7 +209,6 @@
 		0DA264E21AF9CEC400953CB2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		0DA264E51AF9D15100953CB2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		0DA264E91AF9D26500953CB2 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		0DADC94719D289E100127E4F /* MyRipplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRipplesViewController.h; sourceTree = "<group>"; };
 		0DADC94B19D28D0200127E4F /* MyRippleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRippleCell.h; sourceTree = "<group>"; };
 		0DADC94C19D28D0200127E4F /* MyRippleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRippleCell.m; sourceTree = "<group>"; };
 		0DB5B3EB1A0F4C07008C0C1B /* PropagateRippleCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropagateRippleCellDelegate.h; sourceTree = "<group>"; };
@@ -219,8 +218,8 @@
 		0DB855C71A1801EC008C824F /* PrivacyPolicyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyView.m; sourceTree = "<group>"; };
 		0DB855CF1A19D34F008C824F /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
 		0DB855D01A19D34F008C824F /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
-		0DB855D51A2147F8008C824F /* RippleLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleLevel.h; sourceTree = "<group>"; };
-		0DB855D61A2147F8008C824F /* RippleLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleLevel.m; sourceTree = "<group>"; };
+		0DB855D51A2147F8008C824F /* BellowLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BellowLevel.h; sourceTree = "<group>"; };
+		0DB855D61A2147F8008C824F /* BellowLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BellowLevel.m; sourceTree = "<group>"; };
 		0DD5AB2019E7954F003CA91F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0DD5AB2219E91470003CA91F /* MiniRipple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiniRipple.h; sourceTree = "<group>"; };
 		0DD5AB2319E91470003CA91F /* MiniRipple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiniRipple.m; sourceTree = "<group>"; };
@@ -235,7 +234,7 @@
 		0DFB082419C17FC700A57630 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0DFB082519C17FC700A57630 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0DFB082A19C17FC700A57630 /* StartPostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartPostViewController.h; sourceTree = "<group>"; };
-		0DFB082B19C17FC700A57630 /* StartPostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartPostViewController.m; sourceTree = "<group>"; usesTabs = 0; };
+		0DFB082B19C17FC700A57630 /* StartPostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StartPostViewController.m; sourceTree = "<group>"; usesTabs = 0; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0DFB082D19C17FC700A57630 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0DFB083319C17FC700A57630 /* Bellow.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bellow.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFB083419C17FC700A57630 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -255,14 +254,14 @@
 		DA125F961AE63908006731DE /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarController.h; path = Ripple/TabBarController.h; sourceTree = "<group>"; };
 		DA125F971AE63908006731DE /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarController.m; path = Ripple/TabBarController.m; sourceTree = "<group>"; };
 		DA125F9A1AE6FDC9006731DE /* ProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePageViewController.h; sourceTree = "<group>"; };
-		DA125F9B1AE6FDC9006731DE /* ProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePageViewController.m; sourceTree = "<group>"; };
+		DA125F9B1AE6FDC9006731DE /* ProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ProfilePageViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA20DEA519CE059D0057C00F /* pebble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pebble.png; sourceTree = "<group>"; };
 		DA2561771B2A614C00B38A38 /* rippleMapGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rippleMapGif.gif; sourceTree = "<group>"; };
 		DA2561791B2A791000B38A38 /* reachLevel.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = reachLevel.gif; sourceTree = "<group>"; };
 		DA2628CE1A2D0C6900CB6D90 /* LevelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelCell.h; sourceTree = "<group>"; };
 		DA2628CF1A2D0C6900CB6D90 /* LevelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelCell.m; sourceTree = "<group>"; };
 		DA2B0EDD1A8690CF00879B1E /* StaticProfileTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticProfileTableTableViewController.h; sourceTree = "<group>"; };
-		DA2B0EDE1A8690CF00879B1E /* StaticProfileTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticProfileTableTableViewController.m; sourceTree = "<group>"; };
+		DA2B0EDE1A8690CF00879B1E /* StaticProfileTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StaticProfileTableTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA2B0EE01A86925100879B1E /* ShareRippleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareRippleSheet.h; sourceTree = "<group>"; };
 		DA2B0EE11A86925100879B1E /* ShareRippleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareRippleSheet.m; sourceTree = "<group>"; };
 		DA39A8BE1BABEC6E00D7980E /* dismissRippleIconUnselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dismissRippleIconUnselected.png; sourceTree = "<group>"; };
@@ -353,7 +352,7 @@
 		DAC1E4FC1A50AD90008960F9 /* ImageViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerViewController.m; sourceTree = "<group>"; };
 		DAD00FDD1B8D4B6600725666 /* InstagramAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InstagramAdd.png; sourceTree = "<group>"; };
 		DADB74FA1BC1A96D00749DAA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		DADB74FB1BC1A96D00749DAA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		DADB74FB1BC1A96D00749DAA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SearchViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DADB74FD1BC1DD2C00749DAA /* TrendingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendingCollectionViewCell.h; sourceTree = "<group>"; };
 		DADB74FE1BC1DD2C00749DAA /* TrendingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendingCollectionViewCell.m; sourceTree = "<group>"; };
 		DADB75001BC218C400749DAA /* HeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCollectionReusableView.h; sourceTree = "<group>"; };
@@ -362,17 +361,17 @@
 		DADD00011A818CD300E49BC1 /* TwitterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterService.m; sourceTree = "<group>"; };
 		DADD00031A840A2300E49BC1 /* verticalLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verticalLine.png; sourceTree = "<group>"; };
 		DADDFFF81A800B3200E49BC1 /* PointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointsViewController.h; sourceTree = "<group>"; };
-		DADDFFF91A800B3200E49BC1 /* PointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointsViewController.m; sourceTree = "<group>"; };
-		DADDFFFB1A800F3D00E49BC1 /* RipplePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RipplePoint.h; sourceTree = "<group>"; };
-		DADDFFFC1A800F3D00E49BC1 /* RipplePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RipplePoint.m; sourceTree = "<group>"; };
+		DADDFFF91A800B3200E49BC1 /* PointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PointsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DADDFFFB1A800F3D00E49BC1 /* BellowPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BellowPoint.h; sourceTree = "<group>"; };
+		DADDFFFC1A800F3D00E49BC1 /* BellowPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BellowPoint.m; sourceTree = "<group>"; };
 		DAE13D521A0BE937005D59DE /* dismissButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dismissButton.png; sourceTree = "<group>"; };
 		DAE13D5E1A0ED167005D59DE /* HomePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePage.h; sourceTree = "<group>"; };
-		DAE13D5F1A0ED167005D59DE /* HomePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePage.m; sourceTree = "<group>"; };
+		DAE13D5F1A0ED167005D59DE /* HomePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HomePage.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DAE13D621A0ED1C6005D59DE /* PendingRippleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRippleCell.h; sourceTree = "<group>"; };
 		DAE13D631A0ED1C6005D59DE /* PendingRippleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRippleCell.m; sourceTree = "<group>"; };
 		DAE13D651A0EF0C5005D59DE /* smallCircleFull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallCircleFull.png; sourceTree = "<group>"; };
-		DAE1715E1A78005D00A2E89D /* StartRippleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartRippleTableViewCell.h; sourceTree = "<group>"; };
-		DAE1715F1A78005D00A2E89D /* StartRippleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartRippleTableViewCell.m; sourceTree = "<group>"; };
+		DAE1715E1A78005D00A2E89D /* StartPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPostTableViewCell.h; sourceTree = "<group>"; };
+		DAE1715F1A78005D00A2E89D /* StartPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPostTableViewCell.m; sourceTree = "<group>"; };
 		DAE58C401A7E0177007C9A10 /* ImageCropping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropping.h; sourceTree = "<group>"; };
 		DAE58C411A7E0177007C9A10 /* ImageCropping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropping.m; sourceTree = "<group>"; };
 		DAE612421B8C47DB009D74D5 /* UserSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSearchCell.xib; sourceTree = "<group>"; };
@@ -465,12 +464,11 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		0D73282D19C2CF9B0076CD7F /* Ripple Service */ = {
+		0D73282D19C2CF9B0076CD7F /* Bellow Service */ = {
 			isa = PBXGroup;
 			children = (
-				0D73282A19C2CF950076CD7F /* RippleService.h */,
-				0D73282B19C2CF950076CD7F /* RippleService.m */,
-				0DADC94719D289E100127E4F /* MyRipplesViewController.h */,
+				0D73282A19C2CF950076CD7F /* BellowService.h */,
+				0D73282B19C2CF950076CD7F /* BellowService.m */,
 				DADD00001A818CD300E49BC1 /* TwitterService.h */,
 				DADD00011A818CD300E49BC1 /* TwitterService.m */,
 				DA7B68121ACE0A2600160141 /* FacebookService.h */,
@@ -480,7 +478,7 @@
 				DAE58C401A7E0177007C9A10 /* ImageCropping.h */,
 				DAE58C411A7E0177007C9A10 /* ImageCropping.m */,
 			);
-			name = "Ripple Service";
+			name = "Bellow Service";
 			sourceTree = "<group>";
 		};
 		0D73282E19C2CFAA0076CD7F /* Start A Post */ = {
@@ -488,8 +486,8 @@
 			children = (
 				0DFB082A19C17FC700A57630 /* StartPostViewController.h */,
 				0DFB082B19C17FC700A57630 /* StartPostViewController.m */,
-				DAE1715E1A78005D00A2E89D /* StartRippleTableViewCell.h */,
-				DAE1715F1A78005D00A2E89D /* StartRippleTableViewCell.m */,
+				DAE1715E1A78005D00A2E89D /* StartPostTableViewCell.h */,
+				DAE1715F1A78005D00A2E89D /* StartPostTableViewCell.m */,
 			);
 			name = "Start A Post";
 			sourceTree = "<group>";
@@ -529,10 +527,10 @@
 				0D73284019C68FA00076CD7F /* Ripple.m */,
 				0DD5AB2219E91470003CA91F /* MiniRipple.h */,
 				0DD5AB2319E91470003CA91F /* MiniRipple.m */,
-				0DB855D51A2147F8008C824F /* RippleLevel.h */,
-				0DB855D61A2147F8008C824F /* RippleLevel.m */,
-				DADDFFFB1A800F3D00E49BC1 /* RipplePoint.h */,
-				DADDFFFC1A800F3D00E49BC1 /* RipplePoint.m */,
+				0DB855D51A2147F8008C824F /* BellowLevel.h */,
+				0DB855D61A2147F8008C824F /* BellowLevel.m */,
+				DADDFFFB1A800F3D00E49BC1 /* BellowPoint.h */,
+				DADDFFFC1A800F3D00E49BC1 /* BellowPoint.m */,
 				DA40C18A1A3B8E4400B79119 /* Comment.h */,
 				DA40C18B1A3B8E4400B79119 /* Comment.m */,
 				0DA264C21AECBE3B00953CB2 /* Notification.h */,
@@ -541,7 +539,7 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		0DD5AB2519E9D76C003CA91F /* Ripple Map */ = {
+		0DD5AB2519E9D76C003CA91F /* Map and Comments */ = {
 			isa = PBXGroup;
 			children = (
 				0D924A4319E790B800B6AACE /* MapView.h */,
@@ -550,7 +548,7 @@
 				DA40C18E1A3CF26700B79119 /* CommentTableViewCell.m */,
 				DA405C1A1AED6C2200164B80 /* CommentCellDelegate.h */,
 			);
-			name = "Ripple Map";
+			name = "Map and Comments";
 			sourceTree = "<group>";
 		};
 		0DFB080919C17FC700A57630 = {
@@ -617,12 +615,12 @@
 				DA80EBC31B11438C00ADFBFB /* Explore */,
 				DA125F991AE6FD88006731DE /* Profile Page */,
 				DA405C291AEDD2B900164B80 /* Notifications */,
-				0DD5AB2519E9D76C003CA91F /* Ripple Map */,
+				0DD5AB2519E9D76C003CA91F /* Map and Comments */,
 				0D73282E19C2CFAA0076CD7F /* Start A Post */,
 				0D27B0451A7A0CBD004063CA /* Cells */,
 				DA125F951AE63811006731DE /* Tab Bar */,
 				0D73283E19C68F6B0076CD7F /* Models */,
-				0D73282D19C2CF9B0076CD7F /* Ripple Service */,
+				0D73282D19C2CF9B0076CD7F /* Bellow Service */,
 				DA47DE471A2291B0009AA829 /* Tutorial */,
 				DA47DE461A229136009AA829 /* Legal */,
 				DAC1E4FE1A50AD9C008960F9 /* Image Viewer */,
@@ -1072,7 +1070,7 @@
 				AE1456131B37215200FDE9C5 /* RippleTextView.m in Sources */,
 				0DFB082619C17FC700A57630 /* AppDelegate.m in Sources */,
 				DAE13D641A0ED1C6005D59DE /* PendingRippleCell.m in Sources */,
-				0DB855D71A2147F8008C824F /* RippleLevel.m in Sources */,
+				0DB855D71A2147F8008C824F /* BellowLevel.m in Sources */,
 				DADD00021A818CD300E49BC1 /* TwitterService.m in Sources */,
 				DADB74FF1BC1DD2D00749DAA /* TrendingCollectionViewCell.m in Sources */,
 				DA39A8C61BAC891B00D7980E /* SwipeableCell.m in Sources */,
@@ -1080,13 +1078,13 @@
 				DA125F9C1AE6FDC9006731DE /* ProfilePageViewController.m in Sources */,
 				0DB855C51A1801DB008C824F /* TermsOfServiceView.m in Sources */,
 				0DADC94D19D28D0200127E4F /* MyRippleCell.m in Sources */,
-				DAE171601A78005D00A2E89D /* StartRippleTableViewCell.m in Sources */,
+				DAE171601A78005D00A2E89D /* StartPostTableViewCell.m in Sources */,
 				DA2628D01A2D0C6900CB6D90 /* LevelCell.m in Sources */,
 				AE2A68891B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m in Sources */,
 				0DA264CA1AED883000953CB2 /* NotificationsPage.m in Sources */,
 				0DFB082219C17FC700A57630 /* main.m in Sources */,
-				DADDFFFD1A800F3D00E49BC1 /* RipplePoint.m in Sources */,
-				0D73282C19C2CF950076CD7F /* RippleService.m in Sources */,
+				DADDFFFD1A800F3D00E49BC1 /* BellowPoint.m in Sources */,
+				0D73282C19C2CF950076CD7F /* BellowService.m in Sources */,
 				DAB438F61AE9506600B06BD1 /* HeaderTableViewCell.m in Sources */,
 				0D73283319C2D3250076CD7F /* RippleLogInView.m in Sources */,
 				DA89E3B81A74AD2A002F3D68 /* WebViewViewController.m in Sources */,

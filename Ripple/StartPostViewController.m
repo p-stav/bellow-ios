@@ -14,8 +14,7 @@
 #import "StartPostViewController.h"
 #import "RippleLogInView.h"
 #import "RippleSignUpView.h"
-#import "RippleService.h"
-#import "StartRippleTableViewCell.h"
+#import "BellowService.h"
 #import "ImageCropping.h"
 #import "TwitterService.h"
 #import "Flurry.h"
@@ -266,7 +265,7 @@ UIImagePickerController *picker;
             // reset page
             [self dismissViewControllerAnimated:YES completion:^{
                 dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [RippleService startRipple:self.rippleTextView.text withImage:self.originalImage];
+                    [BellowService startRipple:self.rippleTextView.text withImage:self.originalImage];
                 });
             }];
         }];

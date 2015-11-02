@@ -7,7 +7,7 @@
 //
 
 #import "NotificationsPage.h"
-#import "RippleService.h"
+#import "BellowService.h"
 #import "Notification.h"
 #import "Ripple.h"
 #import "MapView.h"
@@ -32,7 +32,7 @@
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
-        self.notificationArray = [RippleService getNotifications];
+        self.notificationArray = [BellowService getNotifications];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -82,7 +82,7 @@
     if (tbi.badgeValue !=nil)
     {
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [RippleService sawAllNotifications];
+            [BellowService sawAllNotifications];
         });
 
         tbi.badgeValue= nil;
@@ -177,7 +177,7 @@
     // update cell
     if (notification.isRead == NO)
     {
-        [RippleService completeNotification:notification.notificationId];
+        [BellowService completeNotification:notification.notificationId];
         
         notification.isRead = YES;
         [self.tableView beginUpdates];
@@ -191,7 +191,7 @@
     
     // Get appropriate ripple
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        Ripple *ripple = [RippleService getRipple:rippleId];
+        Ripple *ripple = [BellowService getRipple:rippleId];
         self.selectedRipple = ripple;
         
         dispatch_async( dispatch_get_main_queue(), ^{
@@ -213,7 +213,7 @@
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
-        self.notificationArray = [RippleService getNotifications];
+        self.notificationArray = [BellowService getNotifications];
 
         dispatch_async( dispatch_get_main_queue(), ^{
            /* if ([self.selectedRippleArray count] > 0)

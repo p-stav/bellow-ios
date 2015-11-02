@@ -1,5 +1,5 @@
 //
-//  RippleService.h
+//  BellowService.h
 //  Ripple
 //
 //  Created by Gal Oshri on 9/11/14.
@@ -10,7 +10,7 @@
 #import "Ripple.h"
 #import <Parse/Parse.h>
 
-@interface RippleService : NSObject
+@interface BellowService : NSObject
 
 + (int)checkUsername:(NSString *)username;
 

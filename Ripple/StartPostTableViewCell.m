@@ -1,14 +1,14 @@
 //
-//  StartRippleTableViewCell.m
+//  StartPostTableViewCell.m
 //  Ripple
 //
 //  Created by Paul Stavropoulos on 1/27/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
 //
 
-#import "StartRippleTableViewCell.h"
+#import "StartPostTableViewCell.h"
 
-@implementation StartRippleTableViewCell
+@implementation StartPostTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code

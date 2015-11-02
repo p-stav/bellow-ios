@@ -17,7 +17,7 @@
 #import "RippleLogInView.h"
 #import "RippleSignUpView.h"
 #import "TTTTimeIntervalFormatter.h"
-#import "RippleMapView.h"
+#import "MapView.h"
 #import "ShareRippleSheet.h"
 #import "AGPushNoteView.h"
 #import "ImageViewerViewController.h"
@@ -163,9 +163,9 @@ int PARSE_PAGE_SIZE = 25;
         [PFAnalytics trackEvent:@"ViewCommentsAndMap" dimensions:@{@"Cell Type" : @"Home Cell"}];
         [Flurry logEvent:@"View_Comments_And_Map" withParameters:[NSDictionary dictionaryWithObject:@"home" forKey:@"page"]];
         
-        if ([segue.destinationViewController isKindOfClass:[RippleMapView class]])
+        if ([segue.destinationViewController isKindOfClass:[MapView class]])
         {
-            RippleMapView *rmv = (RippleMapView *) segue.destinationViewController;
+            MapView *rmv = (MapView *) segue.destinationViewController;
             
             if ([sender isKindOfClass:[Ripple class]])
             {

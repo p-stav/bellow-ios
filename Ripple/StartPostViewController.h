@@ -11,7 +11,7 @@
 
 
 
-@interface StartRippleViewController : UIViewController <UITextViewDelegate, CLLocationManagerDelegate,UIGestureRecognizerDelegate, NSLayoutManagerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
+@interface StartPostViewController : UIViewController <UITextViewDelegate, CLLocationManagerDelegate,UIGestureRecognizerDelegate, NSLayoutManagerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *rippleButton;
 @property (strong, nonatomic) IBOutlet UITextView *rippleTextView;

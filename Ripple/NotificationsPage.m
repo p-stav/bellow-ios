@@ -10,7 +10,7 @@
 #import "RippleService.h"
 #import "Notification.h"
 #import "Ripple.h"
-#import "RippleMapView.h"
+#import "MapView.h"
 #import "NotificationTableViewCell.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "Flurry.h"
@@ -234,9 +234,9 @@
     self.navigationItem.title = @"";
     if ([segue.identifier isEqualToString:@"NotificationToRippleSegue"]) {
         
-        if ([segue.destinationViewController isKindOfClass:[RippleMapView class]])
+        if ([segue.destinationViewController isKindOfClass:[MapView class]])
         {
-            RippleMapView *rmv = (RippleMapView *) segue.destinationViewController;
+            MapView *rmv = (MapView *) segue.destinationViewController;
             
             if ([sender isKindOfClass:[Ripple class]])
             {

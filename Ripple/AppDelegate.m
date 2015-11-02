@@ -14,7 +14,7 @@
 
 #import "Flurry.h"
 #import "NotificationsPage.h"
-#import "RippleMapView.h"
+#import "MapView.h"
 #import "RippleService.h"
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -209,7 +209,7 @@ BOOL isLaunch;
         Ripple *ripple = [RippleService getRipple:rippleId];
         
         dispatch_async( dispatch_get_main_queue(), ^{
-            RippleMapView *rmv = [mainstoryboard instantiateViewControllerWithIdentifier:@"RippleMapView"];
+            MapView *rmv = [mainstoryboard instantiateViewControllerWithIdentifier:@"RippleMapView"];
             rmv.ripple = ripple;
             
             NotificationsPage *np =  (NotificationsPage *)[[tabController viewControllers] objectAtIndex:3];

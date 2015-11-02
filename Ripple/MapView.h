@@ -13,7 +13,7 @@
 #import "Ripple.h"
 #import "CommentCellDelegate.h"
 
-@interface RippleMapView : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UIActionSheetDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CommentTableCellDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, UITextViewDelegate>
+@interface MapView : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UIActionSheetDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CommentTableCellDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) Ripple *ripple;
 @property (nonatomic) BOOL commentsUp;

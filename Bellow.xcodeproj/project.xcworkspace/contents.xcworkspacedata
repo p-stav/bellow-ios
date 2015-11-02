@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Ripple.xcodeproj">
+      location = "self:/Users/paulstavropoulos/Documents/projects/bellow-ios/Bellow.xcodeproj">
    </FileRef>
 </Workspace>

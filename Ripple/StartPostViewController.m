@@ -11,7 +11,7 @@
 #import "FacebookService.h"
 
 #import <Social/Social.h>
-#import "StartRippleViewController.h"
+#import "StartPostViewController.h"
 #import "RippleLogInView.h"
 #import "RippleSignUpView.h"
 #import "RippleService.h"
@@ -23,7 +23,7 @@
 
 
 
-@interface StartRippleViewController ()
+@interface StartPostViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *pebbleAnimationImg;
 @property (weak, nonatomic) IBOutlet UIButton *rippleImageButton;
@@ -64,7 +64,7 @@
 // @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraintStoneButton;
 @end
 
-@implementation StartRippleViewController
+@implementation StartPostViewController
 
 NSString *defaultString;
 UIImagePickerController *picker;

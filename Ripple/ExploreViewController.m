@@ -16,7 +16,7 @@
 #import "WebViewViewController.h"
 #import "ProfilePageViewController.h"
 #import "Flurry.h"
-#import "RippleMapView.h"
+#import "MapView.h"
 #import "AGPushNoteView.h"
 #import "ShareRippleSheet.h"
 #import "SearchViewController.h"
@@ -61,9 +61,9 @@
         [PFAnalytics trackEvent:@"ViewCommentsAndMap" dimensions:@{@"Cell Type" : @"Trending"}];
         [Flurry logEvent:@"View_Comments_And_Map" withParameters:[NSDictionary dictionaryWithObject:@"trending" forKey:@"page"]];
         
-        if ([segue.destinationViewController isKindOfClass:[RippleMapView class]])
+        if ([segue.destinationViewController isKindOfClass:[MapView class]])
         {
-            RippleMapView *rmv = (RippleMapView *) segue.destinationViewController;
+            MapView *rmv = (MapView *) segue.destinationViewController;
             
             if ([sender isKindOfClass:[Ripple class]])
             {

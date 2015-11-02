@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
 //
 
-#import "RippleMapView.h"
+#import "MapView.h"
 #import "MiniRipple.h"
 #import "RippleService.h"
 #import "Comment.h"
@@ -21,7 +21,7 @@
 #import "HomePage.h"
 #import "Flurry.h"
 
-@interface RippleMapView ()
+@interface MapView ()
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *mapOverlayView;
@@ -111,7 +111,7 @@
 #define MERCATOR_RADIUS 85445659.44705395
 #define ARC4RANDOM_MAX      0x100000000
 
-@implementation RippleMapView
+@implementation MapView
 
 - (void)goToUserProfile:(Comment *)comment
 {

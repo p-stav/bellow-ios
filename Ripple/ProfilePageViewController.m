@@ -10,7 +10,7 @@
 #import "MyRippleCell.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "Flurry.h"
-#import "RippleMapView.h"
+#import "MapView.h"
 #import "RippleLogInView.h"
 #import "RippleSignUpView.h"
 #import "RippleService.h"
@@ -206,17 +206,17 @@ NSDictionary *socialMediaIconToName;
         // log event
         [PFAnalytics trackEvent:@"ViewCommentsAndMap" dimensions:@{@"Cell Type" : @"Profile"}];
         
-        if ([segue.destinationViewController isKindOfClass:[RippleMapView class]])
+        if ([segue.destinationViewController isKindOfClass:[MapView class]])
         {
-            RippleMapView *rmv = (RippleMapView *) segue.destinationViewController;
+            MapView *mv = (MapView *) segue.destinationViewController;
             
             if ([sender isKindOfClass:[Ripple class]])
             {
                 Ripple *ripple = (Ripple *)sender;
-                rmv.ripple = ripple;
+                mv.ripple = ripple;
                 
                 if (self.segueWithCommentsUp)
-                    rmv.commentsUp = YES;
+                    mv.commentsUp = YES;
             }
         }
     }
@@ -1240,7 +1240,7 @@ NSDictionary *socialMediaIconToName;
         
         cell.textViewHeightConstraint.constant = textSize.size.height + 45;
         // place spreadCommentView there
-        cell.spreadCommentViewTopConstraint.constant = textSize.size.height + cell.outerImageView.frame.origin.y + 25;
+        cell.spreadCommentViewTopConstraint.constant = textSize.size.height + cell.outerImageView.frame.origin.y + 35;
         
         // add small border to this 
         [cell.rippleTextView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];

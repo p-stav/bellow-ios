@@ -1026,7 +1026,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=/usr/local/bin:$PATH\ncd /Users/paulstavropoulos/Documents/projects/ripple/CloudCode/cloud\n\nparse symbols -p \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+			shellScript = "export PATH=/usr/local/bin:$PATH\ncd /Users/paulstavropoulos/Documents/projects/bellow-cloud/cloud\n\nparse symbols -p \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
 		};
 		DA8CA5031BD0734A00D8F25E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

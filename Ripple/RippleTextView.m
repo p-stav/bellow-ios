@@ -1,6 +1,6 @@
 //
 //  UITextView_RippleTextView.m
-//  Ripple
+//  Bellow
 //
 //  Created by Dan Li on 6/21/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.

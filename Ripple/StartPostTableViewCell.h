@@ -1,6 +1,6 @@
 //
 //  StartPostTableViewCell.h
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 1/27/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.

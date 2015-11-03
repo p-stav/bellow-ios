@@ -33,7 +33,7 @@
                                                         <constraint firstAttribute="width" constant="269" id="g3H-yl-noV"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <state key="normal" title="Share Ripple with your friends!">
+                                                    <state key="normal" title="Share Bellow with your friends!">
                                                         <color key="titleColor" red="0.0" green="0.4823529412" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -501,7 +501,7 @@
         <!--Start A Post-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="Start A Ripple" title="Start A Ripple" id="vXZ-lx-hvc" userLabel="Start A Post" customClass="StartPostViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Start A Post" title="Start A Post" id="vXZ-lx-hvc" userLabel="Start A Post" customClass="StartPostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -815,7 +815,7 @@
                                                 <constraint firstAttribute="height" constant="30" id="qWO-9C-HWm"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
-                                            <state key="normal" title="Share Ripple with friends!">
+                                            <state key="normal" title="Share Bellow with friends!">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
@@ -1055,7 +1055,7 @@
                             <constraint firstAttribute="centerX" secondItem="hNK-TV-6zc" secondAttribute="centerX" id="wmS-bT-ZVp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Ripple" id="jl9-OM-i3S">
+                    <navigationItem key="navigationItem" title="Bellow" id="jl9-OM-i3S">
                         <barButtonItem key="backBarButtonItem" title=" " id="ecK-y8-afM"/>
                     </navigationItem>
                     <connections>
@@ -1122,7 +1122,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">RIPPLE TERMS OF USE
-These Terms and Conditions (the “Terms”) are a contract between you and KEFI LABS LLC. This document explains how you are permitted to use the Ripple mobile application and services and any content found on it (the “Services”). Unless otherwise specified, all references to the “Services” include the services available through the Ripple mobile application as well as any software that KEFI LABS LLC provides to you that allows you to access the Services from a mobile device. By using the Services, you are agreeing to all of the Terms; if you do not agree with any of these Terms, do not access or otherwise use the Services.
+These Terms and Conditions (the “Terms”) are a contract between you and KEFI LABS LLC. This document explains how you are permitted to use the Bellow mobile application and services and any content found on it (the “Services”). Unless otherwise specified, all references to the “Services” include the services available through the Bellow mobile application as well as any software that KEFI LABS LLC provides to you that allows you to access the Services from a mobile device. By using the Services, you are agreeing to all of the Terms; if you do not agree with any of these Terms, do not access or otherwise use the Services.
 
 KEFI LABS LLC may make changes to the content and Services at any time. KEFI LABS LLC can change, update, add or remove provisions of these Terms, at any time by posting the updated Terms on the Services or by notifying you via the App. By using the Services after KEFI LABS LLC has updated the Terms, you are agreeing to all the updated Terms; if you do not agree with any of the updated Terms, you must stop using Services.
 
@@ -1157,7 +1157,7 @@ Unauthorized use of any Materials or Third-Party Content contained in the Servic
 
 COPYRIGHT POLICY
 KEFI LABS LLC respects intellectual property rights of others and expects users of the Services to do so as well. KEFI LABS LLC will respond to notices of copyright infringement that comply with applicable law and are properly provided to the firm. If appropriate, KEFI LABS LLC will restrict access or delete such Content that infringes a third party’s copyright and, in KEFI LABS LLC’s sole discretion and without notice, terminate a user’s account if there are repeated instances of infringement. 
-if you become aware of content on these services of the Ripple application that infringe on copyrights that you own or control, you may file a notice of infringement, in compliance with the requirements of 17 U.S.C § 512(c)(3) to kefiapp@gmail.com
+if you become aware of content on these services of the Bellow application that infringe on copyrights that you own or control, you may file a notice of infringement, in compliance with the requirements of 17 U.S.C § 512(c)(3) to kefiapp@gmail.com
 
 
 DISCLAIMER OF WARRANTIES
@@ -1182,9 +1182,9 @@ SEVERABILITY
 If any clause within this Provision (other than the Class Action Waiver clause above) is found to be illegal or unenforceable, that clause will be severed from this Provision to in the minimum extent necessary, and the remainder of this Provision will be given full force and effect.
 
 ATTRIBUTION OF MATERIALS. 
-Ripple uses the hand icon created by Roman Zubakov from the Noun project. The photo  can be found here: https://thenounproject.com/icon/62080/download-options/. Zubakov’s profile can be found here: http://thenounproject.com/roman.zubakov/. We slightly modify it to create a “hovered” and “pressed” mode to simulate a touch. This work is licensed under the Creative Commons 3.0 License found here: http://creativecommons.org/licenses/by/3.0/. 
+Bellow uses the hand icon created by Roman Zubakov from the Noun project. The photo  can be found here: https://thenounproject.com/icon/62080/download-options/. Zubakov’s profile can be found here: http://thenounproject.com/roman.zubakov/. We slightly modify it to create a “hovered” and “pressed” mode to simulate a touch. This work is licensed under the Creative Commons 3.0 License found here: http://creativecommons.org/licenses/by/3.0/. 
 
-Ripple uses icons from Catalin Fertu’s BigMug Line in Interface. The icon set can be found here: http://www.flaticon.com/packs/bigmug-line/. Ripple uses these icons throughout the service. 
+Bellow uses icons from Catalin Fertu’s BigMug Line in Interface. The icon set can be found here: http://www.flaticon.com/packs/bigmug-line/. Bellow uses these icons throughout the service. 
 
 CONTACT US
 If you have any questions about these Terms or otherwise need to contact KEFI LABS LLC for any reason, you can reach us at wellRippleMeThis@gmail.com</string>
@@ -1265,7 +1265,7 @@ If you have any questions about these Terms or otherwise need to contact KEFI LA
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">RIPPLE PRIVACY STATEMENT
 
-This privacy policy governs your use of the software application Ripple (“Application”) for mobile devices that was created by Kefi Labs LLC. The Application allows users to post content and send it to fellow users nearby. 
+This privacy policy governs your use of the software application Bellow (“Application”) for mobile devices that was created by Kefi Labs LLC. The Application allows users to post content and send it to fellow users nearby. 
 
 USER PROVIDED INFO
 The Application obtains the information you provide when you download and register the Application. Registration with us is optional. However, please keep in mind that you will not be able to use core functionality of the Application. 
@@ -1276,7 +1276,7 @@ We may also use the information you provided us to contact you from time to time
 
 LOCATION INFORMATION
 When you visit the mobile application, we use GPS technology (or other similar technology) to roughly determine your current location in order to determine your general vicinity. We obstruct your current location by a 500 meter radius to protect you. We utilize this data to send your Ripples to users near you, as well as send you nearby Ripples from other users. We will not share your current location with other partners or corporate entities. 
-Ripple makes use of technology which updates your location once you have travelled than 500 meters. Ripple also monitors location changes while in the background. To change this behavior, you should toggle off the option to always use location service, and choose the one which allows for location services while using the application in your mobile phone system settings.
+Bellow makes use of technology which updates your location once you have travelled than 500 meters. Bellow also monitors location changes while in the background. To change this behavior, you should toggle off the option to always use location service, and choose the one which allows for location services while using the application in your mobile phone system settings.
 
 THIRD PARTY INFORMATION ACCESS
 We will share your information with third parties only in the ways that are described in this privacy statement.
@@ -2873,7 +2873,7 @@ If you have any questions regarding privacy while using the Application, or have
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Ripple levels" id="STn-CX-QbA">
+                                    <navigationItem title="Bellow levels" id="STn-CX-QbA">
                                         <barButtonItem key="leftBarButtonItem" title="Done" id="DEB-Oy-PRr">
                                             <connections>
                                                 <action selector="doneWasPressed:" destination="ZY0-Pk-rgh" id="HiX-0x-yeH"/>
@@ -3142,7 +3142,7 @@ If you have any questions regarding privacy while using the Application, or have
                                     <constraint firstAttribute="height" constant="30" id="fBO-tF-gAS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                <state key="normal" title="Invite friends to Ripple!"/>
+                                <state key="normal" title="Invite friends to Bellow!"/>
                                 <connections>
                                     <action selector="didPressInviteButton:" destination="NOk-Gx-AoY" eventType="touchUpInside" id="wP4-by-Cso"/>
                                 </connections>

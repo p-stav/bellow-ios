@@ -1,6 +1,6 @@
 //
 //  TabBarController.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 4/21/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
@@ -80,7 +80,7 @@
     {
         if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
             return NO;
-        else if ([viewController.title isEqualToString:@"Start A Ripple"])
+        else if ([viewController.title isEqualToString:@"Start A Post"])
             return NO;
         
         else if ([PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]] && [viewController.title isEqualToString:@"MeNavController"])
@@ -122,7 +122,7 @@
         {
             // present modal window
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"Start A Ripple"];
+            UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"Start A Post"];
             // self.navigationController.navigationBarHidden=NO;
             [self presentViewController:obj animated:YES completion:nil];
         }

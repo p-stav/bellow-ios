@@ -1,6 +1,6 @@
     //
 //  SwipeableCell.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 9/18/15.
 //  Copyright © 2015 Kefi Labs. All rights reserved.
@@ -190,7 +190,7 @@ BOOL _propagateOnDragRelease;
     if ([self.ripple.creatorId isEqualToString:[PFUser currentUser].objectId])
         return;
     
-    // update Ripple object
+    // update Bellow object
     //self.ripple.actedUponState = 2;
     
     if (self.ripple.miniRippleId != nil)

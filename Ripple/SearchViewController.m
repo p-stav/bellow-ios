@@ -1,6 +1,6 @@
     //
 //  SearchViewController.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 10/4/15.
 //  Copyright © 2015 Kefi Labs. All rights reserved.
@@ -362,7 +362,7 @@
 }
 - (IBAction)didPressInviteButton:(id)sender
 {
-    NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Ripple and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io" , [PFUser currentUser][@"username"]];
+    NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Bellow and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io" , [PFUser currentUser][@"username"]];
     
     UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:shareText];
     [self presentViewController:shareController animated:YES completion:nil];
@@ -383,7 +383,7 @@
     {
         if (buttonIndex == 1)
         {
-            NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Ripple. You should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io" , [PFUser currentUser][@"username"]];
+            NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Bellow. You should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io" , [PFUser currentUser][@"username"]];
             
             UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:shareText];
             [self presentViewController:shareController animated:YES completion:nil];

@@ -1,6 +1,6 @@
 //
 //  ExploreViewController.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 5/23/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
@@ -10,7 +10,7 @@
 #import "BellowService.h"
 #import "SwipeableCell.h"
 #import "UserSearchCell.h"
-#import "Ripple.h"
+#import "Bellow.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "ImageViewerViewController.h"
 #import "WebViewViewController.h"
@@ -65,9 +65,9 @@
         {
             MapView *rmv = (MapView *) segue.destinationViewController;
             
-            if ([sender isKindOfClass:[Ripple class]])
+            if ([sender isKindOfClass:[Bellow class]])
             {
-                Ripple *ripple = (Ripple *)sender;
+                Bellow *ripple = (Bellow *)sender;
                 rmv.ripple = ripple;
 
                 if (self.segueWithCommentsUp)
@@ -327,7 +327,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // grab the item from trending array
-    Ripple *selectedRipple = [self.trendingRipples objectAtIndex:[indexPath row]];
+    Bellow *selectedRipple = [self.trendingRipples objectAtIndex:[indexPath row]];
     
     // segue
     [self performSegueWithIdentifier:@"MapViewSegue" sender:selectedRipple];
@@ -402,7 +402,7 @@
     [self.refreshControl endRefreshing];
 }
 
-- (void) goToImageView: (Ripple *)ripple
+- (void) goToImageView: (Bellow *)ripple
 {
     // modal image view
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
@@ -450,7 +450,7 @@
     {
         if (buttonIndex == 1)
         {
-            NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Ripple and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io" , [PFUser currentUser][@"username"]];
+            NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Bellow and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io" , [PFUser currentUser][@"username"]];
             
             UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:shareText];
             [self presentViewController:shareController animated:YES completion:nil];

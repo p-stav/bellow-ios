@@ -1,20 +1,20 @@
 //
 //  MyRippleCell.h
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 9/23/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "Ripple.h"
+#import "Bellow.h"
 #import <Parse/Parse.h>
 #import "MyRippleCellDelegate.h"
 #import <ParseUI/ParseUI.h>
 
 @interface MyRippleCell : UITableViewCell
 
-@property (strong, nonatomic) Ripple *ripple;
+@property (strong, nonatomic) Bellow *ripple;
 
 @property (strong, nonatomic) IBOutlet UITextView *rippleTextView;
 @property (strong, nonatomic) IBOutlet UILabel *numberPropagatedLabel;

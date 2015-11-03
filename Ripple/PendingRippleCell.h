@@ -1,13 +1,13 @@
 //
 //  PropagateRippleTableViewCell.h
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 11/8/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "Ripple.h"
+#import "Bellow.h"
 #import "PropagateRippleCellDelegate.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -59,7 +59,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightSpreadCommentViewConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftSpreadCommentViewConStraint;
 
-@property (strong, nonatomic) Ripple *currentRipple;
+@property (strong, nonatomic) Bellow *currentRipple;
 @property (strong, nonatomic) NSMutableArray *rippleCircles;
 
 @property (weak, nonatomic) IBOutlet UIView *spreadCommentView;

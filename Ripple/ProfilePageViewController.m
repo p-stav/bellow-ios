@@ -1,6 +1,6 @@
 //
 //  ProfilePageTableViewController.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 4/21/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
@@ -120,7 +120,7 @@ NSDictionary *socialMediaIconToName;
     return self.userId;
 }
 
--(void) goToMapView:(Ripple *)ripple withComments:(BOOL)commentsUp
+-(void) goToMapView:(Bellow *)ripple withComments:(BOOL)commentsUp
 {
     if (commentsUp)
         self.segueWithCommentsUp = YES;
@@ -132,7 +132,7 @@ NSDictionary *socialMediaIconToName;
 
 }
 
-- (void) goToImageView: (Ripple *)ripple
+- (void) goToImageView: (Bellow *)ripple
 {
     if (!self.isChoosingSort)
     {
@@ -145,7 +145,7 @@ NSDictionary *socialMediaIconToName;
     }
 }
 
-- (void) goToUserProfile: (Ripple *)ripple
+- (void) goToUserProfile: (Bellow *)ripple
 {
     if (ripple)
     {
@@ -210,9 +210,9 @@ NSDictionary *socialMediaIconToName;
         {
             MapView *mv = (MapView *) segue.destinationViewController;
             
-            if ([sender isKindOfClass:[Ripple class]])
+            if ([sender isKindOfClass:[Bellow class]])
             {
-                Ripple *ripple = (Ripple *)sender;
+                Bellow *ripple = (Bellow *)sender;
                 mv.ripple = ripple;
                 
                 if (self.segueWithCommentsUp)
@@ -224,9 +224,9 @@ NSDictionary *socialMediaIconToName;
     
     if ([segue.identifier isEqualToString:@"RippleImageView"])
     {
-        if ([sender isKindOfClass:[Ripple class]])
+        if ([sender isKindOfClass:[Bellow class]])
         {
-            Ripple *ripple = (Ripple *)sender;
+            Bellow *ripple = (Bellow *)sender;
             
             ImageViewerViewController *ivvc = (ImageViewerViewController *)segue.destinationViewController;
             ivvc.rippleImageFile = ripple.imageFile;
@@ -890,7 +890,7 @@ NSDictionary *socialMediaIconToName;
     SwipeableCell *cell = (SwipeableCell *)[tableView dequeueReusableCellWithIdentifier:@"SwipeableCell" forIndexPath:indexPath];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    Ripple *ripple = [self.selectedRippleArray objectAtIndex:[indexPath row]];
+    Bellow *ripple = [self.selectedRippleArray objectAtIndex:[indexPath row]];
     
     // nil stuff
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -1100,7 +1100,7 @@ NSDictionary *socialMediaIconToName;
     MyRippleCell *cell = (MyRippleCell *)[tableView dequeueReusableCellWithIdentifier:@"MyRippleCell" forIndexPath:indexPath];
     cell.rippleMainView.layer.cornerRadius = 5.0;
     
-    Ripple *ripple = [self.selectedRippleArray objectAtIndex:[indexPath row]];
+    Bellow *ripple = [self.selectedRippleArray objectAtIndex:[indexPath row]];
     
     // nil stuff
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -1273,7 +1273,7 @@ NSDictionary *socialMediaIconToName;
     if (!self.userId)
     {
         // set current ripple
-        Ripple *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
+        Bellow *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
         
         // size text and images
         CGFloat imageHeight = 0;
@@ -1317,7 +1317,7 @@ NSDictionary *socialMediaIconToName;
     else
     {
         // set current ripple
-        Ripple *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
+        Bellow *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
         
         // size text and images
         CGFloat imageHeight = 0;
@@ -1791,7 +1791,7 @@ NSDictionary *socialMediaIconToName;
 // New ripple was created. Add it to the "started" list
 - (void)notifyNewRipple:(NSNotification *)notification {
     
-    Ripple *newRipple = (Ripple *)[notification object];
+    Bellow *newRipple = (Bellow *)[notification object];
     [self.myRipples insertObject:newRipple atIndex:0];
     
     
@@ -1849,12 +1849,12 @@ NSDictionary *socialMediaIconToName;
 
 - (void)addRippleToPropagated:(NSNotification *)notification {
     // grab ripple
-    Ripple *ripple = (Ripple *)[notification object];
+    Bellow *ripple = (Bellow *)[notification object];
     [self.propagatedRipples insertObject:ripple atIndex:0];
     
 }
 
-- (void)rippleDeleted:(Ripple *)ripple
+- (void)rippleDeleted:(Bellow *)ripple
 {
     // use the UITableView to animate the removal of this row
     NSUInteger index = [self.myRipples indexOfObject:ripple];
@@ -1995,11 +1995,11 @@ NSDictionary *socialMediaIconToName;
 }
 
 #pragma mark - swipeableCellDelegates
-- (void)rippleDismissed:(Ripple *)ripple
+- (void)rippleDismissed:(Bellow *)ripple
 {
     // update trending ripple
     NSUInteger position = [self.myRipples indexOfObject:ripple];
-    Ripple *rippleObject = [self.myRipples objectAtIndex:position];
+    Bellow *rippleObject = [self.myRipples objectAtIndex:position];
     rippleObject.actedUponState = 2;
     
     [self.myRipples replaceObjectAtIndex:position withObject:rippleObject];
@@ -2014,11 +2014,11 @@ NSDictionary *socialMediaIconToName;
     
 }
 
-- (void)ripplePropagated:(Ripple *)ripple
+- (void)ripplePropagated:(Bellow *)ripple
 {
     // update ripple
     NSUInteger position = [self.myRipples indexOfObject:ripple];
-    Ripple *rippleObject = [self.myRipples objectAtIndex:position];
+    Bellow *rippleObject = [self.myRipples objectAtIndex:position];
     rippleObject.actedUponState = 1;
     rippleObject.numberPropagated += 1;
     
@@ -2049,7 +2049,7 @@ NSDictionary *socialMediaIconToName;
         }
         
         else if (spreadFirstRippleCheck == 3) {
-            UIAlertView *tapOnRipple = [[UIAlertView alloc]initWithTitle:@"Tap on a Ripple!" message:@"See a map of where that ripple has spread and leave a comment"delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *tapOnRipple = [[UIAlertView alloc]initWithTitle:@"Tap on a Bellow!" message:@"See a map of where that ripple has spread and leave a comment"delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [tapOnRipple show];
             
             
@@ -2058,7 +2058,7 @@ NSDictionary *socialMediaIconToName;
         
         else if (spreadFirstRippleCheck == 50) {
             
-            UIAlertView *reviewRipple = [[UIAlertView alloc] initWithTitle:@"Review Ripple" message:@"Enjoying Ripple? Rate or review it!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Rate or review", nil];
+            UIAlertView *reviewRipple = [[UIAlertView alloc] initWithTitle:@"Review Bellow" message:@"Enjoying Bellow? Rate or review it!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Rate or review", nil];
             
             [Flurry logEvent:@"Ask_For_Review"];
             
@@ -2066,7 +2066,7 @@ NSDictionary *socialMediaIconToName;
         }
         
         else if (spreadFirstRippleCheck == 100) {
-            UIAlertView *referralPoints = [[UIAlertView alloc] initWithTitle:@"Invite friends!" message:[NSString stringWithFormat:@"Ripple is more fun with frineds! Get them on Ripple, you'll both earn points"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Invite", nil];
+            UIAlertView *referralPoints = [[UIAlertView alloc] initWithTitle:@"Invite friends!" message:[NSString stringWithFormat:@"Bellow is more fun with frineds! Get them on Bellow, you'll both earn points"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Invite", nil];
             [referralPoints show];
         }
         
@@ -2078,7 +2078,7 @@ NSDictionary *socialMediaIconToName;
 - (void)swipedRippleUpdateUserProfile:(NSNotification *)notification
 {
     // check if the ripple is in the list
-    Ripple *swipedRipple = (Ripple *)[notification object];
+    Bellow *swipedRipple = (Bellow *)[notification object];
     
     NSUInteger index = [self.myRipples indexOfObject:swipedRipple];
     
@@ -2222,7 +2222,7 @@ NSDictionary *socialMediaIconToName;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
-    if ([alertView.title isEqualToString:@"Review Ripple"])
+    if ([alertView.title isEqualToString:@"Review Bellow"])
     {
         if (buttonIndex == 1)
         {

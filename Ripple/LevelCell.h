@@ -1,6 +1,6 @@
 //
 //  LevelsTableViewCell.h
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 12/1/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.

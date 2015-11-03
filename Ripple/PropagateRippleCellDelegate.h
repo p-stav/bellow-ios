@@ -1,26 +1,26 @@
 //
 //  PropagateRippleCellDelegate.h
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 11/8/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Ripple.h"
+#import "Bellow.h"
 
 @protocol PendingRippleCellDelegate <NSObject>
 
 // indicates that the given item has been deleted
--(void) rippleDismissed:(Ripple *)ripple;
+-(void) rippleDismissed:(Bellow *)ripple;
 
--(void) ripplePropagated:(Ripple *)ripple;
+-(void) ripplePropagated:(Bellow *)ripple;
 
--(void) goToMapView:(Ripple *)ripple withComments:(BOOL)commentsUp;
+-(void) goToMapView:(Bellow *)ripple withComments:(BOOL)commentsUp;
 
--(void) goToImageView: (Ripple *)ripple;
+-(void) goToImageView: (Bellow *)ripple;
 
-- (void) goToUserProfile: (Ripple *)ripple;
+- (void) goToUserProfile: (Bellow *)ripple;
 
 
 @end

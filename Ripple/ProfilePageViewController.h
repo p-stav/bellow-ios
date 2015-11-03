@@ -1,6 +1,6 @@
 //
 //  ProfilePageTableViewController.h
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 4/21/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
@@ -35,7 +35,7 @@
 @property (nonatomic) BOOL goToProfileFromPush;
 
 
-- (void)rippleDeleted:(Ripple *)ripple;
+- (void)rippleDeleted:(Bellow *)ripple;
 
 
 @end

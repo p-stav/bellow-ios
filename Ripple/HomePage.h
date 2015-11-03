@@ -1,6 +1,6 @@
 //
 //  PropagateRippleTableViewController.h
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 11/8/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
@@ -33,8 +33,8 @@
 @property (strong, nonatomic) NSString *goToRippleId;
 @property (nonatomic) BOOL goToProfileFromPush;
 
-- (void)ripplePropagated:(Ripple *)ripple;
-- (void)rippleDismissed:(Ripple *)ripple;
+- (void)ripplePropagated:(Bellow *)ripple;
+- (void)rippleDismissed:(Bellow *)ripple;
 
 // location
 @property (strong, nonatomic) CLLocationManager *locationManager;

@@ -1,6 +1,6 @@
 //
 //  NotificationsPage.m
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 4/26/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
@@ -9,7 +9,7 @@
 #import "NotificationsPage.h"
 #import "BellowService.h"
 #import "Notification.h"
-#import "Ripple.h"
+#import "Bellow.h"
 #import "MapView.h"
 #import "NotificationTableViewCell.h"
 #import "TTTTimeIntervalFormatter.h"
@@ -17,7 +17,7 @@
 
 @interface NotificationsPage ()
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
-@property (strong, nonatomic) Ripple *selectedRipple;
+@property (strong, nonatomic) Bellow *selectedRipple;
 @end
 
 @implementation NotificationsPage
@@ -191,7 +191,7 @@
     
     // Get appropriate ripple
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        Ripple *ripple = [BellowService getRipple:rippleId];
+        Bellow *ripple = [BellowService getRipple:rippleId];
         self.selectedRipple = ripple;
         
         dispatch_async( dispatch_get_main_queue(), ^{
@@ -236,12 +236,12 @@
         
         if ([segue.destinationViewController isKindOfClass:[MapView class]])
         {
-            MapView *rmv = (MapView *) segue.destinationViewController;
+            MapView *mv = (MapView *) segue.destinationViewController;
             
-            if ([sender isKindOfClass:[Ripple class]])
+            if ([sender isKindOfClass:[Bellow class]])
             {
-                Ripple *ripple = (Ripple *)sender;
-                rmv.ripple = ripple;
+                Bellow *ripple = (Bellow *)sender;
+                mv.ripple = ripple;
             }
             
             // log data

@@ -1,6 +1,6 @@
 //
 //  FollowingTableViewController.h
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 8/25/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.

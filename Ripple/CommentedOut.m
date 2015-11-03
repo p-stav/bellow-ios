@@ -1,6 +1,6 @@
 //
 //  CommentedOut.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 2/7/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
@@ -13,14 +13,14 @@
 /************ADDTUTORIALRIPPLES
  - (void)addTutorialRipples
  {
- // Ripple 1: Click on a ripple to see map and comments
- Ripple *rippleClick = [[Ripple alloc] init];
+ // Bellow 1: Click on a ripple to see map and comments
+ Bellow *rippleClick = [[Bellow alloc] init];
  rippleClick.rippleId = @"FakeRippleTap";
  rippleClick.text = @"Tap to see where this ripple has spread. Then navigate back and spread it to finish the tutorial.";
  rippleClick.imageFile = nil;
  rippleClick.imageHeight = 0;
  rippleClick.imageWidth = 0;
- rippleClick.creatorName = @"Ripple Tutorial";
+ rippleClick.creatorName = @"Bellow Tutorial";
  rippleClick.miniRippleId = @"FakeMiniRipple";
  rippleClick.commentArray = [@[] mutableCopy];
  rippleClick.commentIds = [@[] mutableCopy];
@@ -31,14 +31,14 @@
  rippleClick.longitude = -122.3304829644317;
  rippleClick.rippleExposure = 0;
  
- // Ripple 2: Swipe right to propagate
- Ripple *ripplePropagate = [[Ripple alloc] init];
+ // Bellow 2: Swipe right to propagate
+ Bellow *ripplePropagate = [[Bellow alloc] init];
  ripplePropagate.rippleId = @"FakeRipple";
  ripplePropagate.text = @"This is a ripple. Swipe right to spread to people near you!";
  ripplePropagate.imageFile = nil;
  ripplePropagate.imageHeight = 0;
  ripplePropagate.imageWidth = 0;
- ripplePropagate.creatorName = @"Ripple Tutorial";
+ ripplePropagate.creatorName = @"Bellow Tutorial";
  ripplePropagate.miniRippleId = @"FakeMiniRipple";
  ripplePropagate.commentArray = [@[] mutableCopy];
  ripplePropagate.commentIds = [@[] mutableCopy];
@@ -49,14 +49,14 @@
  ripplePropagate.longitude = -122.3304829644317;
  ripplePropagate.rippleExposure = 0;
  
- // Ripple 3: Swipe left to dismiss
- Ripple *rippleDismiss = [[Ripple alloc] init];
+ // Bellow 3: Swipe left to dismiss
+ Bellow *rippleDismiss = [[Bellow alloc] init];
  rippleDismiss.rippleId = @"FakeRipple";
  rippleDismiss.text = @"Swipe left to dismiss this ripple.";
  rippleDismiss.imageFile = nil;
  rippleDismiss.imageHeight = 0;
  rippleDismiss.imageWidth = 0;
- rippleDismiss.creatorName = @"Ripple Tutorial";
+ rippleDismiss.creatorName = @"Bellow Tutorial";
  rippleDismiss.miniRippleId = @"FakeMiniRipple";
  rippleDismiss.commentArray = [@[] mutableCopy];
  rippleDismiss.commentIds = [@[] mutableCopy];
@@ -189,7 +189,7 @@
  NSMutableArray *array = [[NSMutableArray alloc] init];
  // add some mini ripples here
  for (int j = 0; j<self.ripple.numberPropagated; j++) {
- MiniRipple *miniRipple = [[MiniRipple alloc] init];
+ MiniBellow *miniRipple = [[MiniBellow alloc] init];
  miniRipple.miniRippleId = @"FakeMiniRipple";
  miniRipple.rippleId = self.ripple.rippleId;
  miniRipple.lastUpdated = [NSDate date];
@@ -210,15 +210,15 @@
  // add comments here
  Comment *firstComment = [[Comment alloc] init];
  firstComment.createdAt = [NSDate date];
- firstComment.creatorUsername = @"Ripple Tutorial";
+ firstComment.creatorUsername = @"Bellow Tutorial";
  firstComment.commentId = @"FakeComment";
  firstComment.commentText = @"The green circle shows where the ripple started. Each blue circle is a person who has spread this ripple.";
  
  Comment *secondComment= [[Comment alloc] init];
  secondComment.createdAt = [NSDate date];
- secondComment.creatorUsername = @"Ripple Tutorial";
+ secondComment.creatorUsername = @"Bellow Tutorial";
  secondComment.commentId = @"FakeComment";
- secondComment.commentText = @"Go back and spread this Ripple";
+ secondComment.commentText = @"Go back and spread this Bellow";
  
  [self.commentArray addObject:firstComment];
  // [self.commentArray addObject:secondComment];
@@ -233,7 +233,7 @@
 MyRippleCell *cell = (MyRippleCell *)[tableView dequeueReusableCellWithIdentifier:@"MyRippleCell" forIndexPath:indexPath];
 cell.rippleMainView.layer.cornerRadius = 5.0;
 
-Ripple *ripple = [self.selectedRippleArray objectAtIndex:[indexPath row]];
+Bellow *ripple = [self.selectedRippleArray objectAtIndex:[indexPath row]];
 
 cell.selectionStyle = UITableViewCellSelectionStyleNone;
 cell.ripple = nil;

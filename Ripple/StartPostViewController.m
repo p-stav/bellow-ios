@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 9/10/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
@@ -190,7 +190,7 @@ UIImagePickerController *picker;
         
 
         // user settings to determine if sent first ripple
-        // 1 = just sent first Ripple, 2 = already sent it
+        // 1 = just sent first Bellow, 2 = already sent it
         NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
         
         NSNumber *sentFirstRipple = [userData objectForKey:@"sentFirstRipple"];
@@ -662,7 +662,7 @@ UIImagePickerController *picker;
     if ([PFTwitterUtils isLinkedWithUser:[PFUser currentUser]])
     {
         
-        NSString *fullTweetText = [NSString stringWithFormat:@"%@ - Shared on Ripple @rippleMeThis", self.rippleTextView.text];
+        NSString *fullTweetText = [NSString stringWithFormat:@"%@ - Shared on Bellow @rippleMeThis", self.rippleTextView.text];
         
         if ([fullTweetText length] >= 140 || (self.originalImage && [fullTweetText length] >= 117 ))
         {

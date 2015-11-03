@@ -1,18 +1,18 @@
 //
 //  SwipeableCell.h
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 9/18/15.
 //  Copyright © 2015 Kefi Labs. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "Ripple.h"
+#import "Bellow.h"
 #import "SwipeableCellDelegate.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 @interface SwipeableCell : UITableViewCell
-@property (strong, nonatomic) Ripple *ripple;
+@property (strong, nonatomic) Bellow *ripple;
 
 @property (weak, nonatomic) IBOutlet UIView *rippleMainView;
 @property (weak, nonatomic) IBOutlet UITextView *rippleTextView;

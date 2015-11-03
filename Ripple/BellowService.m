@@ -1,6 +1,6 @@
 //
 //  BellowService.m
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 9/11/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "BellowService.h"
 #import <Parse/Parse.h>
-#import "MiniRipple.h"
+#import "MiniBellow.h"
 #import "BellowLevel.h"
 #import "BellowPoint.h"
 #import "Comment.h"
@@ -128,7 +128,7 @@
         
         
         // start creating newRipple
-        Ripple *newRipple = [[Ripple alloc] init];
+        Bellow *newRipple = [[Bellow alloc] init];
         newRipple.text = ripple[@"text"];
         newRipple.creatorName = ripple[@"creatorName"];
         newRipple.creatorId = [PFUser currentUser].objectId;
@@ -171,7 +171,7 @@
     
 }
 
-+ (void)propagateRipple:(Ripple *)ripple
++ (void)propagateRipple:(Bellow *)ripple
 {
     // Propagate ripple
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -187,14 +187,14 @@
     });
     
     // Complete mini-ripple
-    PFObject *miniRippleObject = [PFObject objectWithoutDataWithClassName:@"MiniRipple"
+    PFObject *miniRippleObject = [PFObject objectWithoutDataWithClassName:@"MiniBellow"
                                                              objectId:ripple.miniRippleId];
     miniRippleObject[@"isPropagated"] = [NSNumber numberWithBool:YES];
     miniRippleObject[@"location"] = [PFUser currentUser][@"location"];
     [miniRippleObject saveInBackground];
 }
 
-+ (void)propagateSwipeableRipple:(Ripple *)ripple
++ (void)propagateSwipeableRipple:(Bellow *)ripple
 {
     // Propagate ripple
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -212,7 +212,7 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
     
@@ -227,7 +227,7 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
    
@@ -242,7 +242,7 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
     
@@ -256,7 +256,7 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
     
@@ -270,7 +270,7 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
     
@@ -285,7 +285,7 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
     
@@ -300,16 +300,16 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
     
     return rippleArray;
 }
 
-+ (void)dismissRipple:(Ripple *)ripple
++ (void)dismissRipple:(Bellow *)ripple
 {
-    PFObject *miniRipple = [PFObject objectWithoutDataWithClassName:@"MiniRipple" objectId:ripple.miniRippleId];
+    PFObject *miniRipple = [PFObject objectWithoutDataWithClassName:@"MiniBellow" objectId:ripple.miniRippleId];
     miniRipple[@"isPropagated"] = [NSNumber numberWithBool:NO];
     miniRipple[@"location"] = [PFUser currentUser][@"location"];
     [miniRipple saveInBackground];
@@ -320,7 +320,7 @@
     });
 }
 
-+ (void)dismissSwipeableRipple:(Ripple *)ripple
++ (void)dismissSwipeableRipple:(Bellow *)ripple
 {
     // call cloud function to add point
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -330,9 +330,9 @@
 }
 
 
-+ (NSArray *)getMiniRipples:(Ripple *)ripple
++ (NSArray *)getMiniRipples:(Bellow *)ripple
 {
-    PFQuery *miniRippleQuery = [PFQuery queryWithClassName:@"MiniRipple"];
+    PFQuery *miniRippleQuery = [PFQuery queryWithClassName:@"MiniBellow"];
     PFObject *rippleObject = [PFObject objectWithoutDataWithClassName:@"Ripple" objectId:ripple.rippleId];
     
     [miniRippleQuery whereKey:@"ripple" equalTo:rippleObject];
@@ -344,7 +344,7 @@
     
     for (PFObject *miniRippleObject in miniRippleObjects)
     {
-        MiniRipple *miniRipple = [[MiniRipple alloc] init];
+        MiniBellow *miniRipple = [[MiniBellow alloc] init];
         
         miniRipple.rippleId = ripple.rippleId;
         miniRipple.miniRippleId = miniRippleObject.objectId;
@@ -366,7 +366,7 @@
     
     for (NSDictionary *miniRippleObject in graphArray)
     {
-        MiniRipple *miniRipple = [[MiniRipple alloc] init];
+        MiniBellow *miniRipple = [[MiniBellow alloc] init];
         
         miniRipple.rippleId = [NSString stringWithString:rippleId];
         miniRipple.miniRippleId = miniRippleObject[@"miniRippleId"];
@@ -384,12 +384,12 @@
     return miniRippleGraph;
 }
 
-+ (void)deleteRipple:(Ripple *)ripple
++ (void)deleteRipple:(Bellow *)ripple
 {
     [PFCloud callFunction:@"deleteRipple" withParameters:@{@"rippleId" : ripple.rippleId}];
 }
 
-+ (NSMutableArray *)getRippleComments:(Ripple *)ripple
++ (NSMutableArray *)getRippleComments:(Bellow *)ripple
 {
     NSMutableArray *commentArray = [[NSMutableArray alloc] init];
     
@@ -423,7 +423,7 @@
 }
 
 
-+ (void) addComment:(NSString *)commentText forRipple:(Ripple *)ripple;
++ (void) addComment:(NSString *)commentText forRipple:(Bellow *)ripple;
 {
     // reverse location
     PFGeoPoint *pfgeopoint = [PFUser currentUser][@"location"];
@@ -469,9 +469,9 @@
     
 }
 
-+ (Ripple *)rippleJsonToRipple:(NSDictionary *)rippleJson;
++ (Bellow *)rippleJsonToRipple:(NSDictionary *)rippleJson;
 {
-    Ripple *ripple = [[Ripple alloc] init];
+    Bellow *ripple = [[Bellow alloc] init];
     ripple.rippleId = rippleJson[@"rippleId"];
     ripple.miniRippleId = rippleJson[@"miniRippleId"];
     ripple.text = rippleJson[@"text"];
@@ -638,7 +638,7 @@
     
     for (NSDictionary *rippleJson in rippleJsonObjects)
     {
-        Ripple *ripple = [self rippleJsonToRipple:rippleJson];
+        Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
     
@@ -716,9 +716,9 @@
     [PFObject saveAll:notificationObjects];
 }
 
-+ (Ripple *)getRipple:(NSString *)rippleId {
++ (Bellow *)getRipple:(NSString *)rippleId {
     
-    Ripple *ripple = [[Ripple alloc] init];
+    Bellow *ripple = [[Bellow alloc] init];
     NSDictionary *rippleObject = [PFCloud callFunction:@"getRippleForPush" withParameters:@{@"rippleId":rippleId}];
     
     if (rippleObject)

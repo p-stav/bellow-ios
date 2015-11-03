@@ -23,7 +23,7 @@
 		0D73283419C2D3250076CD7F /* RippleSignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D73283219C2D3250076CD7F /* RippleSignUpView.m */; };
 		0D73283719C2D63C0076CD7F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D73283619C2D63C0076CD7F /* Social.framework */; };
 		0D73283919C2D66C0076CD7F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D73283819C2D66C0076CD7F /* Accounts.framework */; };
-		0D73284119C68FA00076CD7F /* Ripple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D73284019C68FA00076CD7F /* Ripple.m */; };
+		0D73284119C68FA00076CD7F /* Bellow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D73284019C68FA00076CD7F /* Bellow.m */; };
 		0D75505F1A8B1CFC00004282 /* rightArrowReal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D75505E1A8B1CFC00004282 /* rightArrowReal.png */; };
 		0D7550611A8B429A00004282 /* latestIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D7550601A8B429900004282 /* latestIcon.png */; };
 		0D924A4519E790B800B6AACE /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D924A4419E790B800B6AACE /* MapView.m */; };
@@ -40,7 +40,7 @@
 		0DB855D11A19D34F008C824F /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB855D01A19D34F008C824F /* TTTTimeIntervalFormatter.m */; };
 		0DB855D71A2147F8008C824F /* BellowLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB855D61A2147F8008C824F /* BellowLevel.m */; };
 		0DD5AB2119E7954F003CA91F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD5AB2019E7954F003CA91F /* MapKit.framework */; };
-		0DD5AB2419E91470003CA91F /* MiniRipple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5AB2319E91470003CA91F /* MiniRipple.m */; };
+		0DD5AB2419E91470003CA91F /* MiniBellow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5AB2319E91470003CA91F /* MiniBellow.m */; };
 		0DFB081619C17FC700A57630 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFB081519C17FC700A57630 /* Foundation.framework */; };
 		0DFB081819C17FC700A57630 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFB081719C17FC700A57630 /* CoreGraphics.framework */; };
 		0DFB081A19C17FC700A57630 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFB081919C17FC700A57630 /* UIKit.framework */; };
@@ -194,8 +194,8 @@
 		0D73283219C2D3250076CD7F /* RippleSignUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleSignUpView.m; sourceTree = "<group>"; };
 		0D73283619C2D63C0076CD7F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		0D73283819C2D66C0076CD7F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		0D73283F19C68FA00076CD7F /* Ripple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ripple.h; sourceTree = "<group>"; };
-		0D73284019C68FA00076CD7F /* Ripple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ripple.m; sourceTree = "<group>"; };
+		0D73283F19C68FA00076CD7F /* Bellow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bellow.h; sourceTree = "<group>"; };
+		0D73284019C68FA00076CD7F /* Bellow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bellow.m; sourceTree = "<group>"; };
 		0D75505E1A8B1CFC00004282 /* rightArrowReal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrowReal.png; sourceTree = "<group>"; };
 		0D7550601A8B429900004282 /* latestIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = latestIcon.png; sourceTree = "<group>"; };
 		0D924A4319E790B800B6AACE /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
@@ -221,8 +221,8 @@
 		0DB855D51A2147F8008C824F /* BellowLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BellowLevel.h; sourceTree = "<group>"; };
 		0DB855D61A2147F8008C824F /* BellowLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BellowLevel.m; sourceTree = "<group>"; };
 		0DD5AB2019E7954F003CA91F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		0DD5AB2219E91470003CA91F /* MiniRipple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiniRipple.h; sourceTree = "<group>"; };
-		0DD5AB2319E91470003CA91F /* MiniRipple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiniRipple.m; sourceTree = "<group>"; };
+		0DD5AB2219E91470003CA91F /* MiniBellow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiniBellow.h; sourceTree = "<group>"; };
+		0DD5AB2319E91470003CA91F /* MiniBellow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiniBellow.m; sourceTree = "<group>"; };
 		0DFB081219C17FC700A57630 /* Bellow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bellow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFB081519C17FC700A57630 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DFB081719C17FC700A57630 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -523,10 +523,10 @@
 		0D73283E19C68F6B0076CD7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0D73283F19C68FA00076CD7F /* Ripple.h */,
-				0D73284019C68FA00076CD7F /* Ripple.m */,
-				0DD5AB2219E91470003CA91F /* MiniRipple.h */,
-				0DD5AB2319E91470003CA91F /* MiniRipple.m */,
+				0D73283F19C68FA00076CD7F /* Bellow.h */,
+				0D73284019C68FA00076CD7F /* Bellow.m */,
+				0DD5AB2219E91470003CA91F /* MiniBellow.h */,
+				0DD5AB2319E91470003CA91F /* MiniBellow.m */,
 				0DB855D51A2147F8008C824F /* BellowLevel.h */,
 				0DB855D61A2147F8008C824F /* BellowLevel.m */,
 				DADDFFFB1A800F3D00E49BC1 /* BellowPoint.h */,
@@ -1090,9 +1090,9 @@
 				DA89E3B81A74AD2A002F3D68 /* WebViewViewController.m in Sources */,
 				DADDFFFA1A800B3200E49BC1 /* PointsViewController.m in Sources */,
 				DA40C18F1A3CF26700B79119 /* CommentTableViewCell.m in Sources */,
-				0DD5AB2419E91470003CA91F /* MiniRipple.m in Sources */,
+				0DD5AB2419E91470003CA91F /* MiniBellow.m in Sources */,
 				DA5C18491B70637200680873 /* SocialMediaTableViewCell.m in Sources */,
-				0D73284119C68FA00076CD7F /* Ripple.m in Sources */,
+				0D73284119C68FA00076CD7F /* Bellow.m in Sources */,
 				0D924A4519E790B800B6AACE /* MapView.m in Sources */,
 				0DB855C81A1801EC008C824F /* PrivacyPolicyView.m in Sources */,
 			);

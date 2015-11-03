@@ -1,6 +1,6 @@
 //
 //  PropagateRippleTableViewCell.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 11/8/14.
 //  Copyright (c) 2514 Kefi Labs. All rights reserved.

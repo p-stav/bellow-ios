@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 9/10/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
@@ -206,7 +206,7 @@ BOOL isLaunch;
     UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        Ripple *ripple = [BellowService getRipple:rippleId];
+        Bellow *ripple = [BellowService getRipple:rippleId];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             MapView *rmv = [mainstoryboard instantiateViewControllerWithIdentifier:@"RippleMapView"];

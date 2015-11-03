@@ -24,7 +24,7 @@
     // create label for logo
     UILabel *logoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,-30,150, 50)];
     [logoLabel setFont:[UIFont fontWithName:@"Avenir" size:40.0]];
-    logoLabel.text = @"Ripple";
+    logoLabel.text = @"Bellow";
     logoLabel.textColor = [UIColor whiteColor];
     logoLabel.textAlignment = NSTextAlignmentCenter;
     [self.logInView setLogo:logoLabel];

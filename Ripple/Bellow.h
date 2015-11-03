@@ -1,6 +1,6 @@
 //
-//  Ripple.h
-//  Ripple
+//  Bellow.h
+//  Bellow
 //
 //  Created by Gal Oshri on 9/14/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Ripple : NSObject
+@interface Bellow : NSObject
 
 @property (strong, nonatomic) NSString *rippleId;
 @property (strong, nonatomic) NSString *text;

@@ -1,6 +1,6 @@
 //
 //  ShareRippleSheet.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 2/7/15.
 //  Copyright (c) 2015 Kefi Labs. All rights reserved.
@@ -26,7 +26,7 @@
     }
     
     else
-        shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Ripple and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io", [PFUser currentUser][@"username"]];
+        shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Bellow and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io", [PFUser currentUser][@"username"]];
     UIImage *image = [UIImage imageNamed:@"InstagramAdd.png"];
     shareController = [[UIActivityViewController alloc] initWithActivityItems:@[shareText, image] applicationActivities:nil];
     

@@ -1,6 +1,6 @@
 ///
 //  TutorialViewController.m
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 10/20/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
@@ -118,7 +118,7 @@
             [rippleIntro setEditable:NO];
             [rippleIntro setSelectable:NO];
             
-            [rippleIntro setText:@"Ripple spreads your messages around the world"];
+            [rippleIntro setText:@"Bellow spreads your messages around the world"];
             [rippleIntro setTextColor:[UIColor whiteColor]];
             [rippleIntro setBackgroundColor:[UIColor clearColor]];
             [rippleIntro setFont:[UIFont fontWithName:@"Avenir-Roman" size:18.0]];

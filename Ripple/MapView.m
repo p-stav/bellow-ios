@@ -1,13 +1,13 @@
 //
 //  RippleMapView.m
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 10/9/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
 //
 
 #import "MapView.h"
-#import "MiniRipple.h"
+#import "MiniBellow.h"
 #import "BellowService.h"
 #import "Comment.h"
 #import "CommentTableViewCell.h"
@@ -387,7 +387,7 @@
     double max_long = -180.0;
     double min_long = 180.0;
     
-    for (MiniRipple *miniRipple in self.miniRipples)
+    for (MiniBellow *miniRipple in self.miniRipples)
     {
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(miniRipple.latitude, miniRipple.longitude);
         
@@ -444,7 +444,7 @@
     
     
     // find all first wave miniripples
-    for (MiniRipple *miniRipple in self.miniRipples)
+    for (MiniBellow *miniRipple in self.miniRipples)
     {
         if (miniRipple.isFirstWave)
         {
@@ -456,10 +456,10 @@
     
     while ([frontier count] > 0)
     {
-        MiniRipple *current = [frontier anyObject];
+        MiniBellow *current = [frontier anyObject];
         for (NSString *nextId in current.children)
         {
-            for (MiniRipple *next in self.miniRipples)
+            for (MiniBellow *next in self.miniRipples)
             {
                 if ([nextId isEqualToString:next.miniRippleId])
                 {
@@ -478,7 +478,7 @@
     }
 }
 
-- (void)drawLineRippleToMiniRipple:(Ripple *)ripple to:(MiniRipple *)miniRipple
+- (void)drawLineRippleToMiniRipple:(Bellow *)ripple to:(MiniBellow *)miniRipple
 {
     CLLocationCoordinate2D pointA = CLLocationCoordinate2DMake(ripple.latitude, ripple.longitude);
     CLLocationCoordinate2D pointB = CLLocationCoordinate2DMake(miniRipple.latitude, miniRipple.longitude);
@@ -492,7 +492,7 @@
     [self.lineOverlays addObject:line];
 }
 
-- (void)drawLineBetweenMiniRipples:(MiniRipple *)miniRippleA to:(MiniRipple *)miniRippleB
+- (void)drawLineBetweenMiniRipples:(MiniBellow *)miniRippleA to:(MiniBellow *)miniRippleB
 {
     CLLocationCoordinate2D pointA = CLLocationCoordinate2DMake(miniRippleA.latitude, miniRippleA.longitude);
     CLLocationCoordinate2D pointB = CLLocationCoordinate2DMake(miniRippleB.latitude, miniRippleB.longitude);
@@ -1122,7 +1122,7 @@
 {
     if ([self.ripple.creatorId isEqualToString:[PFUser currentUser].objectId])
     {
-        // delete Ripple
+        // delete Bellow
         if(buttonIndex == 0)
             [self deleteRipple:nil];
     }
@@ -1165,7 +1165,7 @@
     // there is an image and text
 
     
-    NSString *shareText = [NSString stringWithFormat:@"%@ - Shared on Ripple by %@; http://www.getripple.io/ripple.html?id=%@", self.ripple.text,self.ripple.creatorName, self.ripple.rippleId];
+    NSString *shareText = [NSString stringWithFormat:@"%@ - Shared on Bellow by %@; http://www.getripple.io/ripple.html?id=%@", self.ripple.text,self.ripple.creatorName, self.ripple.rippleId];
     
     if (self.ripple.imageFile)
     {

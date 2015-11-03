@@ -1,6 +1,6 @@
 //
 //  PropagateRippleTableViewController.m
-//  Ripple
+//  Bellow
 //
 //  Created by Paul Stavropoulos on 11/8/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
@@ -51,7 +51,7 @@
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
 @property (strong, nonatomic) NSString *defaultNoPendingRippleString;
-@property (strong, nonatomic) Ripple *segueToRippleForPropagateCell;
+@property (strong, nonatomic) Bellow *segueToRippleForPropagateCell;
 
 @property (nonatomic) BOOL isFirstRunPostInteractiveTutorial;
 @property (nonatomic) BOOL getLocationOnce;
@@ -113,7 +113,7 @@ int PARSE_PAGE_SIZE = 25;
     return NO;
 }
 
--(void) goToMapView:(Ripple *)ripple withComments:(BOOL)commentsUp
+-(void) goToMapView:(Bellow *)ripple withComments:(BOOL)commentsUp
 {
     if (commentsUp)
         self.segueWithCommentsUp = YES;
@@ -125,7 +125,7 @@ int PARSE_PAGE_SIZE = 25;
 
 
 
-- (void) goToImageView: (Ripple *)ripple
+- (void) goToImageView: (Bellow *)ripple
 {
     if (ripple.imageFile)
     {
@@ -134,7 +134,7 @@ int PARSE_PAGE_SIZE = 25;
     }
 }
 
-- (void) goToUserProfile: (Ripple *)ripple
+- (void) goToUserProfile: (Bellow *)ripple
 {
     if (ripple)
     {
@@ -167,9 +167,9 @@ int PARSE_PAGE_SIZE = 25;
         {
             MapView *rmv = (MapView *) segue.destinationViewController;
             
-            if ([sender isKindOfClass:[Ripple class]])
+            if ([sender isKindOfClass:[Bellow class]])
             {
-                Ripple *ripple = (Ripple *)sender;
+                Bellow *ripple = (Bellow *)sender;
                 rmv.ripple = ripple;
                 
                 if (self.segueWithCommentsUp)
@@ -201,9 +201,9 @@ int PARSE_PAGE_SIZE = 25;
     
     if ([segue.identifier isEqualToString:@"RippleImageView"])
     {
-        if ([sender isKindOfClass:[Ripple class]])
+        if ([sender isKindOfClass:[Bellow class]])
         {
-            Ripple *ripple = (Ripple *)sender;
+            Bellow *ripple = (Bellow *)sender;
         
             ImageViewerViewController *ivvc = (ImageViewerViewController *)segue.destinationViewController;
             ivvc.rippleImageFile = ripple.imageFile;
@@ -223,10 +223,10 @@ int PARSE_PAGE_SIZE = 25;
     
     if ([segue.identifier isEqualToString:@"UserProfile"])
     {
-        if ([sender isKindOfClass:[Ripple class]])
+        if ([sender isKindOfClass:[Bellow class]])
         {
             [self.navigationController setNavigationBarHidden:NO];
-            Ripple *ripple = sender;
+            Bellow *ripple = sender;
             NSString *string = (NSString*) ripple.creatorId;
             ProfilePageViewController *ppvc = (ProfilePageViewController *)segue.destinationViewController;
             ppvc.userId = string;
@@ -1076,7 +1076,7 @@ int PARSE_PAGE_SIZE = 25;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
         // set current ripple
-        Ripple *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
+        Bellow *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
         
         // size text and images
         CGFloat imageHeight = 0;
@@ -1118,7 +1118,7 @@ int PARSE_PAGE_SIZE = 25;
 }
 
 
-- (void)rippleDismissed:(Ripple *)ripple
+- (void)rippleDismissed:(Bellow *)ripple
 {
     // use the UITableView to animate the removal of this row
     NSUInteger index = [self.selectedRippleArray indexOfObject:ripple];
@@ -1179,7 +1179,7 @@ int PARSE_PAGE_SIZE = 25;
 }
 
 
-- (void)ripplePropagated:(Ripple *)ripple
+- (void)ripplePropagated:(Bellow *)ripple
 {
     // use the UITableView to animate the removal of this row
     NSUInteger index = [self.selectedRippleArray indexOfObject:ripple];
@@ -1221,13 +1221,13 @@ int PARSE_PAGE_SIZE = 25;
         }
         
         else if (spreadFirstRippleCheck == 3) {
-            UIAlertView *tapOnRipple = [[UIAlertView alloc]initWithTitle:@"Tap on a Ripple!" message:@"See a map of where that ripple has spread and leave a comment"delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *tapOnRipple = [[UIAlertView alloc]initWithTitle:@"Tap on a Bellow!" message:@"See a map of where that ripple has spread and leave a comment"delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [tapOnRipple show];
         }
         
         else if (spreadFirstRippleCheck == 50) {
             
-            UIAlertView *reviewRipple = [[UIAlertView alloc] initWithTitle:@"Review Ripple" message:@"Enjoying Ripple? Rate or review it!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Rate or review", nil];
+            UIAlertView *reviewRipple = [[UIAlertView alloc] initWithTitle:@"Review Bellow" message:@"Enjoying Bellow? Rate or review it!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Rate or review", nil];
             
             [Flurry logEvent:@"Ask_For_Review"];
             [reviewRipple show];
@@ -1280,7 +1280,7 @@ int PARSE_PAGE_SIZE = 25;
     [self.barBtn setTitle:[NSString stringWithFormat:@"%d",self.currentScore] forState:UIControlStateNormal];
 }
 
-- (void)swipedRipple:(Ripple *)swipedRipple
+- (void)swipedRipple:(Bellow *)swipedRipple
 {
     NSArray *arrays = [NSArray arrayWithObjects:self.pendingRipples, self.followingRipples, self.topRipples, nil];
     
@@ -1289,7 +1289,7 @@ int PARSE_PAGE_SIZE = 25;
         {
             // check if the ripple is in the list
             NSInteger position = [arrays[i] indexOfObjectPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([[(Ripple *)obj rippleId] isEqualToString:swipedRipple.rippleId]) {
+                if ([[(Bellow *)obj rippleId] isEqualToString:swipedRipple.rippleId]) {
                     *stop = YES;
                     return YES;
                 }
@@ -1305,7 +1305,7 @@ int PARSE_PAGE_SIZE = 25;
 }
 
 - (void)swipedRippleNotification: (NSNotification *)notification {
-    Ripple *ripple = (Ripple *)[notification object];
+    Bellow *ripple = (Bellow *)[notification object];
     
     NSArray *arrays = [NSArray arrayWithObjects:self.pendingRipples, self.followingRipples, self.topRipples, nil];
     
@@ -1313,7 +1313,7 @@ int PARSE_PAGE_SIZE = 25;
     {
         // check if the ripple is in the list
         NSInteger position = [arrays[i] indexOfObjectPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([[(Ripple *)obj rippleId] isEqualToString:ripple.rippleId]) {
+            if ([[(Bellow *)obj rippleId] isEqualToString:ripple.rippleId]) {
                 *stop = YES;
                 return YES;
             }
@@ -1477,13 +1477,13 @@ int PARSE_PAGE_SIZE = 25;
         [self.navigationController setHidesBarsOnSwipe:NO];
     
     // create ripple!
-    Ripple *rippleClick = [[Ripple alloc] init];
+    Bellow *rippleClick = [[Bellow alloc] init];
     rippleClick.rippleId = @"FakeRippleTap";
     rippleClick.text = @"Swipe Ripples to spread them to more people or to dismiss them!";
     rippleClick.imageFile = nil;
     rippleClick.imageHeight = 0;
     rippleClick.imageWidth = 0;
-    rippleClick.creatorName = @"Ripple Tutorial";
+    rippleClick.creatorName = @"Bellow Tutorial";
     rippleClick.miniRippleId = @"FakeMiniRipple";
     rippleClick.commentArray = [@[] mutableCopy];
     rippleClick.commentIds = [@[] mutableCopy];
@@ -1644,7 +1644,7 @@ int PARSE_PAGE_SIZE = 25;
     
     
     // show text box with  message to enable
-    self.noRipplesTextView.text = @"Ripple needs location to share ripples with people nearby. In your phone settings, tap on Ripple and allow location services";
+    self.noRipplesTextView.text = @"Bellow needs location to share ripples with people nearby. In your phone settings, tap on Bellow and allow location services";
     [self.noRipplesTextView setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:26.0]];
     self.noTextTopConstraint.constant = 40;
     [self.noRipplesTextView setHidden:NO];
@@ -1821,7 +1821,7 @@ int PARSE_PAGE_SIZE = 25;
 #pragma mark - share and action items from profile view
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([alertView.title isEqualToString:@"Share Ripple"])
+    if ([alertView.title isEqualToString:@"Share Bellow"])
     {
         if (buttonIndex == 1)
         {
@@ -1831,7 +1831,7 @@ int PARSE_PAGE_SIZE = 25;
         }
     }
     
-    if ([alertView.title isEqualToString:@"Review Ripple"])
+    if ([alertView.title isEqualToString:@"Review Bellow"])
     {
         if (buttonIndex == 1)
         {
@@ -1874,7 +1874,7 @@ int PARSE_PAGE_SIZE = 25;
         
         if (buttonIndex == 1)
         {
-            UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:[NSString stringWithFormat:@"I'm now a %@ on Ripple. Check it out! http://getRipple.io @RippleMeThis", [PFUser currentUser][@"reachLevel"]]];
+            UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:[NSString stringWithFormat:@"I'm now a %@ on Bellow. Check it out! http://getRipple.io @RippleMeThis", [PFUser currentUser][@"reachLevel"]]];
             
             [self presentViewController:shareController animated:YES completion:nil];
             
@@ -1896,7 +1896,7 @@ int PARSE_PAGE_SIZE = 25;
         
         [userData synchronize];
         
-        UIAlertView *shareRipple = [[UIAlertView alloc] initWithTitle:@"Share Ripple" message:@"Ripple is better with friends! Get them on Ripple and gain 200 points!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Share", nil];
+        UIAlertView *shareRipple = [[UIAlertView alloc] initWithTitle:@"Share Bellow" message:@"Bellow is better with friends! Get them on Bellow and gain 200 points!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Share", nil];
         
         [shareRipple show];
     }
@@ -1948,7 +1948,7 @@ int PARSE_PAGE_SIZE = 25;
     // if 15 ripples, ask for  a review
     if (sentFirstRippleCheck == 3)
     {
-        UIAlertView *reviewRipple = [[UIAlertView alloc] initWithTitle:@"Review Ripple" message:@"Enjoying Ripple? Rate and review us!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Rate or review", nil];
+        UIAlertView *reviewRipple = [[UIAlertView alloc] initWithTitle:@"Review Bellow" message:@"Enjoying Bellow? Rate and review us!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Rate or review", nil];
         
         [Flurry logEvent:@"Ask_For_Review"];
         

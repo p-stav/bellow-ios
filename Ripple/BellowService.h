@@ -1,13 +1,13 @@
 //
 //  BellowService.h
-//  Ripple
+//  Bellow
 //
 //  Created by Gal Oshri on 9/11/14.
 //  Copyright (c) 2014 Kefi Labs. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Ripple.h"
+#import "Bellow.h"
 #import <Parse/Parse.h>
 
 @interface BellowService : NSObject
@@ -16,9 +16,9 @@
 
 + (void)startRipple:(NSString *)text withImage: (UIImage *)rippleImage;
 
-+ (void)propagateRipple:(Ripple *)ripple;
++ (void)propagateRipple:(Bellow *)ripple;
 
-+ (void)propagateSwipeableRipple:(Ripple *)ripple;
++ (void)propagateSwipeableRipple:(Bellow *)ripple;
 
 + (NSMutableArray *)getPendingRipples:(int)skipItems;
 
@@ -33,19 +33,19 @@
 + (NSMutableArray *)getPropagatedRipples:(int)skipItems withSortMethod: (int)sortMethod;
 
 
-+ (void)dismissRipple:(Ripple *)ripple;
++ (void)dismissRipple:(Bellow *)ripple;
 
-+ (void)dismissSwipeableRipple:(Ripple *)ripple;
++ (void)dismissSwipeableRipple:(Bellow *)ripple;
 
-+ (NSArray *)getMiniRipples:(Ripple *)ripple;
++ (NSArray *)getMiniRipples:(Bellow *)ripple;
 
 + (NSArray *)getMiniRipplesGraph:(NSString *)rippleId;
 
-+ (void)deleteRipple:(Ripple *)ripple;
++ (void)deleteRipple:(Bellow *)ripple;
 
-+ (NSMutableArray *)getRippleComments:(Ripple *)ripple;
++ (NSMutableArray *)getRippleComments:(Bellow *)ripple;
 
-+ (void) addComment:(NSString *)commentText forRipple:(Ripple *)ripple;
++ (void) addComment:(NSString *)commentText forRipple:(Bellow *)ripple;
 
 // Return YES if settings were updated
 + (BOOL)getSettings;
@@ -66,7 +66,7 @@
 
 + (void)sawAllNotifications;
 
-+ (Ripple *)getRipple:(NSString *)rippleId;
++ (Bellow *)getRipple:(NSString *)rippleId;
 
 + (void)completeNotification:(NSString *)notificationId;
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Bellow.h"
-#import "PropagateRippleCellDelegate.h"
+#import "PropagateCellDelegate.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
@@ -68,7 +68,7 @@
 
 
 // The object that acts as delegate for this cell.
-@property (nonatomic, assign) id<PendingRippleCellDelegate> delegate;
+@property (nonatomic, assign) id<PendingCellDelegate> delegate;
 
 
 // @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;

@@ -53,7 +53,7 @@
 		0DFB083619C17FC700A57630 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFB081519C17FC700A57630 /* Foundation.framework */; };
 		0DFB083719C17FC700A57630 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFB081919C17FC700A57630 /* UIKit.framework */; };
 		0DFB083F19C17FC700A57630 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB083D19C17FC700A57630 /* InfoPlist.strings */; };
-		0DFB084119C17FC700A57630 /* RippleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB084019C17FC700A57630 /* RippleTests.m */; };
+		0DFB084119C17FC700A57630 /* BellowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB084019C17FC700A57630 /* BellowTests.m */; };
 		AE1456131B37215200FDE9C5 /* RippleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1456121B37215200FDE9C5 /* RippleTextView.m */; };
 		AE2A68891B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */; };
 		DA0690391A8B323C006AFBD0 /* triangle-for-filter-39.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0690381A8B323C006AFBD0 /* triangle-for-filter-39.png */; };
@@ -211,7 +211,7 @@
 		0DA264E91AF9D26500953CB2 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		0DADC94B19D28D0200127E4F /* MyRippleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRippleCell.h; sourceTree = "<group>"; };
 		0DADC94C19D28D0200127E4F /* MyRippleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRippleCell.m; sourceTree = "<group>"; };
-		0DB5B3EB1A0F4C07008C0C1B /* PropagateRippleCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropagateRippleCellDelegate.h; sourceTree = "<group>"; };
+		0DB5B3EB1A0F4C07008C0C1B /* PropagateCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropagateCellDelegate.h; sourceTree = "<group>"; };
 		0DB855C31A1801DB008C824F /* TermsOfServiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsOfServiceView.h; sourceTree = "<group>"; };
 		0DB855C41A1801DB008C824F /* TermsOfServiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsOfServiceView.m; sourceTree = "<group>"; };
 		0DB855C61A1801EC008C824F /* PrivacyPolicyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyView.h; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 		0DFB083419C17FC700A57630 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0DFB083C19C17FC700A57630 /* BellowTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BellowTests-Info.plist"; sourceTree = "<group>"; };
 		0DFB083E19C17FC700A57630 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0DFB084019C17FC700A57630 /* RippleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RippleTests.m; sourceTree = "<group>"; };
+		0DFB084019C17FC700A57630 /* BellowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BellowTests.m; sourceTree = "<group>"; };
 		AE1456121B37215200FDE9C5 /* RippleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleTextView.m; sourceTree = "<group>"; };
 		AE2A68871B3F677E00B0C1F6 /* SocialMediaCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaCollectionViewController.h; sourceTree = "<group>"; };
 		AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaCollectionViewController.m; sourceTree = "<group>"; };
@@ -441,7 +441,7 @@
 				DA80EBC71B1143F800ADFBFB /* PendingCell.xib */,
 				DAE13D621A0ED1C6005D59DE /* PendingRippleCell.h */,
 				DAE13D631A0ED1C6005D59DE /* PendingRippleCell.m */,
-				0DB5B3EB1A0F4C07008C0C1B /* PropagateRippleCellDelegate.h */,
+				0DB5B3EB1A0F4C07008C0C1B /* PropagateCellDelegate.h */,
 				DAB048311AE852380056B143 /* MyRippleCell.xib */,
 				0DADC94B19D28D0200127E4F /* MyRippleCell.h */,
 				0DADC94C19D28D0200127E4F /* MyRippleCell.m */,
@@ -556,7 +556,7 @@
 			children = (
 				DA45F4A21ADF5A3200363A28 /* Flurry */,
 				0DFB081B19C17FC700A57630 /* Ripple */,
-				0DFB083A19C17FC700A57630 /* RippleTests */,
+				0DFB083A19C17FC700A57630 /* BellowTests */,
 				0DFB081419C17FC700A57630 /* Frameworks */,
 				0DFB081319C17FC700A57630 /* Products */,
 			);
@@ -649,12 +649,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0DFB083A19C17FC700A57630 /* RippleTests */ = {
+		0DFB083A19C17FC700A57630 /* BellowTests */ = {
 			isa = PBXGroup;
 			children = (
-				0DFB084019C17FC700A57630 /* RippleTests.m */,
+				0DFB084019C17FC700A57630 /* BellowTests.m */,
 				0DFB083B19C17FC700A57630 /* Supporting Files */,
 			);
+			name = BellowTests;
 			path = RippleTests;
 			sourceTree = "<group>";
 		};
@@ -1102,7 +1103,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DFB084119C17FC700A57630 /* RippleTests.m in Sources */,
+				0DFB084119C17FC700A57630 /* BellowTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

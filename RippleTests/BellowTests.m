@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface RippleTests : XCTestCase
+@interface BellowTests : XCTestCase
 
 @end
 
-@implementation RippleTests
+@implementation BellowTests
 
 - (void)setUp
 {

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "RippleLogInView.h"
-#import "PropagateRippleCellDelegate.h"
+#import "PropagateCellDelegate.h"
 
 @interface TutorialViewController : UIViewController <UIWebViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIScrollViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UIAlertViewDelegate>
 

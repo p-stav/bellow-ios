@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
-#import "PropagateRippleCellDelegate.h"
+#import "PropagateCellDelegate.h"
 #import "MyRippleCellDelegate.h"
 #import <ParseUI/ParseUI.h>
 
-@interface HomePage : UIViewController <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate, PendingRippleCellDelegate,ActedRippleCellDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate>
+@interface HomePage : UIViewController <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate, PendingCellDelegate,ActedRippleCellDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *selectedRippleArray;
 @property (nonatomic, strong) NSMutableArray *pendingRipples;

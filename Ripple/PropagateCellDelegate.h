@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Bellow.h"
 
-@protocol PendingRippleCellDelegate <NSObject>
+@protocol PendingCellDelegate <NSObject>
 
 // indicates that the given item has been deleted
 -(void) rippleDismissed:(Bellow *)ripple;

@@ -518,11 +518,15 @@ int PARSE_PAGE_SIZE = 25;
             if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
             {
                 self.isAllHomeRipples = YES;
+                
+                if ([self.selectedRippleArray count] == 0)
+                    [self setNoRipplesText];
             }
             else
             {
                 self.isAllHomeRipples = NO;
             }
+            
             
             break;
             
@@ -535,6 +539,9 @@ int PARSE_PAGE_SIZE = 25;
             if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
             {
                 self.isAllFollowingRipples = YES;
+                
+                if ([self.selectedRippleArray count] == 0)
+                    [self setNoRipplesText];
             }
             else
             {
@@ -808,7 +815,7 @@ int PARSE_PAGE_SIZE = 25;
     // userlabel work
     [cell.userLabel setTitle:cell.currentRipple.creatorName forState:UIControlStateNormal];
     
-    UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:18.0];
+    UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Medium" size:18.0];
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
     NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
     
@@ -843,6 +850,9 @@ int PARSE_PAGE_SIZE = 25;
     rippledText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%dx", cell.currentRipple.numberPropagated] attributes:boldAttributes];
     [cell.numPropagatedLabel setAttributedText:rippledText];
     [cell.numPropagatedLabel setTextColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0]];
+    [cell.reachSpreadLabel setText:[NSString stringWithFormat:@"spread to %@ people",[PFUser currentUser][@"reach"]]];
+    [cell.reachSpreadLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
+    [cell.dismissLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
     
     // do work to display comments and recognize tap
     [cell.numberOfCommentsButton setTitle:[NSString stringWithFormat:@"%d", cell.currentRipple.numberComments] forState:UIControlStateNormal];
@@ -972,6 +982,11 @@ int PARSE_PAGE_SIZE = 25;
     [cell.spreadButton setAlpha:1.0];
     [cell.dismissButton setAlpha:1.0];
     [cell.dismissButton setHidden:NO];
+    
+    // add border to username
+    /*[cell.userLabel.layer setBorderColor:[[UIColor colorWithWhite:0.9 alpha:1.0] CGColor]];
+    [cell.userLabel.layer setBorderWidth:1.0];
+    cell.userLabel.layer.cornerRadius = 5.0;*/
     
     return cell;
 }
@@ -1816,6 +1831,8 @@ int PARSE_PAGE_SIZE = 25;
     
     else if (self.rippleSegmentControl.selectedSegmentIndex == 2)
         self.noRipplesTextView.text = @"You have no new trending ripples. Swipe down to refresh";
+    
+    [self.noRipplesTextView setHidden:NO];
 }
 
 #pragma mark - share and action items from profile view

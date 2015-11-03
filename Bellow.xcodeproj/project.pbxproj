@@ -90,7 +90,6 @@
 		DA405C241AEDBFAE00164B80 /* commentNotification.png in Resources */ = {isa = PBXBuildFile; fileRef = DA405C231AEDBFAE00164B80 /* commentNotification.png */; };
 		DA405C261AEDBFEF00164B80 /* userNotification.png in Resources */ = {isa = PBXBuildFile; fileRef = DA405C251AEDBFEF00164B80 /* userNotification.png */; };
 		DA405C281AEDC04000164B80 /* rippleNotification.png in Resources */ = {isa = PBXBuildFile; fileRef = DA405C271AEDC04000164B80 /* rippleNotification.png */; };
-		DA405C2C1AEDD2DC00164B80 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA405C2B1AEDD2DB00164B80 /* NotificationTableViewCell.m */; };
 		DA40C18C1A3B8E4400B79119 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = DA40C18B1A3B8E4400B79119 /* Comment.m */; };
 		DA40C18F1A3CF26700B79119 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA40C18E1A3CF26700B79119 /* CommentTableViewCell.m */; };
 		DA44FA571B4B35840059396D /* referral.png in Resources */ = {isa = PBXBuildFile; fileRef = DA44FA561B4B35840059396D /* referral.png */; };
@@ -100,7 +99,6 @@
 		DA4BC9341A7F41AB00B032AA /* carat.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4BC9331A7F41AB00B032AA /* carat.png */; };
 		DA5838B91A50DEB400168705 /* dismissImage.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5838B81A50DEB400168705 /* dismissImage.png */; };
 		DA5C18461B705CBF00680873 /* website.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C18451B705CBF00680873 /* website.png */; };
-		DA5C18491B70637200680873 /* SocialMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5C18481B70637200680873 /* SocialMediaTableViewCell.m */; };
 		DA5CB4611BB73A990076D56F /* alreadyDismissed.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5CB45F1BB73A990076D56F /* alreadyDismissed.png */; settings = {ASSET_TAGS = (); }; };
 		DA5CB4621BB73A990076D56F /* alreadySpread.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5CB4601BB73A990076D56F /* alreadySpread.png */; settings = {ASSET_TAGS = (); }; };
 		DA5CFC081A703B9800339481 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5CFC071A703B9800339481 /* twitter.png */; };
@@ -113,6 +111,8 @@
 		DA80EBC21B1135CB00ADFBFB /* settingGear.png in Resources */ = {isa = PBXBuildFile; fileRef = DA80EBC11B1135CB00ADFBFB /* settingGear.png */; };
 		DA80EBC61B1143B200ADFBFB /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA80EBC51B1143B200ADFBFB /* ExploreViewController.m */; };
 		DA80EBC81B1143F800ADFBFB /* PendingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA80EBC71B1143F800ADFBFB /* PendingCell.xib */; };
+		DA86854C1BE8557D0056ADD8 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA86854B1BE8557D0056ADD8 /* NotificationTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		DA86854F1BE855950056ADD8 /* SocialMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA86854E1BE855950056ADD8 /* SocialMediaTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		DA89E3B81A74AD2A002F3D68 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA89E3B71A74AD29002F3D68 /* WebViewViewController.m */; };
 		DA89E3BC1A771DD0002F3D68 /* redCompose.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89E3BB1A771DD0002F3D68 /* redCompose.png */; };
 		DA8CA5061BD073AE00D8F25E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8CA5041BD073AE00D8F25E /* Fabric.framework */; settings = {ASSET_TAGS = (); }; };
@@ -286,8 +286,6 @@
 		DA405C231AEDBFAE00164B80 /* commentNotification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentNotification.png; sourceTree = "<group>"; };
 		DA405C251AEDBFEF00164B80 /* userNotification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userNotification.png; sourceTree = "<group>"; };
 		DA405C271AEDC04000164B80 /* rippleNotification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rippleNotification.png; sourceTree = "<group>"; };
-		DA405C2A1AEDD2DB00164B80 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationTableViewCell.h; path = ../NotificationTableViewCell.h; sourceTree = "<group>"; };
-		DA405C2B1AEDD2DB00164B80 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationTableViewCell.m; path = ../NotificationTableViewCell.m; sourceTree = "<group>"; };
 		DA40C18A1A3B8E4400B79119 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		DA40C18B1A3B8E4400B79119 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		DA40C18D1A3CF26700B79119 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -300,8 +298,6 @@
 		DA4BC9331A7F41AB00B032AA /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
 		DA5838B81A50DEB400168705 /* dismissImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dismissImage.png; sourceTree = "<group>"; };
 		DA5C18451B705CBF00680873 /* website.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = website.png; sourceTree = "<group>"; };
-		DA5C18471B70637200680873 /* SocialMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialMediaTableViewCell.h; path = ../SocialMediaTableViewCell.h; sourceTree = "<group>"; };
-		DA5C18481B70637200680873 /* SocialMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialMediaTableViewCell.m; path = ../SocialMediaTableViewCell.m; sourceTree = "<group>"; };
 		DA5CB45F1BB73A990076D56F /* alreadyDismissed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alreadyDismissed.png; sourceTree = "<group>"; };
 		DA5CB4601BB73A990076D56F /* alreadySpread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alreadySpread.png; sourceTree = "<group>"; };
 		DA5CFC071A703B9800339481 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
@@ -317,6 +313,10 @@
 		DA80EBC41B1143B200ADFBFB /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
 		DA80EBC51B1143B200ADFBFB /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		DA80EBC71B1143F800ADFBFB /* PendingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PendingCell.xib; sourceTree = "<group>"; };
+		DA86854A1BE8557D0056ADD8 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
+		DA86854B1BE8557D0056ADD8 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
+		DA86854D1BE855950056ADD8 /* SocialMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaTableViewCell.h; sourceTree = "<group>"; };
+		DA86854E1BE855950056ADD8 /* SocialMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaTableViewCell.m; sourceTree = "<group>"; };
 		DA89E3B61A74AD29002F3D68 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		DA89E3B71A74AD29002F3D68 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
 		DA89E3BB1A771DD0002F3D68 /* redCompose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCompose.png; sourceTree = "<group>"; };
@@ -555,7 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				DA45F4A21ADF5A3200363A28 /* Flurry */,
-				0DFB081B19C17FC700A57630 /* Ripple */,
+				0DFB081B19C17FC700A57630 /* Bellow */,
 				0DFB083A19C17FC700A57630 /* BellowTests */,
 				0DFB081419C17FC700A57630 /* Frameworks */,
 				0DFB081319C17FC700A57630 /* Products */,
@@ -606,7 +606,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0DFB081B19C17FC700A57630 /* Ripple */ = {
+		0DFB081B19C17FC700A57630 /* Bellow */ = {
 			isa = PBXGroup;
 			children = (
 				DAF426061A8BB38800234CE7 /* Main.storyboard */,
@@ -631,6 +631,7 @@
 				0DFB082D19C17FC700A57630 /* Images.xcassets */,
 				0DFB081C19C17FC700A57630 /* Supporting Files */,
 			);
+			name = Bellow;
 			path = Ripple;
 			sourceTree = "<group>";
 		};
@@ -687,8 +688,8 @@
 				DAE612451B8C4BBA009D74D5 /* FollowingTableViewController.m */,
 				AE2A68871B3F677E00B0C1F6 /* SocialMediaCollectionViewController.h */,
 				AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */,
-				DA5C18471B70637200680873 /* SocialMediaTableViewCell.h */,
-				DA5C18481B70637200680873 /* SocialMediaTableViewCell.m */,
+				DA86854D1BE855950056ADD8 /* SocialMediaTableViewCell.h */,
+				DA86854E1BE855950056ADD8 /* SocialMediaTableViewCell.m */,
 			);
 			name = "Profile Page";
 			sourceTree = "<group>";
@@ -768,8 +769,8 @@
 			children = (
 				0DA264C81AED882F00953CB2 /* NotificationsPage.h */,
 				0DA264C91AED883000953CB2 /* NotificationsPage.m */,
-				DA405C2A1AEDD2DB00164B80 /* NotificationTableViewCell.h */,
-				DA405C2B1AEDD2DB00164B80 /* NotificationTableViewCell.m */,
+				DA86854A1BE8557D0056ADD8 /* NotificationTableViewCell.h */,
+				DA86854B1BE8557D0056ADD8 /* NotificationTableViewCell.m */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -1053,7 +1054,6 @@
 				0D27B0481A849BFC004063CA /* LevelsViewController.m in Sources */,
 				DAF427501B7BC85000225455 /* UserSearchCell.m in Sources */,
 				DAE58C421A7E0177007C9A10 /* ImageCropping.m in Sources */,
-				DA405C2C1AEDD2DC00164B80 /* NotificationTableViewCell.m in Sources */,
 				DAB6AFA41A86E6CF008C5EBA /* CommentedOut.m in Sources */,
 				DADB75021BC218C500749DAA /* HeaderCollectionReusableView.m in Sources */,
 				0DB855D11A19D34F008C824F /* TTTTimeIntervalFormatter.m in Sources */,
@@ -1064,8 +1064,10 @@
 				DA125F981AE63908006731DE /* TabBarController.m in Sources */,
 				DA7B68141ACE0A2600160141 /* FacebookService.m in Sources */,
 				0D325C0B19F63B2500F9552A /* TutorialViewController.m in Sources */,
+				DA86854C1BE8557D0056ADD8 /* NotificationTableViewCell.m in Sources */,
 				0D73283419C2D3250076CD7F /* RippleSignUpView.m in Sources */,
 				DAADCE141A14365A008177EE /* AGPushNoteView.m in Sources */,
+				DA86854F1BE855950056ADD8 /* SocialMediaTableViewCell.m in Sources */,
 				DAE13D601A0ED167005D59DE /* HomePage.m in Sources */,
 				DA40C18C1A3B8E4400B79119 /* Comment.m in Sources */,
 				AE1456131B37215200FDE9C5 /* RippleTextView.m in Sources */,
@@ -1092,7 +1094,6 @@
 				DADDFFFA1A800B3200E49BC1 /* PointsViewController.m in Sources */,
 				DA40C18F1A3CF26700B79119 /* CommentTableViewCell.m in Sources */,
 				0DD5AB2419E91470003CA91F /* MiniBellow.m in Sources */,
-				DA5C18491B70637200680873 /* SocialMediaTableViewCell.m in Sources */,
 				0D73284119C68FA00076CD7F /* Bellow.m in Sources */,
 				0D924A4519E790B800B6AACE /* MapView.m in Sources */,
 				0DB855C81A1801EC008C824F /* PrivacyPolicyView.m in Sources */,

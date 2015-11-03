@@ -177,17 +177,10 @@
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
         [PFCloud callFunction:@"spreadRippleTEST" withParameters:@{@"rippleId" : ripple.rippleId}];
-        
-        /*
-         dispatch_async( dispatch_get_main_queue(), ^{
-         // Add code here to update the UI/send notifications based on the
-         // results of the background processing
-         }); 
-        */
     });
     
     // Complete mini-ripple
-    PFObject *miniRippleObject = [PFObject objectWithoutDataWithClassName:@"MiniBellow"
+    PFObject *miniRippleObject = [PFObject objectWithoutDataWithClassName:@"MiniRipple"
                                                              objectId:ripple.miniRippleId];
     miniRippleObject[@"isPropagated"] = [NSNumber numberWithBool:YES];
     miniRippleObject[@"location"] = [PFUser currentUser][@"location"];
@@ -215,7 +208,6 @@
         Bellow *ripple = [self rippleJsonToRipple:rippleJson];
         [rippleArray addObject:ripple];
     }
-    
     return rippleArray;
 }
 
@@ -309,7 +301,7 @@
 
 + (void)dismissRipple:(Bellow *)ripple
 {
-    PFObject *miniRipple = [PFObject objectWithoutDataWithClassName:@"MiniBellow" objectId:ripple.miniRippleId];
+    PFObject *miniRipple = [PFObject objectWithoutDataWithClassName:@"MiniRipple" objectId:ripple.miniRippleId];
     miniRipple[@"isPropagated"] = [NSNumber numberWithBool:NO];
     miniRipple[@"location"] = [PFUser currentUser][@"location"];
     [miniRipple saveInBackground];
@@ -332,7 +324,7 @@
 
 + (NSArray *)getMiniRipples:(Bellow *)ripple
 {
-    PFQuery *miniRippleQuery = [PFQuery queryWithClassName:@"MiniBellow"];
+    PFQuery *miniRippleQuery = [PFQuery queryWithClassName:@"MiniRipple"];
     PFObject *rippleObject = [PFObject objectWithoutDataWithClassName:@"Ripple" objectId:ripple.rippleId];
     
     [miniRippleQuery whereKey:@"ripple" equalTo:rippleObject];

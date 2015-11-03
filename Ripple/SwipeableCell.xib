@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" constant="157" id="FR1-yz-ied"/>
                                     <constraint firstAttribute="height" constant="28" id="Px4-Dl-YCn"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                 <state key="normal" title="mjschmutzenheimer">
                                     <color key="titleColor" red="0.0" green="0.4823529412" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -136,14 +136,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Le5-DT-oRU">
-                                        <rect key="frame" x="115" y="-7" width="90" height="45"/>
+                                        <rect key="frame" x="111" y="-7" width="98" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEu-J3-XmK">
-                                                <rect key="frame" x="50" y="0.0" width="45" height="45"/>
+                                                <rect key="frame" x="50" y="0.0" width="53" height="53"/>
                                                 <animations/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="45" id="Sly-AS-YeO"/>
-                                                    <constraint firstAttribute="height" constant="45" id="zps-GA-2lK"/>
+                                                    <constraint firstAttribute="width" constant="53" id="Sly-AS-YeO"/>
+                                                    <constraint firstAttribute="height" constant="53" id="zps-GA-2lK"/>
                                                 </constraints>
                                                 <state key="normal" image="propagateButtonUnselected.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -153,11 +153,11 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbL-35-Sir">
-                                                <rect key="frame" x="-3" y="-1" width="47" height="47"/>
+                                                <rect key="frame" x="-3" y="-4" width="53" height="53"/>
                                                 <animations/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="47" id="u0y-3F-V4K"/>
-                                                    <constraint firstAttribute="height" constant="47" id="xVy-vT-tRM"/>
+                                                    <constraint firstAttribute="width" constant="53" id="u0y-3F-V4K"/>
+                                                    <constraint firstAttribute="height" constant="53" id="xVy-vT-tRM"/>
                                                 </constraints>
                                                 <state key="normal" image="dismissRippleIconUnselected.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,7 +166,7 @@
                                                     <action selector="deleteRippleFromButton:" destination="H0f-uO-tkB" eventType="touchUpInside" id="E53-Zw-K3j"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Me-KM-DOx">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Me-KM-DOx">
                                                 <rect key="frame" x="31" y="9" width="28" height="28"/>
                                                 <animations/>
                                                 <constraints>
@@ -187,7 +187,7 @@
                                             <constraint firstItem="jEu-J3-XmK" firstAttribute="top" secondItem="Le5-DT-oRU" secondAttribute="top" id="5rr-li-WMh"/>
                                             <constraint firstItem="NbL-35-Sir" firstAttribute="top" secondItem="Le5-DT-oRU" secondAttribute="top" id="7Us-D0-6RB"/>
                                             <constraint firstItem="8Me-KM-DOx" firstAttribute="centerX" secondItem="Le5-DT-oRU" secondAttribute="centerX" id="GMo-RI-UQx"/>
-                                            <constraint firstAttribute="width" constant="90" id="I9Y-tZ-LTN"/>
+                                            <constraint firstAttribute="width" constant="98" id="I9Y-tZ-LTN"/>
                                             <constraint firstAttribute="trailing" secondItem="jEu-J3-XmK" secondAttribute="trailing" constant="-5" id="P7a-5F-Adj"/>
                                             <constraint firstAttribute="height" constant="37" id="WtL-Q3-Vrs"/>
                                             <constraint firstAttribute="width" constant="90" id="XkJ-sP-HI2"/>
@@ -323,13 +323,24 @@
                         <rect key="frame" x="320" y="7" width="600" height="121"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dismissButtonGray.png" translatesAutoresizingMaskIntoConstraints="NO" id="IHq-5h-265">
-                                <rect key="frame" x="30" y="46" width="30" height="30"/>
+                                <rect key="frame" x="30" y="43" width="35" height="35"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="5nb-sV-iaC"/>
-                                    <constraint firstAttribute="width" constant="30" id="Tc0-qf-OON"/>
+                                    <constraint firstAttribute="height" constant="35" id="5nb-sV-iaC"/>
+                                    <constraint firstAttribute="width" constant="35" id="Tc0-qf-OON"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dismiss post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bh0-qV-1Yl">
+                                <rect key="frame" x="16" y="1" width="100" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="OGt-Q2-1ow"/>
+                                    <constraint firstAttribute="width" constant="100" id="s4g-dQ-3F6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.36078431370000003" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -337,18 +348,31 @@
                             <constraint firstAttribute="centerY" secondItem="IHq-5h-265" secondAttribute="centerY" id="3yF-0B-Et4"/>
                             <constraint firstAttribute="height" constant="121" id="Fqx-wZ-mvb"/>
                             <constraint firstItem="IHq-5h-265" firstAttribute="leading" secondItem="gIu-Yl-5RD" secondAttribute="leading" constant="30" id="JHF-8x-HQ5"/>
+                            <constraint firstItem="Bh0-qV-1Yl" firstAttribute="leading" secondItem="gIu-Yl-5RD" secondAttribute="leading" constant="16" id="gbq-q2-6J1"/>
+                            <constraint firstItem="IHq-5h-265" firstAttribute="top" secondItem="Bh0-qV-1Yl" secondAttribute="bottom" constant="21" id="jiL-pB-NYI"/>
                             <constraint firstAttribute="width" constant="600" id="o0M-IJ-G1W"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DT-4R-e7N">
                         <rect key="frame" x="-600" y="7" width="600" height="121"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="propagateRipple.png" translatesAutoresizingMaskIntoConstraints="NO" id="3t8-9z-vGK">
-                                <rect key="frame" x="524" y="36" width="46" height="46"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="spread to 55 people" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGc-mn-HFI">
+                                <rect key="frame" x="454" y="1" width="130" height="21"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="4sS-b8-VO0"/>
-                                    <constraint firstAttribute="height" constant="46" id="Dai-sp-znq"/>
+                                    <constraint firstAttribute="width" constant="130" id="56F-1J-12t"/>
+                                    <constraint firstAttribute="height" constant="21" id="QjU-pC-dau"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="propagateRipple.png" translatesAutoresizingMaskIntoConstraints="NO" id="3t8-9z-vGK">
+                                <rect key="frame" x="510" y="29" width="60" height="60"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="4sS-b8-VO0"/>
+                                    <constraint firstAttribute="height" constant="60" id="Dai-sp-znq"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -358,7 +382,9 @@
                             <constraint firstAttribute="centerY" secondItem="3t8-9z-vGK" secondAttribute="centerY" constant="2" id="J6F-Bn-sUR"/>
                             <constraint firstAttribute="width" constant="600" id="TEi-cN-gIV"/>
                             <constraint firstAttribute="trailing" secondItem="3t8-9z-vGK" secondAttribute="trailing" constant="30" id="Yke-yf-YCM"/>
+                            <constraint firstAttribute="trailing" secondItem="UGc-mn-HFI" secondAttribute="trailing" constant="16" id="aEM-4H-boo"/>
                             <constraint firstAttribute="height" constant="121" id="c6o-B4-Hwy"/>
+                            <constraint firstItem="3t8-9z-vGK" firstAttribute="top" secondItem="UGc-mn-HFI" secondAttribute="bottom" constant="7" id="jbg-jY-ay5"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -404,6 +430,7 @@
                 <outlet property="dismissButton" destination="NbL-35-Sir" id="Idf-DP-mP0"/>
                 <outlet property="dismissButtonRightConstaint" destination="P7a-5F-Adj" id="mHz-Oz-2cA"/>
                 <outlet property="dismissImageView" destination="IHq-5h-265" id="sxA-9E-XHZ"/>
+                <outlet property="dismissLabel" destination="Bh0-qV-1Yl" id="ij0-dJ-g8C"/>
                 <outlet property="dismissView" destination="gIu-Yl-5RD" id="TbQ-ov-oFb"/>
                 <outlet property="dismissViewHeightConstraint" destination="Fqx-wZ-mvb" id="9EW-lJ-Lz5"/>
                 <outlet property="dismissViewWidthConstraint" destination="o0M-IJ-G1W" id="wS9-El-bBs"/>
@@ -427,6 +454,7 @@
                 <outlet property="spreadCommentTopConstraint" destination="x1V-eK-K4P" id="qQP-II-JFc"/>
                 <outlet property="spreadCommentView" destination="C0l-Xe-csY" id="SWb-zQ-8f3"/>
                 <outlet property="spreadCommentViewTopConstraint" destination="x1V-eK-K4P" id="f6o-uy-5lf"/>
+                <outlet property="spreadReachLabel" destination="UGc-mn-HFI" id="NID-av-daB"/>
                 <outlet property="spreadTextLabel" destination="O6Z-3f-mmr" id="f7o-Zr-8CP"/>
                 <outlet property="textViewHeightConstraint" destination="Mr3-nR-nre" id="sUd-tZ-2pR"/>
                 <outlet property="textViewWidthConstraint" destination="7bB-Ah-wT9" id="PRH-FE-fBl"/>
@@ -444,9 +472,9 @@
         <image name="alreadySpread.png" width="62" height="50"/>
         <image name="commentsBlue.png" width="120" height="100"/>
         <image name="dismissButtonGray.png" width="1181" height="1181"/>
-        <image name="dismissRippleIconUnselected.png" width="160" height="160"/>
+        <image name="dismissRippleIconUnselected.png" width="180" height="180"/>
         <image name="explore3x.png" width="80" height="80"/>
-        <image name="propagateButtonUnselected.png" width="150" height="150"/>
+        <image name="propagateButtonUnselected.png" width="180" height="180"/>
         <image name="propagateRipple.png" width="100" height="100"/>
     </resources>
 </document>

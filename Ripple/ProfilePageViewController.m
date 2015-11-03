@@ -908,6 +908,7 @@ NSDictionary *socialMediaIconToName;
     CGSize stringSize = [cell.ripple.creatorName sizeWithAttributes:attributesDictionary];
     cell.userLabelWidthConstraint.constant = stringSize.width + 3;
     [cell.userLabel setTitle:cell.ripple.creatorName forState:UIControlStateNormal];
+    [cell.spreadReachLabel setText:[NSString stringWithFormat:@"spread to %@ people",[PFUser currentUser][@"reach"]]];
     
     
     // set time and city

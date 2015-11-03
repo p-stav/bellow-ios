@@ -88,9 +88,15 @@ BOOL _propagateOnDragRelease;
         if (translation.x < 0)
         {
             if (fabs(translation.x) < self.frame.size.width/3.5)
+            {
                 self.dismissImageView.alpha = 0.3;
+                [self.dismissLabel setAlpha:0.3];
+            }
             else
+            {
                 self.dismissImageView.alpha = 1.0;
+                [self.dismissLabel setAlpha:1.0];
+            }
             
             //[self.dismissButton.layer setZPosition:1];
             //[self.spreadButton.layer setZPosition:0];
@@ -99,9 +105,15 @@ BOOL _propagateOnDragRelease;
         else if (translation.x > 0)
         {
             if (fabs(translation.x) < self.frame.size.width/3.5)
+            {
                 self.propagateImageView.alpha = 0.3;
+                self.reachSpreadLabel.alpha = 0.3;
+            }
             else
+            {
                 self.propagateImageView.alpha = 1.0;
+                self.reachSpreadLabel.alpha = 1.0;
+            }
             
             //[self.dismissButton.layer setZPosition:0];
             //[self.spreadButton.layer setZPosition:1];
@@ -113,6 +125,7 @@ BOOL _propagateOnDragRelease;
             self.dismissImageView.alpha = 1.0;
             self.dismissView.alpha = 1.0;
             self.propagateView.alpha = 1.0;
+            self.reachSpreadLabel.alpha = 1.0;
         }
 
         // change constraints of buttons
@@ -174,6 +187,7 @@ BOOL _propagateOnDragRelease;
 - (void)dismissRipple
 {
     // animate cell all the way over
+    [self.dismissLabel setAlpha:0.0];
     [self.dismissImageView setAlpha:1.0];
     [UIView animateWithDuration:0.3 animations:^{
        self.frame = CGRectMake(-1*self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
@@ -201,6 +215,7 @@ BOOL _propagateOnDragRelease;
 - (void)spreadRipple
 {
     [self.propagateImageView setAlpha:1.0];
+    [self.reachSpreadLabel setAlpha:0.0];
     
     // animate cell all the way over
     [UIView animateWithDuration:0.3 animations:^{

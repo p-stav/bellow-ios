@@ -34,9 +34,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dismissViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dismissViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *dismissImageView;
+@property (weak, nonatomic) IBOutlet UILabel *dismissLabel;
 @property (weak, nonatomic) IBOutlet UIView *propagateView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *propagateViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *propagateViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *spreadReachLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *propagateImageView;
 @property (weak, nonatomic) IBOutlet UILabel *alreadyActedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *alreadyActedButton;

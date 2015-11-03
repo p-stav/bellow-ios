@@ -108,9 +108,15 @@ BOOL _propagateOnDragRelease;
         if (translation.x < 0)
         {
             if (fabs(translation.x) < self.frame.size.width/3.5)
+            {
                 self.dismissImageView.alpha = 0.3;
+                [self.dismissLabel setAlpha:0.3];
+            }
             else
+            {
                 self.dismissImageView.alpha = 1.0;
+                [self.dismissLabel setAlpha:1.0];
+            }
             
             //[self.dismissButton.layer setZPosition:1];
             //[self.spreadButton.layer setZPosition:0];
@@ -119,9 +125,15 @@ BOOL _propagateOnDragRelease;
         else if (translation.x > 0)
         {
             if (fabs(translation.x) < self.frame.size.width/3.5)
+            {
                 self.propagateImageView.alpha = 0.3;
+                self.spreadReachLabel.alpha = 0.3;
+            }
             else
+            {
                 self.propagateImageView.alpha = 1.0;
+                self.spreadReachLabel.alpha = 1.0;
+            }
             
             //[self.dismissButton.layer setZPosition:0];
             //[self.spreadButton.layer setZPosition:1];
@@ -187,6 +199,7 @@ BOOL _propagateOnDragRelease;
 
 - (void)dismissRipple
 {
+    [self.dismissLabel setAlpha:0.0];
     if ([self.ripple.creatorId isEqualToString:[PFUser currentUser].objectId])
         return;
     
@@ -239,7 +252,8 @@ BOOL _propagateOnDragRelease;
 
 - (void)spreadRipple
 {
-
+    [self.spreadReachLabel setAlpha:0.0];
+    
     if ([self.ripple.creatorId isEqualToString:[PFUser currentUser].objectId])
         return;
     

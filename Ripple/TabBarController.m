@@ -57,7 +57,7 @@
     [[[UITabBar appearance].items objectAtIndex:0] setImageInsets:UIEdgeInsetsMake(9, 0, -9, 0)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTabBar) name:@"hideTabBar" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTabBar) name:@"showTabBar" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inactiveTabBar) name:@"inactiveTabBar" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inactiveTabBar) name:@"inactiveTabBarController" object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated

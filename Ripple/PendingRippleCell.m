@@ -22,6 +22,7 @@ BOOL _propagateOnDragRelease;
     [self addGestureRecognizer:recognizer];
 }
 
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -37,6 +38,8 @@ BOOL _propagateOnDragRelease;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [self.layer removeAllAnimations];
+    
     [super touchesEnded:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self];
@@ -72,6 +75,11 @@ BOOL _propagateOnDragRelease;
 }
 
 -(void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    
+    // make sure we're not inactive tutorial cells
+    if (self.rippleMainView.alpha != 1.0)
+        return;
+    
     // 1
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         // if the gesture has just started, record the current centre location
@@ -151,10 +159,11 @@ BOOL _propagateOnDragRelease;
         // the frame this cell would have had before being dragged
         CGRect originalFrame = CGRectMake(0, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
         
-        if (_deleteOnDragRelease)
+        // actions to take; check that we're not in the tutorial
+        if (_deleteOnDragRelease && (![self.currentRipple.rippleId isEqualToString:@"FakeRippleSpread"] && ![self.currentRipple.rippleId isEqualToString:@"FakeRippleTap"]))
             [self dismissRipple];
         
-        else if (_propagateOnDragRelease)
+        else if (_propagateOnDragRelease && (![self.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"] && ![self.currentRipple.rippleId isEqualToString:@"FakeRippleTap"]))
             [self spreadRipple];
         
          else {

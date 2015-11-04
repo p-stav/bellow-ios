@@ -3340,7 +3340,7 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="commentsBlue.png" width="120" height="100"/>
         <image name="dismissButton.png" width="200" height="200"/>
         <image name="dismissImage.png" width="80" height="80"/>
-        <image name="dismissRippleIconUnselected.png" width="160" height="160"/>
+        <image name="dismissRippleIconUnselected.png" width="180" height="180"/>
         <image name="downKeyboard.png" width="100" height="100"/>
         <image name="facebook.png" width="97" height="95"/>
         <image name="feedback.png" width="200" height="200"/>
@@ -3351,7 +3351,7 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="line.png" width="640" height="40"/>
         <image name="lineVertical.png" width="40" height="640"/>
         <image name="pebble.png" width="110" height="110"/>
-        <image name="propagateButtonUnselected.png" width="150" height="150"/>
+        <image name="propagateButtonUnselected.png" width="180" height="180"/>
         <image name="referral.png" width="229" height="229"/>
         <image name="rightArrowReal.png" width="21" height="35"/>
         <image name="share.png" width="250" height="250"/>

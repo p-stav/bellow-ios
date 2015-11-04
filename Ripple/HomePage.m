@@ -69,6 +69,7 @@
 @property (strong, nonatomic) NSMutableArray *circles;
 @property (nonatomic) CGRect originalTabFrame;
 @property (nonatomic) CGFloat contentOffset;
+@property (strong, nonatomic) NSTimer *animationTimer;
 
 @end
 
@@ -115,12 +116,23 @@ int PARSE_PAGE_SIZE = 25;
 
 -(void) goToMapView:(Bellow *)ripple withComments:(BOOL)commentsUp
 {
+    
     if (commentsUp)
         self.segueWithCommentsUp = YES;
     else
         self.segueWithCommentsUp = NO;
     
-    [self performSegueWithIdentifier:@"MapViewSegue" sender:ripple];
+    
+    // protect from double call to goToMapView on tutorial tap
+    if ([ripple.rippleId isEqualToString:@"FakeRippleTap"] && self.isFirstRunPostInteractiveTutorial) {
+        [self endTutorial];
+        return;
+    }
+    else if ([ripple.rippleId isEqualToString:@"FakeRippleTap"])
+        return;
+    
+    if (![ripple.rippleId isEqualToString:@"FakeRippleSpread"] && ![ripple.rippleId isEqualToString:@"FakeRippleDismiss"])
+        [self performSegueWithIdentifier:@"MapViewSegue" sender:ripple];
 }
 
 
@@ -389,7 +401,7 @@ int PARSE_PAGE_SIZE = 25;
     [self.navigationController.navigationBar setHidden:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showTabBar" object:nil];
     
-    if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && !self.isFirstRunPostInteractiveTutorial)
         [self.navigationController setHidesBarsOnSwipe:YES];
 
     // unhide button
@@ -971,11 +983,16 @@ int PARSE_PAGE_SIZE = 25;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell.propagateImageView setHidden:NO];
-        
-    if (([cell.currentRipple.rippleId isEqualToString:@"FakeRipple"] || [cell.currentRipple.rippleId isEqualToString:@"FakeRippleTap"]) && indexPath.row != 0)
-        cell.rippleMainView.backgroundColor= [UIColor lightGrayColor];
+    
+    
+    // tutorial items ////
+    // background
+    if (([cell.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"] || [cell.currentRipple.rippleId isEqualToString:@"FakeRippleTap"]) && indexPath.row != 0)
+    {
+        [cell.rippleMainView setAlpha:0.1];
+    }
     else
-        cell.rippleMainView.backgroundColor = [UIColor whiteColor];
+        [cell.rippleMainView setAlpha:1.0];
     
     // set constraints to 0 and reset buttons
     [cell.spreadButton setHidden:NO];
@@ -1041,6 +1058,68 @@ int PARSE_PAGE_SIZE = 25;
             propagateCell.dismissView.layer.shadowOpacity = 0.5;
             propagateCell.dismissView.layer.shadowPath = [UIBezierPath bezierPathWithRect:propagateCell.dismissView.bounds].CGPath;
         }
+        
+        // animations
+        if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleSpread"] && indexPath.row == 0)
+        {
+            [propagateCell.propagateImageView setAlpha:1.0];
+            [propagateCell.reachSpreadLabel setAlpha:1.0];
+            [propagateCell.spreadButton setAlpha:0.7];
+            [propagateCell.dismissButton setAlpha:0.2];
+            
+            [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
+                propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
+                    propagateCell.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                    
+                    // make spread button animate
+                    [propagateCell.spreadButton setAlpha:1.0];
+                    [propagateCell.dismissButton setAlpha:0.00];
+                    
+                    
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
+                        propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                    } completion:^(BOOL finished) {
+                        [propagateCell.spreadButton setAlpha:0.7];
+                        [propagateCell.dismissButton setAlpha:0.2];
+                    }];
+                }];
+            }];
+        }
+        
+        // animations
+        if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"] && indexPath.row == 0)
+        {
+            [propagateCell.rippleMainView setAlpha:1.0];
+            [propagateCell.dismissImageView setAlpha:1.0];
+            [propagateCell.dismissLabel setAlpha:1.0];
+            [propagateCell.dismissButton setAlpha:0.7];
+            [propagateCell.spreadButton setAlpha:0.2];
+            
+            [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
+                propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
+                    propagateCell.frame = CGRectMake(-1* [UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                    
+                    [propagateCell.spreadButton setAlpha:0.0];
+                    [propagateCell.dismissButton setAlpha:1.0];
+                    
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
+                        propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                    } completion:^(BOOL finished) {
+                        [propagateCell.dismissButton setAlpha:0.7];
+                        [propagateCell.spreadButton setAlpha:0.2];
+                    }];
+                }];
+            }];
+        }
+
     }
 
 
@@ -1085,6 +1164,11 @@ int PARSE_PAGE_SIZE = 25;
             });
         }
     }
+}
+
+- (void)animateCells
+{
+    [self.tableView reloadData];
 }
 
 
@@ -1135,6 +1219,7 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)rippleDismissed:(Bellow *)ripple
 {
+    
     // use the UITableView to animate the removal of this row
     NSUInteger index = [self.selectedRippleArray indexOfObject:ripple];
     if (index != NSNotFound)
@@ -1148,6 +1233,12 @@ int PARSE_PAGE_SIZE = 25;
                               withRowAnimation:UITableViewRowAnimationLeft];
         [self.tableView endUpdates];
         [self checkRemainingRipples];
+    }
+    
+    if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"] || [ripple.rippleId isEqualToString:@"FakeRippleTap"])
+    {
+        [self.tableView reloadData];
+        return;
     }
     
     if (self.rippleSegmentControl.selectedSegmentIndex ==0)
@@ -1196,6 +1287,7 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)ripplePropagated:(Bellow *)ripple
 {
+    
     // use the UITableView to animate the removal of this row
     NSUInteger index = [self.selectedRippleArray indexOfObject:ripple];
     if (index != NSNotFound)
@@ -1209,6 +1301,13 @@ int PARSE_PAGE_SIZE = 25;
     }
     
     // cloud calls and notifications
+    
+    if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"] || [ripple.rippleId isEqualToString:@"FakeRippleTap"])
+    {
+        [self.tableView reloadData];
+        return;
+    }
+    
     if (ripple.miniRippleId != nil)
         [BellowService propagateRipple:ripple];
     else
@@ -1423,96 +1522,6 @@ int PARSE_PAGE_SIZE = 25;
 }
 
 #pragma mark - Log in and sign up
-- (void)createAnonymousUser
-{
-
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
-    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
-    NSNumber *isTutorialDone = [userData objectForKey:@"isTutorialDone"];
-    
-    
-    if ([isTutorialDone boolValue])
-    {
-        self.isFirstRunPostInteractiveTutorial = YES;
-        //[self presentHomeTutorial];
-        // set isfirstrun
-        self.isFirstRun = YES;
-        self.getLocationOnce = YES;
-        
-        
-        // no currentuser; user hasn't been signed in
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate = self;
-        
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        self.locationManager = locationManager;
-        
-        if ([CLLocationManager locationServicesEnabled])
-        {
-            // Find the current location
-            #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-            // Being compiled with a Base SDK of iOS 8 or later
-            // Now do a runtime check to be sure the method is supported
-            if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-                [self.locationManager requestAlwaysAuthorization];
-            } else {
-                // No such method on this device - do something else as needed
-            }
-            #else
-            // Being compiled with a Base SDK of iOS 7.x or earlier
-            #endif
-            
-            [locationManager startUpdatingLocation];
-        }
-    }
-    
-    else
-    {
-        [self performSegueWithIdentifier:@"SegueToTutorial" sender:self];
-    }
-}
-
-- (void)presentHomeTutorial
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"inactiveTabBarController" object:nil];
-    
-    [self.activityIndicator stopAnimating];
-    [self.tableView setHidden:NO];
-    [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.3 alpha:0.5]];
-    [self.rippleSegmentControl setAlpha:0.3];
-    [self.barBtn setAlpha:0.3];
-    
-    [self.tableView setUserInteractionEnabled:NO];
-    [self.barBtn setUserInteractionEnabled:NO];
-    [self.rippleSegmentControl setUserInteractionEnabled:NO];
-    [self.homeScreenFinishTutorialButton setHidden:NO];
-    
-    if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-        [self.navigationController setHidesBarsOnSwipe:NO];
-    
-    // create ripple!
-    Bellow *rippleClick = [[Bellow alloc] init];
-    rippleClick.rippleId = @"FakeRippleTap";
-    rippleClick.text = @"Swipe Ripples to spread them to more people or to dismiss them!";
-    rippleClick.imageFile = nil;
-    rippleClick.imageHeight = 0;
-    rippleClick.imageWidth = 0;
-    rippleClick.creatorName = @"Bellow Tutorial";
-    rippleClick.miniRippleId = @"FakeMiniRipple";
-    rippleClick.commentArray = [@[] mutableCopy];
-    rippleClick.commentIds = [@[] mutableCopy];
-    rippleClick.createdAt = [NSDate date];
-    rippleClick.numberPropagated = 4;
-    rippleClick.numberComments = 1;
-    rippleClick.city = @"San Francisco";
-    
-    self.selectedRippleArray = [NSMutableArray arrayWithObjects:rippleClick, nil];
-    [self.tableView reloadData];
-
-    
-}
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     //save user's location!
@@ -1684,22 +1693,6 @@ int PARSE_PAGE_SIZE = 25;
     [titleView addSubview:self.rippleSegmentControl];
     self.navigationItem.titleView = titleView;
     
-    
-    /*
-    // setup navigation title
-    UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,200, 44)];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
-    
-    [titleLabel setFont:[UIFont fontWithName:@"Avenir" size:22.0]];
-    [titleLabel setTextColor:[UIColor whiteColor]];
-    
-    titleLabel.text = @"Home";
-    
-    [titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [titleView addSubview:titleLabel];
-    self.navigationItem.titleView = titleView;
-    [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
-    */
     // setup items for the table
     [self.tableView setTableHeaderView:nil];
     
@@ -1833,6 +1826,162 @@ int PARSE_PAGE_SIZE = 25;
         self.noRipplesTextView.text = @"You have no new trending ripples. Swipe down to refresh";
     
     [self.noRipplesTextView setHidden:NO];
+}
+
+#pragma mark - tutorial and first run
+- (void)createAnonymousUser
+{
+    
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+    NSNumber *isTutorialDone = [userData objectForKey:@"isTutorialDone"];
+    
+    
+    if ([isTutorialDone boolValue])
+    {
+        self.isFirstRunPostInteractiveTutorial = YES;
+        [self presentHomeTutorial];
+        // set isfirstrun
+        self.isFirstRun = YES;
+        self.getLocationOnce = YES;
+        
+        
+        // no currentuser; user hasn't been signed in
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locationManager = locationManager;
+        
+        if ([CLLocationManager locationServicesEnabled])
+        {
+            // Find the current location
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+            // Being compiled with a Base SDK of iOS 8 or later
+            // Now do a runtime check to be sure the method is supported
+            if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+                [self.locationManager requestAlwaysAuthorization];
+            } else {
+                // No such method on this device - do something else as needed
+            }
+#else
+            // Being compiled with a Base SDK of iOS 7.x or earlier
+#endif
+            
+            [locationManager startUpdatingLocation];
+        }
+    }
+    
+    else
+    {
+        [self performSegueWithIdentifier:@"SegueToTutorial" sender:self];
+    }
+}
+
+- (void)presentHomeTutorial
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"inactiveTabBarController" object:nil];
+    
+    // present title label with tutorial
+    UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 120, 44)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
+    [titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:22.0]];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setText:@"Tutorial"];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleView addSubview:titleLabel];
+    self.navigationItem.titleView = titleView;
+    [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 - self.navigationItem.titleView.frame.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
+    
+    // housekeeping
+    [self.tableView setScrollEnabled:NO];
+    [self.activityIndicator stopAnimating];
+    [self.tableView setHidden:NO];
+    [self.rippleSegmentControl setAlpha:0.3];
+    [self.barBtn setAlpha:0.3];
+    
+    [self.barBtn setUserInteractionEnabled:NO];
+    [self.rippleSegmentControl setUserInteractionEnabled:NO];
+    //[self.homeScreenFinishTutorialButton setHidden:NO];
+    
+    if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+        [self.navigationController setHidesBarsOnSwipe:NO];
+    
+    // create ripple!
+    Bellow *bellowSpread = [[Bellow alloc] init];
+    bellowSpread.rippleId = @"FakeRippleSpread";
+    bellowSpread.text = @"\nSwipe posts right to spread them to more people!\n";
+    bellowSpread.imageFile = nil;
+    bellowSpread.imageHeight = 0;
+    bellowSpread.imageWidth = 0;
+    bellowSpread.creatorName = @"Bellow Tutorial";
+    bellowSpread.miniRippleId = @"FakeMiniRipple";
+    bellowSpread.commentArray = [@[] mutableCopy];
+    bellowSpread.commentIds = [@[] mutableCopy];
+    bellowSpread.createdAt = [NSDate date];
+    bellowSpread.numberPropagated = 4;
+    bellowSpread.numberComments = 1;
+    bellowSpread.city = @"San Francisco";
+    
+    Bellow *bellowDismiss = [[Bellow alloc] init];
+    bellowDismiss.rippleId = @"FakeRippleDismiss";
+    bellowDismiss.text = @"\nSwipe posts left to dismiss them.\n";
+    bellowDismiss.imageFile = nil;
+    bellowDismiss.imageHeight = 0;
+    bellowDismiss.imageWidth = 0;
+    bellowDismiss.creatorName = @"Bellow Tutorial";
+    bellowDismiss.miniRippleId = @"FakeMiniRipple";
+    bellowDismiss.commentArray = [@[] mutableCopy];
+    bellowDismiss.commentIds = [@[] mutableCopy];
+    bellowDismiss.createdAt = [NSDate date];
+    bellowDismiss.numberPropagated = 4;
+    bellowDismiss.numberComments = 1;
+    bellowDismiss.city = @"San Francisco";
+    
+    Bellow *bellowTap = [[Bellow alloc] init];
+    bellowTap.rippleId = @"FakeRippleTap";
+    bellowTap.text = @"\nTap posts to see where they have trvaelled and to comment on them.\n";
+    bellowTap.imageFile = nil;
+    bellowTap.imageHeight = 0;
+    bellowTap.imageWidth = 0;
+    bellowTap.creatorName = @"Bellow Tutorial";
+    bellowTap.miniRippleId = @"FakeMiniRipple";
+    bellowTap.commentArray = [@[] mutableCopy];
+    bellowTap.commentIds = [@[] mutableCopy];
+    bellowTap.createdAt = [NSDate date];
+    bellowTap.numberPropagated = 4;
+    bellowTap.numberComments = 1;
+    bellowTap.city = @"San Francisco";
+    
+    self.selectedRippleArray = [NSMutableArray arrayWithObjects:bellowSpread,bellowDismiss, bellowTap, nil];
+    [self.tableView reloadData];
+    
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(animateCells) userInfo:nil repeats:YES];
+    
+    
+}
+
+- (void)endTutorial
+{
+    // finish the tutorial
+    [self.tableView setScrollEnabled:YES];
+    [self.activityIndicator startAnimating];
+    [self.tableView setHidden:NO];
+    [self.rippleSegmentControl setAlpha:1.0];
+    [self.barBtn setAlpha:1.0];
+    [self.barBtn setUserInteractionEnabled:YES];
+    [self.rippleSegmentControl setUserInteractionEnabled:YES];
+    
+    self.isFirstRunPostInteractiveTutorial = NO;
+    
+    // show alert signaling end of tutorial
+    UIAlertView *doneTutorial = [[UIAlertView alloc] initWithTitle:@"You finished the tutorial" message:@"Welcome to Bellow!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    [self pageSetup];
+    [self updateView];
+    [doneTutorial show];
+    
 }
 
 #pragma mark - share and action items from profile view

@@ -1019,6 +1019,14 @@ int PARSE_PAGE_SIZE = 25;
         propagateCell.propagateViewHeightConstraint.constant = propagateCell.rippleMainView.frame.size.height;
         propagateCell.spreadButtonLeftConstraint.constant = -7;
         propagateCell.dismissButtonRightConstaint.constant = -7;
+        
+        [propagateCell.cityLabel setHidden:NO];
+        [propagateCell.timeLabel setHidden:NO];
+        [propagateCell.numPropagatedLabel setHidden:NO];
+        [propagateCell.spreadLabel setHidden:NO];
+        [propagateCell.commentsButton setHidden:NO];
+        [propagateCell.numberOfCommentsButton setHidden:NO];
+
 
         [propagateCell setNeedsUpdateConstraints];
         [propagateCell layoutIfNeeded];
@@ -1064,8 +1072,15 @@ int PARSE_PAGE_SIZE = 25;
         {
             [propagateCell.propagateImageView setAlpha:1.0];
             [propagateCell.reachSpreadLabel setAlpha:1.0];
-            [propagateCell.spreadButton setAlpha:0.7];
+            [propagateCell.spreadButton setAlpha:0.2];
             [propagateCell.dismissButton setAlpha:0.2];
+
+            [propagateCell.cityLabel setHidden:YES];
+            [propagateCell.timeLabel setHidden:YES];
+            [propagateCell.numPropagatedLabel setHidden:YES];
+            [propagateCell.spreadLabel setHidden:YES];
+            [propagateCell.commentsButton setHidden:YES];
+            [propagateCell.numberOfCommentsButton setHidden:YES];
             
             [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
                 propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
@@ -1083,7 +1098,7 @@ int PARSE_PAGE_SIZE = 25;
                     [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
                         propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                     } completion:^(BOOL finished) {
-                        [propagateCell.spreadButton setAlpha:0.7];
+                        [propagateCell.spreadButton setAlpha:0.2];
                         [propagateCell.dismissButton setAlpha:0.2];
                     }];
                 }];
@@ -1096,8 +1111,15 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.rippleMainView setAlpha:1.0];
             [propagateCell.dismissImageView setAlpha:1.0];
             [propagateCell.dismissLabel setAlpha:1.0];
-            [propagateCell.dismissButton setAlpha:0.7];
+            [propagateCell.dismissButton setAlpha:0.2];
             [propagateCell.spreadButton setAlpha:0.2];
+            
+            [propagateCell.cityLabel setHidden:YES];
+            [propagateCell.timeLabel setHidden:YES];
+            [propagateCell.numPropagatedLabel setHidden:YES];
+            [propagateCell.spreadLabel setHidden:YES];
+            [propagateCell.commentsButton setHidden:YES];
+            [propagateCell.numberOfCommentsButton setHidden:YES];
             
             [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
                 propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
@@ -1113,13 +1135,23 @@ int PARSE_PAGE_SIZE = 25;
                     [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
                         propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                     } completion:^(BOOL finished) {
-                        [propagateCell.dismissButton setAlpha:0.7];
+                        [propagateCell.dismissButton setAlpha:0.2];
                         [propagateCell.spreadButton setAlpha:0.2];
                     }];
                 }];
             }];
         }
-
+        
+        // animations
+        if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleTap"] && indexPath.row == 0)
+        {
+            [propagateCell.cityLabel setHidden:YES];
+            [propagateCell.timeLabel setHidden:YES];
+            [propagateCell.numPropagatedLabel setHidden:YES];
+            [propagateCell.spreadLabel setHidden:YES];
+            [propagateCell.commentsButton setHidden:YES];
+            [propagateCell.numberOfCommentsButton setHidden:YES];
+        }
     }
 
 
@@ -1235,7 +1267,7 @@ int PARSE_PAGE_SIZE = 25;
         [self checkRemainingRipples];
     }
     
-    if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"] || [ripple.rippleId isEqualToString:@"FakeRippleTap"])
+    if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"])
     {
         [self.tableView reloadData];
         return;
@@ -1921,9 +1953,9 @@ int PARSE_PAGE_SIZE = 25;
     bellowSpread.commentArray = [@[] mutableCopy];
     bellowSpread.commentIds = [@[] mutableCopy];
     bellowSpread.createdAt = [NSDate date];
-    bellowSpread.numberPropagated = 124;
-    bellowSpread.numberComments = 1;
-    bellowSpread.city = @"San Francisco";
+    bellowSpread.numberPropagated = 0;
+    bellowSpread.numberComments = 0;
+    bellowSpread.city = @"";
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
@@ -1936,9 +1968,9 @@ int PARSE_PAGE_SIZE = 25;
     bellowDismiss.commentArray = [@[] mutableCopy];
     bellowDismiss.commentIds = [@[] mutableCopy];
     bellowDismiss.createdAt = [NSDate date];
-    bellowDismiss.numberPropagated = 94;
-    bellowDismiss.numberComments = 21;
-    bellowDismiss.city = @"San Francisco";
+    bellowDismiss.numberPropagated = 0;
+    bellowDismiss.numberComments = 0;
+    bellowDismiss.city = @"";
     
     Bellow *bellowTap = [[Bellow alloc] init];
     bellowTap.rippleId = @"FakeRippleTap";
@@ -1951,9 +1983,9 @@ int PARSE_PAGE_SIZE = 25;
     bellowTap.commentArray = [@[] mutableCopy];
     bellowTap.commentIds = [@[] mutableCopy];
     bellowTap.createdAt = [NSDate date];
-    bellowTap.numberPropagated = 84;
-    bellowTap.numberComments = 4;
-    bellowTap.city = @"San Francisco";
+    bellowTap.numberPropagated = 0;
+    bellowTap.numberComments = 0;
+    bellowTap.city = @"";
     
     self.selectedRippleArray = [NSMutableArray arrayWithObjects:bellowSpread,bellowDismiss, bellowTap, nil];
     [self.tableView reloadData];

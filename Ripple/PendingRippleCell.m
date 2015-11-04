@@ -195,6 +195,9 @@ BOOL _propagateOnDragRelease;
 
 - (void)dismissRipple
 {
+    if ([self.currentRipple.rippleId isEqualToString:@"FakeRippleTap"])
+        return;
+    
     // animate cell all the way over
     [self.dismissLabel setAlpha:0.0];
     [self.dismissImageView setAlpha:1.0];
@@ -223,6 +226,9 @@ BOOL _propagateOnDragRelease;
 
 - (void)spreadRipple
 {
+    if ([self.currentRipple.rippleId isEqualToString:@"FakeRippleTap"])
+        return;
+    
     [self.propagateImageView setAlpha:1.0];
     [self.reachSpreadLabel setAlpha:0.0];
     

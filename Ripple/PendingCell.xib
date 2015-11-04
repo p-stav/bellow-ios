@@ -427,6 +427,7 @@
                 <outlet property="spreadButtonLeftConstraint" destination="f2x-eZ-ef0" id="kdm-PV-X4j"/>
                 <outlet property="spreadCommentView" destination="v9E-wM-YFZ" id="AnK-Sa-P0v"/>
                 <outlet property="spreadCommentViewTopConstraint" destination="rlR-zU-nw1" id="b0S-FY-lP3"/>
+                <outlet property="spreadLabel" destination="051-sY-WAr" id="A0v-T0-MQH"/>
                 <outlet property="textViewHeightConstraint" destination="MSk-yH-Yvw" id="vua-XY-a5Q"/>
                 <outlet property="textViewWidthConstraint" destination="bnU-Yy-Cmx" id="WnZ-d5-LfA"/>
                 <outlet property="timeLabel" destination="84L-vU-BzM" id="1Ng-Ws-E2C"/>

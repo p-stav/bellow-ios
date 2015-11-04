@@ -68,8 +68,8 @@
     
     // setup webview and tutorialScrollView
     self.tutorialScrollView.delegate = self;
-    self.numTutorialPages = 4;
-    [self.pageControl setNumberOfPages:4];
+    self.numTutorialPages = 2;
+    [self.pageControl setNumberOfPages:2];
     
     // add border to view
     [self.view setBackgroundColor:[UIColor colorWithRed:8/255.0f green:103.0f/255.0f blue:171.0f/255.0f alpha:1.0]];
@@ -101,7 +101,7 @@
         tutorialView.frame = frame;
         [tutorialView setBackgroundColor:[UIColor colorWithRed:8/255.0f green:103.0f/255.0f blue:171.0f/255.0f alpha:1.0]];
         
-        if (i==0)
+        /*if (i==0)
         {
             self.imageView0 = [[UIImageView alloc] init];
             
@@ -138,23 +138,13 @@
             //[self..scrollView setScrollEnabled:NO];
             //[self.gif0WebView setBackgroundColor:[UIColor clearColor]];
             //[self.gif0WebView setOpaque:NO];
-            /*
-             //add uiwebview with gif
-             CGFloat aspectRatio  = 1.5625;
-             NSString *filePath = [[NSBundle mainBundle] pathForResource:@"rippleMapGif" ofType:@"gif"];
-             NSURL *gifURL	 = [NSURL fileURLWithPath:filePath];
-             NSString *gifString = @"<html><body><img src='%@' width='%fpx' height='%fpx'></body></html>";
-             NSString *gifHTML  = [[NSString alloc] initWithFormat:gifString, gifURL, frame.size.width, (frame.size.width) * aspectRatio];
-             
-             [self.gif0WebView loadHTMLString:gifHTML baseURL:nil];
-             [self.gif0WebView setUserInteractionEnabled:NO];
-             self.gif0WebView.delegate = self;*/
-            
+         
             [self.tutorialScrollView addSubview:self.imageView0];
             [self.tutorialScrollView addSubview:rippleIntro];
             [self.tutorialScrollView addSubview:startRipple];
             
         }
+        */
         
         /*if (i==1)
          {
@@ -214,7 +204,7 @@
          
          }*/
         
-        
+        /*
         if (i==1)
         {
             
@@ -266,9 +256,10 @@
             [self.tutorialScrollView addSubview:otherPeople];
             
         }
+         */
         
         
-        if (i==2) {
+        if (i==0) {
             self.gif2WebView = [[UIWebView alloc] init];
             
             if ([UIScreen mainScreen].bounds.size.height <=480)
@@ -317,7 +308,7 @@
             [self.tutorialScrollView addSubview:comment];
         }
         
-        if (i == 3)
+        if (i == 1)
         {
             UIView *blueView = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)];
             [blueView setBackgroundColor:[UIColor colorWithRed:8/255.0f green:103.0f/255.0f blue:171.0f/255.0f alpha:1.0]];
@@ -518,7 +509,7 @@
 {
     CGFloat pageWidth = self.tutorialScrollView.frame.size.width;
     int page = floor((self.tutorialScrollView.contentOffset.x - pageWidth) / pageWidth) + 1;
-    if (page == 3)
+    if (page == 1)
     {
         [self.activityIndicator setHidden:YES];
         [self.textViewAccept setHidden: NO];

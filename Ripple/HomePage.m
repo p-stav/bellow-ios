@@ -1483,42 +1483,43 @@ int PARSE_PAGE_SIZE = 25;
         [self.tableView setHidden:NO];
     }
     
-    // Figure out which view we are on
-    if ([self.selectedRippleArray count] == 0)
+    if (!self.isFirstRunPostInteractiveTutorial)
     {
-        self.continueRippleMapAnimation = YES;
-        [self rippleMapAnimation];
-    }
-    
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Add code here to do background processing
-        
-        if ([self.rippleSegmentControl selectedSegmentIndex] == 0)
+        // Figure out which view we are on
+        if ([self.selectedRippleArray count] == 0)
         {
-            self.pendingRipples = [BellowService getPendingRipples:0];
-            self.selectedRippleArray = self.pendingRipples;
+            self.continueRippleMapAnimation = YES;
+            [self rippleMapAnimation];
         }
         
-        else if (self.rippleSegmentControl.selectedSegmentIndex ==1)
-        {
-            self.followingRipples = [BellowService getFollowingRipples];
-            self.selectedRippleArray = self.followingRipples;
-        }
-        
-        dispatch_async( dispatch_get_main_queue(), ^{
-            // reload table and check if pending ripples
-            // [self checkRemainingRipples];
-            self.continueRippleMapAnimation = NO;
-            for (int i = 0; i < [self.circles count]; i++)
-                [self.circles[i] removeFromSuperview];
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // Add code here to do background processing
             
-            [self.tableView reloadData];
-            [self checkBarrier];
+            if ([self.rippleSegmentControl selectedSegmentIndex] == 0)
+            {
+                self.pendingRipples = [BellowService getPendingRipples:0];
+                self.selectedRippleArray = self.pendingRipples;
+            }
             
-            self.isFirstRunPostInteractiveTutorial = NO;
+            else if (self.rippleSegmentControl.selectedSegmentIndex ==1)
+            {
+                self.followingRipples = [BellowService getFollowingRipples];
+                self.selectedRippleArray = self.followingRipples;
+            }
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                // reload table and check if pending ripples
+                // [self checkRemainingRipples];
+                self.continueRippleMapAnimation = NO;
+                for (int i = 0; i < [self.circles count]; i++)
+                    [self.circles[i] removeFromSuperview];
+                
+                [self.tableView reloadData];
+                [self checkBarrier];
+            });
         });
-    });
-    [self addNotificationsBadge];
+        [self addNotificationsBadge];
+    }
 }
 
 #pragma mark - Log in and sign up
@@ -1620,9 +1621,9 @@ int PARSE_PAGE_SIZE = 25;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSLog(@"finished getNearestRipplesOnFirstLoad");
                     self.isFirstRun = NO;
-                    [self updateView];
-                    [self.activityIndicator stopAnimating];
-                    [self.activityIndicator setHidden:NO];
+                    // [self updateView];
+                   //  [self.activityIndicator stopAnimating];
+                    //[self.activityIndicator setHidden:NO];
                 });
             });
         }
@@ -1833,7 +1834,7 @@ int PARSE_PAGE_SIZE = 25;
 {
     
     [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
+    // [self.activityIndicator startAnimating];
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
     NSNumber *isTutorialDone = [userData objectForKey:@"isTutorialDone"];
     
@@ -1920,13 +1921,13 @@ int PARSE_PAGE_SIZE = 25;
     bellowSpread.commentArray = [@[] mutableCopy];
     bellowSpread.commentIds = [@[] mutableCopy];
     bellowSpread.createdAt = [NSDate date];
-    bellowSpread.numberPropagated = 4;
+    bellowSpread.numberPropagated = 124;
     bellowSpread.numberComments = 1;
     bellowSpread.city = @"San Francisco";
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
-    bellowDismiss.text = @"\nSwipe posts left to dismiss them.\n";
+    bellowDismiss.text = @"\nSwipe posts left to dismiss them. They will not be shared with others.\n";
     bellowDismiss.imageFile = nil;
     bellowDismiss.imageHeight = 0;
     bellowDismiss.imageWidth = 0;
@@ -1935,13 +1936,13 @@ int PARSE_PAGE_SIZE = 25;
     bellowDismiss.commentArray = [@[] mutableCopy];
     bellowDismiss.commentIds = [@[] mutableCopy];
     bellowDismiss.createdAt = [NSDate date];
-    bellowDismiss.numberPropagated = 4;
-    bellowDismiss.numberComments = 1;
+    bellowDismiss.numberPropagated = 94;
+    bellowDismiss.numberComments = 21;
     bellowDismiss.city = @"San Francisco";
     
     Bellow *bellowTap = [[Bellow alloc] init];
     bellowTap.rippleId = @"FakeRippleTap";
-    bellowTap.text = @"\nTap posts to see where they have trvaelled and to comment on them.\n";
+    bellowTap.text = @"\nTap posts to see where they've travelled and to see comments.\n";
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
@@ -1950,16 +1951,14 @@ int PARSE_PAGE_SIZE = 25;
     bellowTap.commentArray = [@[] mutableCopy];
     bellowTap.commentIds = [@[] mutableCopy];
     bellowTap.createdAt = [NSDate date];
-    bellowTap.numberPropagated = 4;
-    bellowTap.numberComments = 1;
+    bellowTap.numberPropagated = 84;
+    bellowTap.numberComments = 4;
     bellowTap.city = @"San Francisco";
     
     self.selectedRippleArray = [NSMutableArray arrayWithObjects:bellowSpread,bellowDismiss, bellowTap, nil];
     [self.tableView reloadData];
     
     self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(animateCells) userInfo:nil repeats:YES];
-    
-    
 }
 
 - (void)endTutorial

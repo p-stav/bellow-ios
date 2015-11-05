@@ -124,6 +124,7 @@ int PARSE_PAGE_SIZE = 25;
     
     // protect from double call to goToMapView on tutorial tap
     if ([ripple.rippleId isEqualToString:@"FakeRippleTap"] && self.isFirstRunPostInteractiveTutorial) {
+        [self incrementScore];
         [self endTutorial];
         return;
     }
@@ -1264,6 +1265,7 @@ int PARSE_PAGE_SIZE = 25;
     if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"])
     {
         [self.tableView reloadData];
+        [self incrementScore];
         return;
     }
     
@@ -1331,6 +1333,7 @@ int PARSE_PAGE_SIZE = 25;
     if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"] || [ripple.rippleId isEqualToString:@"FakeRippleTap"])
     {
         [self.tableView reloadData];
+        [self incrementScore];
         return;
     }
     
@@ -1630,7 +1633,7 @@ int PARSE_PAGE_SIZE = 25;
     currentUser[@"highestPropagated"] = [NSNumber numberWithInt:0];
     currentUser[@"notificationsToday"] = [NSNumber numberWithInt:0];
     currentUser[@"reachLevel"] = @"Sea Serpent";
-    currentUser[@"score"] = [NSNumber numberWithInt:0];
+    currentUser[@"score"] = [NSNumber numberWithInt:3];
     currentUser[@"followingNumber"] = [NSNumber numberWithInt:0];
     [[PFUser currentUser] setObject:point forKey:@"location"];
 
@@ -1929,7 +1932,6 @@ int PARSE_PAGE_SIZE = 25;
     [self.activityIndicator stopAnimating];
     [self.tableView setHidden:NO];
     [self.rippleSegmentControl setAlpha:0.3];
-    [self.barBtn setAlpha:0.3];
     
     [self.barBtn setUserInteractionEnabled:NO];
     [self.rippleSegmentControl setUserInteractionEnabled:NO];
@@ -1940,11 +1942,11 @@ int PARSE_PAGE_SIZE = 25;
     // create ripple!
     Bellow *bellowSpread = [[Bellow alloc] init];
     bellowSpread.rippleId = @"FakeRippleSpread";
-    bellowSpread.text = @"\nSwipe posts right to spread them to more people!\n";
+    bellowSpread.text = @"\nSwipe right to spread posts to more people!\n";
     bellowSpread.imageFile = nil;
     bellowSpread.imageHeight = 0;
     bellowSpread.imageWidth = 0;
-    bellowSpread.creatorName = @"Bellow Tutorial";
+    bellowSpread.creatorName = @"Bellow Tutorial 1/3";
     bellowSpread.miniRippleId = @"FakeMiniRipple";
     bellowSpread.commentArray = [@[] mutableCopy];
     bellowSpread.commentIds = [@[] mutableCopy];
@@ -1955,11 +1957,11 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
-    bellowDismiss.text = @"\nSwipe posts left to dismiss them. They will not be shared with others.\n";
+    bellowDismiss.text = @"\nSwipe left to dismiss posts. They will not be shared with others.\n";
     bellowDismiss.imageFile = nil;
     bellowDismiss.imageHeight = 0;
     bellowDismiss.imageWidth = 0;
-    bellowDismiss.creatorName = @"Bellow Tutorial";
+    bellowDismiss.creatorName = @"Bellow Tutorial 2/3";
     bellowDismiss.miniRippleId = @"FakeMiniRipple";
     bellowDismiss.commentArray = [@[] mutableCopy];
     bellowDismiss.commentIds = [@[] mutableCopy];
@@ -1974,7 +1976,7 @@ int PARSE_PAGE_SIZE = 25;
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
-    bellowTap.creatorName = @"Bellow Tutorial";
+    bellowTap.creatorName = @"Bellow Tutorial 3/3";
     bellowTap.miniRippleId = @"FakeMiniRipple";
     bellowTap.commentArray = [@[] mutableCopy];
     bellowTap.commentIds = [@[] mutableCopy];
@@ -1991,12 +1993,13 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)endTutorial
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"inactiveTabBarController" object:nil];
+    
     // finish the tutorial
     [self.tableView setScrollEnabled:YES];
     [self.activityIndicator startAnimating];
     [self.tableView setHidden:NO];
     [self.rippleSegmentControl setAlpha:1.0];
-    [self.barBtn setAlpha:1.0];
     [self.barBtn setUserInteractionEnabled:YES];
     [self.rippleSegmentControl setUserInteractionEnabled:YES];
     

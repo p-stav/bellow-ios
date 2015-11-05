@@ -284,8 +284,9 @@ BOOL _propagateOnDragRelease;
     
 }
 
-
 - (IBAction)didPressUser:(id)sender {
-    [self.delegate goToUserProfile:self.currentRipple];
+    if (![self.currentRipple.rippleId isEqualToString:@"FakeRippleSpread"] && ![self.currentRipple.rippleId isEqualToString:@"FakeRippleTap"] && ![self.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"])
+        [self.delegate goToUserProfile:self.currentRipple];
 }
+
 @end

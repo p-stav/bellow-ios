@@ -70,8 +70,8 @@
     
     // add border to view
     [self.headerview setBackgroundColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0]];
-    [self.bottomView setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
-    [self.tutorialScrollView setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]]; // setBackgroundColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0]];
+    [self.bottomView setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.7]];
+    [self.tutorialScrollView setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.7]]; // setBackgroundColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0]];
     
     // set imageview background
     UIImage *image = [UIImage imageNamed:@"step1.png"];
@@ -79,7 +79,6 @@
     
     self.backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (int)[UIScreen mainScreen].bounds.size.height / ratio, [UIScreen mainScreen].bounds.size.height)];
     [self.backgroundImage setImage:[UIImage imageNamed:@"step1.png"]];
-    [self.backgroundImage setAlpha:0.2];
     
     [self.view addSubview:self.backgroundImage];
     [self.view sendSubviewToBack:self.backgroundImage];
@@ -126,17 +125,17 @@
             UITextView *connect = [[UITextView alloc] initWithFrame:CGRectMake(frame.origin.x + 8, title.frame.origin.y + title.frame.size.height + 10, self.view.frame.size.width - 16, 120)];
             [connect setEditable:NO];
             [connect setSelectable:NO];
-            [connect setText:@"Connect with people and events from all over the world"];
+            [connect setText:@"Where your awesome stuff spreads"];
             [connect setTextColor:[UIColor whiteColor]];
             [connect setBackgroundColor:[UIColor clearColor]];
-            [connect setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:18.0]];
+            [connect setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:18.0]];
             [connect setTextAlignment:NSTextAlignmentCenter];
             
-            UIButton *continueBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, connect.frame.origin.y + connect.frame.size.height, 200, 70)];
+            UIButton *continueBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, connect.frame.origin.y + connect.frame.size.height - 10, 200, 90)];
             [continueBtn setTitle:@"Get Started" forState:UIControlStateNormal];
             [continueBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [continueBtn setBackgroundColor:[UIColor colorWithRed:3/255.0f green:73/255.0f blue:119/255.0f alpha:1.0]];
-            [continueBtn.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
+            [continueBtn setBackgroundColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0]];
+            [continueBtn.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:25.0]];
             [continueBtn addTarget:self action:@selector(continueWasPressed) forControlEvents:UIControlEventTouchUpInside];
             continueBtn.layer.cornerRadius = 10;
             continueBtn.clipsToBounds = YES;
@@ -151,8 +150,8 @@
             
             UIButton *haveAccountBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 70, haveAccount.frame.origin.y + haveAccount.frame.size.height + 10, 140, 50)];
             [haveAccountBtn setTitle:@"Login" forState:UIControlStateNormal];
-            [haveAccountBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [haveAccountBtn setBackgroundColor:[UIColor colorWithWhite:0.6 alpha:1.0]];
+            [haveAccountBtn setTitleColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
+            [haveAccountBtn setBackgroundColor:[UIColor whiteColor]];
             [haveAccountBtn.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
             [haveAccountBtn addTarget:self action:@selector(loginWasPressed:) forControlEvents:UIControlEventTouchUpInside];
             haveAccountBtn.layer.cornerRadius = 10;
@@ -212,11 +211,11 @@
             [location setFont:[UIFont fontWithName:@"Avenir-Roman" size:18.0]];
             [location setTextAlignment:NSTextAlignmentCenter];
             
-            UIButton *turnOnLoc = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, location.frame.origin.y + location.frame.size.height, 200, 50)];
+            UIButton *turnOnLoc = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, location.frame.origin.y + location.frame.size.height, 200, 80)];
             [turnOnLoc setTitle:@"Turn on location" forState:UIControlStateNormal];
             [turnOnLoc setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [turnOnLoc setBackgroundColor:[UIColor colorWithRed:3/255.0f green:73/255.0f blue:119/255.0f alpha:1.0]];
-            [turnOnLoc.titleLabel setFont:[UIFont fontWithName:@"Avenir-Roman" size:16.0]];
+            [turnOnLoc setBackgroundColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0]];
+            [turnOnLoc.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:20.0]];
             [turnOnLoc addTarget:self action:@selector(doneWasPressed:) forControlEvents:UIControlEventTouchUpInside];
             turnOnLoc.layer.cornerRadius = 10;
             turnOnLoc.clipsToBounds = YES;

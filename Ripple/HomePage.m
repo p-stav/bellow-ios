@@ -45,7 +45,6 @@
 @property (strong, nonatomic) UISegmentedControl *rippleSegmentControl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noTextTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topTableViewConstraint;
-@property (weak, nonatomic) IBOutlet UIButton *homeScreenFinishTutorialButton;
 
 @property (strong, nonatomic) UIButton *barBtn;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -265,7 +264,6 @@ int PARSE_PAGE_SIZE = 25;
     self.viewDidLoadJustRan = NO;
     self.finishedFirstUpdateView = NO;
     [self.rippleSegmentControl setHidden:YES];
-    [self.homeScreenFinishTutorialButton setHidden:YES];
     self.followingSkip = 0;
     
     self.continueRippleMapAnimation = YES;
@@ -416,10 +414,15 @@ int PARSE_PAGE_SIZE = 25;
     
     if (!self.viewDidLoadJustRan)
         self.viewDidLoadJustRan = YES;
-    //else
-    //    [self.barBtn setTitle:[NSString stringWithFormat:@"%@", [PFUser currentUser][@"score"]] forState:UIControlStateNormal];
     
+    // check if we have a user 
+    if (![PFUser currentUser])
+        [self createAnonymousUser];
     
+    else if (([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]] && [PFUser currentUser][@"reach"] == nil) ||
+             ([PFTwitterUtils isLinkedWithUser:[PFUser currentUser]] && [PFUser currentUser][@"reach"] == nil))
+        [self createAnonymousUser];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -1366,10 +1369,10 @@ int PARSE_PAGE_SIZE = 25;
             }];
         }
         
-        else if (spreadFirstRippleCheck == 3) {
+        /*else if (spreadFirstRippleCheck == 3) {
             UIAlertView *tapOnRipple = [[UIAlertView alloc]initWithTitle:@"Tap on a Bellow!" message:@"See a map of where that ripple has spread and leave a comment"delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [tapOnRipple show];
-        }
+        }*/
         
         else if (spreadFirstRippleCheck == 50) {
             
@@ -1936,7 +1939,6 @@ int PARSE_PAGE_SIZE = 25;
     
     [self.barBtn setUserInteractionEnabled:NO];
     [self.rippleSegmentControl setUserInteractionEnabled:NO];
-    //[self.homeScreenFinishTutorialButton setHidden:NO];
     
     if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
         [self.navigationController setHidesBarsOnSwipe:NO];

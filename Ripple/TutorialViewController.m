@@ -120,7 +120,7 @@
             [title setScrollEnabled:NO];
             [title setTextColor:[UIColor whiteColor]];
             [title setBackgroundColor:[UIColor clearColor]];
-            [title setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:70.0]];
+            [title setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:65.0]];
             
             UITextView *connect = [[UITextView alloc] initWithFrame:CGRectMake(frame.origin.x + 8, title.frame.origin.y + title.frame.size.height + 10, self.view.frame.size.width - 16, 120)];
             [connect setEditable:NO];

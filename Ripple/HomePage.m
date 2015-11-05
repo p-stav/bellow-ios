@@ -414,15 +414,6 @@ int PARSE_PAGE_SIZE = 25;
     
     if (!self.viewDidLoadJustRan)
         self.viewDidLoadJustRan = YES;
-    
-    // check if we have a user 
-    if (![PFUser currentUser])
-        [self createAnonymousUser];
-    
-    else if (([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]] && [PFUser currentUser][@"reach"] == nil) ||
-             ([PFTwitterUtils isLinkedWithUser:[PFUser currentUser]] && [PFUser currentUser][@"reach"] == nil))
-        [self createAnonymousUser];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -1097,7 +1088,6 @@ int PARSE_PAGE_SIZE = 25;
                     
                     // make spread button animate
                     [propagateCell.spreadButton setAlpha:1.0];
-                    [propagateCell.dismissButton setAlpha:0.00];
                     
                     
                 } completion:^(BOOL finished) {
@@ -1105,7 +1095,6 @@ int PARSE_PAGE_SIZE = 25;
                         propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                     } completion:^(BOOL finished) {
                         [propagateCell.spreadButton setAlpha:0.2];
-                        [propagateCell.dismissButton setAlpha:0.2];
                     }];
                 }];
             }];
@@ -1134,7 +1123,6 @@ int PARSE_PAGE_SIZE = 25;
                 [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
                     propagateCell.frame = CGRectMake(-1* [UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                     
-                    [propagateCell.spreadButton setAlpha:0.0];
                     [propagateCell.dismissButton setAlpha:1.0];
                     
                 } completion:^(BOOL finished) {
@@ -1142,7 +1130,6 @@ int PARSE_PAGE_SIZE = 25;
                         propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                     } completion:^(BOOL finished) {
                         [propagateCell.dismissButton setAlpha:0.2];
-                        [propagateCell.spreadButton setAlpha:0.2];
                     }];
                 }];
             }];
@@ -1574,8 +1561,8 @@ int PARSE_PAGE_SIZE = 25;
     if (locationAge > 0.2)
         return;
     
-    double randomVal1 = ((double)arc4random() / ARC4RANDOM_MAX) - 0.5;
-    double randomVal2 = ((double)arc4random() / ARC4RANDOM_MAX) - 0.5;
+    double randomVal1 = ((double)arc4random() / ARC4RANDOM_MAX) - 0.4;
+    double randomVal2 = ((double)arc4random() / ARC4RANDOM_MAX) - 0.4;
     double latitudeJiggle = randomVal1 / 222;
     double milesInLongitudeDegree = 69.11 * cos(self.location.coordinate.longitude);
     double longitudeJiggle = randomVal2 / (milesInLongitudeDegree * 1.6 * 2);

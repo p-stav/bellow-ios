@@ -309,6 +309,7 @@ BOOL isLaunch;
         double latitudeJiggle = randomVal1 / 222;
         double milesInLongitudeDegree = 69.11 * cos(self.location.coordinate.longitude);
         double longitudeJiggle = randomVal2 / (milesInLongitudeDegree * 1.6 * 2);
+        
         // If we're running in the background, run sendBackgroundLocationToServer
         PFGeoPoint *point = [PFGeoPoint
                              geoPointWithLatitude:self.location.coordinate.latitude + latitudeJiggle

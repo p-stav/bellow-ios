@@ -11,8 +11,9 @@
 #import "PropagateCellDelegate.h"
 #import "MyRippleCellDelegate.h"
 #import <ParseUI/ParseUI.h>
+#import "UserSearchHeaderViewCellDelegate.h"
 
-@interface HomePage : UIViewController <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate, PendingCellDelegate,ActedRippleCellDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate>
+@interface HomePage : UIViewController <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate, PendingCellDelegate,ActedRippleCellDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate,UserSearchHeaderDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *selectedRippleArray;
 @property (nonatomic, strong) NSMutableArray *pendingRipples;

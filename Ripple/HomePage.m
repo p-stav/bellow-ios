@@ -32,7 +32,7 @@
 #import <ParseTwitterUtils/ParseTwitterUtils.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
+#import "UserSearchHeaderViewCell.h"
 
 #define ARC4RANDOM_MAX      0x100000000
 
@@ -782,19 +782,22 @@ int PARSE_PAGE_SIZE = 25;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (self.rippleSegmentControl.selectedSegmentIndex == 0)
         return 0;
+    else
+        return 40;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"today's top ripples:";
-    [label setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:15.0]];
-    [label setFrame:CGRectMake(18, 5, 200, 21)];
-    [headerView addSubview:label];
-    [headerView setBackgroundColor:[UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0]];
-    return headerView;
+    // 1. Dequeue the custom header cell
+    HeaderTableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"UserSearchCell"];
+    headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [headerCell setUserInteractionEnabled:YES];
+    headerCell.delegate = self;
+    
+    
+    return headerCell;
 }
 
 
@@ -1201,6 +1204,7 @@ int PARSE_PAGE_SIZE = 25;
     }
 }
 
+
 - (void)animateCells
 {
     [self.tableView reloadData];
@@ -1410,8 +1414,11 @@ int PARSE_PAGE_SIZE = 25;
         [PFAnalytics trackEvent:@"RipplePropagated" dimensions:@{@"feed":@"trending_feed"}];
         [Flurry logEvent:@"Ripple_Spread" withParameters:[NSDictionary dictionaryWithObject:@"trending_feed" forKey:@"feed"]];
     }
-    
+}
 
+- (void)segueToSearchView
+{
+    
 }
 
 

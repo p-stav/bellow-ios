@@ -58,6 +58,7 @@
 		AE2A68891B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */; };
 		DA0690391A8B323C006AFBD0 /* triangle-for-filter-39.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0690381A8B323C006AFBD0 /* triangle-for-filter-39.png */; };
 		DA06E70D1A66684A0015F7B3 /* commentsBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06E70C1A66684A0015F7B3 /* commentsBlue.png */; };
+		DA09A7701BEAE681002BDC46 /* UserSearchHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA09A76F1BEAE681002BDC46 /* UserSearchHeaderViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		DA12024C1BB126AB007D2043 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA12024B1BB126AB007D2043 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		DA1202501BB1289F007D2043 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA12024F1BB1289F007D2043 /* ParseFacebookUtilsV4.framework */; settings = {ASSET_TAGS = (); }; };
 		DA1202521BB129DB007D2043 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1202511BB129DB007D2043 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
@@ -246,6 +247,9 @@
 		AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaCollectionViewController.m; sourceTree = "<group>"; };
 		DA0690381A8B323C006AFBD0 /* triangle-for-filter-39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "triangle-for-filter-39.png"; sourceTree = "<group>"; };
 		DA06E70C1A66684A0015F7B3 /* commentsBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentsBlue.png; sourceTree = "<group>"; };
+		DA09A76E1BEAE681002BDC46 /* UserSearchHeaderViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchHeaderViewCell.h; sourceTree = "<group>"; };
+		DA09A76F1BEAE681002BDC46 /* UserSearchHeaderViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchHeaderViewCell.m; sourceTree = "<group>"; };
+		DA09A7711BEAEA19002BDC46 /* UserSearchHeaderViewCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSearchHeaderViewCellDelegate.h; sourceTree = "<group>"; };
 		DA12024B1BB126AB007D2043 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = FacebookSDKs/FBSDKCoreKit.framework; sourceTree = SOURCE_ROOT; };
 		DA12024F1BB1289F007D2043 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		DA1202511BB129DB007D2043 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -448,8 +452,8 @@
 				DA9801561AD048F800B72708 /* MyRippleCellDelegate.h */,
 				DA2628CE1A2D0C6900CB6D90 /* LevelCell.h */,
 				DA2628CF1A2D0C6900CB6D90 /* LevelCell.m */,
-				DAB438F41AE9506600B06BD1 /* HeaderTableViewCell.h */,
 				AE1456121B37215200FDE9C5 /* RippleTextView.m */,
+				DAB438F41AE9506600B06BD1 /* HeaderTableViewCell.h */,
 				DAB438F51AE9506600B06BD1 /* HeaderTableViewCell.m */,
 				DAB438F71AE9507600B06BD1 /* HeaderTableViewCellDelegate.h */,
 				DAE612421B8C47DB009D74D5 /* UserSearchCell.xib */,
@@ -460,6 +464,9 @@
 				DA39A8C41BAC891B00D7980E /* SwipeableCell.h */,
 				DA39A8C51BAC891B00D7980E /* SwipeableCell.m */,
 				DA5D30291BAC90C4001E13E7 /* SwipeableCellDelegate.h */,
+				DA09A76E1BEAE681002BDC46 /* UserSearchHeaderViewCell.h */,
+				DA09A76F1BEAE681002BDC46 /* UserSearchHeaderViewCell.m */,
+				DA09A7711BEAEA19002BDC46 /* UserSearchHeaderViewCellDelegate.h */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1076,6 +1083,7 @@
 				0DB855D71A2147F8008C824F /* BellowLevel.m in Sources */,
 				DADD00021A818CD300E49BC1 /* TwitterService.m in Sources */,
 				DADB74FF1BC1DD2D00749DAA /* TrendingCollectionViewCell.m in Sources */,
+				DA09A7701BEAE681002BDC46 /* UserSearchHeaderViewCell.m in Sources */,
 				DA39A8C61BAC891B00D7980E /* SwipeableCell.m in Sources */,
 				DAC1E4FD1A50AD91008960F9 /* ImageViewerViewController.m in Sources */,
 				DA125F9C1AE6FDC9006731DE /* ProfilePageViewController.m in Sources */,

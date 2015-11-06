@@ -9,7 +9,7 @@
 #import "HeaderTableViewCell.h"
 #import "UserSearchHeaderViewCellDelegate.h"
 
-@interface UserSearchHeaderViewCell : UITableViewCell<UISearchBarDelegate, UserSearchHeaderDelegate>
+@interface UserSearchHeaderViewCell : UITableViewCell<UserSearchHeaderDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *userSearchView;
 
 // acting delegate

@@ -105,7 +105,6 @@
         frame.size.width = frame.size.width;
         frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 6);
         
-        
         UIView *tutorialView = [[UIView alloc] init];
         tutorialView.frame = frame;
         [tutorialView setBackgroundColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0]];
@@ -128,7 +127,7 @@
             [connect setText:@"Where your awesome stuff spreads"];
             [connect setTextColor:[UIColor whiteColor]];
             [connect setBackgroundColor:[UIColor clearColor]];
-            [connect setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:19.0]];
+            [connect setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:18.0]];
             [connect setTextAlignment:NSTextAlignmentCenter];
             
             UIButton *continueBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, connect.frame.origin.y + connect.frame.size.height - 10, 200, 90)];
@@ -146,7 +145,6 @@
             [haveAccount setTextColor:[UIColor whiteColor]];
             [haveAccount setBackgroundColor:[UIColor clearColor]];
             [haveAccount setTextAlignment:NSTextAlignmentCenter];
-            
             
             UIButton *haveAccountBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 70, haveAccount.frame.origin.y + haveAccount.frame.size.height + 10, 140, 50)];
             [haveAccountBtn setTitle:@"Login" forState:UIControlStateNormal];
@@ -212,7 +210,7 @@
             [location setTextAlignment:NSTextAlignmentCenter];
             
             UIButton *turnOnLoc = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, location.frame.origin.y + location.frame.size.height, 200, 80)];
-            [turnOnLoc setTitle:@"Continue" forState:UIControlStateNormal];
+            [turnOnLoc setTitle:@"Turn on" forState:UIControlStateNormal];
             [turnOnLoc setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [turnOnLoc setBackgroundColor:[UIColor colorWithRed:0/255.0f green:123.0f/255.0f blue:255.0f/255.0f alpha:1.0]];
             [turnOnLoc.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:20.0]];
@@ -228,7 +226,6 @@
             
             [self.tosButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [self.privacyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            
         }
     }
 }

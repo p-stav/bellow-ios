@@ -33,11 +33,10 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "UserSearchHeaderViewCell.h"
+#import "SearchViewController.h"
 
 #define ARC4RANDOM_MAX      0x100000000
-
 @interface HomePage ()
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorFooter;
@@ -51,7 +50,6 @@
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
 @property (strong, nonatomic) NSString *defaultNoPendingRippleString;
 @property (strong, nonatomic) Bellow *segueToRippleForPropagateCell;
-
 @property (nonatomic) BOOL isFirstRunPostInteractiveTutorial;
 @property (nonatomic) BOOL getLocationOnce;
 @property (nonatomic) BOOL creatingAnonymousUser;
@@ -63,13 +61,11 @@
 @property (nonatomic) float isActive;
 @property (nonatomic) int currentScore;
 @property (strong, nonatomic) NSURL *url;
-
 @property (nonatomic) BOOL continueRippleMapAnimation;
 @property (strong, nonatomic) NSMutableArray *circles;
 @property (nonatomic) CGRect originalTabFrame;
 @property (nonatomic) CGFloat contentOffset;
 @property (strong, nonatomic) NSTimer *animationTimer;
-
 @end
 
 
@@ -123,7 +119,8 @@ int PARSE_PAGE_SIZE = 25;
     
     
     // protect from double call to goToMapView on tutorial tap
-    if ([ripple.rippleId isEqualToString:@"FakeRippleTap"] && self.isFirstRunPostInteractiveTutorial) {
+    if ([ripple.rippleId isEqualToString:@"FakeRippleTap"] && self.isFirstRunPostInteractiveTutorial)
+    {
         [self incrementScore];
         [self endTutorial];
         return;
@@ -189,27 +186,6 @@ int PARSE_PAGE_SIZE = 25;
             }
         }
     }
-    
-    /*
-    if ([segue.identifier isEqualToString:@"SegueToMapViewForPropagatedCell"]) {
-        self.navigationItem.title = @"";
-        
-        // log event
-        [PFAnalytics trackEvent:@"ViewCommentsAndMap" dimensions:@{@"Cell Type" : @"Propagated Cell"}];
-        
-        RippleMapView *rmv = (RippleMapView *) segue.destinationViewController;
-        if ([segue.destinationViewController isKindOfClass:[RippleMapView class]])
-        {
-             if ([sender isKindOfClass:[self class]])
-             {
-                
-                rmv.ripple = self.segueToRippleForPropagateCell;
-                rmv.selectedSegmentIndex = (int) self.rippleSegmentControl.selectedSegmentIndex;
-                self.segueToRippleForPropagateCell = nil;
-             }
-        }
-    }
-     */
     
     if ([segue.identifier isEqualToString:@"RippleImageView"])
     {
@@ -783,11 +759,10 @@ int PARSE_PAGE_SIZE = 25;
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     // 1. Dequeue the custom header cell
-    HeaderTableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"UserSearchCell"];
+    UserSearchHeaderViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"UserSearchCell"];
     headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
     [headerCell setUserInteractionEnabled:YES];
     headerCell.delegate = self;
-    
     
     return headerCell;
 }
@@ -860,7 +835,12 @@ int PARSE_PAGE_SIZE = 25;
     rippledText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%dx", cell.currentRipple.numberPropagated] attributes:boldAttributes];
     [cell.numPropagatedLabel setAttributedText:rippledText];
     [cell.numPropagatedLabel setTextColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0]];
-    [cell.reachSpreadLabel setText:[NSString stringWithFormat:@"spread to %@ people",[PFUser currentUser][@"reach"]]];
+    
+    if ([PFUser currentUser][@"reach"] != nil)
+        [cell.reachSpreadLabel setText:[NSString stringWithFormat:@"spread to %@ people",[PFUser currentUser][@"reach"]]];
+    else
+        [cell.reachSpreadLabel setText:@"spread to 7 people"];
+    
     [cell.reachSpreadLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
     [cell.dismissLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
     
@@ -1045,10 +1025,8 @@ int PARSE_PAGE_SIZE = 25;
             
             [propagateCell.propagateView addSubview:outerCircle];
             [propagateCell.propagateView addSubview:innerCircle];
-            
             [propagateCell.rippleCircles addObject:outerCircle];
             [propagateCell.rippleCircles addObject:innerCircle];
-            
             
             // add shadow and unhide propagateimage
             propagateCell.rippleMainView.layer.shadowOffset = CGSizeMake(0,0);
@@ -1080,6 +1058,11 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
             
+            // setup image
+            UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+            [arrow setFrame:CGRectMake(8, 50, 40, 40)];
+            [propagateCell addSubview:arrow];
+            
             [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
                 propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                 
@@ -1090,12 +1073,18 @@ int PARSE_PAGE_SIZE = 25;
                     // make spread button animate
                     [propagateCell.spreadButton setAlpha:1.0];
                     
+                    // arrow view
+                    arrow.frame = CGRectMake(arrow.frame.origin.x + [UIScreen mainScreen].bounds.size.width/4, arrow.frame.origin.y, arrow.frame.size.width, arrow.frame.size.height);
                     
                 } completion:^(BOOL finished) {
                     [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
                         propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                        
+                        // arrow view
+                        arrow.frame = CGRectMake(8, arrow.frame.origin.y, arrow.frame.size.width, arrow.frame.size.height);
                     } completion:^(BOOL finished) {
                         [propagateCell.spreadButton setAlpha:0.2];
+                        [arrow removeFromSuperview];
                     }];
                 }];
             }];
@@ -1117,20 +1106,30 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
             
+            // setup image
+            UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+            [arrow setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 48, 50, 40, 40)];
+            arrow.transform = CGAffineTransformMakeRotation(M_PI);
+            
+            [propagateCell addSubview:arrow];
+            
             [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
                 propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
                     propagateCell.frame = CGRectMake(-1* [UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
-                    
                     [propagateCell.dismissButton setAlpha:1.0];
+                    
+                    [arrow setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - [UIScreen mainScreen].bounds.size.width/4, 50, 40, 40)];
                     
                 } completion:^(BOOL finished) {
                     [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
                         propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                        [arrow setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 48, 50, 40, 40)];
                     } completion:^(BOOL finished) {
                         [propagateCell.dismissButton setAlpha:0.2];
+                        [arrow removeFromSuperview];
                     }];
                 }];
             }];
@@ -1145,6 +1144,22 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.spreadLabel setHidden:YES];
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
+            
+            // add animation for tap
+            UIImageView *tap = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
+            [tap setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2- 35, 45, 60, 60)];
+            [propagateCell addSubview:tap];
+            [tap setAlpha:0.0];
+            
+            [UIView animateWithDuration:0.5 delay:1.0 options:0  animations:^{
+                [tap setAlpha:1.0];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+                    [tap setAlpha:0.0];
+                } completion:^(BOOL finished) {
+                    // noop
+                }];
+            }];
         }
     }
 
@@ -1266,6 +1281,18 @@ int PARSE_PAGE_SIZE = 25;
     {
         [self.tableView reloadData];
         [self incrementScore];
+        
+        // present title label with tutorial
+        UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 120, 44)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
+        [titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:22.0]];
+        [titleLabel setTextColor:[UIColor whiteColor]];
+        [titleLabel setText:@"Tutorial 3/3"];
+        [titleLabel setTextAlignment:NSTextAlignmentCenter];
+        [titleView addSubview:titleLabel];
+        self.navigationItem.titleView = titleView;
+        [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 - self.navigationItem.titleView.frame.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
+        
         return;
     }
     
@@ -1334,6 +1361,19 @@ int PARSE_PAGE_SIZE = 25;
     {
         [self.tableView reloadData];
         [self incrementScore];
+        
+        // change title label
+        UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 120, 44)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
+        [titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:22.0]];
+        [titleLabel setTextColor:[UIColor whiteColor]];
+        [titleLabel setText:@"Tutorial 2/3"];
+        [titleLabel setTextAlignment:NSTextAlignmentCenter];
+        [titleView addSubview:titleLabel];
+        self.navigationItem.titleView = titleView;
+        [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 - self.navigationItem.titleView.frame.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
+        
+        
         return;
     }
     
@@ -1406,9 +1446,15 @@ int PARSE_PAGE_SIZE = 25;
     }
 }
 
-- (void)segueToSearchView
+- (void)goToSearchView
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    SearchViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchView"];
     
+    self.navigationItem.title = @"";
+    self.navigationItem.hidesBackButton = YES;
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 
@@ -1864,7 +1910,6 @@ int PARSE_PAGE_SIZE = 25;
 #pragma mark - tutorial and first run
 - (void)createAnonymousUser
 {
-    
     [self.activityIndicator setHidden:NO];
     // [self.activityIndicator startAnimating];
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
@@ -1921,7 +1966,7 @@ int PARSE_PAGE_SIZE = 25;
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
     [titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:22.0]];
     [titleLabel setTextColor:[UIColor whiteColor]];
-    [titleLabel setText:@"Tutorial"];
+    [titleLabel setText:@"Tutorial 1/3"];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     [titleView addSubview:titleLabel];
     self.navigationItem.titleView = titleView;
@@ -1942,11 +1987,11 @@ int PARSE_PAGE_SIZE = 25;
     // create ripple!
     Bellow *bellowSpread = [[Bellow alloc] init];
     bellowSpread.rippleId = @"FakeRippleSpread";
-    bellowSpread.text = @"\nSwipe right to spread posts to more people!\n";
+    bellowSpread.text = @"\nSwipe right to spread posts to more people!\n\n";
     bellowSpread.imageFile = nil;
     bellowSpread.imageHeight = 0;
     bellowSpread.imageWidth = 0;
-    bellowSpread.creatorName = @"Bellow Tutorial 1/3";
+    bellowSpread.creatorName = @"Bellow Tutorial";
     bellowSpread.miniRippleId = @"FakeMiniRipple";
     bellowSpread.commentArray = [@[] mutableCopy];
     bellowSpread.commentIds = [@[] mutableCopy];
@@ -1957,11 +2002,11 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
-    bellowDismiss.text = @"\nSwipe left to dismiss posts. They will not be shared with others.\n";
+    bellowDismiss.text = @"\nSwipe left to dismiss posts. They will not be shared with others.\n\n";
     bellowDismiss.imageFile = nil;
     bellowDismiss.imageHeight = 0;
     bellowDismiss.imageWidth = 0;
-    bellowDismiss.creatorName = @"Bellow Tutorial 2/3";
+    bellowDismiss.creatorName = @"Bellow Tutorial";
     bellowDismiss.miniRippleId = @"FakeMiniRipple";
     bellowDismiss.commentArray = [@[] mutableCopy];
     bellowDismiss.commentIds = [@[] mutableCopy];
@@ -1972,11 +2017,11 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowTap = [[Bellow alloc] init];
     bellowTap.rippleId = @"FakeRippleTap";
-    bellowTap.text = @"\nTap posts to see where they've travelled and to see comments.\n";
+    bellowTap.text = @"\nTap posts to see where they've travelled and to see comments.\n\n";
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
-    bellowTap.creatorName = @"Bellow Tutorial 3/3";
+    bellowTap.creatorName = @"Bellow Tutorial";
     bellowTap.miniRippleId = @"FakeMiniRipple";
     bellowTap.commentArray = [@[] mutableCopy];
     bellowTap.commentIds = [@[] mutableCopy];

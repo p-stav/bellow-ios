@@ -59,6 +59,8 @@
 		DA0690391A8B323C006AFBD0 /* triangle-for-filter-39.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0690381A8B323C006AFBD0 /* triangle-for-filter-39.png */; };
 		DA06E70D1A66684A0015F7B3 /* commentsBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06E70C1A66684A0015F7B3 /* commentsBlue.png */; };
 		DA09A7701BEAE681002BDC46 /* UserSearchHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA09A76F1BEAE681002BDC46 /* UserSearchHeaderViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		DA09A7731BEC8399002BDC46 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA09A7721BEC8399002BDC46 /* arrow.png */; settings = {ASSET_TAGS = (); }; };
+		DA09A7751BEC8AE4002BDC46 /* tap.png in Resources */ = {isa = PBXBuildFile; fileRef = DA09A7741BEC8AE4002BDC46 /* tap.png */; settings = {ASSET_TAGS = (); }; };
 		DA12024C1BB126AB007D2043 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA12024B1BB126AB007D2043 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		DA1202501BB1289F007D2043 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA12024F1BB1289F007D2043 /* ParseFacebookUtilsV4.framework */; settings = {ASSET_TAGS = (); }; };
 		DA1202521BB129DB007D2043 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1202511BB129DB007D2043 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
@@ -250,6 +252,8 @@
 		DA09A76E1BEAE681002BDC46 /* UserSearchHeaderViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchHeaderViewCell.h; sourceTree = "<group>"; };
 		DA09A76F1BEAE681002BDC46 /* UserSearchHeaderViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchHeaderViewCell.m; sourceTree = "<group>"; };
 		DA09A7711BEAEA19002BDC46 /* UserSearchHeaderViewCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSearchHeaderViewCellDelegate.h; sourceTree = "<group>"; };
+		DA09A7721BEC8399002BDC46 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		DA09A7741BEC8AE4002BDC46 /* tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap.png; sourceTree = "<group>"; };
 		DA12024B1BB126AB007D2043 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = FacebookSDKs/FBSDKCoreKit.framework; sourceTree = SOURCE_ROOT; };
 		DA12024F1BB1289F007D2043 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		DA1202511BB129DB007D2043 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -704,6 +708,8 @@
 		DA20DEA719CE05A80057C00F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA09A7741BEC8AE4002BDC46 /* tap.png */,
+				DA09A7721BEC8399002BDC46 /* arrow.png */,
 				DA95BF6D1BC3C2F300AD4DFD /* explore3x.png */,
 				DA5CB45F1BB73A990076D56F /* alreadyDismissed.png */,
 				DA5CB4601BB73A990076D56F /* alreadySpread.png */,
@@ -968,10 +974,12 @@
 				DA9CCFB21A43BE6200A5B99C /* comments.png in Resources */,
 				0DFB082019C17FC700A57630 /* InfoPlist.strings in Resources */,
 				DA89E3BC1A771DD0002F3D68 /* redCompose.png in Resources */,
+				DA09A7731BEC8399002BDC46 /* arrow.png in Resources */,
 				0D7550611A8B429A00004282 /* latestIcon.png in Resources */,
 				DA405C201AED911D00164B80 /* feedback.png in Resources */,
 				DA495F8B1A2A939D000F201E /* Launch Screen.xib in Resources */,
 				DA7739B31B168EE300D51D46 /* mapView.gif in Resources */,
+				DA09A7751BEC8AE4002BDC46 /* tap.png in Resources */,
 				DA5CB4611BB73A990076D56F /* alreadyDismissed.png in Resources */,
 				DAAD9C3A1A0001D5006DF466 /* backArrow.png in Resources */,
 				DAF4274C1B7AAEBA00225455 /* follow.png in Resources */,

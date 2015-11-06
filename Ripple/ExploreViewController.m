@@ -88,7 +88,19 @@
     if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
         [self.navigationController setHidesBarsOnSwipe:YES];
     
-    // setup navigation title
+    // setup title
+    UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 100, 44)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
+    
+    [titleLabel setFont:[UIFont fontWithName:@"Avenir" size:22.0]];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setText:@"Trending"];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleView addSubview:titleLabel];
+    self.navigationItem.titleView = titleView;
+    [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
+
+    /*
     UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 80, 44)];
     self.searchField = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, titleView.frame.size.width, titleView.frame.size.height)];
     [self.searchField setBackgroundImage:[UIImage new]];
@@ -96,10 +108,12 @@
     [self.searchField setPlaceholder:@"search for a user..."];
     [self.searchField setTintColor:[UIColor whiteColor]];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0]];
-
+    
     [self.searchDisplayController.searchBar setSearchBarStyle:UISearchBarStyleMinimal];
     [titleView addSubview:self.searchField];
     self.navigationItem.titleView = titleView;
+    */
+    
     
     // delegates and table setup
     self.searchField.delegate = self;
@@ -378,7 +392,7 @@
     }
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+/*- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *reusableview = nil;
     
@@ -393,6 +407,7 @@
     
     return reusableview;
 }
+ */
 
 - (void)refreshList
 {
@@ -436,10 +451,7 @@
     [self.noContentTextView setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:16.0]];
     [self.noContentTextView setTextAlignment:NSTextAlignmentCenter];
 
-    if (self.isSearching)
-        [self.noContentTextView setText:@"There are no results for this search."];
-    else
-        [self.noContentTextView setText:@"You are not following anyone. Search for people to follow."];
+    [self.noContentTextView setText:@"Refresh this page to see trending posts!"];
     
     [self.noContentTextView setTextAlignment:NSTextAlignmentCenter];
 }

@@ -44,7 +44,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="latestIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Krl-VA-CNW">
-                    <rect key="frame" x="149" y="186" width="100" height="100"/>
+                    <rect key="frame" x="149" y="199" width="100" height="100"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="esv-qa-cMj"/>
@@ -56,7 +56,7 @@
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="0ui-cM-UfH"/>
-                <constraint firstItem="69W-Qd-TXz" firstAttribute="top" secondItem="Krl-VA-CNW" secondAttribute="bottom" constant="9" id="H1l-XZ-ztC"/>
+                <constraint firstItem="69W-Qd-TXz" firstAttribute="top" secondItem="Krl-VA-CNW" secondAttribute="bottom" constant="-4" id="H1l-XZ-ztC"/>
                 <constraint firstItem="Krl-VA-CNW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OmQ-F7-5UG"/>
                 <constraint firstItem="69W-Qd-TXz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SdE-NE-dhi"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" id="o2i-jV-xuh"/>

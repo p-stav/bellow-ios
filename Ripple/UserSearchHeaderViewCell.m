@@ -21,10 +21,9 @@
     // Configure the view for the selected state
 }
 
-#pragma mark - searchbar methods
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self.delegate segueToSearchView];
+    [self.delegate goToSearchView];
 }
 
 

@@ -279,9 +279,9 @@
     cell.level.text = user[@"level"];
     
     if ((BOOL) cell.isFollowing == YES)
-        [cell.followerImage setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
+        [cell.followerImage setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
     else
-        [cell.followerImage setImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
+        [cell.followerImage setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
     
     return cell;
 }

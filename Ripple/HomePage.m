@@ -50,7 +50,6 @@
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
 @property (strong, nonatomic) NSString *defaultNoPendingRippleString;
 @property (strong, nonatomic) Bellow *segueToRippleForPropagateCell;
-@property (nonatomic) BOOL isFirstRunPostInteractiveTutorial;
 @property (nonatomic) BOOL getLocationOnce;
 @property (nonatomic) BOOL creatingAnonymousUser;
 @property (nonatomic) BOOL viewDidLoadJustRan;
@@ -65,7 +64,12 @@
 @property (strong, nonatomic) NSMutableArray *circles;
 @property (nonatomic) CGRect originalTabFrame;
 @property (nonatomic) CGFloat contentOffset;
+
 @property (strong, nonatomic) NSTimer *animationTimer;
+@property (strong, nonatomic) UIView *overlay;
+@property (nonatomic) BOOL isFirstRunPostInteractiveTutorial;
+@property (nonatomic) BOOL isOverlayTutorial;
+
 @end
 
 
@@ -242,6 +246,7 @@ int PARSE_PAGE_SIZE = 25;
     self.finishedFirstUpdateView = NO;
     [self.rippleSegmentControl setHidden:YES];
     self.followingSkip = 0;
+    self.isOverlayTutorial = NO;
     
     self.continueRippleMapAnimation = YES;
     self.circles = [[NSMutableArray alloc] init];
@@ -694,6 +699,8 @@ int PARSE_PAGE_SIZE = 25;
             //[Flurry logEvent:@"View_Rippled"];
             self.selectedRippleArray = self.followingRipples;
             self.tableView.allowsSelection = YES;
+            
+            [self checkFirstTimeFollowing];
             break;
             
         case 2:
@@ -1147,7 +1154,7 @@ int PARSE_PAGE_SIZE = 25;
             
             // add animation for tap
             UIImageView *tap = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
-            [tap setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2- 35, 45, 60, 60)];
+            [tap setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2- 35, 45, 50, 50)];
             [propagateCell addSubview:tap];
             [tap setAlpha:0.0];
             
@@ -1161,6 +1168,11 @@ int PARSE_PAGE_SIZE = 25;
                 }];
             }];
         }
+        
+        if (self.isOverlayTutorial)
+            propagateCell.alpha = 0.1;
+        else
+            propagateCell.alpha = 1.0;
     }
 
 
@@ -2057,6 +2069,74 @@ int PARSE_PAGE_SIZE = 25;
     [self updateView];
     [doneTutorial show];
     
+}
+
+- (void)checkFirstTimeFollowing
+{
+    {
+        NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+        NSNumber *firstTime = [userData objectForKey:@"firstTimeFollowing"];
+        int firstTimeCheck = [firstTime intValue];
+        
+        if (firstTimeCheck == 0)
+        {
+            self.isOverlayTutorial = YES;
+            [self.tableView reloadData];
+            
+            //show overlay
+            self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+            [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.6]];
+            
+            // add textview explaining
+            UITextView *followingPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 180, [UIScreen mainScreen].bounds.size.width - 16, 150)];
+            [followingPosts setUserInteractionEnabled:NO];
+            [followingPosts setScrollEnabled:NO];
+            [followingPosts setTextColor:[UIColor whiteColor]];
+            [followingPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+            [followingPosts setText:@"This is the following tab.\n\nView and swipe posts from people you follow."];
+            [followingPosts setTextAlignment:NSTextAlignmentCenter];
+            [followingPosts setBackgroundColor:[UIColor clearColor]];
+            
+            // add textview search and arrow
+            UITextView *search = [[UITextView alloc] initWithFrame:CGRectMake(50, 105, [UIScreen mainScreen].bounds.size.width - 50, 40)];
+            [search setUserInteractionEnabled:NO];
+            [search setScrollEnabled:NO];
+            [search setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+            [search setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+            [search setText:@"Search for users to follow"];
+            [search setTextAlignment:NSTextAlignmentLeft];
+            [search setBackgroundColor:[UIColor clearColor]];
+            
+            UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+            [arrow setFrame:CGRectMake(search.frame.origin.x - 30, search.frame.origin.y + 2, 30, 30)];
+            arrow.transform = CGAffineTransformMakeRotation(-1*M_PI/2);
+            
+                
+            
+            // add button to overlay
+            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, followingPosts.frame.origin.y + followingPosts.frame.size.height, 100, 40)];
+            [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
+            [ok setTitle:@"Got it" forState:UIControlStateNormal];
+            [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+            [ok.layer setCornerRadius:5.0];
+            
+            [self.overlay addSubview:arrow];
+            [self.overlay addSubview:search];
+            [self.overlay addSubview:followingPosts];
+            [self.overlay addSubview:ok];
+            [self.view addSubview:self.overlay];
+            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeFollowing"];
+            [userData synchronize];
+        }
+    }
+}
+
+- (void)removeFirstRunOverlay
+{
+    [self.overlay removeFromSuperview];
+    self.isOverlayTutorial = NO;
+    [self.tableView reloadData];
 }
 
 #pragma mark - share and action items from profile view

@@ -61,6 +61,8 @@
 		DA09A7701BEAE681002BDC46 /* UserSearchHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA09A76F1BEAE681002BDC46 /* UserSearchHeaderViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		DA09A7731BEC8399002BDC46 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA09A7721BEC8399002BDC46 /* arrow.png */; settings = {ASSET_TAGS = (); }; };
 		DA09A7751BEC8AE4002BDC46 /* tap.png in Resources */ = {isa = PBXBuildFile; fileRef = DA09A7741BEC8AE4002BDC46 /* tap.png */; settings = {ASSET_TAGS = (); }; };
+		DA09A7781BED1E68002BDC46 /* followAndLabel.png in Resources */ = {isa = PBXBuildFile; fileRef = DA09A7761BED1E68002BDC46 /* followAndLabel.png */; settings = {ASSET_TAGS = (); }; };
+		DA09A7791BED1E68002BDC46 /* followingAndLabel.png in Resources */ = {isa = PBXBuildFile; fileRef = DA09A7771BED1E68002BDC46 /* followingAndLabel.png */; settings = {ASSET_TAGS = (); }; };
 		DA12024C1BB126AB007D2043 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA12024B1BB126AB007D2043 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		DA1202501BB1289F007D2043 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA12024F1BB1289F007D2043 /* ParseFacebookUtilsV4.framework */; settings = {ASSET_TAGS = (); }; };
 		DA1202521BB129DB007D2043 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1202511BB129DB007D2043 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
@@ -254,6 +256,8 @@
 		DA09A7711BEAEA19002BDC46 /* UserSearchHeaderViewCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSearchHeaderViewCellDelegate.h; sourceTree = "<group>"; };
 		DA09A7721BEC8399002BDC46 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		DA09A7741BEC8AE4002BDC46 /* tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap.png; sourceTree = "<group>"; };
+		DA09A7761BED1E68002BDC46 /* followAndLabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followAndLabel.png; sourceTree = "<group>"; };
+		DA09A7771BED1E68002BDC46 /* followingAndLabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followingAndLabel.png; sourceTree = "<group>"; };
 		DA12024B1BB126AB007D2043 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = FacebookSDKs/FBSDKCoreKit.framework; sourceTree = SOURCE_ROOT; };
 		DA12024F1BB1289F007D2043 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		DA1202511BB129DB007D2043 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -708,6 +712,8 @@
 		DA20DEA719CE05A80057C00F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA09A7761BED1E68002BDC46 /* followAndLabel.png */,
+				DA09A7771BED1E68002BDC46 /* followingAndLabel.png */,
 				DA09A7741BEC8AE4002BDC46 /* tap.png */,
 				DA09A7721BEC8399002BDC46 /* arrow.png */,
 				DA95BF6D1BC3C2F300AD4DFD /* explore3x.png */,
@@ -944,6 +950,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA44FA571B4B35840059396D /* referral.png in Resources */,
+				DA09A7791BED1E68002BDC46 /* followingAndLabel.png in Resources */,
 				DA793CA21B31EE9F004C05E0 /* noPath.png in Resources */,
 				DA39A8C01BABEC6E00D7980E /* dismissRippleIconUnselected.png in Resources */,
 				DA39F0331B1454B40092D57A /* addImage.png in Resources */,
@@ -1012,6 +1019,7 @@
 				DAF4274D1B7AAEBA00225455 /* following.png in Resources */,
 				DA20DEA619CE059E0057C00F /* pebble.png in Resources */,
 				DA956CD11AD34F0A00465917 /* downKeyboard.png in Resources */,
+				DA09A7781BED1E68002BDC46 /* followAndLabel.png in Resources */,
 				DA405C1E1AED911700164B80 /* getPoints.png in Resources */,
 				DA91A3A71B80287400DCF8CA /* trash.png in Resources */,
 				DABD75981AC8CBC100B580E0 /* DismissLogoPink.png in Resources */,

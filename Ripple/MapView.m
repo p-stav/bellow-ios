@@ -84,12 +84,15 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dismissButtonLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cityLabelWidthConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *spreadText;
+@property (strong,nonatomic) UIView *overlay;
+@property (nonatomic) BOOL isOverlayTutorial;
 
 
 @property (nonatomic) BOOL viewDidLoadJustRan;
 @property (nonatomic) BOOL didPressMapOverlayOnce;
 @property (nonatomic) BOOL pathsShowingOrNah;
 @property (nonatomic) int maxDepth;
+
 
 // @property (strong, nonatomic) UITapGestureRecognizer *tapMapOverlayOnce;
 // @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rippleUsernameBottomConstraint;
@@ -204,21 +207,19 @@
     self.miniRipples = [[NSArray alloc] init];
     self.commentArray = [[NSMutableArray alloc] init];
     
-    if (![self.ripple.rippleId isEqualToString:@"FakeRipple"])
-    {
-        // get miniripples to display location circles
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            self.miniRipples = [BellowService getMiniRipplesGraph:self.ripple.rippleId];
+    // get miniripples to display location circles
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.miniRipples = [BellowService getMiniRipplesGraph:self.ripple.rippleId];
 
-            dispatch_async( dispatch_get_main_queue(), ^{
-                [self addMiniRipplePaths];
-                [self addMiniRipplePins];
-                
-            });
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self addMiniRipplePaths];
+            [self addMiniRipplePins];
+            
         });
-        
-        [self grabComments];
-    }
+    });
+    
+    [self checkFirstTimeMap];
+    [self grabComments];
     
     // navigation bar items, constraints
     [self setupPage];
@@ -235,8 +236,9 @@
     self.pathsShowingOrNah = NO;
     
     // set maptoggle
-    if (!self.commentsUp)
+    if (!self.commentsUp || self.isOverlayTutorial)
     {
+        self.commentsUp = NO;
         [self showHideMapToggle:self];
         self.didPressMapOverlayOnce = NO;
     }
@@ -268,8 +270,8 @@
         if (firstMapVisitCheck != 1)
         {
             // setup alert
-            UIAlertView *pathsToggleAlert = [[UIAlertView alloc] initWithTitle:@"see a ripple's path!" message:@"Tap the button on the top right to show/hide path lines." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [pathsToggleAlert show];
+            //UIAlertView *pathsToggleAlert = [[UIAlertView alloc] initWithTitle:@"see a ripple's path!" message:@"Tap the button on the top right to show/hide path lines." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            //[pathsToggleAlert show];
             
             // set to 1
             [userData setObject:[NSNumber numberWithInteger:1] forKey:@"visitFirstMap"];
@@ -367,7 +369,7 @@
             if ([self.commentArray count] != 0)
                 [self.tableView reloadData];
             
-            if (self.commentsUp)
+            if (self.commentsUp && !self.isOverlayTutorial)
             {
                 [self showHideMapToggle:self];
                 self.didPressMapOverlayOnce = YES;
@@ -1684,5 +1686,82 @@
 
 }
 
+#pragma mark- first run
+- (void)checkFirstTimeMap
+{
+    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+    NSNumber *firstTime = [userData objectForKey:@"firstTimeMap"];
+    int firstTimeCheck = [firstTime intValue];
+    
+    if (firstTimeCheck == 0)
+    {
+        self.isOverlayTutorial = YES;
+        [self.mapView setAlpha:0.4];
+        
+        //show overlay
+        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.6]];
+        
+        // add textview explaining
+        UITextView *map = [[UITextView alloc] initWithFrame:CGRectMake(8, [UIScreen mainScreen].bounds.size.height/2 - 100, [UIScreen mainScreen].bounds.size.width - 16, 80)];
+        [map setUserInteractionEnabled:NO];
+        [map setScrollEnabled:NO];
+        [map setTextColor:[UIColor whiteColor]];
+        [map setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+        [map setText:@"See where posts have travelled\nand leave a comment."];
+        [map setTextAlignment:NSTextAlignmentCenter];
+        [map setBackgroundColor:[UIColor clearColor]];
+        
+        // add button to overlay
+        UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, map.frame.origin.y + map.frame.size.height, 100, 40)];
+        [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
+        [ok setTitle:@"Got it" forState:UIControlStateNormal];
+        [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+        [ok.layer setCornerRadius:5.0];
+        
+        // add directions
+        UITextView *tap = [[UITextView alloc] initWithFrame:CGRectMake(60, [UIScreen mainScreen].bounds.size.height*0.66 -5, [UIScreen mainScreen].bounds.size.width - 50, 40)];
+        [tap setUserInteractionEnabled:NO];
+        [tap setScrollEnabled:NO];
+        [tap setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+        [tap setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+        [tap setText:@"Tap the post to see comments."];
+        [tap setTextAlignment:NSTextAlignmentLeft];
+        [tap setBackgroundColor:[UIColor clearColor]];
+        
+        UIImageView *tapImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
+        [tapImage setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 20, [UIScreen mainScreen].bounds.size.height*0.66 + 30, 40, 40)];
+        
+        UITextView *path = [[UITextView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 290, 70, [UIScreen mainScreen].bounds.size.width, 40)];
+        [path setUserInteractionEnabled:NO];
+        [path setScrollEnabled:NO];
+        [path setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+        [path setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+        [path setText:@"Tap here to see how this post spread."];
+        [path setTextAlignment:NSTextAlignmentLeft];
+        [path setBackgroundColor:[UIColor clearColor]];
+        
+        UIImageView *pathImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
+        [pathImage setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 40, 66, 40, 40)];
+        
+        [self.overlay addSubview:path];
+        [self.overlay addSubview:pathImage];
+        [self.overlay addSubview:tap];
+        [self.overlay addSubview:tapImage];
+        [self.overlay addSubview:map];
+        [self.overlay addSubview:ok];
+        [self.view addSubview:self.overlay];
+        [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeMap"];
+        [userData synchronize];
+    }
+}
+
+- (void)removeFirstRunOverlay
+{
+    [self.mapView setAlpha:1.0];
+    self.isOverlayTutorial = NO;
+    [self.overlay removeFromSuperview];
+}
 
 @end

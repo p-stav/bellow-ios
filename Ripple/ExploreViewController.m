@@ -42,7 +42,8 @@
 @property (nonatomic) BOOL isSearching;
 @property (nonatomic) BOOL isTyping;
 @property (nonatomic) CGFloat contentOffset;
-@property (nonatomic) BOOL segueWithCommentsUp;
+@property (strong,nonatomic) UIView *overlay;
+@property (nonatomic) BOOL isOverlayTutorial;
 
 @end
 
@@ -63,15 +64,13 @@
         
         if ([segue.destinationViewController isKindOfClass:[MapView class]])
         {
-            MapView *rmv = (MapView *) segue.destinationViewController;
+            MapView *mv = (MapView *) segue.destinationViewController;
             
             if ([sender isKindOfClass:[Bellow class]])
             {
                 Bellow *ripple = (Bellow *)sender;
-                rmv.ripple = ripple;
-
-                if (self.segueWithCommentsUp)
-                    rmv.commentsUp = YES;
+                mv.ripple = ripple;
+                mv.commentsUp = YES;
             }
         }
     }
@@ -84,6 +83,7 @@
     self.isTyping = NO;
     self.isAllTopRipples = NO;
     [self.noContentTextView setHidden:YES];
+    self.isOverlayTutorial = NO;
     
     if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
         [self.navigationController setHidesBarsOnSwipe:YES];
@@ -188,6 +188,7 @@
 
 - (void)updateView
 {
+    [self checkFirstTimeExplore];
     [self.activityIndicator startAnimating];
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -329,6 +330,11 @@
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
+    if (self.isOverlayTutorial)
+        cell.alpha = 0.1;
+    else
+        cell.alpha = 1.0;
+    
     return cell;
 }
 
@@ -391,23 +397,6 @@
         });
     }
 }
-
-/*- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionReusableView *reusableview = nil;
-    
-    if (kind == UICollectionElementKindSectionHeader)
-    {
-        HeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"sectionHeader" forIndexPath:indexPath];
-        
-        [headerView.headerLabel setText:@"Trending Ripples:"];
-       
-        reusableview = headerView;
-    }
-    
-    return reusableview;
-}
- */
 
 - (void)refreshList
 {
@@ -511,4 +500,86 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+
+
+#pragma mark- first run
+- (void)checkFirstTimeExplore
+{
+    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+    NSNumber *firstTime = [userData objectForKey:@"firstTimeExplore"];
+    int firstTimeCheck = [firstTime intValue];
+    
+    if (firstTimeCheck == 0)
+    {
+        self.isOverlayTutorial = YES;
+        [self.collectionView reloadData];
+        
+        //show overlay
+        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.7]];
+        
+        // add textview explaining
+        UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 90, [UIScreen mainScreen].bounds.size.width - 16, 100)];
+        [topPosts setUserInteractionEnabled:NO];
+        [topPosts setScrollEnabled:NO];
+        [topPosts setTextColor:[UIColor whiteColor]];
+        [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+        [topPosts setText:@"These are trending posts from the last 3 days."];
+        [topPosts setTextAlignment:NSTextAlignmentCenter];
+        [topPosts setBackgroundColor:[UIColor clearColor]];
+        
+        // add button to overlay
+        UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
+        [ok setBackgroundColor:[UIColor colorWithRed:3.0/255.0f green:123.0/255.0f blue:255.0/255.0f alpha:1.0]];
+        [ok setTitle:@"Got it" forState:UIControlStateNormal];
+        [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+        [ok.layer setCornerRadius:5.0];
+        
+        // add directions
+        UITextView *tap = [[UITextView alloc] initWithFrame:CGRectMake(60, ok.frame.origin.y + ok.frame.size.height + 60, [UIScreen mainScreen].bounds.size.width - 50, 40)];
+        [tap setUserInteractionEnabled:NO];
+        [tap setScrollEnabled:NO];
+        [tap setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+        [tap setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+        [tap setText:@"tap on a post to see more."];
+        [tap setTextAlignment:NSTextAlignmentLeft];
+        [tap setBackgroundColor:[UIColor clearColor]];
+        
+        UIImageView *tapImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
+        [tapImage setFrame:CGRectMake(tap.frame.origin.x - 40, tap.frame.origin.y + 2, 40, 40)];
+
+        [self.overlay addSubview:tap];
+        [self.overlay addSubview:tapImage];
+        [self.overlay addSubview:topPosts];
+        [self.overlay addSubview:ok];
+        [self.view addSubview:self.overlay];
+        [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeExplore"];
+        [userData synchronize];
+    }
+}
+
+- (void)removeFirstRunOverlay
+{
+    self.isOverlayTutorial = NO;
+    [self.overlay removeFromSuperview];
+    [self.collectionView reloadData];
+}
+
+/*- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+ {
+ UICollectionReusableView *reusableview = nil;
+ 
+ if (kind == UICollectionElementKindSectionHeader)
+ {
+ HeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"sectionHeader" forIndexPath:indexPath];
+ 
+ [headerView.headerLabel setText:@"Trending Ripples:"];
+ 
+ reusableview = headerView;
+ }
+ 
+ return reusableview;
+ }
+ */
 @end

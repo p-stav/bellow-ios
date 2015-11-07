@@ -18,6 +18,7 @@
 @interface NotificationsPage ()
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
 @property (strong, nonatomic) Bellow *selectedRipple;
+@property (strong, nonatomic) UITextView *noNotificationsText;
 @end
 
 @implementation NotificationsPage
@@ -223,7 +224,26 @@
                 [self displayNoRipplesViewForSort];
             }
             */
-            [self.tableView reloadData];
+            
+            if ([self.notificationArray count] == 0) {
+                // show noripplestextview
+                /*self.noNotificationsText = [[UITextView alloc] initWithFrame:CGRectMake(16, self.tableView.frame.origin.y + 100, [UIScreen mainScreen].bounds.size.width - 32, 300)];
+                [self.noNotificationsText setUserInteractionEnabled:NO];
+                [self.noNotificationsText setScrollEnabled:NO];
+                [self.noNotificationsText setBackgroundColor:[UIColor clearColor]];
+                [self.noNotificationsText setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:25]];
+                [self.noNotificationsText setTextAlignment:NSTextAlignmentCenter];
+                [self.noNotificationsText setTextColor:[UIColor blackColor]];
+                [self.noNotificationsText setText:@"You have no notifications"];
+                [self.view addSubview:self.noNotificationsText];*/
+                [self.tableView reloadData];
+                
+            }
+            else
+            {
+                [self.tableView reloadData];
+                // [self.noNotificationsText removeFromSuperview];
+            }
         });
     });
 }

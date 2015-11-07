@@ -18,10 +18,10 @@
                         <rect key="frame" x="0.0" y="7" width="320" height="154"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxY-iz-FaE" userLabel="mj_schutzenheimer in Seattle">
-                                <rect key="frame" x="9" y="12" width="157" height="28"/>
+                                <rect key="frame" x="9" y="12" width="157" height="30"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="U9A-oW-K8E"/>
+                                    <constraint firstAttribute="height" constant="30" id="U9A-oW-K8E"/>
                                     <constraint firstAttribute="width" constant="157" id="ayU-MZ-E2w"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEq-Ba-ttQ">
-                                <rect key="frame" x="0.0" y="60" width="320" height="350"/>
+                                <rect key="frame" x="0.0" y="62" width="320" height="350"/>
                                 <subviews>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UR3-VO-0Il" customClass="PFImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
@@ -203,7 +203,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="following.png" translatesAutoresizingMaskIntoConstraints="NO" id="b99-Nd-M9L">
-                                <rect key="frame" x="169" y="14" width="20" height="20"/>
+                                <rect key="frame" x="169" y="15" width="20" height="20"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="uGq-7W-TQG"/>
@@ -239,7 +239,7 @@
                             <constraint firstItem="v9E-wM-YFZ" firstAttribute="leading" secondItem="v4p-2Z-luB" secondAttribute="leading" id="WpI-pC-zyg"/>
                             <constraint firstAttribute="bottom" secondItem="fxY-iz-FaE" secondAttribute="bottom" constant="44" id="dzl-KP-m9J"/>
                             <constraint firstAttribute="trailing" secondItem="v9E-wM-YFZ" secondAttribute="trailing" id="m98-aI-HN6"/>
-                            <constraint firstItem="b99-Nd-M9L" firstAttribute="top" secondItem="v4p-2Z-luB" secondAttribute="top" constant="14" id="oV3-60-cgM"/>
+                            <constraint firstItem="b99-Nd-M9L" firstAttribute="top" secondItem="v4p-2Z-luB" secondAttribute="top" constant="15" id="oV3-60-cgM"/>
                             <constraint firstItem="84L-vU-BzM" firstAttribute="leading" secondItem="dt4-Tq-0jp" secondAttribute="trailing" constant="12" id="pHc-Bb-fQR"/>
                             <constraint firstItem="v9E-wM-YFZ" firstAttribute="top" secondItem="v4p-2Z-luB" secondAttribute="top" constant="50" id="rlR-zU-nw1"/>
                             <constraint firstItem="aFa-vX-WRZ" firstAttribute="leading" secondItem="v4p-2Z-luB" secondAttribute="leading" constant="4" id="va6-Rk-dUR"/>

@@ -1026,6 +1026,7 @@
                                                 <searchBar userInteractionEnabled="NO" contentMode="redraw" fixedFrame="YES" placeholder="search for a user..." translatesAutoresizingMaskIntoConstraints="NO" id="iWE-Cg-Yc7">
                                                     <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
                                                     <animations/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <scopeButtonTitles>
                                                         <string>Title</string>
@@ -2406,11 +2407,11 @@ If you have any questions regarding privacy while using the Application, or have
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIZ-TH-lGK">
-                                            <rect key="frame" x="269" y="98" width="30" height="30"/>
+                                            <rect key="frame" x="258" y="89" width="50" height="50"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="I4U-kq-hMs"/>
-                                                <constraint firstAttribute="height" constant="30" id="jM3-an-ePu"/>
+                                                <constraint firstAttribute="width" constant="50" id="I4U-kq-hMs"/>
+                                                <constraint firstAttribute="height" constant="50" id="jM3-an-ePu"/>
                                             </constraints>
                                             <state key="normal" title="follow" image="follow.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2493,7 +2494,7 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstItem="gyd-vF-A9Z" firstAttribute="top" secondItem="7nR-gF-FBU" secondAttribute="bottom" constant="-1" id="MlU-Tb-Fed"/>
                                         <constraint firstItem="aAS-do-INq" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="NV3-cX-qo1"/>
                                         <constraint firstItem="QlU-N7-5oF" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="O3h-3e-Ed9"/>
-                                        <constraint firstItem="fIZ-TH-lGK" firstAttribute="bottom" secondItem="aAS-do-INq" secondAttribute="bottom" constant="4" id="P2X-nw-0S0"/>
+                                        <constraint firstItem="fIZ-TH-lGK" firstAttribute="bottom" secondItem="aAS-do-INq" secondAttribute="bottom" constant="15" id="P2X-nw-0S0"/>
                                         <constraint firstItem="5c3-Q8-j8R" firstAttribute="top" secondItem="JyA-pq-6sM" secondAttribute="bottom" constant="125" id="PkY-SV-uZ4"/>
                                         <constraint firstAttribute="centerY" secondItem="Ldi-2d-D6I" secondAttribute="centerY" constant="40" id="ZfE-Da-d8w"/>
                                         <constraint firstItem="tlh-v7-hP4" firstAttribute="leading" secondItem="lLq-Pg-9LT" secondAttribute="trailing" constant="4" id="b9w-nC-pL2"/>
@@ -2503,7 +2504,7 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstAttribute="trailing" secondItem="ono-V7-4Jm" secondAttribute="trailing" constant="3" id="gUS-Op-j8F"/>
                                         <constraint firstItem="lLq-Pg-9LT" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="43" id="iRN-8x-k91"/>
                                         <constraint firstItem="tlh-v7-hP4" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="24" id="kYm-je-eHo"/>
-                                        <constraint firstAttribute="trailing" secondItem="fIZ-TH-lGK" secondAttribute="trailing" constant="21" id="mnW-3g-5zh"/>
+                                        <constraint firstAttribute="trailing" secondItem="fIZ-TH-lGK" secondAttribute="trailing" constant="12" id="mnW-3g-5zh"/>
                                         <constraint firstAttribute="trailing" secondItem="tlh-v7-hP4" secondAttribute="trailing" constant="-2" id="oAd-Sf-HHg"/>
                                         <constraint firstItem="g8Z-SB-5v2" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="24" id="phK-nR-A88"/>
                                         <constraint firstAttribute="centerX" secondItem="Ldi-2d-D6I" secondAttribute="centerX" id="rLR-4O-ins"/>
@@ -3216,7 +3217,7 @@ If you have any questions regarding privacy while using the Application, or have
         <scene sceneID="0GK-5Q-20n">
             <objects>
                 <navigationController title="Trending" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="SXv-va-N01" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="Search" id="Nef-sM-Zgb"/>
+                    <tabBarItem key="tabBarItem" title="Trending" image="Search" id="Nef-sM-Zgb"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
@@ -3290,7 +3291,7 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="downKeyboard.png" width="100" height="100"/>
         <image name="facebook.png" width="97" height="95"/>
         <image name="feedback.png" width="200" height="200"/>
-        <image name="follow.png" width="100" height="100"/>
+        <image name="follow.png" width="130" height="130"/>
         <image name="getPoints.png" width="100" height="100"/>
         <image name="instagram.png" width="97" height="95"/>
         <image name="legal.png" width="229" height="229"/>
@@ -3309,13 +3310,13 @@ If you have any questions regarding privacy while using the Application, or have
     <inferredMetricsTieBreakers>
         <segue reference="xGn-U9-Idz"/>
         <segue reference="9de-MY-sDe"/>
+        <segue reference="zDq-cr-Pt1"/>
         <segue reference="XEv-Jf-jLC"/>
         <segue reference="ddR-cu-Xrf"/>
         <segue reference="AcY-H4-hdD"/>
         <segue reference="wlf-Iq-ZyU"/>
         <segue reference="A5N-Q5-ixn"/>
-        <segue reference="UIQ-Zd-zIV"/>
-        <segue reference="QIZ-Tb-RpO"/>
+        <segue reference="kdj-jQ-aNK"/>
         <segue reference="19E-hf-Zw3"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -49,12 +49,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *firstLevelTextView;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewHeightConstraint;
-
 @property (weak, nonatomic) IBOutlet UIButton *followingLabel;
 @property (strong, nonatomic) IBOutlet UIButton *followingNum;
 @property (weak, nonatomic) IBOutlet UIButton *followersLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followersNum;
-
 
 @property (nonatomic) BOOL isStartedCompleted;
 @property (nonatomic) BOOL isSpreadCompleted;
@@ -63,7 +61,6 @@
 @property (nonatomic) float isChoosingSort;
 @property (nonatomic) int headerHeight;
 
-
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
 @property (strong, nonatomic) NSArray *selectedRippleArray;
@@ -71,6 +68,8 @@
 @property (nonatomic) BOOL viewDidLoadJustRan;
 @property (strong, nonatomic) NSURL *url;
 @property (nonatomic) int referralNum;
+@property (strong, nonatomic) UIView *overlay;
+@property (nonatomic) BOOL isOverlayTutorial;
 
 @property (strong, nonatomic) NSMutableDictionary *profileToHandle;
 
@@ -274,10 +273,12 @@ NSDictionary *socialMediaIconToName;
     [super viewDidLoad];
     self.profileToHandle = nil;
     self.contentOffset = 0;
+    self.isOverlayTutorial = NO;
     
     // navigtion bar stuff
     self.navigationItem.hidesBackButton = NO;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self checkFirstTimeProfile];
     
     if (!self.userId)
     {
@@ -463,6 +464,7 @@ NSDictionary *socialMediaIconToName;
 #pragma mark - setup
 - (void) updateView
 {
+    
     // Get My ripples
     self.selectedRippleArray = self.myRipples;
     if (!self.user)
@@ -563,11 +565,11 @@ NSDictionary *socialMediaIconToName;
         // check if user is following
         if ([PFUser currentUser][@"following"] !=nil && [[PFUser currentUser][@"following"] indexOfObject:self.userId] != NSNotFound)
         {
-            [self.followButton setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
+            [self.followButton setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
         }
         else
         {
-            [self.followButton setImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
+            [self.followButton setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
         }
         
         
@@ -688,20 +690,14 @@ NSDictionary *socialMediaIconToName;
             if ([PFAnonymousUtils isLinkedWithUser:self.currentUser])
             {
                 [self.loginSignupProfileButton setHidden:NO];
-                [self.pointsLabel setHidden:YES];
-
             }
             else
             {
                 // put level number
                 [self.loginSignupProfileButton setHidden:YES];
-                [self.pointsLabel setHidden:NO];
             }
-            
-            
     
             int nextLevelScore;
-            
             if (!self.user)
                 nextLevelScore = nextLevel.minScore - [[PFUser currentUser][@"score"] intValue];
             else
@@ -720,15 +716,19 @@ NSDictionary *socialMediaIconToName;
             [self.view layoutIfNeeded];
             
             // unhide elements
-            [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:YES];
-            [self.followingLabel setHidden:NO];
-            [self.followingNum setHidden:NO];
-            [self.followersLabel setHidden:NO];
-            [self.followersNum setHidden:NO];
-            [self.pointsToNextLevel setHidden:NO];
-            [self.progressBackground setHidden:NO];
-            [self.rippleLevel setHidden:NO];
+            if (!self.isOverlayTutorial)
+            {
+                [self.activityIndicator stopAnimating];
+                [self.activityIndicator setHidden:YES];
+                [self.followingLabel setHidden:NO];
+                [self.followingNum setHidden:NO];
+                [self.followersLabel setHidden:NO];
+                [self.followersNum setHidden:NO];
+                [self.pointsToNextLevel setHidden:NO];
+                [self.progressBackground setHidden:NO];
+                [self.rippleLevel setHidden:NO];
+                [self.pointsLabel setHidden:NO];
+            }
         });
     });
 }
@@ -2109,7 +2109,7 @@ NSDictionary *socialMediaIconToName;
            {
                 // add!
                 [[PFUser currentUser][@"following"] addObject:self.userId];
-                [self.followButton setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
+                [self.followButton setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
                 [BellowService addToFollowingNumber:self.userId];
                 
                 // add to followingNum
@@ -2121,7 +2121,7 @@ NSDictionary *socialMediaIconToName;
         {
             // remove!
             [[PFUser currentUser][@"following"] removeObject:self.userId];
-            [self.followButton setImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
+            [self.followButton setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
             [BellowService removeFromFollowingNumber:self.userId];
             
             // remove from followingNum
@@ -2135,7 +2135,7 @@ NSDictionary *socialMediaIconToName;
         NSMutableArray *following = [[NSMutableArray alloc] initWithObjects:self.userId, nil];
         [PFUser currentUser][@"following"] = following;
         
-        [self.followButton setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
+        [self.followButton setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
         [BellowService addToFollowingNumber:self.userId];
         
         // add to followingNum
@@ -2270,6 +2270,131 @@ NSDictionary *socialMediaIconToName;
     // alert view
     UIAlertView *referralPoints = [[UIAlertView alloc] initWithTitle:@"Invite your friends!" message:[NSString stringWithFormat:@"Earn points when friends sign in using your username as a referral code. Get points when they invite their friends, too."] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Invite", nil];
     [referralPoints show];
+}
+
+#pragma mark-first run
+- (void)checkFirstTimeProfile
+{
+    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+    NSNumber *firstTime;
+    
+    if (self.userId)
+        firstTime = [userData objectForKey:@"firstTimeOtherUserProfile"];
+    else
+        firstTime = [userData objectForKey:@"firstTimeProfile"];
+    int firstTimeCheck = [firstTime intValue];
+    
+    if (firstTimeCheck == 0)
+    {
+        self.isOverlayTutorial = YES;
+        
+        //show overlay
+        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
+        
+        // add textview explaining
+        if (!self.userId)
+        {
+            // add button to overlay
+            UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 70, [UIScreen mainScreen].bounds.size.width - 16, 80)];
+            [topPosts setUserInteractionEnabled:NO];
+            [topPosts setScrollEnabled:NO];
+            [topPosts setTextColor:[UIColor whiteColor]];
+            [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+            [topPosts setText:@"This is your profile.\nView posts you start & spread."];
+            [topPosts setTextAlignment:NSTextAlignmentCenter];
+            [topPosts setBackgroundColor:[UIColor clearColor]];
+            
+            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
+            [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
+            [ok setTitle:@"Got it" forState:UIControlStateNormal];
+            [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+            [ok.layer setCornerRadius:5.0];
+
+            
+            [self.overlay addSubview:topPosts];
+            [self.overlay addSubview:ok];
+            [self.view addSubview:self.overlay];
+            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeProfile"];
+            [userData synchronize];
+        }
+        
+        else
+        {
+            // add button to overlay
+            UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 80, [UIScreen mainScreen].bounds.size.width - 16, 50)];
+            [topPosts setUserInteractionEnabled:NO];
+            [topPosts setScrollEnabled:NO];
+            [topPosts setTextColor:[UIColor whiteColor]];
+            [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+            [topPosts setText:@"User profile page"];
+            [topPosts setTextAlignment:NSTextAlignmentCenter];
+            [topPosts setBackgroundColor:[UIColor clearColor]];
+            
+            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
+            [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
+            [ok setTitle:@"Got it" forState:UIControlStateNormal];
+            [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+            [ok.layer setCornerRadius:5.0];
+
+            
+            UILabel *swipe = [[UILabel alloc] initWithFrame:CGRectMake(8,[UIScreen mainScreen].bounds.size.height - 150, [UIScreen mainScreen].bounds.size.width - 16, 40)];
+            [swipe setUserInteractionEnabled:NO];
+            [swipe setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+            [swipe setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+            [swipe setText:@"You can swipe posts from a user's profile."];
+            [swipe setTextAlignment:NSTextAlignmentCenter];
+            [swipe setBackgroundColor:[UIColor clearColor]];
+            
+            UIImageView *swipeImg= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
+            [swipeImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-20, swipe.frame.origin.y + 40, 40, 40)];
+            
+            UIImageView *followImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
+            [followImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 200, 40, 40)];
+            
+            UILabel *follow = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 250, followImg.frame.origin.y+ 35, [UIScreen mainScreen].bounds.size.width, 40)];
+            [follow setUserInteractionEnabled:NO];
+            [follow setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+            [follow setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+            [follow setText:@"Tap here to follow a user."];
+            [follow setTextAlignment:NSTextAlignmentCenter];
+            [follow setBackgroundColor:[UIColor clearColor]];
+
+
+            [self.overlay addSubview:swipeImg];
+            [self.overlay addSubview:swipe];
+            [self.overlay addSubview:followImg];
+            [self.overlay addSubview:follow];
+            [self.overlay addSubview:topPosts];
+            [self.overlay addSubview:ok];
+            [self.view addSubview:self.overlay];
+            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeOtherUserProfile"];
+            [userData synchronize];
+            
+            [self.activityIndicator stopAnimating];
+            [self.activityIndicator setHidden:YES];
+        }
+    }
+}
+
+- (void)removeFirstRunOverlay
+{
+    [self.overlay removeFromSuperview];
+    
+    //unhide items
+    [self.followingLabel setHidden:NO];
+    [self.followingNum setHidden:NO];
+    [self.followersLabel setHidden:NO];
+    [self.followersNum setHidden:NO];
+    [self.pointsToNextLevel setHidden:NO];
+    [self.progressBackground setHidden:NO];
+    [self.rippleLevel setHidden:NO];
+    [self.pointsLabel setHidden:NO];
+    [self.progressBar setHidden:NO];
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator setHidden:YES];
 }
 
 @end

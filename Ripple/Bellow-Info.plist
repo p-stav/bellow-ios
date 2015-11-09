@@ -89,11 +89,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We will never share your exact location.</string>
+	<string>We randomize your location within a 2-mile radius. We never share your exact location.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>We will never share your exact location.</string>
+	<string>We randomize your location within a 2-mile radius. We never share your exact location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We will never share your exact location.</string>
+	<string>We randomize your location within a 2-mile radius. We never share your exact location.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>

@@ -523,26 +523,34 @@ NSDictionary *socialMediaIconToName;
             else
                 [self.reachValue setTitle:@"7" forState:UIControlStateNormal];
             
-            self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 300);
-            [self.tableView setTableHeaderView:self.tableHeader];
-            
             // points
             BellowLevel *nextLevel = [self findLevel:1];
     
             int nextLevelScore;
             nextLevelScore = nextLevel.minScore - [[PFUser currentUser][@"score"] intValue];
-
+            NSString *pointsString;
             if (nextLevelScore == 1)
-                [self.pointsToNextLevel setTitle:[NSString stringWithFormat:@"%d point to have %d reach", nextLevelScore, nextLevel.reach] forState:UIControlStateNormal];
+            {
+                pointsString = [NSString stringWithFormat:@"%d point to have %d reach", nextLevelScore, nextLevel.reach] ;
+                [self.pointsToNextLevel setTitle:pointsString forState:UIControlStateNormal];
+            }
             else
-                [self.pointsToNextLevel setTitle:[NSString stringWithFormat:@"%d points to have %d reach", nextLevelScore, nextLevel.reach] forState:UIControlStateNormal];
+            {
+                pointsString = [NSString stringWithFormat:@"%d points to have %d reach", nextLevelScore, nextLevel.reach];
+                [self.pointsToNextLevel setTitle:pointsString forState:UIControlStateNormal];
+            }
             
             // pointstonextlevel label work
             UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:13.0];
             NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
-            CGSize stringSize = [self.pointsToNextLevel.titleLabel.text sizeWithAttributes:attributesDictionary];
-            self.progressBarLabelWidthConstraint.constant = stringSize.width + 3;
+            CGSize stringSize = [pointsString sizeWithAttributes:attributesDictionary];
+            self.progressBarLabelWidthConstraint.constant = stringSize.width;
             
+            // style edit buttons
+            [self.editAbout.layer setCornerRadius:5.0];
+            [self.editInterests.layer setCornerRadius:5.0];
+            [self.editImage.layer setCornerRadius:5.0];
+
             // image
             [self.profileImage.layer setCornerRadius:self.profileImage.frame.size.height/2];
             [self.profileImage setBackgroundColor:[UIColor clearColor]];
@@ -558,11 +566,45 @@ NSDictionary *socialMediaIconToName;
                 // set image
             }
             
-            // style edit buttons
-            [self.editAbout.layer setCornerRadius:5.0];
-            [self.editInterests.layer setCornerRadius:5.0];
-            [self.editImage.layer setCornerRadius:5.0];
+            // set about and interests text and height
+            if ([PFUser currentUser][@"aboutMe"] == nil || [[PFUser currentUser][@"aboutMe"] length] == 0)
+            {
+                [self.aboutText setText:@"Add a description about yourself"];
+                [self.aboutText setTextColor:[UIColor grayColor]];
+            }
+            else
+            {
+                [self.aboutText setTextColor:[UIColor grayColor]];
+                [self.aboutText setText:[PFUser currentUser][@"aboutMe"]];
+            }
             
+            
+            if ([PFUser currentUser][@"interests"] == nil || [[PFUser currentUser][@"interests"] length] == 0)
+            {
+                [self.interestText setText:@"Share your interests"];
+                [self.interestText setTextColor:[UIColor grayColor]];
+            }
+            else
+            {
+                [self.interestText setTextColor:[UIColor grayColor]];
+                [self.interestText setText:[PFUser currentUser][@"interests"]];
+            }
+            [self.aboutText setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
+            [self.interestText setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
+            
+            CGFloat additionalHeaderHeight = 0;
+            CGSize maximumSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 16.0, 9999);
+            NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+            CGRect aboutSize =  [self.aboutText.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
+            self.aboutHeightConstraint.constant = aboutSize.size.height + 30;
+            
+            CGRect interestSize =  [self.interestText.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
+            self.interstsHeightConstraint.constant = interestSize.size.height + 30;
+            
+            // size the table header
+            additionalHeaderHeight =self.interstsHeightConstraint.constant + self.aboutHeightConstraint.constant;
+            self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 210 + additionalHeaderHeight);
+            [self.tableView setTableHeaderView:self.tableHeader];
             [self.view setNeedsUpdateConstraints];
             [self.view layoutIfNeeded];
             
@@ -1154,6 +1196,9 @@ NSDictionary *socialMediaIconToName;
             });
         }
     }
+    
+    // call service and update table
+    [self.refreshControl endRefreshing];
 }
 
 
@@ -1428,10 +1473,24 @@ NSDictionary *socialMediaIconToName;
 #pragma mark-collectionView action items
 - (IBAction)didPressEditAbout:(id)sender {
     // alertview
+    UIAlertView *about = [[UIAlertView alloc] initWithTitle:@"Edit About Me" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+    about.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    if (self.aboutText.text != nil && ![self.aboutText.text isEqualToString:@"Add a description about yourself"])
+        [[about textFieldAtIndex:0] setText:self.aboutText.text];
+    [about show];
+    
 }
 
 - (IBAction)didPresssEditInterests:(id)sender {
-    //alertview
+    // alertview
+    UIAlertView *about = [[UIAlertView alloc] initWithTitle:@"Edit Interests" message:@"What makes you tick?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+    about.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    if (self.interestText.text != nil && ![self.interestText.text isEqualToString:@"Share your interests"])
+        [[about textFieldAtIndex:0] setText:self.interestText.text];
+    [about show];
+
 }
 
 - (IBAction)didPressEditImage:(id)sender {
@@ -1465,6 +1524,38 @@ NSDictionary *socialMediaIconToName;
         {
             UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:nil];
             [self presentViewController:shareController animated:YES completion:nil];
+        }
+    }
+    
+    if ([alertView.title isEqualToString:@"Edit About Me"])
+    {
+        if (buttonIndex == 1)
+        {
+            // error check
+            NSString *aboutText = [[alertView textFieldAtIndex:0] text];
+            
+            // save description
+            [[PFUser currentUser] setObject:aboutText forKey:@"aboutMe"];
+            [[PFUser currentUser] saveEventually];
+            
+            // set text
+            [self setupHeaderView];
+        }
+    }
+    
+    if ([alertView.title isEqualToString:@"Edit Interests"])
+    {
+        if (buttonIndex == 1)
+        {
+            // error check
+            NSString *interestText = [[alertView textFieldAtIndex:0] text];
+            
+            // save description
+            [[PFUser currentUser] setObject:interestText forKey:@"interests"];
+            [[PFUser currentUser] saveEventually];
+            
+            // set text
+            [self setupHeaderView];
         }
     }
 

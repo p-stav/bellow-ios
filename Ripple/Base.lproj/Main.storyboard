@@ -2771,11 +2771,11 @@ If you have any questions regarding privacy while using the Application, or have
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JyA-pq-6sM">
-                                            <rect key="frame" x="9" y="94" width="210" height="22"/>
+                                            <rect key="frame" x="9" y="94" width="20" height="22"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="UmW-VV-RZX"/>
-                                                <constraint firstAttribute="width" constant="210" id="jPT-sJ-V1M"/>
+                                                <constraint firstAttribute="width" constant="20" id="jPT-sJ-V1M"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                             <state key="normal" title="42pts to get 42 reach">
@@ -2790,7 +2790,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <animations/>
                                         </activityIndicatorView>
                                         <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-cM-Z8A">
-                                            <rect key="frame" x="3" y="251" width="314" height="50"/>
+                                            <rect key="frame" x="3" y="218" width="314" height="50"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="myQ-cA-lyt"/>
@@ -2902,7 +2902,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNz-KP-Ng7">
-                                            <rect key="frame" x="224" y="94" width="20" height="20"/>
+                                            <rect key="frame" x="34" y="94" width="20" height="20"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="Evx-VN-LqI"/>
@@ -2927,7 +2927,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIZ-Wf-CYc">
-                                            <rect key="frame" x="83" y="194" width="53" height="20"/>
+                                            <rect key="frame" x="83" y="177" width="53" height="20"/>
                                             <animations/>
                                             <color key="backgroundColor" red="1" green="0.69179224439999998" blue="0.040244564019999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -2943,7 +2943,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             </connections>
                                         </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-I3-3zB">
-                                            <rect key="frame" x="3" y="208" width="314" height="32"/>
+                                            <rect key="frame" x="3" y="191" width="314" height="32"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="xw5-yg-3kJ"/>
@@ -2952,7 +2952,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vef-9B-uVl">
-                                            <rect key="frame" x="8" y="194" width="67" height="24"/>
+                                            <rect key="frame" x="8" y="177" width="67" height="24"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="67" id="K0y-Yp-VMy"/>
@@ -2989,8 +2989,8 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstItem="uIZ-Wf-CYc" firstAttribute="top" secondItem="vef-9B-uVl" secondAttribute="top" id="FXH-6M-ZP1"/>
                                         <constraint firstAttribute="trailing" secondItem="Dzq-I3-3zB" secondAttribute="trailing" constant="3" id="Igk-S1-Fqp"/>
                                         <constraint firstItem="sZF-7h-5eX" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="Jeq-4l-ycJ"/>
-                                        <constraint firstItem="Fbi-cM-Z8A" firstAttribute="top" secondItem="Dzq-I3-3zB" secondAttribute="bottom" constant="11" id="NHK-Kr-RQ8"/>
-                                        <constraint firstItem="vef-9B-uVl" firstAttribute="top" secondItem="DcQ-Tt-IER" secondAttribute="bottom" constant="12" id="NdR-jV-Nzj"/>
+                                        <constraint firstItem="Fbi-cM-Z8A" firstAttribute="top" secondItem="Dzq-I3-3zB" secondAttribute="bottom" constant="-5" id="NHK-Kr-RQ8"/>
+                                        <constraint firstItem="vef-9B-uVl" firstAttribute="top" secondItem="DcQ-Tt-IER" secondAttribute="bottom" constant="-5" id="NdR-jV-Nzj"/>
                                         <constraint firstItem="xIQ-L3-9S1" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="22" id="Ogq-aq-bna"/>
                                         <constraint firstItem="lLq-Pg-9LT" firstAttribute="centerX" secondItem="g8Z-SB-5v2" secondAttribute="centerX" id="Qp6-BP-0iT"/>
                                         <constraint firstItem="sZF-7h-5eX" firstAttribute="top" secondItem="aAS-do-INq" secondAttribute="bottom" constant="16" id="Qsi-u8-kdR"/>

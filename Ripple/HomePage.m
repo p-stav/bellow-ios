@@ -1123,6 +1123,9 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
             
+            [propagateCell.dismissButton setAlpha:0.2];
+            [propagateCell.spreadButton setAlpha:0.2];
+            
             // add animation for tap
             UIImageView *tap = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
             [tap setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2- 35, 45, 50, 50)];
@@ -1132,7 +1135,7 @@ int PARSE_PAGE_SIZE = 25;
             [UIView animateKeyframesWithDuration:0.8 delay:0.3 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
                 [tap setAlpha:1.0];
             } completion:^(BOOL finished){
-                //noop
+                [tap removeFromSuperview];
             }];
         }
         

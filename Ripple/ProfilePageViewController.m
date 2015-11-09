@@ -21,6 +21,7 @@
 #import "WebViewViewController.h"
 #import "ShareRippleSheet.h"
 #import "AGPushNoteView.h"
+#import "PointsViewController.h"
 
 @interface ProfilePageViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -218,6 +219,12 @@ NSDictionary *socialMediaIconToName;
                     mv.commentsUp = YES;
             }
         }
+    }
+    
+    if ([segue.identifier isEqualToString:@"SegueToPointsFromProfile"])
+    {
+        PointsViewController *pvc = (PointsViewController*)segue.destinationViewController;
+        pvc.points = [[PFUser currentUser][@"score"] integerValue];
     }
     
     

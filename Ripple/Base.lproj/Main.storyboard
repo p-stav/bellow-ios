@@ -1023,10 +1023,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <searchBar userInteractionEnabled="NO" contentMode="redraw" fixedFrame="YES" placeholder="search for a user..." translatesAutoresizingMaskIntoConstraints="NO" id="iWE-Cg-Yc7">
+                                                <searchBar contentMode="redraw" fixedFrame="YES" placeholder="search for a user..." translatesAutoresizingMaskIntoConstraints="NO" id="iWE-Cg-Yc7">
                                                     <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
                                                     <animations/>
-                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <scopeButtonTitles>
                                                         <string>Title</string>
@@ -3308,15 +3308,15 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="userNotification.png" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xGn-U9-Idz"/>
-        <segue reference="9de-MY-sDe"/>
-        <segue reference="zDq-cr-Pt1"/>
         <segue reference="XEv-Jf-jLC"/>
-        <segue reference="ddR-cu-Xrf"/>
-        <segue reference="AcY-H4-hdD"/>
+        <segue reference="19E-hf-Zw3"/>
+        <segue reference="d1h-wJ-aQE"/>
+        <segue reference="9de-MY-sDe"/>
+        <segue reference="xGn-U9-Idz"/>
+        <segue reference="zDq-cr-Pt1"/>
         <segue reference="wlf-Iq-ZyU"/>
         <segue reference="A5N-Q5-ixn"/>
-        <segue reference="kdj-jQ-aNK"/>
-        <segue reference="19E-hf-Zw3"/>
+        <segue reference="AcY-H4-hdD"/>
+        <segue reference="ddR-cu-Xrf"/>
     </inferredMetricsTieBreakers>
 </document>

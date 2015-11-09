@@ -25,7 +25,7 @@
     if (self.isFollowing)
     {
         self.isFollowing = NO;
-        [self.followerImage setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
+        [self.followerImage setImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
         [[PFUser currentUser][@"following"] removeObject:self.objectId];
         [BellowService removeFromFollowingNumber:self.objectId];
         
@@ -33,7 +33,7 @@
     else
     {
         self.isFollowing = YES;
-        [self.followerImage setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
+        [self.followerImage setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
         if ([PFUser currentUser][@"following"] != nil)
             [[PFUser currentUser][@"following"] addObject:self.objectId];
         else

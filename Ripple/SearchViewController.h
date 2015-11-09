@@ -12,4 +12,6 @@
 
 @interface SearchViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, UserSearchDelegate, UIAlertViewDelegate, UIScrollViewDelegate>
 
+@property (strong, nonatomic) NSString *searchString;
+
 @end

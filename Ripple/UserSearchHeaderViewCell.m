@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.userSearchView setBackgroundColor:[UIColor colorWithRed:0 green:123.0f/255.0 blue:255.0 alpha:1.0]];
+    self.userSearchView.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,9 +24,19 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self.delegate goToSearchView];
+
 }
 
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    // segue to searchview
+    [self.delegate goToSearchView:searchBar.text];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    
+}
 
 
 @end

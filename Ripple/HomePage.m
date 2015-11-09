@@ -1075,7 +1075,7 @@ int PARSE_PAGE_SIZE = 25;
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
-                    propagateCell.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                    //propagateCell.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                     
                     // make spread button animate
                     [propagateCell.spreadButton setAlpha:1.0];
@@ -1085,7 +1085,7 @@ int PARSE_PAGE_SIZE = 25;
                     
                 } completion:^(BOOL finished) {
                     [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
-                        propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                        //propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                         
                         // arrow view
                         arrow.frame = CGRectMake(8, arrow.frame.origin.y, arrow.frame.size.width, arrow.frame.size.height);
@@ -1125,14 +1125,14 @@ int PARSE_PAGE_SIZE = 25;
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
-                    propagateCell.frame = CGRectMake(-1* [UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                    //propagateCell.frame = CGRectMake(-1* [UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                     [propagateCell.dismissButton setAlpha:1.0];
                     
                     [arrow setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - [UIScreen mainScreen].bounds.size.width/4, 50, 40, 40)];
                     
                 } completion:^(BOOL finished) {
                     [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
-                        propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+                       // propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
                         [arrow setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 48, 50, 40, 40)];
                     } completion:^(BOOL finished) {
                         [propagateCell.dismissButton setAlpha:0.2];
@@ -1458,10 +1458,11 @@ int PARSE_PAGE_SIZE = 25;
     }
 }
 
-- (void)goToSearchView
+- (void)goToSearchView:(NSString*)searchString
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     SearchViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchView"];
+    svc.searchString = searchString;
     
     self.navigationItem.title = @"";
     self.navigationItem.hidesBackButton = YES;
@@ -2045,7 +2046,7 @@ int PARSE_PAGE_SIZE = 25;
     self.selectedRippleArray = [NSMutableArray arrayWithObjects:bellowSpread,bellowDismiss, bellowTap, nil];
     [self.tableView reloadData];
     
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(animateCells) userInfo:nil repeats:YES];
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(animateCells) userInfo:nil repeats:YES];
 }
 
 - (void)endTutorial

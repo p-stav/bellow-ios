@@ -139,7 +139,7 @@
                                         <rect key="frame" x="111" y="-7" width="98" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEu-J3-XmK">
-                                                <rect key="frame" x="50" y="0.0" width="53" height="53"/>
+                                                <rect key="frame" x="50" y="-3" width="53" height="53"/>
                                                 <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="53" id="Sly-AS-YeO"/>
@@ -184,7 +184,7 @@
                                         <constraints>
                                             <constraint firstItem="NbL-35-Sir" firstAttribute="leading" secondItem="Le5-DT-oRU" secondAttribute="leading" constant="-3" id="10z-jT-Wp5"/>
                                             <constraint firstItem="8Me-KM-DOx" firstAttribute="top" secondItem="Le5-DT-oRU" secondAttribute="top" constant="9" id="4pg-z1-AUo"/>
-                                            <constraint firstItem="jEu-J3-XmK" firstAttribute="top" secondItem="Le5-DT-oRU" secondAttribute="top" id="5rr-li-WMh"/>
+                                            <constraint firstItem="jEu-J3-XmK" firstAttribute="top" secondItem="Le5-DT-oRU" secondAttribute="top" constant="-3" id="5rr-li-WMh"/>
                                             <constraint firstItem="NbL-35-Sir" firstAttribute="top" secondItem="Le5-DT-oRU" secondAttribute="top" id="7Us-D0-6RB"/>
                                             <constraint firstItem="8Me-KM-DOx" firstAttribute="centerX" secondItem="Le5-DT-oRU" secondAttribute="centerX" id="GMo-RI-UQx"/>
                                             <constraint firstAttribute="width" constant="98" id="I9Y-tZ-LTN"/>

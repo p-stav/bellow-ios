@@ -100,6 +100,11 @@
     
     // add observer
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatefollowingNotification:) name:@"updateFollowing" object:nil];
+    
+    // if we searched from previous view
+    if (self.searchString)
+        [self performSearch:self.searchString];
+        
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -183,10 +188,16 @@
     [self.view removeGestureRecognizer:self.whileEditing];
     
     // find results from cloud service
+    [self performSearch:searchBar.text];
+}
+
+- (void)performSearch:(NSString *)search
+{
+    // find results from cloud service
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.searchResults = [BellowService getSearchResults:searchBar.text];
+        self.searchResults = [BellowService getSearchResults:search];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
@@ -209,6 +220,7 @@
             [self.tableView reloadData];
         });
     });
+
 }
 
 - (void)touchEventOnView: (id) sender
@@ -243,7 +255,15 @@
     
     // text
     if ([self.searchResults count] != 0)
-        myLabel.text = [NSString stringWithFormat:@"search results for \"%@\"",self.searchField.text];
+    {
+        if (self.searchString)
+        {
+            myLabel.text = [NSString stringWithFormat:@"search results for \"%@\"",self.searchString];
+            self.searchString = nil;
+        }
+        else
+            myLabel.text = [NSString stringWithFormat:@"search results for \"%@\"",self.searchField.text];
+    }
     else
         myLabel.text = @"No search results";
         
@@ -279,9 +299,9 @@
     cell.level.text = user[@"level"];
     
     if ((BOOL) cell.isFollowing == YES)
-        [cell.followerImage setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
+        [cell.followerImage setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
     else
-        [cell.followerImage setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
+        [cell.followerImage setImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
     
     return cell;
 }

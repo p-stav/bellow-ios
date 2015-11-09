@@ -9,7 +9,7 @@
 
 @protocol UserSearchHeaderDelegate <NSObject>
 
-- (void)goToSearchView;
+- (void)goToSearchView: (NSString *)searchString;
 
 
 @end

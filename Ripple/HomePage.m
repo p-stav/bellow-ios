@@ -1069,31 +1069,14 @@ int PARSE_PAGE_SIZE = 25;
             UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
             [arrow setFrame:CGRectMake(8, 50, 40, 40)];
             [propagateCell addSubview:arrow];
-            
-            [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
-                propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
-                
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
-                    //propagateCell.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
-                    
-                    // make spread button animate
-                    [propagateCell.spreadButton setAlpha:1.0];
-                    
-                    // arrow view
-                    arrow.frame = CGRectMake(arrow.frame.origin.x + [UIScreen mainScreen].bounds.size.width/4, arrow.frame.origin.y, arrow.frame.size.width, arrow.frame.size.height);
-                    
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
-                        //propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
-                        
-                        // arrow view
-                        arrow.frame = CGRectMake(8, arrow.frame.origin.y, arrow.frame.size.width, arrow.frame.size.height);
-                    } completion:^(BOOL finished) {
-                        [propagateCell.spreadButton setAlpha:0.2];
-                        [arrow removeFromSuperview];
-                    }];
-                }];
+            [UIView animateKeyframesWithDuration:0.8 delay:0.3 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
+                arrow.frame = CGRectMake(arrow.frame.origin.x + [UIScreen mainScreen].bounds.size.width/4, arrow.frame.origin.y, arrow.frame.size.width, arrow.frame.size.height);
+                // make spread button animate
+                [propagateCell.spreadButton setAlpha:1.0];
+
+            } completion:^(BOOL finished){
+                [propagateCell.spreadButton setAlpha:0.2];
+                [arrow removeFromSuperview];
             }];
         }
         
@@ -1119,26 +1102,14 @@ int PARSE_PAGE_SIZE = 25;
             arrow.transform = CGAffineTransformMakeRotation(M_PI);
             
             [propagateCell addSubview:arrow];
-            
-            [UIView animateWithDuration:0.0 delay:0.3 options:0  animations:^{
-                propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
+            [UIView animateKeyframesWithDuration:0.8 delay:0.3 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
+                arrow.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - [UIScreen mainScreen].bounds.size.width/4, 50, 40, 40);
+                // make spread button animate
+                [propagateCell.dismissButton setAlpha:1.0];
                 
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
-                    //propagateCell.frame = CGRectMake(-1* [UIScreen mainScreen].bounds.size.width/4, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
-                    [propagateCell.dismissButton setAlpha:1.0];
-                    
-                    [arrow setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - [UIScreen mainScreen].bounds.size.width/4, 50, 40, 40)];
-                    
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.3 delay:0.5 options:0 animations:^{
-                       // propagateCell.frame = CGRectMake(0, propagateCell.frame.origin.y, propagateCell.frame.size.width, propagateCell.frame.size.height);
-                        [arrow setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 48, 50, 40, 40)];
-                    } completion:^(BOOL finished) {
-                        [propagateCell.dismissButton setAlpha:0.2];
-                        [arrow removeFromSuperview];
-                    }];
-                }];
+            } completion:^(BOOL finished){
+                [propagateCell.dismissButton setAlpha:0.2];
+                [arrow removeFromSuperview];
             }];
         }
         
@@ -1158,14 +1129,10 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell addSubview:tap];
             [tap setAlpha:0.0];
             
-            [UIView animateWithDuration:0.5 delay:1.0 options:0  animations:^{
+            [UIView animateKeyframesWithDuration:0.8 delay:0.3 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
                 [tap setAlpha:1.0];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
-                    [tap setAlpha:0.0];
-                } completion:^(BOOL finished) {
-                    // noop
-                }];
+            } completion:^(BOOL finished){
+                //noop
             }];
         }
         
@@ -1217,12 +1184,6 @@ int PARSE_PAGE_SIZE = 25;
             });
         }
     }
-}
-
-
-- (void)animateCells
-{
-    [self.tableView reloadData];
 }
 
 
@@ -1278,6 +1239,12 @@ int PARSE_PAGE_SIZE = 25;
     NSUInteger index = [self.selectedRippleArray indexOfObject:ripple];
     if (index != NSNotFound)
     {
+        [CATransaction begin];
+        [CATransaction setCompletionBlock:^{
+            if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"])
+                [self.tableView reloadData];
+        }];
+        
         [self.tableView beginUpdates];
         [self.selectedRippleArray removeObject:ripple];
         PendingRippleCell *cell = (PendingRippleCell *)[self.tableView cellForRowAtIndexPath:0];
@@ -1286,12 +1253,13 @@ int PARSE_PAGE_SIZE = 25;
         [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                               withRowAnimation:UITableViewRowAnimationLeft];
         [self.tableView endUpdates];
+        [CATransaction commit];
         [self checkRemainingRipples];
+
     }
     
     if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"])
     {
-        [self.tableView reloadData];
         [self incrementScore];
         
         // present title label with tutorial
@@ -1359,11 +1327,18 @@ int PARSE_PAGE_SIZE = 25;
     NSUInteger index = [self.selectedRippleArray indexOfObject:ripple];
     if (index != NSNotFound)
     {
+        [CATransaction begin];
+        [CATransaction setCompletionBlock:^{
+            if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"])
+                [self.tableView reloadData];
+        }];
+        
         [self.tableView beginUpdates];
         [self.selectedRippleArray removeObject:ripple];
         [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                               withRowAnimation:UITableViewRowAnimationRight];
         [self.tableView endUpdates];
+        [CATransaction commit];
         [self checkRemainingRipples];
     }
     
@@ -1371,7 +1346,6 @@ int PARSE_PAGE_SIZE = 25;
     
     if ([ripple.rippleId isEqualToString:@"FakeRippleSpread"] || [ripple.rippleId isEqualToString:@"FakeRippleDismiss"] || [ripple.rippleId isEqualToString:@"FakeRippleTap"])
     {
-        [self.tableView reloadData];
         [self incrementScore];
         
         // change title label
@@ -2000,11 +1974,11 @@ int PARSE_PAGE_SIZE = 25;
     // create ripple!
     Bellow *bellowSpread = [[Bellow alloc] init];
     bellowSpread.rippleId = @"FakeRippleSpread";
-    bellowSpread.text = @"\nSwipe right to spread posts to more people!\n\n";
+    bellowSpread.text = @"\nSwipe right to spread posts.\n\n";
     bellowSpread.imageFile = nil;
     bellowSpread.imageHeight = 0;
     bellowSpread.imageWidth = 0;
-    bellowSpread.creatorName = @"Bellow Tutorial";
+    bellowSpread.creatorName = @"";
     bellowSpread.miniRippleId = @"FakeMiniRipple";
     bellowSpread.commentArray = [@[] mutableCopy];
     bellowSpread.commentIds = [@[] mutableCopy];
@@ -2015,11 +1989,11 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
-    bellowDismiss.text = @"\nSwipe left to dismiss posts. They will not be shared with others.\n\n";
+    bellowDismiss.text = @"\nSwipe left to dismiss posts.\n\n";
     bellowDismiss.imageFile = nil;
     bellowDismiss.imageHeight = 0;
     bellowDismiss.imageWidth = 0;
-    bellowDismiss.creatorName = @"Bellow Tutorial";
+    bellowDismiss.creatorName = @"";
     bellowDismiss.miniRippleId = @"FakeMiniRipple";
     bellowDismiss.commentArray = [@[] mutableCopy];
     bellowDismiss.commentIds = [@[] mutableCopy];
@@ -2034,7 +2008,7 @@ int PARSE_PAGE_SIZE = 25;
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
-    bellowTap.creatorName = @"Bellow Tutorial";
+    bellowTap.creatorName = @"";
     bellowTap.miniRippleId = @"FakeMiniRipple";
     bellowTap.commentArray = [@[] mutableCopy];
     bellowTap.commentIds = [@[] mutableCopy];
@@ -2045,8 +2019,6 @@ int PARSE_PAGE_SIZE = 25;
     
     self.selectedRippleArray = [NSMutableArray arrayWithObjects:bellowSpread,bellowDismiss, bellowTap, nil];
     [self.tableView reloadData];
-    
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(animateCells) userInfo:nil repeats:YES];
 }
 
 - (void)endTutorial

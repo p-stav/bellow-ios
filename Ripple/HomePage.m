@@ -23,6 +23,7 @@
 #import "ImageViewerViewController.h"
 #import "WebViewViewController.h"
 #import "ProfilePageViewController.h"
+#import "OtherUserProfileViewController.h"
 #import "Flurry.h"
 #import "TabBarController.h"
 #import "NotificationsPage.h"
@@ -220,8 +221,8 @@ int PARSE_PAGE_SIZE = 25;
             [self.navigationController setNavigationBarHidden:NO];
             Bellow *ripple = sender;
             NSString *string = (NSString*) ripple.creatorId;
-            ProfilePageViewController *ppvc = (ProfilePageViewController *)segue.destinationViewController;
-            ppvc.userId = string;
+            OtherUserProfileViewController *ouvc = (OtherUserProfileViewController *)segue.destinationViewController;
+            ouvc.userId = string;
         }
     }
 }
@@ -283,8 +284,6 @@ int PARSE_PAGE_SIZE = 25;
             [locationManager startUpdatingLocation];
         }
 
-        
-        
         self.isActive = YES;
         // check to see user is inactive
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -810,9 +809,7 @@ int PARSE_PAGE_SIZE = 25;
     UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Medium" size:18.0];
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
     NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-    
     CGSize stringSize = [cell.currentRipple.creatorName sizeWithAttributes:attributesDictionary];
-    
     cell.userLabelWidthConstraint.constant = stringSize.width + 3; //[UIScreen mainScreen].bounds.size.width;
     
     // set city and time
@@ -2000,11 +1997,11 @@ int PARSE_PAGE_SIZE = 25;
     // create ripple!
     Bellow *bellowSpread = [[Bellow alloc] init];
     bellowSpread.rippleId = @"FakeRippleSpread";
-    bellowSpread.text = @"\nSwipe right to spread posts to more people!\n\n";
+    bellowSpread.text = @"\nSwipe right to spread posts\n\n";
     bellowSpread.imageFile = nil;
     bellowSpread.imageHeight = 0;
     bellowSpread.imageWidth = 0;
-    bellowSpread.creatorName = @"Bellow Tutorial";
+    bellowSpread.creatorName = @"";
     bellowSpread.miniRippleId = @"FakeMiniRipple";
     bellowSpread.commentArray = [@[] mutableCopy];
     bellowSpread.commentIds = [@[] mutableCopy];
@@ -2015,11 +2012,11 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
-    bellowDismiss.text = @"\nSwipe left to dismiss posts. They will not be shared with others.\n\n";
+    bellowDismiss.text = @"\nSwipe left to dismiss posts\n\n";
     bellowDismiss.imageFile = nil;
     bellowDismiss.imageHeight = 0;
     bellowDismiss.imageWidth = 0;
-    bellowDismiss.creatorName = @"Bellow Tutorial";
+    bellowDismiss.creatorName = @"";
     bellowDismiss.miniRippleId = @"FakeMiniRipple";
     bellowDismiss.commentArray = [@[] mutableCopy];
     bellowDismiss.commentIds = [@[] mutableCopy];
@@ -2034,7 +2031,7 @@ int PARSE_PAGE_SIZE = 25;
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
-    bellowTap.creatorName = @"Bellow Tutorial";
+    bellowTap.creatorName = @"";
     bellowTap.miniRippleId = @"FakeMiniRipple";
     bellowTap.commentArray = [@[] mutableCopy];
     bellowTap.commentIds = [@[] mutableCopy];

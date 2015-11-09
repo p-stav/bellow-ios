@@ -1,26 +1,29 @@
 //
-//  ProfilePageTableViewController.h
+//  OtherUserProfileViewController.h
 //  Bellow
 //
-//  Created by Paul Stavropoulos on 4/21/15.
-//  Copyright (c) 2015 Kefi Labs. All rights reserved.
+//  Created by Paul Stavropoulos on 11/8/15.
+//  Copyright © 2015 Kefi Labs. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
-#import "MyRippleCellDelegate.h"
 #import "HeaderTableViewCellDelegate.h"
 #import <ParseUI/ParseUI.h>
 #import "SocialMediaCollectionView.h"
+#import "SwipeableCell.h"
+#import "OtherUserProfileViewController.h"
 
 
-@interface ProfilePageViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, ActedRippleCellDelegate, HeaderCellDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate>
+@interface OtherUserProfileViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, HeaderCellDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate, SwipeableRippleCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *myRipples;
 @property (strong, nonatomic) NSMutableArray *myRipplesMostPopular;
 @property (strong, nonatomic) NSMutableArray *propagatedRipples;
 @property (strong, nonatomic) NSMutableArray *propagatedRipplesMostPopular;
 
+@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) PFUser *currentUser;
 @property (strong, nonatomic) NSArray *userLevels;
 
@@ -30,9 +33,6 @@
 @property (nonatomic) BOOL isAllPropagatedRipplesMostPopular;
 
 @property (nonatomic) BOOL goToProfileFromPush;
-
-
-- (void)rippleDeleted:(Bellow *)ripple;
 
 
 @end

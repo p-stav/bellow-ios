@@ -189,9 +189,6 @@
              self.sortImages[i] = sortImageView;
              */
             
-            // style sort button
-            [self.sortButton setTitle:button.titleLabel.text forState:UIControlStateNormal];
-            
         }
         
         else

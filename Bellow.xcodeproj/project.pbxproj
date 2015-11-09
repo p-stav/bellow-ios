@@ -55,7 +55,6 @@
 		0DFB083F19C17FC700A57630 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB083D19C17FC700A57630 /* InfoPlist.strings */; };
 		0DFB084119C17FC700A57630 /* BellowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB084019C17FC700A57630 /* BellowTests.m */; };
 		AE1456131B37215200FDE9C5 /* RippleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1456121B37215200FDE9C5 /* RippleTextView.m */; };
-		AE2A68891B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */; };
 		DA0690391A8B323C006AFBD0 /* triangle-for-filter-39.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0690381A8B323C006AFBD0 /* triangle-for-filter-39.png */; };
 		DA06E70D1A66684A0015F7B3 /* commentsBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06E70C1A66684A0015F7B3 /* commentsBlue.png */; };
 		DA09A7701BEAE681002BDC46 /* UserSearchHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA09A76F1BEAE681002BDC46 /* UserSearchHeaderViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -117,7 +116,6 @@
 		DA80EBC61B1143B200ADFBFB /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA80EBC51B1143B200ADFBFB /* ExploreViewController.m */; };
 		DA80EBC81B1143F800ADFBFB /* PendingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA80EBC71B1143F800ADFBFB /* PendingCell.xib */; };
 		DA86854C1BE8557D0056ADD8 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA86854B1BE8557D0056ADD8 /* NotificationTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		DA86854F1BE855950056ADD8 /* SocialMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA86854E1BE855950056ADD8 /* SocialMediaTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		DA89E3B81A74AD2A002F3D68 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA89E3B71A74AD29002F3D68 /* WebViewViewController.m */; };
 		DA89E3BC1A771DD0002F3D68 /* redCompose.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89E3BB1A771DD0002F3D68 /* redCompose.png */; };
 		DA8CA5061BD073AE00D8F25E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8CA5041BD073AE00D8F25E /* Fabric.framework */; settings = {ASSET_TAGS = (); }; };
@@ -144,6 +142,11 @@
 		DABFCC691A1A7278000A5BD3 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = DABFCC681A1A7278000A5BD3 /* line.png */; };
 		DAC1E4FA1A4FC06F008960F9 /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC1E4F91A4FC06F008960F9 /* cameraIcon.png */; };
 		DAC1E4FD1A50AD91008960F9 /* ImageViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC1E4FC1A50AD90008960F9 /* ImageViewerViewController.m */; };
+		DAC9F6A31BF049020025D6C4 /* OtherUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC9F6A21BF049010025D6C4 /* OtherUserProfileViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DAC9F6A51BF079730025D6C4 /* userSilhouette.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC9F6A41BF079730025D6C4 /* userSilhouette.png */; settings = {ASSET_TAGS = (); }; };
+		DAC9F6A71BF097BA0025D6C4 /* questionMark.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC9F6A61BF097BA0025D6C4 /* questionMark.png */; settings = {ASSET_TAGS = (); }; };
+		DAC9F6AD1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC9F6AC1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		DAC9F6B01BF12EDB0025D6C4 /* SocialMediaCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC9F6AF1BF12EDB0025D6C4 /* SocialMediaCollectionView.m */; settings = {ASSET_TAGS = (); }; };
 		DAD00FDE1B8D4B6600725666 /* InstagramAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD00FDD1B8D4B6600725666 /* InstagramAdd.png */; };
 		DADB74FC1BC1A97000749DAA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADB74FB1BC1A96D00749DAA /* SearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DADB74FF1BC1DD2D00749DAA /* TrendingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DADB74FE1BC1DD2C00749DAA /* TrendingCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -247,8 +250,6 @@
 		0DFB083E19C17FC700A57630 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0DFB084019C17FC700A57630 /* BellowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BellowTests.m; sourceTree = "<group>"; };
 		AE1456121B37215200FDE9C5 /* RippleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleTextView.m; sourceTree = "<group>"; };
-		AE2A68871B3F677E00B0C1F6 /* SocialMediaCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaCollectionViewController.h; sourceTree = "<group>"; };
-		AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaCollectionViewController.m; sourceTree = "<group>"; };
 		DA0690381A8B323C006AFBD0 /* triangle-for-filter-39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "triangle-for-filter-39.png"; sourceTree = "<group>"; };
 		DA06E70C1A66684A0015F7B3 /* commentsBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentsBlue.png; sourceTree = "<group>"; };
 		DA09A76E1BEAE681002BDC46 /* UserSearchHeaderViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchHeaderViewCell.h; sourceTree = "<group>"; };
@@ -327,8 +328,6 @@
 		DA80EBC71B1143F800ADFBFB /* PendingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PendingCell.xib; sourceTree = "<group>"; };
 		DA86854A1BE8557D0056ADD8 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		DA86854B1BE8557D0056ADD8 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
-		DA86854D1BE855950056ADD8 /* SocialMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaTableViewCell.h; sourceTree = "<group>"; };
-		DA86854E1BE855950056ADD8 /* SocialMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaTableViewCell.m; sourceTree = "<group>"; };
 		DA89E3B61A74AD29002F3D68 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		DA89E3B71A74AD29002F3D68 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
 		DA89E3BB1A771DD0002F3D68 /* redCompose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCompose.png; sourceTree = "<group>"; };
@@ -362,6 +361,14 @@
 		DAC1E4F91A4FC06F008960F9 /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
 		DAC1E4FB1A50AD90008960F9 /* ImageViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerViewController.h; sourceTree = "<group>"; };
 		DAC1E4FC1A50AD90008960F9 /* ImageViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerViewController.m; sourceTree = "<group>"; };
+		DAC9F6A11BF049010025D6C4 /* OtherUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileViewController.h; sourceTree = "<group>"; };
+		DAC9F6A21BF049010025D6C4 /* OtherUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserProfileViewController.m; sourceTree = "<group>"; };
+		DAC9F6A41BF079730025D6C4 /* userSilhouette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userSilhouette.png; sourceTree = "<group>"; };
+		DAC9F6A61BF097BA0025D6C4 /* questionMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = questionMark.png; sourceTree = "<group>"; };
+		DAC9F6AB1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaCollectionViewCell.h; sourceTree = "<group>"; };
+		DAC9F6AC1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaCollectionViewCell.m; sourceTree = "<group>"; };
+		DAC9F6AE1BF12EDB0025D6C4 /* SocialMediaCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaCollectionView.h; sourceTree = "<group>"; };
+		DAC9F6AF1BF12EDB0025D6C4 /* SocialMediaCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaCollectionView.m; sourceTree = "<group>"; };
 		DAD00FDD1B8D4B6600725666 /* InstagramAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InstagramAdd.png; sourceTree = "<group>"; };
 		DADB74FA1BC1A96D00749DAA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		DADB74FB1BC1A96D00749DAA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SearchViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -629,6 +636,7 @@
 				0D73283D19C664D30076CD7F /* Home page */,
 				DA80EBC31B11438C00ADFBFB /* Explore */,
 				DA125F991AE6FD88006731DE /* Profile Page */,
+				DAC9F6A01BF048930025D6C4 /* Other User Profile */,
 				DA405C291AEDD2B900164B80 /* Notifications */,
 				0DD5AB2519E9D76C003CA91F /* Map and Comments */,
 				0D73282E19C2CFAA0076CD7F /* Start A Post */,
@@ -701,10 +709,10 @@
 				DA125F9B1AE6FDC9006731DE /* ProfilePageViewController.m */,
 				DAE612441B8C4BBA009D74D5 /* FollowingTableViewController.h */,
 				DAE612451B8C4BBA009D74D5 /* FollowingTableViewController.m */,
-				AE2A68871B3F677E00B0C1F6 /* SocialMediaCollectionViewController.h */,
-				AE2A68881B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m */,
-				DA86854D1BE855950056ADD8 /* SocialMediaTableViewCell.h */,
-				DA86854E1BE855950056ADD8 /* SocialMediaTableViewCell.m */,
+				DAC9F6AE1BF12EDB0025D6C4 /* SocialMediaCollectionView.h */,
+				DAC9F6AF1BF12EDB0025D6C4 /* SocialMediaCollectionView.m */,
+				DAC9F6AB1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.h */,
+				DAC9F6AC1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.m */,
 			);
 			name = "Profile Page";
 			sourceTree = "<group>";
@@ -712,6 +720,8 @@
 		DA20DEA719CE05A80057C00F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DAC9F6A61BF097BA0025D6C4 /* questionMark.png */,
+				DAC9F6A41BF079730025D6C4 /* userSilhouette.png */,
 				DA09A7761BED1E68002BDC46 /* followAndLabel.png */,
 				DA09A7771BED1E68002BDC46 /* followingAndLabel.png */,
 				DA09A7741BEC8AE4002BDC46 /* tap.png */,
@@ -867,6 +877,15 @@
 			name = "Image Viewer";
 			sourceTree = "<group>";
 		};
+		DAC9F6A01BF048930025D6C4 /* Other User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DAC9F6A11BF049010025D6C4 /* OtherUserProfileViewController.h */,
+				DAC9F6A21BF049010025D6C4 /* OtherUserProfileViewController.m */,
+			);
+			name = "Other User Profile";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -959,6 +978,7 @@
 				DA7739B11B167A2800D51D46 /* spreadDismiss.gif in Resources */,
 				DA3C96E11B8BC1BD0023509B /* inviteFriends.png in Resources */,
 				DA39F0371B1454EC0092D57A /* facebook.png in Resources */,
+				DAC9F6A51BF079730025D6C4 /* userSilhouette.png in Resources */,
 				DA405C1C1AED910F00164B80 /* levelsImage.png in Resources */,
 				DAADCE1B1A1535ED008177EE /* dismissButtonGray.png in Resources */,
 				DA39A8C11BABEC6E00D7980E /* propagateButtonUnselected.png in Resources */,
@@ -982,6 +1002,7 @@
 				0DFB082019C17FC700A57630 /* InfoPlist.strings in Resources */,
 				DA89E3BC1A771DD0002F3D68 /* redCompose.png in Resources */,
 				DA09A7731BEC8399002BDC46 /* arrow.png in Resources */,
+				DAC9F6A71BF097BA0025D6C4 /* questionMark.png in Resources */,
 				0D7550611A8B429A00004282 /* latestIcon.png in Resources */,
 				DA405C201AED911D00164B80 /* feedback.png in Resources */,
 				DA495F8B1A2A939D000F201E /* Launch Screen.xib in Resources */,
@@ -1073,6 +1094,7 @@
 			files = (
 				DA80EBC61B1143B200ADFBFB /* ExploreViewController.m in Sources */,
 				0DA264C41AECBE3B00953CB2 /* Notification.m in Sources */,
+				DAC9F6A31BF049020025D6C4 /* OtherUserProfileViewController.m in Sources */,
 				0DFB082C19C17FC700A57630 /* StartPostViewController.m in Sources */,
 				0D27B0481A849BFC004063CA /* LevelsViewController.m in Sources */,
 				DAF427501B7BC85000225455 /* UserSearchCell.m in Sources */,
@@ -1090,9 +1112,9 @@
 				DA86854C1BE8557D0056ADD8 /* NotificationTableViewCell.m in Sources */,
 				0D73283419C2D3250076CD7F /* RippleSignUpView.m in Sources */,
 				DAADCE141A14365A008177EE /* AGPushNoteView.m in Sources */,
-				DA86854F1BE855950056ADD8 /* SocialMediaTableViewCell.m in Sources */,
 				DAE13D601A0ED167005D59DE /* HomePage.m in Sources */,
 				DA40C18C1A3B8E4400B79119 /* Comment.m in Sources */,
+				DAC9F6AD1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.m in Sources */,
 				AE1456131B37215200FDE9C5 /* RippleTextView.m in Sources */,
 				0DFB082619C17FC700A57630 /* AppDelegate.m in Sources */,
 				DAE13D641A0ED1C6005D59DE /* PendingRippleCell.m in Sources */,
@@ -1107,7 +1129,6 @@
 				0DADC94D19D28D0200127E4F /* MyRippleCell.m in Sources */,
 				DAE171601A78005D00A2E89D /* StartPostTableViewCell.m in Sources */,
 				DA2628D01A2D0C6900CB6D90 /* LevelCell.m in Sources */,
-				AE2A68891B3F677E00B0C1F6 /* SocialMediaCollectionViewController.m in Sources */,
 				0DA264CA1AED883000953CB2 /* NotificationsPage.m in Sources */,
 				0DFB082219C17FC700A57630 /* main.m in Sources */,
 				DADDFFFD1A800F3D00E49BC1 /* BellowPoint.m in Sources */,
@@ -1121,6 +1142,7 @@
 				0D73284119C68FA00076CD7F /* Bellow.m in Sources */,
 				0D924A4519E790B800B6AACE /* MapView.m in Sources */,
 				0DB855C81A1801EC008C824F /* PrivacyPolicyView.m in Sources */,
+				DAC9F6B01BF12EDB0025D6C4 /* SocialMediaCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

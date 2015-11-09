@@ -8,6 +8,7 @@
 
 #import "FollowingTableViewController.h"
 #import "ProfilePageViewController.h"
+#import "OtherUserProfileViewController.h"
 #import "BellowService.h"
 #import "UserSearchCell.h"
 #import "Flurry.h"
@@ -117,7 +118,7 @@
 {
     // push same view controller
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    ProfilePageViewController *sameView = [storyboard instantiateViewControllerWithIdentifier:@"Me"];
+    OtherUserProfileViewController *sameView = [storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileView"];
     sameView.userId = userId;
     [Flurry logEvent:@"Profile_Open_Following"];
     

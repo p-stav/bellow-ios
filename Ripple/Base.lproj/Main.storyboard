@@ -2782,7 +2782,7 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <segue destination="HGC-Lb-qS4" kind="modal" id="wZ5-MA-Cv3"/>
+                                                <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="ymc-Oc-Nf5"/>
                                             </connections>
                                         </button>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-2d-D6I">
@@ -2865,7 +2865,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                             <state key="normal" title="1000"/>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userSilhouette.png" translatesAutoresizingMaskIntoConstraints="NO" id="uOs-hr-oB6">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userSilhouette.png" translatesAutoresizingMaskIntoConstraints="NO" id="uOs-hr-oB6" customClass="PFImageView">
                                             <rect key="frame" x="8" y="8" width="70" height="70"/>
                                             <animations/>
                                             <constraints>
@@ -2909,6 +2909,9 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <constraint firstAttribute="height" constant="20" id="Ho6-6H-Nit"/>
                                             </constraints>
                                             <state key="normal" image="questionMark.png"/>
+                                            <connections>
+                                                <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="4dT-xs-kln"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZF-7h-5eX">
                                             <rect key="frame" x="9" y="137" width="53" height="20"/>

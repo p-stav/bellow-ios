@@ -55,7 +55,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *reachValue;
 
 @property (weak, nonatomic) IBOutlet UIButton *questionLevelsButton;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UIButton *editImage;
 @property (weak, nonatomic) IBOutlet UIButton *editAbout;
 @property (weak, nonatomic) IBOutlet UIButton *editInterests;
@@ -558,9 +558,10 @@ UIImagePickerController *picker;
             [self.profileImage.layer setBorderWidth:0];
             
             // set image
-            if ([PFUser currentUser][@"profileImage"]) {
+            if ([PFUser currentUser][@"profileImg"]) {
                 PFFile *imageFile = [PFUser currentUser][@"profileImg"];
-                
+                self.profileImage.file = imageFile;
+                [self.profileImage loadInBackground];
             }
             
             
@@ -1627,33 +1628,22 @@ UIImagePickerController *picker;
     // resize image
     UIImage *resizedImage;
     UIImage *newImage;
-    CGSize newSize = CGSizeMake(70, 70);
     if (image.size.width != image.size.height)
     {
         
         if (image.size.width < image.size.height)
-        {
-            CGRect croppedRect = CGRectMake(0,(image.size.height - image.size.width)/2 , image.size.width, image.size.width);
-            CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], croppedRect);
-            newImage = [UIImage imageWithCGImage:imageRef];
-            CGImageRelease(imageRef);
-        }
+            newImage = [self cropImage:image cropSize:CGSizeMake(image.size.width, image.size.width)];
         else
-        {
-            CGRect croppedRect = CGRectMake((image.size.width - image.size.height)/2,0, image.size.height, image.size.height);
-            CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], croppedRect);
-            newImage = [UIImage imageWithCGImage:imageRef];
-            CGImageRelease(imageRef);
-        }
+            newImage = [self cropImage:image cropSize:CGSizeMake(image.size.height, image.size.height)];
     }
     else
         newImage = image;
     
     // resize
-    UIGraphicsBeginImageContext(newSize);
-    [newImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    resizedImage = [self resizeImage:newImage newSize:CGSizeMake(70, 70)];
+    
+    // determine correct orientation
+    resizedImage = [self normalizeImage:resizedImage];
     
     // set image
     [self.profileImage setImage:resizedImage];
@@ -1665,6 +1655,97 @@ UIImagePickerController *picker;
     [[PFUser currentUser] saveInBackground];
 }
 
+- (UIImage *)resizeImage:(UIImage*)image newSize:(CGSize)newSize {
+    CGRect newRect = CGRectIntegral(CGRectMake(0, 0, newSize.width, newSize.height));
+    CGImageRef imageRef = image.CGImage;
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Set the quality level to use when rescaling
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, newSize.height);
+    
+    CGContextConcatCTM(context, flipVertical);
+    // Draw into the context; this scales the image
+    CGContextDrawImage(context, newRect, imageRef);
+    
+    // Get the resized image from the context and a UIImage
+    CGImageRef newImageRef = CGBitmapContextCreateImage(context);
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    
+    CGImageRelease(newImageRef);
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+- (UIImage *) cropImage:(UIImage *)originalImage cropSize:(CGSize)cropSize
+{
+    NSLog(@"original image orientation:%d",originalImage.imageOrientation);
+    
+    //calculate scale factor to go between cropframe and original image
+    float SF = originalImage.size.width / cropSize.width;
+    
+    //find the centre x,y coordinates of image
+    float centreX = originalImage.size.width / 2;
+    float centreY = originalImage.size.height / 2;
+    
+    //calculate crop parameters
+    float cropX = centreX - ((cropSize.width / 2) * SF);
+    float cropY = centreY - ((cropSize.height / 2) * SF);
+    
+    CGRect cropRect = CGRectMake(cropX, cropY, (cropSize.width *SF), (cropSize.height * SF));
+    
+    CGAffineTransform rectTransform;
+    switch (originalImage.imageOrientation)
+    {
+        case UIImageOrientationLeft:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(M_PI_2), 0, -originalImage.size.height);
+            break;
+        case UIImageOrientationRight:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(-M_PI_2), -originalImage.size.width, 0);
+            break;
+        case UIImageOrientationDown:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(-M_PI), -originalImage.size.width, -originalImage.size.height);
+            break;
+        default:
+            rectTransform = CGAffineTransformIdentity;
+    };
+    rectTransform = CGAffineTransformScale(rectTransform, originalImage.scale, originalImage.scale);
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([originalImage CGImage], CGRectApplyAffineTransform(cropRect, rectTransform));
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:originalImage.scale orientation:originalImage.imageOrientation];
+    CGImageRelease(imageRef);
+    //return result;
+    
+    //Now want to scale down cropped image!
+    //want to multiply frames by 2 to get retina resolution
+    CGRect scaledImgRect = CGRectMake(0, 0, (cropSize.width * 2), (cropSize.height * 2));
+    
+    UIGraphicsBeginImageContextWithOptions(scaledImgRect.size, NO, [UIScreen mainScreen].scale);
+    
+    [result drawInRect:scaledImgRect];
+    
+    UIImage *scaledNewImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return scaledNewImage;
+    
+}
+
+- (UIImage *)normalizeImage:(UIImage *)image
+{
+    if (image.imageOrientation == UIImageOrientationUp)
+        return image;
+    
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    [image drawInRect:(CGRect){0, 0, image.size}];
+    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return normalizedImage;
+}
 
 
 #pragma mark- first run

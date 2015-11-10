@@ -198,12 +198,6 @@ NSDictionary *socialMediaIconToName;
         }
     }
     
-    if ([segue.identifier isEqualToString:@"SegueToPointsFromProfile"])
-    {
-        PointsViewController *pvc = (PointsViewController*)segue.destinationViewController;
-        pvc.points = [[PFUser currentUser][@"score"] integerValue];
-    }
-    
     
     if ([segue.identifier isEqualToString:@"RippleImageView"])
     {
@@ -300,7 +294,10 @@ NSDictionary *socialMediaIconToName;
     [self.followersLabel setHidden:YES];
     [self.reachLabel setHidden:YES];
     [self.reachValue setHidden:YES];
-    
+    [self.interestsLabel setHidden:YES];
+    [self.interestText setHidden:YES];
+    [self.aboutText setHidden:YES];
+    [self.profileImage setHidden:YES];
     
     // bools and original values
     self.viewDidLoadJustRan = YES;
@@ -363,10 +360,6 @@ NSDictionary *socialMediaIconToName;
             [self.activityIndicator setHidden:YES];
         });
     });
-    
-    [self.followingNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
-    [self.followersNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
-    [self.reachValue.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
 }
 
 - (void) setupHeaderView
@@ -375,21 +368,16 @@ NSDictionary *socialMediaIconToName;
     // setup navigation title
     UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 100, 44)];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
-    
     [titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:22.0]];
     [titleLabel setTextColor:[UIColor whiteColor]];
-    
     if([PFAnonymousUtils isLinkedWithUser:self.currentUser])
         titleLabel.text = @"Profile";
     else
         titleLabel.text= [NSString stringWithFormat:@"%@", self.currentUser.username];
-    
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     [titleView addSubview:titleLabel];
     self.navigationItem.titleView = titleView;
     [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
-
-    
     
     // check if user is following
     if ([PFUser currentUser][@"following"] !=nil && [[PFUser currentUser][@"following"] indexOfObject:self.userId] != NSNotFound)
@@ -401,7 +389,7 @@ NSDictionary *socialMediaIconToName;
         [self.followButton setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
     }
     
-    // set up followers and following
+    // set up followers and following and reach
     if (self.currentUser[@"followingNumber"] == nil)
         [self.followingNum setTitle:@"0" forState:UIControlStateNormal];
     else
@@ -418,23 +406,77 @@ NSDictionary *socialMediaIconToName;
     else
         [self.followingLabel setTitle:@"followers" forState:UIControlStateNormal];
     
+    if (self.currentUser[@"reach"] != nil)
+        [self.reachValue setTitle:[NSString stringWithFormat:@"%ld", [self.currentUser[@"reach"] integerValue]] forState:UIControlStateNormal];
+    else
+        [self.reachValue setTitle:@"7" forState:UIControlStateNormal];
     
+    [self.followingNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
+    [self.followersNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
+    [self.reachValue.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
+
+    // image
+    [self.profileImage.layer setCornerRadius:self.profileImage.frame.size.height/2];
+    [self.profileImage setBackgroundColor:[UIColor clearColor]];
+    [self.profileImage.layer setMasksToBounds:YES];
+    [self.profileImage.layer setBorderWidth:0];
     
-    // find height of tableHeader
-    int accessibleProfilesNumber = 0;
-    if(self.userId)
+    // set image
+    if (self.currentUser[@"profileImg"]) {
+        PFFile *imageFile = self.currentUser[@"profileImg"];
+        self.profileImage.file = imageFile;
+        [self.profileImage loadInBackground];
+    }
+    
+    // find height of tableHeader and saet about + interest heights
+    CGFloat additionalHeaderHeight = 0;
+    UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:13.0];
+    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
+    CGSize maximumSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 16.0, 9999);
+    NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+
+    if (self.currentUser[@"aboutMe"] != nil && [self.currentUser[@"aboutMe"] length] != 0)
     {
+        [self.aboutText setHidden:NO];
+        [self.aboutText setText:self.currentUser[@"aboutMe"]];
+        [self.aboutText setTextColor:[UIColor blackColor]];
+        [self.aboutText setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
         
-        for(NSString *key in self.user[@"accessibleProfiles"])
-        {
-            if(![self.user[@"accessibleProfiles"][key] isEqualToString:@""])
-                accessibleProfilesNumber +=1;
-        }
+        CGRect aboutSize =  [self.aboutText.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
+        self.aboutHeightConstraint.constant = aboutSize.size.height + 30;
         
-        self.containerViewHeightConstraint.constant = 36*accessibleProfilesNumber;
-        self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 170+self.containerViewHeightConstraint.constant);
+    }
+    else
+    {
+        [self.aboutText setHidden:YES];
+        self.aboutHeightConstraint.constant = 0;
+    }
+    
+    if (self.currentUser[@"interests"] != nil && [self.currentUser[@"interests"] length] != 0)
+    {
+        [self.interestText setHidden:NO];
+        [self.interestsLabel setHidden:NO];
+        [self.interestText setTextColor:[UIColor blackColor]];
+        [self.interestText setText:self.currentUser[@"interests"]];
+        [self.interestText setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
+        
+        CGRect interestSize =  [self.interestText.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
+        self.interstsHeightConstraint.constant = interestSize.size.height + 30;
+    }
+    else
+    {
+        [self.interestText setHidden:YES];
+        [self.interestsLabel setHidden:YES];
+        self.interstsHeightConstraint.constant = 0;
     }
 
+    // size the table header
+    additionalHeaderHeight =self.interstsHeightConstraint.constant + self.aboutHeightConstraint.constant;
+    if ([self.user[@"accessibleProfiles"] count] >0)
+        additionalHeaderHeight += 50;
+
+    
+    self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 100 + additionalHeaderHeight);
     [self.tableView setTableHeaderView:self.tableHeader];
     [self.view setNeedsUpdateConstraints];
     [self.view layoutIfNeeded];
@@ -448,7 +490,10 @@ NSDictionary *socialMediaIconToName;
         [self.followingNum setHidden:NO];
         [self.followersLabel setHidden:NO];
         [self.followersNum setHidden:NO];
-
+        [self.reachLabel setHidden:NO];
+        [self.reachValue setHidden:NO];
+        [self.profileImage setHidden:NO];
+        [self.followButton setHidden:NO];
     }
 }
 
@@ -470,7 +515,10 @@ NSDictionary *socialMediaIconToName;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    if (self.user)
+        return 30;
+    else
+        return 0;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -483,6 +531,7 @@ NSDictionary *socialMediaIconToName;
     [myLabel setTextColor:[UIColor blackColor]];
     
     UIView *headerView = [[UIView alloc] init];
+    [headerView setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
     [headerView addSubview:myLabel];
     
     return headerView;
@@ -1006,20 +1055,6 @@ NSDictionary *socialMediaIconToName;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFollowing" object:self.userId];
 }
 
-- (IBAction)didPressFollowing:(id)sender {
-    if (!self.userId)
-        [self performSegueWithIdentifier:@"SegueToFollowingUsers" sender:nil];
-}
-
-- (IBAction)didPressFollower:(id)sender {
-    if (!self.userId)
-    {
-        // alert that this feature is coming
-        UIAlertView *comingFeature = [[UIAlertView alloc] initWithTitle:@"Coming Soon!" message:@"We're working on letting you see a list of your followers. Stay tuned!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [comingFeature show];
-    }
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -1045,11 +1080,6 @@ NSDictionary *socialMediaIconToName;
             
             [Flurry logEvent:@"Review_Clicked"];
         }
-    }
-    
-    if ([alertView.title isEqualToString:@"Congratulations"])
-    {
-        [self performSegueWithIdentifier:@"SegueToPointsFromProfile" sender:nil];
     }
     
     

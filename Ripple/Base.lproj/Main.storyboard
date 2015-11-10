@@ -1102,12 +1102,12 @@
                                     <constraint firstAttribute="height" constant="20" id="mKS-gT-UYh"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I8u-9N-QTD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I8u-9N-QTD">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="CTc-pg-CbR">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-Qe-Yzv">
@@ -1123,7 +1123,7 @@
                                             <animations/>
                                         </activityIndicatorView>
                                         <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbD-pa-OTQ">
-                                            <rect key="frame" x="3" y="208" width="314" height="50"/>
+                                            <rect key="frame" x="8" y="110" width="304" height="50"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="2Lj-p4-j69"/>
@@ -1142,9 +1142,12 @@
                                             <state key="normal" title="follow" image="follow.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="didPressFollowButton:" destination="Uot-JS-E4r" eventType="touchUpInside" id="0EH-Ux-hPc"/>
+                                            </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99P-17-7C2">
-                                            <rect key="frame" x="254" y="16" width="65" height="37"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99P-17-7C2">
+                                            <rect key="frame" x="254" y="22" width="65" height="26"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="X8A-vk-IjR"/>
@@ -1155,8 +1158,8 @@
                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw7-a1-TDw">
-                                            <rect key="frame" x="176" y="16" width="52" height="37"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw7-a1-TDw">
+                                            <rect key="frame" x="176" y="22" width="52" height="26"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="LhV-sR-jiN"/>
@@ -1191,8 +1194,8 @@
                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RX4-KS-zhq">
-                                            <rect key="frame" x="103" y="16" width="47" height="37"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RX4-KS-zhq">
+                                            <rect key="frame" x="103" y="22" width="47" height="26"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="47" id="N9t-gU-SPI"/>
@@ -1223,18 +1226,17 @@
                                                 <constraint firstAttribute="height" constant="70" id="Rq0-qL-Tp7"/>
                                             </constraints>
                                         </imageView>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="81S-DB-dj6">
-                                            <rect key="frame" x="3" y="86" width="251" height="59"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81S-DB-dj6">
+                                            <rect key="frame" x="3" y="86" width="251" height="10"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="59" id="f2O-vA-Xgu"/>
+                                                <constraint firstAttribute="height" constant="10" id="f2O-vA-Xgu"/>
                                             </constraints>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ib5-p7-VAi">
-                                            <rect key="frame" x="8" y="140" width="67" height="24"/>
+                                            <rect key="frame" x="8" y="91" width="67" height="24"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="67" id="LMg-A9-MZD"/>
@@ -1244,13 +1246,12 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="X3S-nZ-RcY">
-                                            <rect key="frame" x="3" y="154" width="251" height="59"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3S-nZ-RcY">
+                                            <rect key="frame" x="3" y="105" width="251" height="10"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="59" id="9D0-Xh-Nsy"/>
+                                                <constraint firstAttribute="height" constant="10" id="9D0-Xh-Nsy"/>
                                             </constraints>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
@@ -1279,9 +1280,9 @@
                                         <constraint firstAttribute="trailing" secondItem="o5k-pm-vGg" secondAttribute="trailing" constant="8" id="Wgg-P9-91l"/>
                                         <constraint firstItem="X3S-nZ-RcY" firstAttribute="top" secondItem="ib5-p7-VAi" secondAttribute="bottom" constant="-10" id="YAL-kA-12y"/>
                                         <constraint firstItem="Ijx-T0-KA4" firstAttribute="top" secondItem="CTc-pg-CbR" secondAttribute="top" constant="8" id="YZj-Hi-X1o"/>
-                                        <constraint firstItem="zbD-pa-OTQ" firstAttribute="leading" secondItem="CTc-pg-CbR" secondAttribute="leading" constant="3" id="Zkg-7V-T0L"/>
+                                        <constraint firstItem="zbD-pa-OTQ" firstAttribute="leading" secondItem="CTc-pg-CbR" secondAttribute="leading" constant="8" id="Zkg-7V-T0L"/>
                                         <constraint firstItem="vw7-a1-TDw" firstAttribute="leading" secondItem="RX4-KS-zhq" secondAttribute="trailing" constant="26" id="gmM-Jg-OA3"/>
-                                        <constraint firstAttribute="trailing" secondItem="zbD-pa-OTQ" secondAttribute="trailing" constant="3" id="is7-QA-gzJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="zbD-pa-OTQ" secondAttribute="trailing" constant="8" id="is7-QA-gzJ"/>
                                         <constraint firstItem="81S-DB-dj6" firstAttribute="leading" secondItem="CTc-pg-CbR" secondAttribute="leading" constant="3" id="mQf-mH-paS"/>
                                         <constraint firstItem="GkZ-r2-V6P" firstAttribute="top" secondItem="vw7-a1-TDw" secondAttribute="bottom" constant="-6" id="q4U-7S-BLl"/>
                                         <constraint firstItem="ib5-p7-VAi" firstAttribute="top" secondItem="81S-DB-dj6" secondAttribute="bottom" constant="-5" id="qgi-2L-tRh"/>
@@ -1291,7 +1292,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HeaderCell" rowHeight="30" id="I7B-UN-o2U" customClass="HeaderTableViewCell">
-                                        <rect key="frame" x="0.0" y="292" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="145" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I7B-UN-o2U" id="zyP-Wu-EkE">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="29"/>
@@ -2252,7 +2253,7 @@ If you have any questions regarding privacy while using the Application, or have
                         <outlet property="topTableViewHeader" destination="wdB-wq-dz3" id="W10-fg-Mgu"/>
                         <segue destination="bYJ-Ra-7Uu" kind="modal" identifier="ImageSegue" id="aHu-cA-FrR"/>
                         <segue destination="7aP-vw-Ugn" kind="modal" identifier="WebViewSegue" id="7yi-Va-b1e"/>
-                        <segue destination="jLm-es-HZl" kind="push" identifier="UserProfile" id="jF9-dc-adu"/>
+                        <segue destination="Uot-JS-E4r" kind="push" identifier="UserProfile" id="Chv-7s-49J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7qh-7p-GxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2264,7 +2265,7 @@ If you have any questions regarding privacy while using the Application, or have
             <objects>
                 <collectionViewController id="xnt-2Y-EfY" customClass="SocialMediaCollectionView" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="aK0-cl-CLF">
-                        <rect key="frame" x="0.0" y="0.0" width="314" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="304" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2310,6 +2311,9 @@ If you have any questions regarding privacy while using the Application, or have
                             <outlet property="delegate" destination="xnt-2Y-EfY" id="hO2-W2-0Pq"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="7aP-vw-Ugn" kind="modal" identifier="WebViewSegue" id="vSo-RI-LxM"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kas-a1-orS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2564,7 +2568,7 @@ If you have any questions regarding privacy while using the Application, or have
                                 <animations/>
                                 <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="86g-4d-Kjp">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAS-do-INq">
@@ -2603,12 +2607,12 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="ymc-Oc-Nf5"/>
                                             </connections>
                                         </button>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-2d-D6I">
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-2d-D6I">
                                             <rect key="frame" x="150" y="149" width="20" height="20"/>
                                             <animations/>
                                         </activityIndicatorView>
                                         <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-cM-Z8A">
-                                            <rect key="frame" x="3" y="218" width="314" height="50"/>
+                                            <rect key="frame" x="8" y="218" width="304" height="50"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="myQ-cA-lyt"/>
@@ -2763,7 +2767,7 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <action selector="didPresssEditInterests:" destination="jLm-es-HZl" eventType="touchUpInside" id="wxl-Av-GRx"/>
                                             </connections>
                                         </button>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-I3-3zB">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-I3-3zB">
                                             <rect key="frame" x="3" y="191" width="314" height="32"/>
                                             <animations/>
                                             <constraints>
@@ -2783,7 +2787,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="I love olives. And coffee. But not olive coffee. Beach goer, Californian. " textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcQ-Tt-IER">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcQ-Tt-IER">
                                             <rect key="frame" x="5" y="151" width="310" height="31"/>
                                             <animations/>
                                             <constraints>
@@ -2804,7 +2808,7 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstItem="lLq-Pg-9LT" firstAttribute="top" secondItem="g8Z-SB-5v2" secondAttribute="bottom" constant="-7" id="9oI-Nz-RJu"/>
                                         <constraint firstItem="JyA-pq-6sM" firstAttribute="top" secondItem="uOs-hr-oB6" secondAttribute="bottom" constant="16" id="BYw-H9-FHI"/>
                                         <constraint firstItem="Ldi-2d-D6I" firstAttribute="centerX" secondItem="86g-4d-Kjp" secondAttribute="centerX" id="BfP-Gm-NXd"/>
-                                        <constraint firstAttribute="trailing" secondItem="Fbi-cM-Z8A" secondAttribute="trailing" constant="3" id="CqE-fh-7wB"/>
+                                        <constraint firstAttribute="trailing" secondItem="Fbi-cM-Z8A" secondAttribute="trailing" constant="8" id="CqE-fh-7wB"/>
                                         <constraint firstItem="8tW-dn-plN" firstAttribute="top" secondItem="xIQ-L3-9S1" secondAttribute="bottom" constant="-7" id="EDi-sa-Dok"/>
                                         <constraint firstItem="uIZ-Wf-CYc" firstAttribute="top" secondItem="vef-9B-uVl" secondAttribute="top" id="FXH-6M-ZP1"/>
                                         <constraint firstAttribute="trailing" secondItem="Dzq-I3-3zB" secondAttribute="trailing" constant="3" id="Igk-S1-Fqp"/>
@@ -2817,7 +2821,7 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstItem="sZF-7h-5eX" firstAttribute="top" secondItem="aAS-do-INq" secondAttribute="bottom" constant="16" id="Qsi-u8-kdR"/>
                                         <constraint firstItem="Dzq-I3-3zB" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="3" id="SDM-xk-6gD"/>
                                         <constraint firstItem="Ldi-2d-D6I" firstAttribute="centerY" secondItem="86g-4d-Kjp" secondAttribute="centerY" id="VWx-ZX-WVV"/>
-                                        <constraint firstItem="Fbi-cM-Z8A" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="3" id="VjJ-vf-s8q"/>
+                                        <constraint firstItem="Fbi-cM-Z8A" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="8" id="VjJ-vf-s8q"/>
                                         <constraint firstItem="Dzq-I3-3zB" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="3" id="Xbs-pC-jvK"/>
                                         <constraint firstAttribute="trailing" secondItem="tlh-v7-hP4" secondAttribute="trailing" constant="1" id="b7s-yH-qlV"/>
                                         <constraint firstItem="JyA-pq-6sM" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="b9Y-1R-tl2"/>
@@ -2842,7 +2846,7 @@ If you have any questions regarding privacy while using the Application, or have
                                 </view>
                                 <prototypes>
                                     <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HeaderCell" rowHeight="75" id="RqR-Or-WxN" customClass="HeaderTableViewCell">
-                                        <rect key="frame" x="0.0" y="341" width="320" height="75"/>
+                                        <rect key="frame" x="0.0" y="252" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RqR-Or-WxN" id="81w-9v-gQg">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
@@ -3624,17 +3628,16 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="userSilhouette.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lcN-O5-ENH"/>
+        <segue reference="BQt-lq-G7y"/>
         <segue reference="AcY-H4-hdD"/>
         <segue reference="Ubg-9a-Zfa"/>
-        <segue reference="wlf-Iq-ZyU"/>
+        <segue reference="Vjc-ZB-AvE"/>
         <segue reference="A5N-Q5-ixn"/>
+        <segue reference="wlf-Iq-ZyU"/>
+        <segue reference="hJL-5N-K1N"/>
         <segue reference="dba-bl-yJ2"/>
+        <segue reference="Chv-7s-49J"/>
         <segue reference="Wu2-Fk-dQS"/>
-        <segue reference="BQt-lq-G7y"/>
-        <segue reference="X2E-Tv-mSA"/>
-        <segue reference="sDS-I7-BZ3"/>
-        <segue reference="7je-vw-1j6"/>
         <segue reference="4EZ-l1-4gK"/>
     </inferredMetricsTieBreakers>
 </document>

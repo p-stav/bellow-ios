@@ -522,7 +522,7 @@ UIImagePickerController *picker;
             else
                 [self.reachValue setTitle:@"7" forState:UIControlStateNormal];
             
-            // points
+            // show progress bar label
             BellowLevel *nextLevel = [self findLevel:1];
     
             int nextLevelScore;
@@ -572,7 +572,7 @@ UIImagePickerController *picker;
             }
             else
             {
-                [self.aboutText setTextColor:[UIColor grayColor]];
+                [self.aboutText setTextColor:[UIColor blackColor]];
                 [self.aboutText setText:[PFUser currentUser][@"aboutMe"]];
             }
             

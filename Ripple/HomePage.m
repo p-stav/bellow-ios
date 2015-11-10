@@ -392,9 +392,6 @@ int PARSE_PAGE_SIZE = 25;
             break;
         }
     }
-    
-    if (!self.viewDidLoadJustRan)
-        self.viewDidLoadJustRan = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -471,6 +468,8 @@ int PARSE_PAGE_SIZE = 25;
                 [self checkBarrier];
                 
                 self.isFirstRunPostInteractiveTutorial = NO;
+                if (!self.viewDidLoadJustRan)
+                    self.viewDidLoadJustRan = YES;
                 
                 
             });
@@ -1905,16 +1904,19 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void) setNoRipplesText
 {
-    if (self.rippleSegmentControl.selectedSegmentIndex == 0)
-        self.noRipplesTextView.text = self.defaultNoPendingRippleString;
-    
-    else if (self.rippleSegmentControl.selectedSegmentIndex == 1)
-        self.noRipplesTextView.text = @"You have no new following ripples. Swipe down to refresh";
-    
-    else if (self.rippleSegmentControl.selectedSegmentIndex == 2)
-        self.noRipplesTextView.text = @"You have no new trending ripples. Swipe down to refresh";
-    
-    [self.noRipplesTextView setHidden:NO];
+    if (self.viewDidLoadJustRan)
+    {
+        if (self.rippleSegmentControl.selectedSegmentIndex == 0)
+            self.noRipplesTextView.text = self.defaultNoPendingRippleString;
+        
+        else if (self.rippleSegmentControl.selectedSegmentIndex == 1)
+            self.noRipplesTextView.text = @"You have no new following ripples. Swipe down to refresh";
+        
+        else if (self.rippleSegmentControl.selectedSegmentIndex == 2)
+            self.noRipplesTextView.text = @"You have no new trending ripples. Swipe down to refresh";
+        
+        [self.noRipplesTextView setHidden:NO];
+    }
 }
 
 #pragma mark - tutorial and first run

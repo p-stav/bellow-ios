@@ -14,7 +14,7 @@
 #import "SocialMediaCollectionView.h"
 
 
-@interface ProfilePageViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, ActedRippleCellDelegate, HeaderCellDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate>
+@interface ProfilePageViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, ActedRippleCellDelegate, HeaderCellDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSMutableArray *myRipples;
 @property (strong, nonatomic) NSMutableArray *myRipplesMostPopular;

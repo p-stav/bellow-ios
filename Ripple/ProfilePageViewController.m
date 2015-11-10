@@ -92,7 +92,7 @@
 
 NSString *defaultNoRipplesString;
 NSDictionary *socialMediaIconToName;
-// int PARSE_PAGE_SIZE = 25;
+UIImagePickerController *picker;
 
 + (void) initialize {
     socialMediaIconToName = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -557,14 +557,12 @@ NSDictionary *socialMediaIconToName;
             [self.profileImage.layer setMasksToBounds:YES];
             [self.profileImage.layer setBorderWidth:0];
             
-            if ([PFUser currentUser][@"profileImg"] == nil)
-            {
-                [self.editImage setHidden:NO];
+            // set image
+            if ([PFUser currentUser][@"profileImage"]) {
+                PFFile *imageFile = [PFUser currentUser][@"profileImg"];
+                
             }
-            else
-            {
-                // set image
-            }
+            
             
             // set about and interests text and height
             if ([PFUser currentUser][@"aboutMe"] == nil || [[PFUser currentUser][@"aboutMe"] length] == 0)
@@ -624,6 +622,7 @@ NSDictionary *socialMediaIconToName;
                 [self.interestText setHidden:NO];
                 [self.aboutText setHidden:NO];
                 [self.editAbout setHidden:NO];
+                [self.editImage setHidden:NO];
                 [self.editInterests setHidden:NO];
                 [self.pointsToNextLevel setHidden:NO];
                 [self.progressBackground setHidden:NO];
@@ -1494,7 +1493,13 @@ NSDictionary *socialMediaIconToName;
 }
 
 - (IBAction)didPressEditImage:(id)sender {
-    // show libary/take photo option.
+    // show libary/take photo actionsheet
+    UIActionSheet *pickImageMethod;
+
+    pickImageMethod = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Photo Library",@"Take Photo", nil];
+    
+    [pickImageMethod showInView:self.view];
+
 }
 
 
@@ -1561,6 +1566,25 @@ NSDictionary *socialMediaIconToName;
 
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    picker = [[UIImagePickerController alloc] init];
+    [picker setDelegate:self];
+    
+    
+    if(buttonIndex == 1)
+    {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    
+    if(buttonIndex == 0)
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+
 - (void)justLoggedIn
 {
     self.currentUser = [PFUser currentUser];
@@ -1583,7 +1607,67 @@ NSDictionary *socialMediaIconToName;
     [referralPoints show];
 }
 
-#pragma mark-first run
+#pragma mark- profile image methods
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *) Picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    // grab image
+    UIImage *image = [UIImage imageWithCGImage:[[info objectForKey:UIImagePickerControllerEditedImage] CGImage] scale:1.0 orientation:UIImageOrientationUp];
+    if(image == nil)
+        image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if(image == nil)
+        image = [info objectForKey:UIImagePickerControllerCropRect];
+    
+    // resize image
+    UIImage *resizedImage;
+    UIImage *newImage;
+    CGSize newSize = CGSizeMake(70, 70);
+    if (image.size.width != image.size.height)
+    {
+        
+        if (image.size.width < image.size.height)
+        {
+            CGRect croppedRect = CGRectMake(0,(image.size.height - image.size.width)/2 , image.size.width, image.size.width);
+            CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], croppedRect);
+            newImage = [UIImage imageWithCGImage:imageRef];
+            CGImageRelease(imageRef);
+        }
+        else
+        {
+            CGRect croppedRect = CGRectMake((image.size.width - image.size.height)/2,0, image.size.height, image.size.height);
+            CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], croppedRect);
+            newImage = [UIImage imageWithCGImage:imageRef];
+            CGImageRelease(imageRef);
+        }
+    }
+    else
+        newImage = image;
+    
+    // resize
+    UIGraphicsBeginImageContext(newSize);
+    [newImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // set image
+    [self.profileImage setImage:resizedImage];
+    
+    // save image
+    NSData *profileImageData = UIImageJPEGRepresentation(resizedImage, 1.0);
+    PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"profile.jpg"] data:profileImageData];
+    [[PFUser currentUser] setObject:imageFile forKey:@"profileImg"];
+    [[PFUser currentUser] saveInBackground];
+}
+
+
+
+#pragma mark- first run
 - (void)checkFirstTimeProfile
 {
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];

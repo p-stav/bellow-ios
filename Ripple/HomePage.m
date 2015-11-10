@@ -141,11 +141,16 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void) goToImageView: (Bellow *)ripple
 {
-    if (ripple.imageFile)
+    /*if (ripple.imageFile)
     {
         [self performSegueWithIdentifier:@"RippleImageView" sender:ripple];
         [Flurry logEvent:@"Image_Open_Feed"];
-    }
+    }*/
+    
+    self.segueWithCommentsUp = YES;
+    if (![ripple.rippleId isEqualToString:@"FakeRippleSpread"] && ![ripple.rippleId isEqualToString:@"FakeRippleDismiss"])
+        [self performSegueWithIdentifier:@"MapViewSegue" sender:ripple];
+
 }
 
 - (void) goToUserProfile: (Bellow *)ripple
@@ -782,87 +787,30 @@ int PARSE_PAGE_SIZE = 25;
     
     cell.currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
     cell.delegate = self;
-    
-    // reset button images
-    cell.currentRipple.actedUponState = 0;
-    [cell.dismissButton setHidden:NO];
-    [cell.spreadButton setHidden:NO];
-    [cell.spreadButton setUserInteractionEnabled:YES];
-    [cell.dismissButton setUserInteractionEnabled:YES];
-
-    [cell.spreadButton setImage:[UIImage imageNamed:@"propagateButtonUnselected"] forState:UIControlStateNormal];
-    [cell.dismissButton setImage:[UIImage imageNamed:@"dismissRippleIconUnselected"] forState:UIControlStateNormal];
-    
-    // update constraints for the text view
-    [cell setNeedsUpdateConstraints];
-    [cell layoutIfNeeded];
 
     // Configure the cell
     cell.rippleTextView.text = cell.currentRipple.text;
     cell.rippleTextView.delegate = self;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
-    // userlabel work
-    [cell.userLabel setTitle:cell.currentRipple.creatorName forState:UIControlStateNormal];
-    
     UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Medium" size:18.0];
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
     NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
     CGSize stringSize = [cell.currentRipple.creatorName sizeWithAttributes:attributesDictionary];
     cell.userLabelWidthConstraint.constant = stringSize.width + 3; //[UIScreen mainScreen].bounds.size.width;
     
-    // set city and time
-    NSTimeInterval timeInterval = [cell.currentRipple.createdAt timeIntervalSinceNow];
-    if (cell.currentRipple.city)
-    {
-        // set city label hidden
-        [cell.cityLabel setHidden:NO];
-        cell.cityLabel.text = cell.currentRipple.city;
-        
-        cell.timeLabel.text = [NSString stringWithFormat:@"%@", [self.timeIntervalFormatter stringForTimeInterval:timeInterval]];
-        [cell.timeLabel setHidden:NO];
-
-    }
-    else
-    {
-        // switch purpose
-        cell.cityLabel.text = [NSString stringWithFormat:@"%@", [self.timeIntervalFormatter stringForTimeInterval:timeInterval]];
-        
-        [cell.timeLabel setHidden:YES];
-    }
-    
-    
-    // spread count
-     NSDictionary *boldAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"AvenirNext-Bold" size:13], NSFontAttributeName, nil];
-    NSAttributedString *rippledText;
-    rippledText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%dx", cell.currentRipple.numberPropagated] attributes:boldAttributes];
-    [cell.numPropagatedLabel setAttributedText:rippledText];
-    [cell.numPropagatedLabel setTextColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0]];
-    
-    if ([PFUser currentUser][@"reach"] != nil)
-        [cell.reachSpreadLabel setText:[NSString stringWithFormat:@"spread to %@ people",[PFUser currentUser][@"reach"]]];
-    else
-        [cell.reachSpreadLabel setText:@"spread to 7 people"];
-    
-    [cell.reachSpreadLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
-    [cell.dismissLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
-    
-    // do work to display comments and recognize tap
-    [cell.numberOfCommentsButton setTitle:[NSString stringWithFormat:@"%d", cell.currentRipple.numberComments] forState:UIControlStateNormal];
-    
-    // set colors of dismiss and propagate views
-    cell.propagateView.backgroundColor = [UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0];
-    cell.dismissView.backgroundColor = [UIColor colorWithRed:255/255.0f green:92.0f/255 blue:122.0f/255 alpha:1.0];
-    cell.propagateImageView.alpha = 0.2;
-    cell.dismissImageView.alpha = 0.2;
-    
-    
-    cell.textViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width - 8;
+    // hide everything
+    [cell.spreadCommentView setHidden:YES];
+    [cell.userLabel setHidden:YES];
+    [cell.cityLabel setHidden:YES];
+    [cell.timeLabel setHidden:YES];
+    [cell.followingImage setHidden:YES];
     
     // set text top constraint if  have image
     if (cell.currentRipple.imageFile)
     {
         // image work!
+        [cell.rippleTextView setHidden:YES];
         [cell.outerImageView setHidden:NO];
         [cell.rippleImageView setHidden:NO];
         cell.rippleImageView.image = [UIImage imageNamed:@"grayBox.png"];
@@ -891,35 +839,15 @@ int PARSE_PAGE_SIZE = 25;
         cell.rippleImageViewHeightConstraint.constant = cell.outerImageView.frame.size.width*heightRatio;
         
         [cell.rippleImageView loadInBackground];
-        cell.topTextViewConstraint.constant = cellImageHeight + cell.outerImageView.frame.origin.y + cell.spreadCommentView.frame.size.height + 5;
-        
-        // find textview height
-        [cell.rippleTextView setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:16.0]];
-        CGSize maximumSize = CGSizeMake(self.tableView.frame.size.width- 12.0, 9999);
-        CGRect textSize =  [cell.currentRipple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
-        
-        cell.textViewHeightConstraint.constant = textSize.size.height + 30;
-        
-        // place spreadCommentView on image
-        cell.spreadCommentViewTopConstraint.constant = cellImageHeight + cell.outerImageView.frame.origin.y;
-        
-        // remove borders, but add border around image
-        [cell.rippleTextView.layer setBorderWidth:0.0];
-        [cell.outerImageView.layer setBorderColor:[[UIColor colorWithRed:220.0/255.0f green:220.0f/255 blue:220.0f/255 alpha:1.0] CGColor]];
-        [cell.outerImageView.layer setBorderWidth:1.0];
-        
-        cell.rightSpreadCommentViewConstraint.constant = 0;
-        cell.leftSpreadCommentViewConStraint.constant = 0;
-    
     }
     
     else
     {
+        [cell.rippleTextView setHidden:NO];
         cell.rippleImageView.hidden = YES;
         cell.rippleImageView.image = nil;
         [cell.outerImageView setHidden:YES];
         [cell.rippleTextView setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:20.0]];
-        cell.topTextViewConstraint.constant = cell.outerImageView.frame.origin.y;
         
         // find textview height
         [cell.rippleTextView setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:20.0]];
@@ -930,29 +858,13 @@ int PARSE_PAGE_SIZE = 25;
         
         CGRect textSize =  [cell.currentRipple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
         
-        cell.textViewHeightConstraint.constant = textSize.size.height + 53;
+        cell.textViewHeightConstraint.constant = textSize.size.height + 23;
+        cell.textViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width - 8;
 
-        
-        // place spreadCommentView there
-        cell.spreadCommentViewTopConstraint.constant = textSize.size.height + cell.outerImageView.frame.origin.y + 20;
-        
         // add small border to this
         [cell.rippleTextView.layer setBorderColor:[[UIColor colorWithRed:220.0/255.0f green:220.0f/255 blue:220.0f/255 alpha:1.0] CGColor]];
         [cell.rippleTextView.layer setBorderWidth:1.0];
         cell.rippleTextView.layer.cornerRadius = 5.0;
-        
-        cell.rightSpreadCommentViewConstraint.constant = 4;
-        cell.leftSpreadCommentViewConStraint.constant = 4;
-    }
-
-    if (cell.currentRipple.isFollowingUser) {
-        [cell.followingImage setHidden:NO];
-        cell.leftUsernameConstraint.constant = 29;
-    }
-    else
-    {
-        [cell.followingImage setHidden:YES];
-        cell.leftUsernameConstraint.constant = 8;
     }
     
     // update constraints
@@ -1001,14 +913,6 @@ int PARSE_PAGE_SIZE = 25;
         propagateCell.spreadButtonLeftConstraint.constant = -7;
         propagateCell.dismissButtonRightConstaint.constant = -7;
         
-        [propagateCell.cityLabel setHidden:NO];
-        [propagateCell.timeLabel setHidden:NO];
-        [propagateCell.numPropagatedLabel setHidden:NO];
-        [propagateCell.spreadLabel setHidden:NO];
-        [propagateCell.commentsButton setHidden:NO];
-        [propagateCell.numberOfCommentsButton setHidden:NO];
-
-
         [propagateCell setNeedsUpdateConstraints];
         [propagateCell layoutIfNeeded];
         
@@ -1229,41 +1133,34 @@ int PARSE_PAGE_SIZE = 25;
         
         // size text and images
         CGFloat imageHeight = 0;
+        CGRect stringsize;
         NSDictionary *attributesDictionary = [[NSDictionary alloc]init];
         NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 20, 9999);
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 8  , 9999);
         if (currentRipple.imageFile)
         {
             // find height ratio
             CGFloat heightRatio = (float) currentRipple.imageHeight / currentRipple.imageWidth;
-            CGFloat height = ([UIScreen mainScreen].bounds.size.width - 28) * heightRatio;
+            CGFloat height = ([UIScreen mainScreen].bounds.size.width) * heightRatio;
             
             if (height > 350)
                 imageHeight = 350;
             else
                 imageHeight = height;
             
-            if (currentRipple.imageHeight <= currentRipple.imageWidth)
-                imageHeight += 25;
-            
             // include height of spreadViewComment
-            imageHeight += 25;
-            
-            UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0];
-            attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
+            imageHeight +=  8;
+            stringsize = CGRectMake(0, 0, 0, 0);
         }
         else
         {
-            imageHeight = 20;
+            imageHeight = 120;
             UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:20.0];
             attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
+            stringsize = [currentRipple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
         }
-    
-        CGRect stringsize =  [currentRipple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
         
-        CGFloat dismissSpreadView = 60;
-        
-        return stringsize.size.height + imageHeight + 75 + dismissSpreadView;
+    return stringsize.size.height + imageHeight;
 }
 
 

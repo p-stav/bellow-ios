@@ -57,11 +57,12 @@
         self.points = 0;
 
     if ([[PFUser currentUser][@"score"] integerValue] != 1)
-        [self.pointsLevelText setText:[NSString stringWithFormat:@"You have %d points and are at the '%@' level", self.points ,[PFUser currentUser][@"reachLevel"]]];
+        [self.pointsLevelText setText:[NSString stringWithFormat:@"You have %d points\nYour reach is %@ people", self.points ,[PFUser currentUser][@"reach"]]];
     else
-        [self.pointsLevelText setText:[NSString stringWithFormat:@"You have %d point and are at the '%@' level",self.points ,[PFUser currentUser][@"reachLevel"]]];
+        [self.pointsLevelText setText:[NSString stringWithFormat:@"You have %d point\nYour reach is %@ people",self.points ,[PFUser currentUser][@"reachLabel"]]];
     
-    [self.pointsLevelText setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:15.0]];
+    [self.pointsLevelText setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:25.0]];
+    [self.pointsLevelText setTextAlignment:NSTextAlignmentCenter];
     [self.pointsLevelText setTextColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0]];
 }
 
@@ -91,8 +92,8 @@
     LevelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"levelCell" forIndexPath:indexPath];
     
     BellowLevel *level = [self.levels objectAtIndex:[indexPath row]];
-    cell.levelLabel.text = level.name;
-    cell.levelNumber.text = [NSString stringWithFormat:@"Level %d", [indexPath row]+1 ];
+    //cell.levelLabel.text = level.name;
+    //cell.levelNumber.text = [NSString stringWithFormat:@"Level %d", [indexPath row]+1 ];
     cell.reachLabel.text = [NSString stringWithFormat:@"%dx reach",level.reach];
     cell.pointsLabel.text = [NSString stringWithFormat:@"%d points", level.minScore];
     
@@ -112,19 +113,19 @@
     if (level.minScore < [[PFUser currentUser][@"score"] intValue])
     {
         cell.backgroundColor = [UIColor whiteColor];
-        cell.levelLabel.textColor = [UIColor grayColor];
-        cell.reachLabel.textColor = [UIColor grayColor];
-        cell.pointsLabel.textColor = [UIColor grayColor];
-        cell.levelNumber.textColor = [UIColor grayColor];
-        cell.levelNumber.textColor = [UIColor grayColor];
+        //cell.levelLabel.textColor = [UIColor grayColor];
+        cell.reachLabel.textColor = [UIColor blackColor];
+        cell.pointsLabel.textColor = [UIColor blackColor];
+        //cell.levelNumber.textColor = [UIColor grayColor];
+        //cell.levelNumber.textColor = [UIColor grayColor];
     }
     else
     {
         cell.backgroundColor = [UIColor whiteColor];
-        cell.levelLabel.textColor = [UIColor blackColor];
-        cell.reachLabel.textColor = [UIColor grayColor];
-        cell.pointsLabel.textColor = [UIColor grayColor];
-        cell.levelNumber.textColor = [UIColor blackColor];
+        //cell.levelLabel.textColor = [UIColor blackColor];
+        cell.reachLabel.textColor = [UIColor blackColor];
+        cell.pointsLabel.textColor = [UIColor blackColor];
+        //cell.levelNumber.textColor = [UIColor blackColor];
     }
     
     if ([level.name isEqualToString:[PFUser currentUser][@"reachLevel"]])
@@ -134,10 +135,10 @@
         else
             cell.backgroundColor = [UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:0.6];
         
-        cell.levelLabel.textColor = [UIColor whiteColor];
+        //cell.levelLabel.textColor = [UIColor whiteColor];
         cell.reachLabel.textColor = [UIColor whiteColor];
         cell.pointsLabel.textColor = [UIColor whiteColor];
-        cell.levelNumber.textColor = [UIColor whiteColor];
+        //cell.levelNumber.textColor = [UIColor whiteColor];
     }
     
     return cell;
@@ -149,7 +150,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 97.0;
+    return 70.0;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

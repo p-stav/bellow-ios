@@ -2078,7 +2078,7 @@ int PARSE_PAGE_SIZE = 25;
             [search setScrollEnabled:NO];
             [search setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
             [search setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-            [search setText:@"Search for users to follow"];
+            [search setText:@"Search for people to follow"];
             [search setTextAlignment:NSTextAlignmentLeft];
             [search setBackgroundColor:[UIColor clearColor]];
             

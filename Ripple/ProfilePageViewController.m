@@ -291,7 +291,7 @@ UIImagePickerController *picker;
     // navigtion bar stuff
     self.navigationItem.hidesBackButton = NO;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    [self checkFirstTimeProfile];
+    //[self checkFirstTimeProfile];
     
     // set up bar button
     UIButton *barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];

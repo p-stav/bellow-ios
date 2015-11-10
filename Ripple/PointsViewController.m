@@ -17,8 +17,8 @@
 @property (strong, nonatomic) NSMutableArray *levels;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *levelsFromService;
-//@property (weak, nonatomic) IBOutlet UIButton *shareRipple;
-//@property (weak, nonatomic) IBOutlet UIButton *shareImage;
+@property (weak, nonatomic) IBOutlet UIButton *shareRipple;
+@property (weak, nonatomic) IBOutlet UIButton *shareImage;
 @property (weak, nonatomic) IBOutlet UITextView *pointsLevelText;
 
 
@@ -49,8 +49,8 @@
     });
     
     // add touch targets to share stuff
-   // [self.shareRipple addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    //[self.shareImage addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareRipple addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareImage addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     // write text for pointsLevelText
     if (!self.points)
@@ -91,8 +91,8 @@
     LevelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"levelCell" forIndexPath:indexPath];
     
     BellowLevel *level = [self.levels objectAtIndex:[indexPath row]];
-    //cell.levelLabel.text = level.name;
-    //cell.levelNumber.text = [NSString stringWithFormat:@"Level %d", [indexPath row]+1 ];
+    cell.levelLabel.text = level.name;
+    cell.levelNumber.text = [NSString stringWithFormat:@"Level %d", [indexPath row]+1 ];
     cell.reachLabel.text = [NSString stringWithFormat:@"%dx reach",level.reach];
     cell.pointsLabel.text = [NSString stringWithFormat:@"%d points", level.minScore];
     
@@ -112,19 +112,19 @@
     if (level.minScore < [[PFUser currentUser][@"score"] intValue])
     {
         cell.backgroundColor = [UIColor whiteColor];
-        //cell.levelLabel.textColor = [UIColor grayColor];
+        cell.levelLabel.textColor = [UIColor grayColor];
         cell.reachLabel.textColor = [UIColor grayColor];
         cell.pointsLabel.textColor = [UIColor grayColor];
-        //cell.levelNumber.textColor = [UIColor grayColor];
-        //cell.levelNumber.textColor = [UIColor grayColor];
+        cell.levelNumber.textColor = [UIColor grayColor];
+        cell.levelNumber.textColor = [UIColor grayColor];
     }
     else
     {
         cell.backgroundColor = [UIColor whiteColor];
-        //cell.levelLabel.textColor = [UIColor blackColor];
+        cell.levelLabel.textColor = [UIColor blackColor];
         cell.reachLabel.textColor = [UIColor grayColor];
         cell.pointsLabel.textColor = [UIColor grayColor];
-        //cell.levelNumber.textColor = [UIColor blackColor];
+        cell.levelNumber.textColor = [UIColor blackColor];
     }
     
     if ([level.name isEqualToString:[PFUser currentUser][@"reachLevel"]])
@@ -134,10 +134,10 @@
         else
             cell.backgroundColor = [UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:0.6];
         
-        //cell.levelLabel.textColor = [UIColor whiteColor];
+        cell.levelLabel.textColor = [UIColor whiteColor];
         cell.reachLabel.textColor = [UIColor whiteColor];
         cell.pointsLabel.textColor = [UIColor whiteColor];
-        //cell.levelNumber.textColor = [UIColor whiteColor];
+        cell.levelNumber.textColor = [UIColor whiteColor];
     }
     
     return cell;

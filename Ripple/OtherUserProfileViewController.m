@@ -7,7 +7,6 @@
 //
 
 #import "OtherUserProfileViewController.h"
-#import "MyRippleCell.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "Flurry.h"
 #import "MapView.h"
@@ -30,46 +29,32 @@
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorFooter;
 @property (weak, nonatomic) IBOutlet UITextView *noRipplesTextView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noTextTopConstraint;
-
-@property (strong, nonatomic) NSArray *sortButtons;
-@property (strong, nonatomic) NSMutableArray *sortImages;
-@property (strong, nonatomic) UITapGestureRecognizer *dismissSort;
-@property (nonatomic) int sortMethod;
-@property (nonatomic) int filterMethod;
 @property (nonatomic) CGFloat contentOffset;
 
-
 @property (strong, nonatomic) IBOutlet UIView *tableHeader;
-@property (weak, nonatomic) IBOutlet UIButton *loginSignupProfileButton;
-@property (weak, nonatomic) IBOutlet UILabel *highestPropagatedLabel;
-@property (strong, nonatomic) IBOutlet UIView *progressBar;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressBarWidthConstraint;
-@property (strong, nonatomic) IBOutlet UIView *progressBackground;
-@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *rippleLevel;
-@property (weak, nonatomic) IBOutlet UIButton *pointsToNextLevel;
-@property (weak, nonatomic) IBOutlet UITextView *firstLevelTextView;
-@property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIButton *followingLabel;
 @property (strong, nonatomic) IBOutlet UIButton *followingNum;
 @property (weak, nonatomic) IBOutlet UIButton *followersLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followersNum;
+@property (weak, nonatomic) IBOutlet UIButton *reachLabel;
+@property (weak, nonatomic) IBOutlet UIButton *reachValue;
 
-@property (nonatomic) BOOL isStartedCompleted;
-@property (nonatomic) BOOL isSpreadCompleted;
-@property (nonatomic) BOOL newRippleCreated;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UITextView *aboutText;
+@property (weak, nonatomic) IBOutlet UITextView *interestText;
+@property (weak, nonatomic) IBOutlet UILabel *interestsLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *aboutHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *interstsHeightConstraint;
+
 @property (nonatomic) BOOL segueWithCommentsUp;
-@property (nonatomic) float isChoosingSort;
-@property (nonatomic) int headerHeight;
-
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
 @property (strong, nonatomic) NSArray *selectedRippleArray;
 @property (strong, nonatomic) NSString *defaultNoPendingRippleString;
 @property (nonatomic) BOOL viewDidLoadJustRan;
 @property (strong, nonatomic) NSURL *url;
-@property (nonatomic) int referralNum;
 @property (strong, nonatomic) UIView *overlay;
 @property (nonatomic) BOOL isOverlayTutorial;
 
@@ -114,7 +99,7 @@ NSDictionary *socialMediaIconToName;
 }
 
 -(BOOL) isCurrentUserProfile {
-    return self.userId == nil;
+    return NO;
 }
 
 -(NSString *) getUserIdString {
@@ -128,21 +113,16 @@ NSDictionary *socialMediaIconToName;
     else
         self.segueWithCommentsUp = NO;
     
-    if (!self.isChoosingSort)
-        [self performSegueWithIdentifier:@"MapViewSegue" sender:ripple];
+    [self performSegueWithIdentifier:@"MapViewSegue" sender:ripple];
     
 }
 
 - (void) goToImageView: (Bellow *)ripple
 {
-    if (!self.isChoosingSort)
+    if (ripple.imageFile)
     {
-        
-        if (ripple.imageFile)
-        {
-            [self performSegueWithIdentifier:@"RippleImageView" sender:ripple];
-            [Flurry logEvent:@"Image_Open_Profile"];
-        }
+        [self performSegueWithIdentifier:@"RippleImageView" sender:ripple];
+        [Flurry logEvent:@"Image_Open_Profile"];
     }
 }
 
@@ -150,11 +130,7 @@ NSDictionary *socialMediaIconToName;
 {
     if (ripple)
     {
-        if (self.userId && ![self.currentUser.objectId isEqualToString:ripple.creatorId])
-        {
-            [self pushUserProfile:ripple.creatorId];
-        }
-        else if (!self.userId && ![ripple.creatorId isEqualToString: [PFUser currentUser].objectId])
+        if (![self.currentUser.objectId isEqualToString:ripple.creatorId])
         {
             [self pushUserProfile:ripple.creatorId];
         }
@@ -318,70 +294,26 @@ NSDictionary *socialMediaIconToName;
     
     
     // hide things
-    [self.highestPropagatedLabel setHidden:YES];
-    [self.pointsLabel setHidden:YES];
     [self.followersNum setHidden:YES];
     [self.followingNum setHidden:YES];
     [self.followingLabel setHidden:YES];
     [self.followersLabel setHidden:YES];
-    // [self.reachImage setHidden:YES];
-    [self.firstLevelTextView setHidden:YES];
-    [self.loginSignupProfileButton setHidden:YES];
-    [self.pointsToNextLevel setHidden:YES];
-    [self.progressBackground setHidden:YES];
-    [self.rippleLevel setHidden:YES];
+    [self.reachLabel setHidden:YES];
+    [self.reachValue setHidden:YES];
     
     
     // bools and original values
     self.viewDidLoadJustRan = YES;
-    self.newRippleCreated = NO;
-    self.sortMethod = 0;
-    self.filterMethod = 0;
-    self.isChoosingSort = NO;
-    self.headerHeight = 75;
     self.profileToHandle = nil;
+    
+    [self hideTabBar];
+    
+    // get data
+    [self updateView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    [self hideTabBar];
-    if (self.viewDidLoadJustRan)
-    {
-        self.viewDidLoadJustRan = NO;
-        
-        if (self.userId)
-        // this is someone else's profile page
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            self.user = [BellowService getUser:self.userId];
-            self.userLevels = [BellowService getRippleLevels];
-            
-            if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
-            {
-                self.isAllMyRipples = YES;
-            }
-            else
-            {
-                self.isAllMyRipples = NO;
-            }
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                self.currentUser = self.user;
-                [self updateView];
-                [self setupHeaderView];
-                [self showExperienceBar];
-                
-                
-            });
-        });
-    }
-    
-    else
-    {
-        [self setupHeaderView];
-        [self showExperienceBar];
-    }
-    
     [self.activityIndicator stopAnimating];
     [self.activityIndicator setHidden:YES];
     
@@ -403,343 +335,123 @@ NSDictionary *socialMediaIconToName;
 - (void) updateView
 {
     // Get My ripples
-    self.selectedRippleArray = self.myRipples;
-    if (!self.user)
-    {
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Add code here to do background processing
-            self.myRipples = [BellowService getMyRipples:0 withSortMethod:0];
-            if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
-            {
-                self.isAllMyRipples = YES;
-            }
-            else
-            {
-                self.isAllMyRipples = NO;
-            }
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                self.isStartedCompleted = YES;
-                [self checkBarrier];
-                
-                // sign up for listener
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addRippleToPropagated:) name:@"RipplePropagated" object:nil];
-            });
-        });
-        
-        // Get spread ripples
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Add code here to do background processing
-            self.propagatedRipples = [BellowService getPropagatedRipples:0 withSortMethod:0];
-            
-            if ([self.propagatedRipples count] < 25)// PARSE_PAGE_SIZE)
-            {
-                self.isAllPropagatedRipples = YES;
-            }
-            else
-            {
-                self.isAllPropagatedRipples = NO;
-            }
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                
-            });
-        });
-    }
-    
-    else
-    {
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Add code here to do background processing
-            self.myRipples = [BellowService getUserRipples:0 forUser:self.userId];
-            
-            if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
-            {
-                self.isAllMyRipples = YES;
-            }
-            else
-            {
-                self.isAllMyRipples = NO;
-            }
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                self.isStartedCompleted = YES;
-                [self checkBarrier];
-            });
-        });
-        
-        [self.followingNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:18.0]];
-        //[self.followingLabel.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:11.0]];
-        [self.followersNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:18.0]];
-        
-    }
-}
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
 
-- (void)checkBarrier
-{
-    if (self.isSpreadCompleted)
-    {
-        // allow to click 'spread'
-    }
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Add code here to do background processing
+        self.user = [BellowService getUser:self.userId];
+        self.myRipples = [BellowService getUserRipples:0 forUser:self.userId];
+        
+        if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
+        {
+            self.isAllMyRipples = YES;
+        }
+        else
+        {
+            self.isAllMyRipples = NO;
+        }
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            self.selectedRippleArray = self.myRipples;
+            self.currentUser = self.user;
+            
+            [self.tableView reloadData];
+            [self setupHeaderView];
+            
+            [self.activityIndicator stopAnimating];
+            [self.activityIndicator setHidden:YES];
+        });
+    });
     
-    if (self.isStartedCompleted)
-    {
-        self.selectedRippleArray = self.myRipples;
-        [self.tableView reloadData];
-    }
+    [self.followingNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
+    [self.followersNum.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
+    [self.reachValue.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0]];
 }
 
 - (void) setupHeaderView
 {
-    // hide all elements
-    [self.activityIndicator setHidden:NO];
-    [self.activityIndicator startAnimating];
     
-    if (self.userId)
+    // setup navigation title
+    UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 100, 44)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
+    
+    [titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:22.0]];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    
+    if([PFAnonymousUtils isLinkedWithUser:self.currentUser])
+        titleLabel.text = @"Profile";
+    else
+        titleLabel.text= [NSString stringWithFormat:@"%@", self.currentUser.username];
+    
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleView addSubview:titleLabel];
+    self.navigationItem.titleView = titleView;
+    [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
+
+    
+    
+    // check if user is following
+    if ([PFUser currentUser][@"following"] !=nil && [[PFUser currentUser][@"following"] indexOfObject:self.userId] != NSNotFound)
     {
-        [self.followButton setHidden:NO];
-        
-        // check if user is following
-        if ([PFUser currentUser][@"following"] !=nil && [[PFUser currentUser][@"following"] indexOfObject:self.userId] != NSNotFound)
-        {
-            [self.followButton setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            [self.followButton setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
-        }
-        
-        
+        [self.followButton setImage:[UIImage imageNamed:@"followingAndLabel.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.followButton setImage:[UIImage imageNamed:@"followAndLabel.png"] forState:UIControlStateNormal];
     }
     
-    // initiate user refresh. Alot of data we show depends on the user.
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (!self.user)
-        {
-            [[PFUser currentUser] fetch];
-            self.currentUser = [PFUser currentUser];
-        }
-        
-        dispatch_async( dispatch_get_main_queue(), ^{
-            // post notification
-            
-            if(!self.user)
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateBarBtn" object:nil];
-            
-            [self.rippleLevel setText:[NSString stringWithFormat:@"%@", self.currentUser[@"reachLevel"]]];
-            
-            // setup navigation title
-            UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 100, 44)];
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleView.frame.size.width/2 - 110,0,220, 44)];
-            
-            [titleLabel setFont:[UIFont fontWithName:@"Avenir" size:22.0]];
-            [titleLabel setTextColor:[UIColor whiteColor]];
-            
-            if([PFAnonymousUtils isLinkedWithUser:self.currentUser])
-                titleLabel.text = @"Profile";
-            else
-                titleLabel.text= [NSString stringWithFormat:@"%@", self.currentUser.username];
-            
-            [titleLabel setTextAlignment:NSTextAlignmentCenter];
-            [titleView addSubview:titleLabel];
-            self.navigationItem.titleView = titleView;
-            [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
-            
-            
-            // set up followers and following
-            if (self.currentUser[@"followingNumber"] == nil)
-                [self.followingNum setTitle:@"0" forState:UIControlStateNormal];
-            else
-                [self.followingNum setTitle:[NSString stringWithFormat:@"%u",[self.currentUser[@"followingNumber"] integerValue]] forState:UIControlStateNormal];
-            
-            [self.followingLabel setTitle:@"following" forState:UIControlStateNormal];
-            
-            NSArray *followers = [NSArray arrayWithArray:self.currentUser[@"following"]];
-            int followerscount = [followers count];
-            [self.followersNum setTitle:[NSString stringWithFormat:@"%d", followerscount] forState :UIControlStateNormal];
-            
-            if ([self.followingNum.titleLabel.text isEqualToString:@"1"])
-                [self.followingLabel setTitle:@"follower" forState:UIControlStateNormal];
-            else
-                [self.followingLabel setTitle:@"followers" forState:UIControlStateNormal];
-            
-            
-            
-            // hide or show first level text
-            if (!self.user &&[self.currentUser[@"reachLevel"] isEqualToString:@"Sea Serpent"])
-            {
-                [self.highestPropagatedLabel setHidden:YES];
-                [self.firstLevelTextView setHidden:NO];
-                
-                [self.firstLevelTextView setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
-                
-                // add gesture recognizer
-                UITapGestureRecognizer *goToMoreTab = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressFirstLevel)];
-                [goToMoreTab setNumberOfTapsRequired:1];
-                [goToMoreTab setDelegate:self];
-                [self.firstLevelTextView addGestureRecognizer:goToMoreTab];
-                
-                self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 320);
-                [self.tableView setTableHeaderView:self.tableHeader];
-                
-            }
-            else
-            {
-                
-                [self.firstLevelTextView setHidden:YES];
-                [self.highestPropagatedLabel setHidden:YES];
-                
-                // find height of tableHeader
-                int accessibleProfilesNumber = 0;
-                if(self.userId)
-                {
-                    
-                    for(NSString *key in self.user[@"accessibleProfiles"])
-                    {
-                        if(![self.user[@"accessibleProfiles"][key] isEqualToString:@""])
-                            accessibleProfilesNumber +=1;
-                    }
-                    
-                    self.containerViewHeightConstraint.constant = 36*accessibleProfilesNumber;
-                    self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 170+self.containerViewHeightConstraint.constant);
-                }
-                
-                else
-                {
-                    self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 276);
-                }
-                
-                
-                [self.tableView setTableHeaderView:self.tableHeader];
-            }
-            
-            // points
-            BellowLevel *nextLevel = [self findLevel:1];
-            
-            
-            // setup following Label
-            self.pointsLabel.text = [NSString stringWithFormat:@"%d reach  |  %d points", [self.currentUser[@"reach"] intValue], [self.currentUser[@"score"] intValue]];
-            
-            // user or nah?
-            if ([PFAnonymousUtils isLinkedWithUser:self.currentUser])
-            {
-                [self.loginSignupProfileButton setHidden:NO];
-            }
-            else
-            {
-                // put level number
-                [self.loginSignupProfileButton setHidden:YES];
-            }
-            
-            int nextLevelScore;
-            if (!self.user)
-                nextLevelScore = nextLevel.minScore - [[PFUser currentUser][@"score"] intValue];
-            else
-                nextLevelScore = nextLevel.minScore - [[self.user objectForKey:@"score"] intValue];
-
-            if (nextLevelScore == 1)
-                [self.pointsToNextLevel setTitle:[NSString stringWithFormat:@"%d point to become %@", nextLevelScore, nextLevel.name] forState:UIControlStateNormal];
-            else
-                [self.pointsToNextLevel setTitle:[NSString stringWithFormat:@"%d points to become %@", nextLevelScore, nextLevel.name] forState:UIControlStateNormal];
-            
-            // Allow the text in the button to be resized
-            self.pointsToNextLevel.titleLabel.adjustsFontSizeToFitWidth = YES;
-            self.pointsToNextLevel.titleLabel.minimumScaleFactor = 0.7;
-            
-            [self.view setNeedsUpdateConstraints];
-            [self.view layoutIfNeeded];
-            
-            // unhide elements
-            if (!self.isOverlayTutorial)
-            {
-                [self.activityIndicator stopAnimating];
-                [self.activityIndicator setHidden:YES];
-                [self.followingLabel setHidden:NO];
-                [self.followingNum setHidden:NO];
-                [self.followersLabel setHidden:NO];
-                [self.followersNum setHidden:NO];
-                [self.pointsToNextLevel setHidden:NO];
-                [self.progressBackground setHidden:NO];
-                [self.rippleLevel setHidden:NO];
-                [self.pointsLabel setHidden:NO];
-            }
-        });
-    });
-}
-
-- (void)showExperienceBar
-{
-    self.progressBackground.hidden = NO;
-    // set ripple reach level text width, progress bar width, and update constraints
-    
-    
-    // calculate progress bar width
-    double score = [self.currentUser[@"score"] doubleValue];
-    BellowLevel *nextLevel = [self findLevel:1];
-    BellowLevel *currentLevel = [self findLevel:0];
-    double minScore = currentLevel.minScore;
-    double maxScore = nextLevel.minScore;
-    
-    
-    double ratio = (score - minScore) / (maxScore - minScore);
-    CGFloat xCoordinate = (self.progressBackground.frame.size.width) * ratio;
-    if (ratio == 0)
-        xCoordinate = self.progressBackground.frame.size.width * 0.01;
-    
-    [self.progressBackground setHidden:NO];
-    
-    // animate
-    [UIView animateWithDuration:1 animations:^{
-        self.progressBarWidthConstraint.constant = xCoordinate;
-        
-        self.progressBar.frame = CGRectMake(self.progressBar.frame.origin.x, self.progressBar.frame.origin.y, xCoordinate, self.progressBar.frame.size.height);
-    }];
-    
-}
-
-- (BellowLevel *)findLevel: (int)whichLevel
-{
-    
-    double score;
-    
-    if (!self.user)
-        score = [self.currentUser[@"score"] doubleValue];
+    // set up followers and following
+    if (self.currentUser[@"followingNumber"] == nil)
+        [self.followingNum setTitle:@"0" forState:UIControlStateNormal];
     else
-        score = [self.user[@"score"] doubleValue];
+        [self.followingNum setTitle:[NSString stringWithFormat:@"%u",[self.currentUser[@"followingNumber"] integerValue]] forState:UIControlStateNormal];
     
-    BellowLevel *returnLevel;
+    [self.followingLabel setTitle:@"following" forState:UIControlStateNormal];
     
-    for (int i = 0; i < [self.userLevels count]; i++)
+    NSArray *followers = [NSArray arrayWithArray:self.currentUser[@"following"]];
+    int followerscount = [followers count];
+    [self.followersNum setTitle:[NSString stringWithFormat:@"%d", followerscount] forState :UIControlStateNormal];
+    
+    if ([self.followingNum.titleLabel.text isEqualToString:@"1"])
+        [self.followingLabel setTitle:@"follower" forState:UIControlStateNormal];
+    else
+        [self.followingLabel setTitle:@"followers" forState:UIControlStateNormal];
+    
+    
+    
+    // find height of tableHeader
+    int accessibleProfilesNumber = 0;
+    if(self.userId)
     {
-        BellowLevel *level = self.userLevels[i];
-        if (level.minScore > score)
+        
+        for(NSString *key in self.user[@"accessibleProfiles"])
         {
-            if (whichLevel == 1)
-                level = self.userLevels[i];
-            else
-                level = self.userLevels[i - 1];
-            
-            returnLevel = level;
-            break;
+            if(![self.user[@"accessibleProfiles"][key] isEqualToString:@""])
+                accessibleProfilesNumber +=1;
         }
+        
+        self.containerViewHeightConstraint.constant = 36*accessibleProfilesNumber;
+        self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 170+self.containerViewHeightConstraint.constant);
     }
+
+    [self.tableView setTableHeaderView:self.tableHeader];
+    [self.view setNeedsUpdateConstraints];
+    [self.view layoutIfNeeded];
     
-    return returnLevel;
+    // unhide elements
+    if (!self.isOverlayTutorial)
+    {
+        [self.activityIndicator stopAnimating];
+        [self.activityIndicator setHidden:YES];
+        [self.followingLabel setHidden:NO];
+        [self.followingNum setHidden:NO];
+        [self.followersLabel setHidden:NO];
+        [self.followersNum setHidden:NO];
+
+    }
 }
 
-- (IBAction)didPressNextLevelButton:(id)sender {
-    
-    if ([PFAnonymousUtils isLinkedWithUser:self.currentUser])
-        [self showLogInAndSignUpView];
-    else
-        [self performSegueWithIdentifier:@"SegueToPointsFromProfile" sender:nil];
-}
-
-
-- (void)didPressFirstLevel
-{
-    [self performSegueWithIdentifier:@"SegueToPointsFromProfile" sender:nil];
-}
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -753,68 +465,32 @@ NSDictionary *socialMediaIconToName;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.userId)
-        return [self setSwipeableCell:tableView withIndexPath:indexPath];
-    else
-        return [self setMyRippleCell:tableView withIndexPath:indexPath];
+    return [self setSwipeableCell:tableView withIndexPath:indexPath];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (!self.userId)
-        return 75;
-    
-    else
-        return 30;
+    return 30;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     // 1. Dequeue the custom header cell
-    HeaderTableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
-    headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [headerCell setUserInteractionEnabled:YES];
-    headerCell.delegate = self;
+    UILabel *myLabel = [[UILabel alloc] init];
+    myLabel.frame = CGRectMake(8, 5, [UIScreen mainScreen].bounds.size.width - 16, 20);
+    myLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:14.0];
+    myLabel.text = [NSString stringWithFormat:@"%@'s posts:", self.currentUser.username];
+    [myLabel setTextColor:[UIColor blackColor]];
     
-    if (!self.userId)
-    {
-        [headerCell.filterView setHidden:NO];
-        [headerCell.UserRecentLabel setHidden:YES];
-        if (self.newRippleCreated)
-        {
-            headerCell.filterMethod = 1; //MAKE IT OPPOSITE
-            headerCell.sortMethod = 0;
-            
-            self.newRippleCreated = NO;
-        }
-        
-        [headerCell changeColorOfFilterMethods:self.filterMethod];
-        [headerCell changeColorOfSortOptions:self.sortMethod];
-        
-    }
+    UIView *headerView = [[UIView alloc] init];
+    [headerView addSubview:myLabel];
     
-    else
-    {
-        [headerCell.filterView setHidden:YES];
-        
-        if (self.currentUser == self.user) {
-            [headerCell.UserRecentLabel setText: [NSString stringWithFormat:@"%@'s ripples", self.user.username]];
-            [headerCell.UserRecentLabel setHidden:NO];
-        }
-    }
-    
-    
-    [headerCell setHidden:NO];
-    
-    return headerCell;
+    return headerView;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (self.user)
-        return [NSString stringWithFormat:@"%@'s ripples", self.user.username];
-    else
-        return nil;
+    return nil;
 }
 
 - (SwipeableCell *)setSwipeableCell:(UITableView *)tableView withIndexPath:(NSIndexPath *) indexPath
@@ -1029,266 +705,45 @@ NSDictionary *socialMediaIconToName;
     return cell;
 }
 
-- (MyRippleCell *)setMyRippleCell:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView registerNib:[UINib nibWithNibName:@"MyRippleCell" bundle:nil] forCellReuseIdentifier:@"MyRippleCell"];
-    MyRippleCell *cell = (MyRippleCell *)[tableView dequeueReusableCellWithIdentifier:@"MyRippleCell" forIndexPath:indexPath];
-    cell.rippleMainView.layer.cornerRadius = 5.0;
-    
-    Bellow *ripple = [self.selectedRippleArray objectAtIndex:[indexPath row]];
-    
-    // nil stuff
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.ripple = nil;
-    cell.ripple = ripple;
-    cell.delegate = self;
-    cell.rippleTextView.delegate = self;
-    cell.rippleTextView.text = [NSString stringWithString:ripple.text];
-    cell.ripple.actedUponState = -1;
-    
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    // user label work
-    UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:18.0];
-    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
-    NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-    
-    [cell.usernameLabel setTitle:cell.ripple.creatorName forState:UIControlStateNormal];
-    CGSize stringSize = [cell.ripple.creatorName sizeWithAttributes:attributesDictionary];
-    cell.usernameLabelWidthConstraint.constant = stringSize.width + 3;
-    
-    
-    // set username and city
-    NSTimeInterval timeInterval = [cell.ripple.createdAt timeIntervalSinceNow];
-    if (cell.ripple.city)
-    {
-        // set city label hidden
-        [cell.cityLabel setHidden:NO];
-        cell.cityLabel.text = cell.ripple.city;
-        [cell.timestamp setHidden:NO];
-        cell.timestamp.text = [NSString stringWithFormat:@"%@", [self.timeIntervalFormatter stringForTimeInterval:timeInterval]];
-        
-        // size citylabel
-        UIFont *labelFont = [UIFont fontWithName:@"AvenirNext-Regular" size:12.0];
-        NSDictionary *labelDictionary = [NSDictionary dictionaryWithObjectsAndKeys:labelFont, NSFontAttributeName,nil];
-        CGSize citySize = [cell.ripple.city sizeWithAttributes:labelDictionary];
-        cell.cityLabelWidthConstraint.constant = citySize.width;
-    }
-    else
-    {
-        [cell.timestamp setHidden:YES];
-        cell.cityLabel.text = [NSString stringWithFormat:@"%@", [self.timeIntervalFormatter stringForTimeInterval:timeInterval]];
-        cell.cityLabelWidthConstraint.constant = 200;
-    }
-    
-    // spread count
-    NSDictionary *boldAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"AvenirNext-Bold" size:13], NSFontAttributeName, nil];
-    NSAttributedString *rippledText;
-    
-    if (cell.ripple.numberPropagated != -1)
-        rippledText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%dx", cell.ripple.numberPropagated] attributes:boldAttributes];
-    else
-        rippledText = [[NSAttributedString alloc] initWithString:@"0x" attributes:boldAttributes];
-    [cell.numberPropagatedLabel setAttributedText:rippledText];
-    
-    [cell.numberOfCommentsButton setTitle:[NSString stringWithFormat:@"%d", ripple.numberComments] forState:UIControlStateNormal];
-    
-    
-    // change color of spreadCommentView items
-    [cell.spreadCommentView setBackgroundColor:[UIColor colorWithRed:238.0/255.0f green:238.0f/255 blue:238.0f/255 alpha:1.0]];
-    [cell.numberPropagatedLabel setTextColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0]];
-    [cell.numberOfCommentsButton setTitleColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0] forState:UIControlStateNormal];
-    [cell.commentsButton setImage:[UIImage imageNamed:@"commentsBlue.png"] forState:UIControlStateNormal];
-    
-    // set text top constraint if  have image
-    if (cell.ripple.imageFile)
-    {
-        // image work!
-        [cell.outerImageView setHidden:NO];
-        [cell.outerImageViewWidthConstraint setConstant:[UIScreen mainScreen].bounds.size.width - 12];
-        [cell.rippleImageView setHidden:NO];
-        cell.rippleImageView.image = [UIImage imageNamed:@"grayBox.png"];
-        [cell.outerImageView setBackgroundColor:[UIColor colorWithWhite:232/255.0 alpha:1.0]];
-        
-        
-        cell.rippleImageView.file = (PFFile *)cell.ripple.imageFile;
-        
-        // determine set to 100% width, ratio for height. (if smaller than...350px)
-        CGFloat heightRatio = (float) cell.ripple.imageHeight / cell.ripple.imageWidth;
-        cell.rippleImageViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width - 6;
-        
-        CGFloat cellImageHeight;
-        if (cell.outerImageViewWidthConstraint.constant*heightRatio <= 350)
-        {
-            cell.outerImageViewHeightConstraint.constant = cell.outerImageViewWidthConstraint.constant*heightRatio;
-            cellImageHeight = cell.outerImageViewHeightConstraint.constant;
-        }
-        
-        else
-        {
-            cell.outerImageViewHeightConstraint.constant = 350;
-            cellImageHeight = 350;
-        }
-        
-        // load image + set position from top for image
-        cell.rippleImageViewHeightConstraint.constant = cell.outerImageView.frame.size.width*heightRatio;
-        [cell.rippleImageView loadInBackground];
-        
-        cell.topTextViewConstraint.constant = cellImageHeight + cell.spreadCommentView.frame.size.height + cell.outerImageView.frame.origin.y;
-        
-        // place spreadCommentView on image
-        cell.spreadCommentViewTopConstraint.constant = cellImageHeight + cell.outerImageView.frame.origin.y;
-        
-        // find textview height// find textview height
-        [cell.rippleTextView setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:16.0]];
-        CGSize maximumSize = CGSizeMake(self.tableView.frame.size.width- 12.0, 9999);
-        CGRect textSize =  [cell.ripple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
-        cell.textViewHeightConstraint.constant = textSize.size.height + 30;
-        
-        // borders borders
-        [cell.rippleTextView.layer setBorderWidth:0.0];
-        [cell.outerImageView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-        [cell.outerImageView.layer setBorderWidth:1.0];
-        // cell.outerImageView.layer.cornerRadius = 5.0;
-        
-        cell.rightSpreadCommentViewConstraint.constant = 6;
-        cell.leftSpreadCommentViewConStraint.constant = 6;
-        
-    }
-    
-    // we don't have an image
-    else
-    {
-        cell.rippleImageView.hidden = YES;
-        cell.outerImageView.hidden = YES;
-        cell.rippleImageView.image = nil;
-        cell.topTextViewConstraint.constant = cell.outerImageView.frame.origin.y;
-        
-        // find textview height
-        [cell.rippleTextView setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:20.0]];
-        CGSize maximumSize = CGSizeMake(self.tableView.frame.size.width- 20.0, 9999);
-        UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:20.0];
-        NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
-        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-        
-        CGRect textSize =  [cell.ripple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
-        
-        cell.textViewHeightConstraint.constant = textSize.size.height + 45;
-        // place spreadCommentView there
-        cell.spreadCommentViewTopConstraint.constant = textSize.size.height + cell.outerImageView.frame.origin.y + 35;
-        
-        // add small border to this
-        [cell.rippleTextView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-        [cell.rippleTextView.layer setBorderWidth:1.0];
-        cell.rippleTextView.layer.cornerRadius = 5.0;
-        
-        cell.rightSpreadCommentViewConstraint.constant = 10;
-        cell.leftSpreadCommentViewConStraint.constant = 10;
-    }
-    
-    // update constraints
-    [cell setNeedsUpdateConstraints];
-    [cell layoutIfNeeded];
-    
-    // give it arrow accessory
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    // add shadow
-    cell.rippleMainView.layer.shadowOffset = CGSizeMake(0,0);
-    cell.rippleMainView.layer.shadowRadius = 2;
-    cell.rippleMainView.layer.shadowOpacity = 0.1;
-    cell.rippleMainView.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.rippleMainView.bounds].CGPath;
-    
-    return cell;
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.userId)
-    {
-        // set current ripple
-        Bellow *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
-        
-        // size text and images
-        CGFloat imageHeight = 0;
-        NSDictionary *attributesDictionary = [[NSDictionary alloc]init];
-        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 20, 9999);
-        
-        if (currentRipple.imageFile)
-        {
-            // find height ratio
-            CGFloat heightRatio = (float) currentRipple.imageHeight / currentRipple.imageWidth;
-            CGFloat height = ([UIScreen mainScreen].bounds.size.width - 28) * heightRatio;
-            
-            if (height > 350)
-                imageHeight = 350;
-            else
-                imageHeight = height + 10;
-            
-            imageHeight += 60;
-            
-            UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0];
-            attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
-        }
-        else
-        {
-            imageHeight = 90; // account for the spreadCommentView
-            
-            UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:20.0];
-            attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
-        }
-        
-        CGRect stringsize =  [currentRipple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
-        
-        CGFloat swipeableCellHeight = 0;
-        if (self.userId)
-            swipeableCellHeight = 60;
-        
-        return stringsize.size.height + imageHeight + swipeableCellHeight + 75;
-    }
+    // set current ripple
+    Bellow *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
     
+    // size text and images
+    CGFloat imageHeight = 0;
+    NSDictionary *attributesDictionary = [[NSDictionary alloc]init];
+    NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+    CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 20, 9999);
+    if (currentRipple.imageFile)
+    {
+        // find height ratio
+        CGFloat heightRatio = (float) currentRipple.imageHeight / currentRipple.imageWidth;
+        CGFloat height = ([UIScreen mainScreen].bounds.size.width - 28) * heightRatio;
+        
+        if (height > 350)
+            imageHeight = 350;
+        else
+            imageHeight = height;
+        
+        // include height of spreadViewComment
+        imageHeight += 25;
+        
+        UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0];
+        attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
+    }
     else
     {
-        // set current ripple
-        Bellow *currentRipple = [self.selectedRippleArray objectAtIndex:indexPath.row];
-        
-        // size text and images
-        CGFloat imageHeight = 0;
-        NSDictionary *attributesDictionary = [[NSDictionary alloc]init];
-        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 20, 9999);
-        if (currentRipple.imageFile)
-        {
-            // find height ratio
-            CGFloat heightRatio = (float) currentRipple.imageHeight / currentRipple.imageWidth;
-            CGFloat height = ([UIScreen mainScreen].bounds.size.width - 28) * heightRatio;
-            
-            if (height > 350)
-                imageHeight = 350;
-            else
-                imageHeight = height;
-            
-            // include height of spreadViewComment
-            imageHeight += 25;
-            
-            UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0];
-            attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
-        }
-        else
-        {
-            imageHeight = 25;
-            UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:21.0];
-            attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
-        }
-        
-        CGRect stringsize =  [currentRipple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
-        
-        CGFloat dismissSpreadView = 60;
-        
-        return stringsize.size.height + imageHeight + 75 + dismissSpreadView;
+        imageHeight = 25;
+        UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Regular" size:21.0];
+        attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
     }
+    
+    CGRect stringsize =  [currentRipple.text boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:context];
+    
+    CGFloat dismissSpreadView = 60;
+    
+    return stringsize.size.height + imageHeight + 75 + dismissSpreadView;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1351,582 +806,45 @@ NSDictionary *socialMediaIconToName;
         }
     }
     
-    if ([cell isKindOfClass:[MyRippleCell class]] || [cell isKindOfClass:[SwipeableCell class]])
+    if ([indexPath row] == [self.selectedRippleArray count] - 4)
     {
-        if ([indexPath row] == [self.selectedRippleArray count] - 2)
-        {
-            if ((self.filterMethod == 0) && (self.sortMethod == 0) && !self.isAllMyRipples)
-            {
+        // call method to create ripples with block to reload
+        [self.indicatorFooter startAnimating];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSArray *newMyRipples;
+            newMyRipples = [BellowService getUserRipples:(int)[self.selectedRippleArray count] forUser:self.userId];
+            
+            if (newMyRipples.count < 25) // PARSE_PAGE_SIZE)
+                self.isAllMyRipples = YES;
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
                 
-                // call method to create ripples with block to reload
-                [self.indicatorFooter startAnimating];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    NSArray *newMyRipples;
-                    if (!self.userId)
-                        newMyRipples = [BellowService getMyRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
-                    else
-                        newMyRipples = [BellowService getUserRipples:(int)[self.selectedRippleArray count] forUser:self.userId];
-                    
-                    if (newMyRipples.count < 25) // PARSE_PAGE_SIZE)
-                        self.isAllMyRipples = YES;
-                    
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.myRipples addObjectsFromArray:newMyRipples];
-                        [self.tableView reloadData];
-                        [self.indicatorFooter stopAnimating];
-                    });
-                });
-            }
-            else if ((self.filterMethod == 0) && (self.sortMethod == 1) && !self.isAllMyRipplesMostPopular)
-            {
-                
-                // call method to create ripples with block to reload
-                [self.indicatorFooter startAnimating];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    
-                    NSArray *newMyRipplesMostPopular = [BellowService getMyRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
-                    
-                    if (newMyRipplesMostPopular.count < 25) //PARSE_PAGE_SIZE)
-                        self.isAllMyRipples = YES;
-                    
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.myRipplesMostPopular addObjectsFromArray:newMyRipplesMostPopular];
-                        [self.tableView reloadData];
-                        [self.indicatorFooter stopAnimating];
-                    });
-                });
-            }
-            else if ((self.filterMethod == 1) && (self.sortMethod == 0) && !self.isAllPropagatedRipples)
-            {
-                
-                // call method to create ripples with block to reload
-                [self.indicatorFooter startAnimating];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    
-                    NSArray *newPropagatedRipples = [BellowService getPropagatedRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
-                    
-                    if (newPropagatedRipples.count < 25) //PARSE_PAGE_SIZE)
-                        self.isAllPropagatedRipples = YES;
-                    
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.propagatedRipples addObjectsFromArray:newPropagatedRipples];
-                        [self.tableView reloadData];
-                        [self.indicatorFooter stopAnimating];
-                    });
-                });
-            }
-            else if ((self.filterMethod == 1) && (self.sortMethod == 1) && !self.isAllPropagatedRipplesMostPopular)
-            {
-                
-                // call method to create ripples with block to reload
-                [self.indicatorFooter startAnimating];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    
-                    NSArray *newPropagatedRipplesMostPopular = [BellowService getPropagatedRipples:(int)[self.selectedRippleArray count]  withSortMethod:self.sortMethod];
-                    
-                    if (newPropagatedRipplesMostPopular.count < 25) //PARSE_PAGE_SIZE)
-                        self.isAllPropagatedRipplesMostPopular = YES;
-                    
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.propagatedRipplesMostPopular addObjectsFromArray:newPropagatedRipplesMostPopular];
-                        [self.tableView reloadData];
-                        [self.indicatorFooter startAnimating];
-                    });
-                });
-            }
-        }
+                [self.myRipples addObjectsFromArray:newMyRipples];
+                [self.tableView reloadData];
+                [self.indicatorFooter stopAnimating];
+            });
+        });
     }
 }
 
 
 - (void)refreshList
 {
-    if (!self.userId)
-    {
-        [self.noRipplesTextView setHidden:YES];
-        [self.tableView setAlpha:1.0];
-        [self setupHeaderView];
-        [self showExperienceBar];
-        
-        // my ripples
-        if (self.filterMethod == 0)
-        {
-            // most recent
-            if (self.sortMethod == 0)
-            {
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    // Add code here to do background processing
-                    self.myRipples = [BellowService getMyRipples:0 withSortMethod:0];
-                    self.selectedRippleArray = self.myRipples;
-                    
-                    if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
-                    {
-                        self.isAllMyRipples = YES;
-                    }
-                    else
-                    {
-                        self.isAllMyRipples = NO;
-                    }
-                    
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        if ([self.selectedRippleArray count] > 0)
-                            [self.noRipplesTextView setHidden:YES];
-                        else
-                        {
-                            [self displayNoRipplesViewForSort];
-                        }
-                        
-                        [self.tableView reloadData];
-                    });
-                });
-            }
-            
-            // most popular
-            else
-            {
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    // Add code here to do background processing
-                    self.myRipplesMostPopular = [BellowService getMyRipples:0 withSortMethod:1];
-                    self.selectedRippleArray = self.myRipplesMostPopular;
-                    
-                    if ([self.myRipplesMostPopular count] < 25) // PARSE_PAGE_SIZE)
-                    {
-                        self.isAllMyRipplesMostPopular = YES;
-                    }
-                    else
-                    {
-                        self.isAllMyRipplesMostPopular = NO;
-                    }
-                    
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        
-                        if ([self.selectedRippleArray count] > 0)
-                            [self.noRipplesTextView setHidden:YES];
-                        else
-                        {
-                            [self displayNoRipplesViewForSort];
-                        }
-                        
-                        [self.tableView reloadData];
-                    });
-                });
-            }
-        }
-        
-        // spread ripples
-        else
-        {
-            // most recent
-            if (self.sortMethod == 0)
-            {
-                // Get spread ripples
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    // Add code here to do background processing
-                    self.propagatedRipples = [BellowService getPropagatedRipples:0 withSortMethod:0];
-                    self.selectedRippleArray = self.propagatedRipples;
-                    
-                    if ([self.propagatedRipples count] < 25) // PARSE_PAGE_SIZE)
-                    {
-                        self.isAllPropagatedRipples = YES;
-                    }
-                    else
-                    {
-                        self.isAllPropagatedRipples = NO;
-                    }
-                    
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        
-                        if ([self.selectedRippleArray count] > 0)
-                            [self.noRipplesTextView setHidden:YES];
-                        else
-                        {
-                            [self displayNoRipplesViewForSort];
-                        }
-                        
-                        [self.tableView reloadData];
-                    });
-                });
-            }
-            
-            // most popular
-            else
-            {
-                // Get spread ripples
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    // Add code here to do background processing
-                    self.propagatedRipplesMostPopular = [BellowService getPropagatedRipples:0 withSortMethod:1];
-                    self.selectedRippleArray = self.propagatedRipplesMostPopular;
-                    
-                    if ([self.propagatedRipplesMostPopular count] < 25) // PARSE_PAGE_SIZE)
-                    {
-                        self.isAllPropagatedRipplesMostPopular = YES;
-                    }
-                    else
-                    {
-                        self.isAllPropagatedRipplesMostPopular = NO;
-                    }
-                    
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        if ([self.selectedRippleArray count] > 0)
-                            [self.noRipplesTextView setHidden:YES];
-                        else
-                        {
-                            [self displayNoRipplesViewForSort];
-                        }
-                        
-                        [self.tableView reloadData];
-                    });
-                });
-            }
-        }
-    }
-    
-    else
-    {
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Add code here to do background processing
-            self.myRipples = [BellowService getUserRipples:0 forUser:self.userId];
-            
-            if ([self.myRipples count] < 25) //PARSE_PAGE_SIZE)
-            {
-                self.isAllMyRipples = YES;
-            }
-            else
-            {
-                self.isAllMyRipples = NO;
-            }
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                self.isStartedCompleted = YES;
-                [self checkBarrier];
-            });
-        });
-    }
-    
-    // call service and update table
-    [self.refreshControl endRefreshing];
-}
-
-
-- (void) displayNoRipplesViewForSort
-{
-    if (self.filterMethod == 0)
-        self.noRipplesTextView.text = @"You haven't started a ripple. Tap the pencil to create one!";
-    else
-        self.noRipplesTextView.text = @"You haven't spread a ripple yet. Swipe a ripple on the feed to spread it!";
-    
-    self.noTextTopConstraint.constant = 80;
-    [self.noRipplesTextView setHidden:NO];
-    
-}
-
-
-#pragma mark - filter/sort options
-- (void)dismissTableUnderlay
-{
-    //self.isChoosingSort = NO;
-}
-
-- (void) showTableUnderlay
-{
-    //self.isChoosingSort = YES;
-}
-
-
-- (void) passSortMethod:(int)sortMethod passFilterMethod: (int)filterMethod
-{
-    [self.activityIndicator setHidden:YES];
-    [self.activityIndicator startAnimating];
-    
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Add code here to do background processing
-        if (filterMethod == 0)
-        {
-            if (sortMethod == 0)
-            {
-                self.selectedRippleArray = self.myRipples;
-            }
-            else if (self.myRipplesMostPopular == nil)
-            {
-                self.myRipplesMostPopular = [BellowService getMyRipples:0 withSortMethod:sortMethod];
-                self.selectedRippleArray = self.myRipplesMostPopular;
-                
-                
-                if ([self.myRipplesMostPopular count] < 25)//PARSE_PAGE_SIZE)
-                {
-                    self.isAllMyRipplesMostPopular = YES;
-                }
-            }
-            else
-            {
-                self.selectedRippleArray = self.myRipplesMostPopular;
-            }
-        }
-        else
-        {
-            if (sortMethod == 0)
-            {
-                self.selectedRippleArray = self.propagatedRipples;
-            }
-            else if (self.propagatedRipplesMostPopular == nil)
-            {
-                self.propagatedRipplesMostPopular = [BellowService getPropagatedRipples:0 withSortMethod:sortMethod];
-                self.selectedRippleArray = self.propagatedRipplesMostPopular;
-                
-                
-                if ([self.propagatedRipplesMostPopular count] < 25)//PARSE_PAGE_SIZE)
-                {
-                    self.isAllPropagatedRipplesMostPopular = YES;
-                }
-            }
-            else
-            {
-                self.selectedRippleArray = self.propagatedRipplesMostPopular;
-            }
-            
-        }
-        
-        dispatch_async( dispatch_get_main_queue(), ^{
-            // reload table and check if pending ripples
-            [self.tableView reloadData];
-            
-            if (self.selectedRippleArray.count > 0)
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
-            
-            [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:YES];
-            
-            if ([self.selectedRippleArray count] > 0)
-                [self.noRipplesTextView setHidden:YES];
-            else
-            {
-                if (filterMethod == 0)
-                    self.noRipplesTextView.text = @"You haven't started a ripple. Tap the pencil to create one";
-                else
-                    self.noRipplesTextView.text = @"You haven't spread a ripple yet. Swipe a ripple on the feed to spread it";
-                self.noTextTopConstraint.constant = 80;
-                [self.noRipplesTextView setHidden:NO];
-            }
-        });
-    });
-    
-    self.sortMethod = sortMethod;
-    self.filterMethod = filterMethod;
-}
-
-#pragma mark - navigate here upon new ripple creation
-// New ripple was created. Add it to the "started" list
-- (void)notifyNewRipple:(NSNotification *)notification {
-    
-    Bellow *newRipple = (Bellow *)[notification object];
-    [self.myRipples insertObject:newRipple atIndex:0];
-    
-    
-    // use the UITableView to animate the removal of this row
-    self.selectedRippleArray = self.myRipples;
-    self.newRippleCreated = YES;
-    
-    [self.tableView reloadData];
-    
-    // determine if this was first ripple user sent
-    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
-    
-    NSNumber *sentFirstRipple = [userData objectForKey:@"sentFirstRipple"];
-    int sentFirstRippleCheck = [sentFirstRipple intValue];
-    
-    // if we recently updated, return
-    if (sentFirstRippleCheck <= 2 && [[PFUser currentUser][@"score"] intValue] <= 250)
-    {
-        //increment point
-        [[PFUser currentUser] incrementKey:@"score"];
-        [[PFUser currentUser] saveInBackground];
-        
-        // show alert saying you got a point, and take to user page
-        UIAlertView *sentFirstRipple = [[UIAlertView alloc] initWithTitle:@"Congratulations" message:@"You just sent a ripple. Here's a point!" delegate:self cancelButtonTitle:@"Learn about points" otherButtonTitles:nil];
-        
-        [sentFirstRipple show];
-        [userData setObject:[NSNumber numberWithInteger:2] forKey:@"sentFirstRipple"];
-        [userData synchronize];
-    }
-    
-    // start refresh
-    [self.refreshControl setHidden:NO];
-    [self.refreshControl beginRefreshing];
-    
-    // DELETE AFTER VIDEO:
-    /*
-     [AGPushNoteView showWithNotificationMessage:[NSString stringWithFormat:@"You have new ripples"]];
-     
-     [AGPushNoteView setMessageAction:^(NSString *message) {
-     self.selectedRippleArray = self.pendingRipples;
-     
-     [self.rippleSegmentControl setSelectedSegmentIndex:1];
-     [self chosenRippleSegmentChanged:nil];
-     
-     }];
-     */
-}
-
-- (void)notifyNewRippleEnd:(NSNotification *)notification {
-    [self refreshList];
-    [self.refreshControl endRefreshing];
-    [self.refreshControl setHidden:YES];
-}
-
-
-- (void)addRippleToPropagated:(NSNotification *)notification {
-    // grab ripple
-    Bellow *ripple = (Bellow *)[notification object];
-    [self.propagatedRipples insertObject:ripple atIndex:0];
-    
-}
-
-- (void)rippleDeleted:(Bellow *)ripple
-{
-    // use the UITableView to animate the removal of this row
-    NSUInteger index = [self.myRipples indexOfObject:ripple];
-    
-    if (index != NSNotFound)
-    {
-        [self.tableView beginUpdates];
-        [self.myRipples removeObject:ripple];
-        
-        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                              withRowAnimation:UITableViewRowAnimationLeft];
-        [self.tableView endUpdates];
-    }
-    
-    [self checkRemainingRipples];
-    
-    
-    
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [BellowService deleteRipple:ripple];
-    });
-    
-    [PFAnalytics trackEvent:@"RippleDeleted" dimensions:@{}];
-    
-    [Flurry logEvent:@"Ripple_Deleted"];
+    [self updateView];
 }
 
 - (void)checkRemainingRipples
 {
-    if ([self.myRipples count] == 0 && self.filterMethod == 0)
+    if ([self.myRipples count] == 0)
     {
-        self.noRipplesTextView.text = self.defaultNoPendingRippleString;
+        self.noRipplesTextView.text =[NSString stringWithFormat:@"There are no posts from %@", self.currentUser.username];
         [self.view updateConstraints];
         [self.noRipplesTextView setHidden:NO];
     }
     
     else
         [self.noRipplesTextView setHidden:YES];
-}
-
-#pragma mark - login and signup
-- (void)showLogInAndSignUpView
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(justLoggedIn) name:@"justLoggedIn" object:nil];
-    
-    // Create the log in view controller
-    RippleLogInView *logInViewController = [[RippleLogInView alloc] init];
-    [logInViewController setDelegate:self]; // Set ourselves as the delegate
-    [logInViewController setFields: PFLogInFieldsDefault];
-    
-    // Create the sign up view controller
-    RippleSignUpView *signUpViewController = [[RippleSignUpView alloc] init];
-    [signUpViewController setDelegate:self]; // Set ourselves as the delegate
-    signUpViewController.fields = (PFSignUpFieldsUsernameAndPassword | PFSignUpFieldsSignUpButton | PFSignUpFieldsEmail | PFSignUpFieldsAdditional | PFSignUpFieldsDismissButton);
-    
-    [signUpViewController setDelegate:self]; // Set ourselves as the delegate
-    
-    // Assign our sign up controller to be displayed from the login controller
-    [logInViewController setSignUpController:signUpViewController];
-    
-    // Present the log in view controller
-    [self presentViewController:logInViewController animated:YES completion:NULL];
-}
-
-- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
-    // Associate the device with a user
-    PFInstallation *installation = [PFInstallation currentInstallation];
-    installation[@"user"] = [PFUser currentUser];
-    [installation saveInBackground];
-    
-    
-    // initiate user refresh
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Add code here to do background processing
-        [[PFUser currentUser] fetch];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // initiate user user refresh
-            self.currentUser = [PFUser currentUser];
-            [self setupHeaderView];
-            [self refreshList];
-            // [self updateView];
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-    });
-}
-
-// Sent to the delegate when the log in attempt fails.
-- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
-    UIAlertView *failToLogInAlertView = [[UIAlertView alloc] initWithTitle:@"Failed to log in" message:[NSString stringWithFormat:@"%@", error.userInfo[@"error"]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [failToLogInAlertView show];
-}
-
-// Sent to the delegate when the log in screen is dismissed.
-- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
-    // initiate user refresh
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Add code here to do background processing
-        [[PFUser currentUser] fetch];
-        
-        //referral
-        if (user[@"additional"] != NULL)
-        {
-            self.referralNum = [BellowService acceptReferral:user[@"additional"]];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // initiate user user refresh
-            self.currentUser = [PFUser currentUser];
-            [self setupHeaderView];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReferralAlert" object:[NSNumber numberWithInt: self.referralNum]];
-            
-            [[PFUser currentUser] setObject:[[PFUser currentUser].username lowercaseString] forKey:@"canonicalUsername"];
-            
-            NSArray *followingArray = [NSArray arrayWithObject:@"qqyvLOFvNT"];
-            [[PFUser currentUser] setObject:followingArray forKey:@"following"];
-            
-            [[PFUser currentUser] saveInBackground];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-    });
-}
-
-- (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error
-{
-    
-}
-
-- (IBAction)loginSignupFromProfile:(id)sender
-{
-    [self showLogInAndSignUpView];
 }
 
 #pragma mark - swipeableCellDelegates
@@ -2102,44 +1020,6 @@ NSDictionary *socialMediaIconToName;
     }
 }
 
-#pragma mark - Scrollview related methods
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (!self.userId)
-    {
-        if (scrollView.contentOffset.y <60)
-        {
-            [[self navigationController] setNavigationBarHidden:NO animated:NO];
-            if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-                [self.navigationController setHidesBarsOnSwipe:NO];
-        }
-        
-        else if(scrollView.contentOffset.y > self.contentOffset + 5)
-        {
-            if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-                [self.navigationController setHidesBarsOnSwipe:YES];
-            
-            if (!self.userId)
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"hideTabBar" object:nil];
-        }
-        
-        else if (scrollView.contentOffset.y < self.contentOffset - 5)
-        {
-            if (!self.userId)
-            {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"showTabBar" object:nil];
-                [self.tabBarController.tabBar setHidden:NO];
-            }
-            
-            [[self navigationController] setNavigationBarHidden:NO animated:YES];
-            
-        }
-        
-        
-        self.contentOffset = scrollView.contentOffset.y;
-    }
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -2184,38 +1064,12 @@ NSDictionary *socialMediaIconToName;
     
 }
 
-- (void)justLoggedIn
-{
-    self.currentUser = [PFUser currentUser];
-    [self setupHeaderView];
-    [self refreshList];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"justLoggedIn" object:nil];
-}
-
-- (void)didPressSettings
-{
-    // perform segue
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideTabBar" object:nil];
-    [self performSegueWithIdentifier:@"MoreSegue" sender:self];
-}
-
-- (void)shareSheetForRipple
-{
-    // alert view
-    UIAlertView *referralPoints = [[UIAlertView alloc] initWithTitle:@"Invite your friends!" message:[NSString stringWithFormat:@"Earn points when friends sign in using your username as a referral code. Get points when they invite their friends, too."] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Invite", nil];
-    [referralPoints show];
-}
 
 #pragma mark-first run
 - (void)checkFirstTimeProfile
 {
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
-    NSNumber *firstTime;
-    
-    if (self.userId)
-        firstTime = [userData objectForKey:@"firstTimeOtherUserProfile"];
-    else
-        firstTime = [userData objectForKey:@"firstTimeProfile"];
+    NSNumber *firstTime = [userData objectForKey:@"firstTimeOtherUserProfile"];
     int firstTimeCheck = [firstTime intValue];
     
     if (firstTimeCheck == 0)
@@ -2227,89 +1081,58 @@ NSDictionary *socialMediaIconToName;
         [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
         
         // add textview explaining
-        if (!self.userId)
-        {
-            // add button to overlay
-            UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 70, [UIScreen mainScreen].bounds.size.width - 16, 80)];
-            [topPosts setUserInteractionEnabled:NO];
-            [topPosts setScrollEnabled:NO];
-            [topPosts setTextColor:[UIColor whiteColor]];
-            [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
-            [topPosts setText:@"This is your profile.\nView posts you start & spread."];
-            [topPosts setTextAlignment:NSTextAlignmentCenter];
-            [topPosts setBackgroundColor:[UIColor clearColor]];
-            
-            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
-            [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-            [ok setTitle:@"Got it" forState:UIControlStateNormal];
-            [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
-            [ok.layer setCornerRadius:5.0];
-            
-            
-            [self.overlay addSubview:topPosts];
-            [self.overlay addSubview:ok];
-            [self.view addSubview:self.overlay];
-            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeProfile"];
-            [userData synchronize];
-        }
+        UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 80, [UIScreen mainScreen].bounds.size.width - 16, 50)];
+        [topPosts setUserInteractionEnabled:NO];
+        [topPosts setScrollEnabled:NO];
+        [topPosts setTextColor:[UIColor whiteColor]];
+        [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+        [topPosts setText:@"User profile page"];
+        [topPosts setTextAlignment:NSTextAlignmentCenter];
+        [topPosts setBackgroundColor:[UIColor clearColor]];
         
-        else
-        {
-            // add button to overlay
-            UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 80, [UIScreen mainScreen].bounds.size.width - 16, 50)];
-            [topPosts setUserInteractionEnabled:NO];
-            [topPosts setScrollEnabled:NO];
-            [topPosts setTextColor:[UIColor whiteColor]];
-            [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
-            [topPosts setText:@"User profile page"];
-            [topPosts setTextAlignment:NSTextAlignmentCenter];
-            [topPosts setBackgroundColor:[UIColor clearColor]];
-            
-            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
-            [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-            [ok setTitle:@"Got it" forState:UIControlStateNormal];
-            [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
-            [ok.layer setCornerRadius:5.0];
-            
-            
-            UILabel *swipe = [[UILabel alloc] initWithFrame:CGRectMake(8,[UIScreen mainScreen].bounds.size.height - 150, [UIScreen mainScreen].bounds.size.width - 16, 40)];
-            [swipe setUserInteractionEnabled:NO];
-            [swipe setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
-            [swipe setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-            [swipe setText:@"You can swipe posts from a user's profile."];
-            [swipe setTextAlignment:NSTextAlignmentCenter];
-            [swipe setBackgroundColor:[UIColor clearColor]];
-            
-            UIImageView *swipeImg= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
-            [swipeImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-20, swipe.frame.origin.y + 40, 40, 40)];
-            
-            UIImageView *followImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
-            [followImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 200, 40, 40)];
-            
-            UILabel *follow = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 250, followImg.frame.origin.y+ 35, [UIScreen mainScreen].bounds.size.width, 40)];
-            [follow setUserInteractionEnabled:NO];
-            [follow setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
-            [follow setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-            [follow setText:@"Tap here to follow a user."];
-            [follow setTextAlignment:NSTextAlignmentCenter];
-            [follow setBackgroundColor:[UIColor clearColor]];
-            
-            
-            [self.overlay addSubview:swipeImg];
-            [self.overlay addSubview:swipe];
-            [self.overlay addSubview:followImg];
-            [self.overlay addSubview:follow];
-            [self.overlay addSubview:topPosts];
-            [self.overlay addSubview:ok];
-            [self.view addSubview:self.overlay];
-            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeOtherUserProfile"];
-            [userData synchronize];
-            
-            [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:YES];
-        }
+        UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
+        [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
+        [ok setTitle:@"Got it" forState:UIControlStateNormal];
+        [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+        [ok.layer setCornerRadius:5.0];
+        
+        
+        UILabel *swipe = [[UILabel alloc] initWithFrame:CGRectMake(8,[UIScreen mainScreen].bounds.size.height - 150, [UIScreen mainScreen].bounds.size.width - 16, 40)];
+        [swipe setUserInteractionEnabled:NO];
+        [swipe setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+        [swipe setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+        [swipe setText:@"You can swipe posts from a user's profile."];
+        [swipe setTextAlignment:NSTextAlignmentCenter];
+        [swipe setBackgroundColor:[UIColor clearColor]];
+        
+        UIImageView *swipeImg= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
+        [swipeImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-20, swipe.frame.origin.y + 40, 40, 40)];
+        
+        UIImageView *followImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
+        [followImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 200, 40, 40)];
+        
+        UILabel *follow = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 250, followImg.frame.origin.y+ 35, [UIScreen mainScreen].bounds.size.width, 40)];
+        [follow setUserInteractionEnabled:NO];
+        [follow setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+        [follow setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+        [follow setText:@"Tap here to follow a user."];
+        [follow setTextAlignment:NSTextAlignmentCenter];
+        [follow setBackgroundColor:[UIColor clearColor]];
+        
+        
+        [self.overlay addSubview:swipeImg];
+        [self.overlay addSubview:swipe];
+        [self.overlay addSubview:followImg];
+        [self.overlay addSubview:follow];
+        [self.overlay addSubview:topPosts];
+        [self.overlay addSubview:ok];
+        [self.view addSubview:self.overlay];
+        [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeOtherUserProfile"];
+        [userData synchronize];
+        
+        [self.activityIndicator stopAnimating];
+        [self.activityIndicator setHidden:YES];
     }
 }
 
@@ -2322,11 +1145,6 @@ NSDictionary *socialMediaIconToName;
     [self.followingNum setHidden:NO];
     [self.followersLabel setHidden:NO];
     [self.followersNum setHidden:NO];
-    [self.pointsToNextLevel setHidden:NO];
-    [self.progressBackground setHidden:NO];
-    [self.rippleLevel setHidden:NO];
-    [self.pointsLabel setHidden:NO];
-    [self.progressBar setHidden:NO];
     [self.activityIndicator stopAnimating];
     [self.activityIndicator setHidden:YES];
 }

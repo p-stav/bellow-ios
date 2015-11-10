@@ -65,7 +65,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *aboutHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *interstsHeightConstraint;
 
-
 @property (nonatomic) BOOL isStartedCompleted;
 @property (nonatomic) BOOL isSpreadCompleted;
 @property (nonatomic) BOOL newRippleCreated;
@@ -1642,9 +1641,6 @@ UIImagePickerController *picker;
     // resize
     resizedImage = [self resizeImage:newImage newSize:CGSizeMake(70, 70)];
     
-    // determine correct orientation
-    resizedImage = [self normalizeImage:resizedImage];
-    
     // set image
     [self.profileImage setImage:resizedImage];
     
@@ -1724,29 +1720,13 @@ UIImagePickerController *picker;
     CGRect scaledImgRect = CGRectMake(0, 0, (cropSize.width * 2), (cropSize.height * 2));
     
     UIGraphicsBeginImageContextWithOptions(scaledImgRect.size, NO, [UIScreen mainScreen].scale);
-    
     [result drawInRect:scaledImgRect];
-    
     UIImage *scaledNewImage = UIGraphicsGetImageFromCurrentImageContext();
-    
     UIGraphicsEndImageContext();
     
     return scaledNewImage;
     
 }
-
-- (UIImage *)normalizeImage:(UIImage *)image
-{
-    if (image.imageOrientation == UIImageOrientationUp)
-        return image;
-    
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
-    [image drawInRect:(CGRect){0, 0, image.size}];
-    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return normalizedImage;
-}
-
 
 #pragma mark- first run
 - (void)checkFirstTimeProfile

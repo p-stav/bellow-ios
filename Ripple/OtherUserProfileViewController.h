@@ -15,12 +15,9 @@
 #import "OtherUserProfileViewController.h"
 
 
-@interface OtherUserProfileViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, HeaderCellDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate, SwipeableRippleCellDelegate>
+@interface OtherUserProfileViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate, SwipeableRippleCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *myRipples;
-@property (strong, nonatomic) NSMutableArray *myRipplesMostPopular;
-@property (strong, nonatomic) NSMutableArray *propagatedRipples;
-@property (strong, nonatomic) NSMutableArray *propagatedRipplesMostPopular;
 
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) PFUser *user;
@@ -28,11 +25,6 @@
 @property (strong, nonatomic) NSArray *userLevels;
 
 @property (nonatomic) BOOL isAllMyRipples;
-@property (nonatomic) BOOL isAllMyRipplesMostPopular;
-@property (nonatomic) BOOL isAllPropagatedRipples;
-@property (nonatomic) BOOL isAllPropagatedRipplesMostPopular;
-
-@property (nonatomic) BOOL goToProfileFromPush;
 
 
 @end

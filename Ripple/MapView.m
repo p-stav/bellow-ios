@@ -18,6 +18,7 @@
 #import "ImageViewerViewController.h"
 #import "WebViewViewController.h"
 #import "ProfilePageViewController.h"
+#import "OtherUserProfileViewController.h"
 #import "HomePage.h"
 #import "Flurry.h"
 
@@ -155,9 +156,9 @@
         if ([sender isKindOfClass:[NSString class]])
         {
             NSString *userId = sender;
-            ProfilePageViewController *ppvc = (ProfilePageViewController *)segue.destinationViewController;
+            OtherUserProfileViewController *oupv = (OtherUserProfileViewController *)segue.destinationViewController;
              self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-            ppvc.userId = userId;
+            oupv.userId = userId;
         }
 
     }

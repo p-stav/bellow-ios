@@ -13,6 +13,7 @@
 #import "ShareRippleSheet.h"
 #import "UserSearchCell.h"
 #import "ProfilePageViewController.h"
+#import "OtherUserProfileViewController.h"
 
 @interface SearchViewController ()
 
@@ -318,12 +319,12 @@
 {
     // push same view controller
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    ProfilePageViewController *sameView = [storyboard instantiateViewControllerWithIdentifier:@"Me"];
-    sameView.userId = userId;
+    OtherUserProfileViewController *otherUser = [storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileView"];
+    otherUser.userId = userId;
     [Flurry logEvent:@"Profile_Open_Explore"];
     
     [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController pushViewController:sameView animated:YES];
+    [self.navigationController pushViewController:otherUser animated:YES];
 }
 
 - (void)updateFollowing: (NSString *)userId;

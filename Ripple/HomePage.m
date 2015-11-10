@@ -23,6 +23,7 @@
 #import "ImageViewerViewController.h"
 #import "WebViewViewController.h"
 #import "ProfilePageViewController.h"
+#import "OtherUserProfileViewController.h"
 #import "Flurry.h"
 #import "TabBarController.h"
 #import "NotificationsPage.h"
@@ -220,8 +221,8 @@ int PARSE_PAGE_SIZE = 25;
             [self.navigationController setNavigationBarHidden:NO];
             Bellow *ripple = sender;
             NSString *string = (NSString*) ripple.creatorId;
-            ProfilePageViewController *ppvc = (ProfilePageViewController *)segue.destinationViewController;
-            ppvc.userId = string;
+            OtherUserProfileViewController *ouvc = (OtherUserProfileViewController *)segue.destinationViewController;
+            ouvc.userId = string;
         }
     }
 }
@@ -283,8 +284,6 @@ int PARSE_PAGE_SIZE = 25;
             [locationManager startUpdatingLocation];
         }
 
-        
-        
         self.isActive = YES;
         // check to see user is inactive
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -393,9 +392,6 @@ int PARSE_PAGE_SIZE = 25;
             break;
         }
     }
-    
-    if (!self.viewDidLoadJustRan)
-        self.viewDidLoadJustRan = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -472,6 +468,8 @@ int PARSE_PAGE_SIZE = 25;
                 [self checkBarrier];
                 
                 self.isFirstRunPostInteractiveTutorial = NO;
+                if (!self.viewDidLoadJustRan)
+                    self.viewDidLoadJustRan = YES;
                 
                 
             });
@@ -810,9 +808,7 @@ int PARSE_PAGE_SIZE = 25;
     UIFont *myFont = [UIFont fontWithName:@"AvenirNext-Medium" size:18.0];
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
     NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-    
     CGSize stringSize = [cell.currentRipple.creatorName sizeWithAttributes:attributesDictionary];
-    
     cell.userLabelWidthConstraint.constant = stringSize.width + 3; //[UIScreen mainScreen].bounds.size.width;
     
     // set city and time
@@ -1885,16 +1881,19 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void) setNoRipplesText
 {
-    if (self.rippleSegmentControl.selectedSegmentIndex == 0)
-        self.noRipplesTextView.text = self.defaultNoPendingRippleString;
-    
-    else if (self.rippleSegmentControl.selectedSegmentIndex == 1)
-        self.noRipplesTextView.text = @"You have no new following ripples. Swipe down to refresh";
-    
-    else if (self.rippleSegmentControl.selectedSegmentIndex == 2)
-        self.noRipplesTextView.text = @"You have no new trending ripples. Swipe down to refresh";
-    
-    [self.noRipplesTextView setHidden:NO];
+    if (self.viewDidLoadJustRan)
+    {
+        if (self.rippleSegmentControl.selectedSegmentIndex == 0)
+            self.noRipplesTextView.text = self.defaultNoPendingRippleString;
+        
+        else if (self.rippleSegmentControl.selectedSegmentIndex == 1)
+            self.noRipplesTextView.text = @"You have no new following ripples. Swipe down to refresh";
+        
+        else if (self.rippleSegmentControl.selectedSegmentIndex == 2)
+            self.noRipplesTextView.text = @"You have no new trending ripples. Swipe down to refresh";
+        
+        [self.noRipplesTextView setHidden:NO];
+    }
 }
 
 #pragma mark - tutorial and first run

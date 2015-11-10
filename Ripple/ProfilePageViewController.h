@@ -11,19 +11,16 @@
 #import "MyRippleCellDelegate.h"
 #import "HeaderTableViewCellDelegate.h"
 #import <ParseUI/ParseUI.h>
-#import "SocialMediaCollectionViewController.h"
-#import "SwipeableCell.h"
+#import "SocialMediaCollectionView.h"
 
 
-@interface ProfilePageViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, ActedRippleCellDelegate, HeaderCellDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate, SwipeableRippleCellDelegate>
+@interface ProfilePageViewController : UIViewController<UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, ActedRippleCellDelegate, HeaderCellDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, SocialMediaCollectionControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSMutableArray *myRipples;
 @property (strong, nonatomic) NSMutableArray *myRipplesMostPopular;
 @property (strong, nonatomic) NSMutableArray *propagatedRipples;
 @property (strong, nonatomic) NSMutableArray *propagatedRipplesMostPopular;
 
-@property (strong, nonatomic) NSString *userId;
-@property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) PFUser *currentUser;
 @property (strong, nonatomic) NSArray *userLevels;
 

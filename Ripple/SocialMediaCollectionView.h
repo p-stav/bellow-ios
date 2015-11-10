@@ -1,13 +1,12 @@
 //
-//  SocialMediaCollectionViewController.h
+//  SocialMediaCollectionView.h
 //  Bellow
 //
-//  Created by Dan Li on 6/27/15.
-//  Copyright (c) 2015 Kefi Labs. All rights reserved.
+//  Created by Paul Stavropoulos on 11/9/15.
+//  Copyright © 2015 Kefi Labs. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "SocialMediaTableViewCell.h"
 
 @protocol SocialMediaCollectionControllerDelegate<UIAlertViewDelegate>
 
@@ -18,7 +17,9 @@
 
 @end
 
-@interface SocialMediaCollectionViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+
+
+@interface SocialMediaCollectionView : UICollectionViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) id<SocialMediaCollectionControllerDelegate>delegate;
 

@@ -11,7 +11,6 @@
 
 @interface HeaderTableViewCell : UITableViewCell<UIAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *sortButton;
 @property (weak, nonatomic) IBOutlet UIView *filterView;
 @property (weak, nonatomic) IBOutlet UIButton *filterStarted;
 @property (weak, nonatomic) IBOutlet UIButton *filterSpread;

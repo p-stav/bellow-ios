@@ -1607,7 +1607,7 @@
             
             if (!self.viewDidLoadJustRan && !self.commentsUp) {
                 // make it show 1/4 of the way
-                self.mapOverlayTopConstraint.constant = (self.view.frame.size.height - 64)*0.15;
+                self.mapOverlayTopConstraint.constant = (self.view.frame.size.height - 64)*0.1;
             }
             
             else if (self.ripple.numberComments == 0)

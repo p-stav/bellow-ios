@@ -700,16 +700,19 @@ int PARSE_PAGE_SIZE = 25;
             //[Flurry logEvent:@"View_Pending"];
             //[self.filterView setHidden:YES];
             
-            if (self.isOverlayTutorial) {
-                self.isOverlayTutorial = NO;
+            if (self.isOverlayTutorial)
                 [self removeFirstRunOverlay];
-            }
+            
             self.selectedRippleArray = self.pendingRipples;
             self.tableView.allowsSelection = YES;
         
             break;
 
         case 1:
+            
+            if (self.isOverlayTutorial)
+                [self checkFirstTimeFollowing];
+            
             //[Flurry logEvent:@"View_Rippled"];
             self.selectedRippleArray = self.followingRipples;
             self.tableView.allowsSelection = YES;
@@ -1654,7 +1657,7 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)saveAnonymousUser:(BOOL)isAnonymous withPoint:(PFGeoPoint *)point
 {
-    self.noRipplesTextView.text = @"Getting your first ripples...";
+    self.noRipplesTextView.text = @"Getting your first posts...";
     [self.noRipplesTextView setHidden:NO];
     [self.noRipplesTextView setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:26.0]];
     self.noTextTopConstraint.constant = 40;
@@ -2134,8 +2137,6 @@ int PARSE_PAGE_SIZE = 25;
             [self.overlay addSubview:followingPosts];
             [self.overlay addSubview:ok];
             [self.view addSubview:self.overlay];
-            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeFollowing"];
-            [userData synchronize];
         }
     }
 }
@@ -2145,6 +2146,10 @@ int PARSE_PAGE_SIZE = 25;
     [self.overlay removeFromSuperview];
     self.isOverlayTutorial = NO;
     [self.tableView reloadData];
+    
+    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+    [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeFollowing"];
+    [userData synchronize];
 }
 
 #pragma mark - share and action items from profile view

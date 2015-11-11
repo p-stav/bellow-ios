@@ -219,7 +219,7 @@
         });
     });
     
-    [self checkFirstTimeMap];
+    //[self checkFirstTimeMap];
     [self grabComments];
     
     // navigation bar items, constraints
@@ -1687,7 +1687,7 @@
 }
 
 #pragma mark- first run
-- (void)checkFirstTimeMap
+/*- (void)checkFirstTimeMap
 {
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
     NSNumber *firstTime = [userData objectForKey:@"firstTimeMap"];
@@ -1762,6 +1762,6 @@
     [self.mapView setAlpha:1.0];
     self.isOverlayTutorial = NO;
     [self.overlay removeFromSuperview];
-}
+}*/
 
 @end

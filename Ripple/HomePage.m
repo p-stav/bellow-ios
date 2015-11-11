@@ -1993,7 +1993,7 @@ int PARSE_PAGE_SIZE = 25;
     // create ripple!
     Bellow *bellowSpread = [[Bellow alloc] init];
     bellowSpread.rippleId = @"FakeRippleSpread";
-    bellowSpread.text = @"\nSwipe right to spread posts.\n\n";
+    bellowSpread.text = @"\nSwipe right to spread post\n\n";
     bellowSpread.imageFile = nil;
     bellowSpread.imageHeight = 0;
     bellowSpread.imageWidth = 0;
@@ -2008,7 +2008,7 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
-    bellowDismiss.text = @"\nSwipe left to dismiss posts.\n\n";
+    bellowDismiss.text = @"\nSwipe left to dismiss post\n\n";
     bellowDismiss.imageFile = nil;
     bellowDismiss.imageHeight = 0;
     bellowDismiss.imageWidth = 0;
@@ -2023,7 +2023,7 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowTap = [[Bellow alloc] init];
     bellowTap.rippleId = @"FakeRippleTap";
-    bellowTap.text = @"\nTap posts to see where they've travelled and to see comments.\n\n";
+    bellowTap.text = @"\nTap post for more details\n\n";
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
@@ -2084,7 +2084,7 @@ int PARSE_PAGE_SIZE = 25;
             [followingPosts setScrollEnabled:NO];
             [followingPosts setTextColor:[UIColor whiteColor]];
             [followingPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
-            [followingPosts setText:@"This is the following tab.\n\nView and swipe posts from people you follow."];
+            [followingPosts setText:@"You're currently following Bellow!"];
             [followingPosts setTextAlignment:NSTextAlignmentCenter];
             [followingPosts setBackgroundColor:[UIColor clearColor]];
             
@@ -2094,7 +2094,7 @@ int PARSE_PAGE_SIZE = 25;
             [search setScrollEnabled:NO];
             [search setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
             [search setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-            [search setText:@"Search for people to follow"];
+            [search setText:@"Search people to follow"];
             [search setTextAlignment:NSTextAlignmentLeft];
             [search setBackgroundColor:[UIColor clearColor]];
             
@@ -2105,9 +2105,9 @@ int PARSE_PAGE_SIZE = 25;
                 
             
             // add button to overlay
-            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, followingPosts.frame.origin.y + followingPosts.frame.size.height, 100, 40)];
+            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 75, followingPosts.frame.origin.y + followingPosts.frame.size.height, 150, 60)];
             [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-            [ok setTitle:@"Got it" forState:UIControlStateNormal];
+            [ok setTitle:@"Okay" forState:UIControlStateNormal];
             [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
             [ok.layer setCornerRadius:5.0];

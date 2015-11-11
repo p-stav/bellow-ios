@@ -131,7 +131,7 @@
             
             else
             {
-                UIAlertView *signInPlease = [[UIAlertView alloc] initWithTitle:@"Login or sign up!" message:@"You must have an account to start ripples" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView *signInPlease = [[UIAlertView alloc] initWithTitle:@"Login or sign up!" message:@"You must have an account to create posts" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [self showLogInAndSignUpView];
                 [signInPlease show];
 
@@ -198,7 +198,7 @@
 - (void) presentUsernameAlert
 {
     // we need to prompt them for a user name
-    UIAlertView *usernameAlert = [[UIAlertView alloc]initWithTitle:@"Pick a username!" message:@"Your username will be shown everytime you start a ripple or comment on one.\n\nHave a referral code? Enter it as well." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *usernameAlert = [[UIAlertView alloc]initWithTitle:@"Pick a username!" message:@"Your username will be shown everytime you create a post or comment on one.\n\nHave a referral code? Enter it as well." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     usernameAlert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     [[usernameAlert textFieldAtIndex:1] setSecureTextEntry:NO];
     [[usernameAlert textFieldAtIndex:0] setPlaceholder:@"username"];

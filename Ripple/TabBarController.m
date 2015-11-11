@@ -224,9 +224,7 @@
     NSString *lowercase = [[PFUser currentUser].username lowercaseString];
     [[PFUser currentUser] setObject:lowercase forKey:@"canonicalUsername"];
     
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PFUser currentUser] save];
-    });
+    [[PFUser currentUser] saveInBackground];
 }
 
 

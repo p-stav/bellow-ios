@@ -22,7 +22,7 @@
                                         <rect key="frame" x="0.0" y="86" width="320" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nk4-Mt-AaE" id="hDe-VO-kuN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="169.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYG-Au-Cde">
@@ -81,7 +81,7 @@
                                         <rect key="frame" x="0.0" y="300" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dbQ-9V-akb" id="kjN-bJ-pR5">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrowReal.png" translatesAutoresizingMaskIntoConstraints="NO" id="Biy-5b-5eO">
@@ -145,7 +145,7 @@
                                         <rect key="frame" x="0.0" y="350" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z3Y-81-dm2" id="bL8-h8-Cs6">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbq-UA-KkS">
@@ -202,7 +202,7 @@
                                         <rect key="frame" x="0.0" y="400" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c07-pB-fm3" id="rFG-xC-qkQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrowReal.png" translatesAutoresizingMaskIntoConstraints="NO" id="tNj-Wn-waZ">
@@ -262,7 +262,7 @@
                                         <rect key="frame" x="0.0" y="450" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PtX-Ak-o8n" id="Tci-Wa-Vcy">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPK-NI-jDH">
@@ -319,7 +319,7 @@
                                         <rect key="frame" x="0.0" y="500" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="26T-bA-MYk" id="S92-pu-SWv">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrowReal.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xkh-d6-cdr">
@@ -425,7 +425,7 @@
                                 <rect key="frame" x="0.0" y="22" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1h-Hg-yxf" id="ax6-7h-DHX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="104.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userNotification.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jq3-9q-qpp">
@@ -786,7 +786,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="298"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gat-EH-xHN">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gat-EH-xHN">
                                             <rect key="frame" x="20" y="197" width="300" height="56"/>
                                             <animations/>
                                             <constraints>
@@ -797,7 +797,7 @@
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" so your posts spread to more people" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGb-Jh-eqq">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" so your posts spread to more people" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGb-Jh-eqq">
                                             <rect key="frame" x="6" y="255" width="314" height="21"/>
                                             <animations/>
                                             <constraints>
@@ -876,10 +876,10 @@
                                         <rect key="frame" x="0.0" y="320" width="320" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kgu-Vh-fPN" id="UV1-aR-Pm7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o49-tT-Nzn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10 points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o49-tT-Nzn">
                                                     <rect key="frame" x="8" y="19" width="131" height="21"/>
                                                     <animations/>
                                                     <constraints>
@@ -889,7 +889,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10x reach" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXk-lx-0zn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10x reach" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXk-lx-0zn">
                                                     <rect key="frame" x="202" y="19" width="110" height="21"/>
                                                     <animations/>
                                                     <constraints>
@@ -989,7 +989,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dyc-bb-dQZ" id="Utr-y5-gPd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" fixedFrame="YES" placeholder="search for a user..." translatesAutoresizingMaskIntoConstraints="NO" id="iWE-Cg-Yc7">
@@ -1264,7 +1264,7 @@
                                         <rect key="frame" x="0.0" y="145" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I7B-UN-o2U" id="zyP-Wu-EkE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="29.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="29"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TheOneWhoKnock's recent ripples" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-Id-ea6">
@@ -1985,7 +1985,7 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <rect key="frame" x="0.0" y="294" width="296" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="Hgw-rp-LST" id="6BE-q4-i7e">
-                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="99.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="99"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qV-Yg-C4N">
@@ -2590,28 +2590,26 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <segue destination="xnt-2Y-EfY" kind="embed" identifier="embededIconSegue" id="Vjc-ZB-AvE"/>
                                             </connections>
                                         </containerView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlh-v7-hP4">
-                                            <rect key="frame" x="254" y="22" width="65" height="26"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlh-v7-hP4">
+                                            <rect key="frame" x="254" y="16" width="65" height="37"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="V0m-is-F6m"/>
                                                 <constraint firstAttribute="width" constant="65" id="gg6-Ab-ckO"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                            <state key="normal" title="23"/>
                                             <connections>
                                                 <action selector="didPressFollower:" destination="jLm-es-HZl" eventType="touchUpInside" id="0vw-Bs-9tx"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8Z-SB-5v2">
-                                            <rect key="frame" x="176" y="22" width="52" height="26"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8Z-SB-5v2">
+                                            <rect key="frame" x="176" y="16" width="52" height="37"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="Yuy-bd-FhK"/>
                                                 <constraint firstAttribute="width" constant="52" id="pVS-MQ-OYo"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                            <state key="normal" title="63"/>
                                             <connections>
                                                 <action selector="didPressFollowing:" destination="jLm-es-HZl" eventType="touchUpInside" id="Jkw-Yj-CE9"/>
                                             </connections>
@@ -2646,15 +2644,14 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <action selector="didPressFollower:" destination="jLm-es-HZl" eventType="touchUpInside" id="XeY-3L-3AU"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIQ-L3-9S1">
-                                            <rect key="frame" x="103" y="22" width="47" height="26"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIQ-L3-9S1">
+                                            <rect key="frame" x="103" y="16" width="47" height="37"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="47" id="G7n-y6-vQA"/>
                                                 <constraint firstAttribute="height" constant="26" id="Xxf-8s-fJn"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                            <state key="normal" title="1000"/>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userSilhouette.png" translatesAutoresizingMaskIntoConstraints="NO" id="uOs-hr-oB6" customClass="PFImageView">
                                             <rect key="frame" x="8" y="8" width="70" height="70"/>
@@ -2764,7 +2761,7 @@ If you have any questions regarding privacy while using the Application, or have
                                         <rect key="frame" x="0.0" y="252" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RqR-Or-WxN" id="81w-9v-gQg">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOM-sb-Zpr">
@@ -3364,7 +3361,7 @@ If you have any questions regarding privacy while using the Application, or have
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DDf-xU-inH" id="KTL-88-aIr">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>

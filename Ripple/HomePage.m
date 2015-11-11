@@ -286,6 +286,17 @@ int PARSE_PAGE_SIZE = 25;
         }
 
         self.isActive = YES;
+        
+        // set user data
+        NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+        NSNumber *savedUserData = [userData objectForKey:@"justSavedUserData"];
+        
+        if ([savedUserData boolValue])
+        {
+            [userData setObject:[NSNumber numberWithBool:NO] forKey:@"justSavedUserData"];
+            [userData synchronize];
+        }
+        
         // check to see user is inactive
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[PFUser currentUser] fetch];
@@ -1674,6 +1685,14 @@ int PARSE_PAGE_SIZE = 25;
         [[PFUser currentUser] setObject:followingArray forKey:@"following"];
         [[PFUser currentUser] saveInBackground];
         NSLog(@"just finished getting location first time");
+        
+        
+        // set user data
+        NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+        [userData setObject:[NSNumber numberWithBool:YES] forKey:@"justSavedUserData"];
+        [userData synchronize];
+
+    
         
         // call method to create ripples with block to reload
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

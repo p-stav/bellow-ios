@@ -1,4 +1,4 @@
-//
+    //
 //  ProfilePageTableViewController.m
 //  Bellow
 //
@@ -475,7 +475,14 @@ UIImagePickerController *picker;
     
     // initiate user refresh. Alot of data we show depends on the user.
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PFUser currentUser] fetch];
+        
+        // check userdata to see if we fetch
+        NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+        NSNumber *savedUserData = [userData objectForKey:@"justSavedUserData"];
+        
+        if (![savedUserData boolValue])
+            [[PFUser currentUser] fetch];
+        
         self.currentUser = [PFUser currentUser];
         
         dispatch_async( dispatch_get_main_queue(), ^{

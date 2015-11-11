@@ -126,6 +126,7 @@ int PARSE_PAGE_SIZE = 25;
     // protect from double call to goToMapView on tutorial tap
     if ([ripple.rippleId isEqualToString:@"FakeRippleTap"] && self.isFirstRunPostInteractiveTutorial)
     {
+        self.isFirstRunPostInteractiveTutorial = NO;
         [self incrementScore];
         [self endTutorial];
         return;
@@ -299,7 +300,7 @@ int PARSE_PAGE_SIZE = 25;
             }
             
             dispatch_async( dispatch_get_main_queue(), ^{
-                if (!self.isActive)
+                if (!self.isActive && [PFUser currentUser][@"reach"] != nil)
                 {
                     [PFUser currentUser][@"isActive"] = [NSNumber numberWithBool:YES];
                     [[PFUser currentUser] saveInBackground];
@@ -467,7 +468,6 @@ int PARSE_PAGE_SIZE = 25;
                 [self updateBadgeNumber];
                 [self checkBarrier];
                 
-                self.isFirstRunPostInteractiveTutorial = NO;
                 if (!self.viewDidLoadJustRan)
                     self.viewDidLoadJustRan = YES;
                 
@@ -1608,11 +1608,8 @@ int PARSE_PAGE_SIZE = 25;
     if ([PFUser currentUser][@"location"])
     {
         [[PFUser currentUser] setObject:point forKey:@"location"];
+        
         [[PFUser currentUser] saveInBackground];
-        
-        // increment score
-        [self incrementScore];
-        
     }
     
     else // no location, and first time getting it; also create ripples
@@ -1646,7 +1643,7 @@ int PARSE_PAGE_SIZE = 25;
             }
             else
             {
-                [self saveUserObjectForUser:currentUser withLocation:point];
+                [self saveUserObjectforUserWithLocation:point];
             }
         }];
     }
@@ -1654,50 +1651,52 @@ int PARSE_PAGE_SIZE = 25;
     else if([PFUser currentUser] && !self.creatingAnonymousUser)
     {
         self.creatingAnonymousUser = YES;
-        [self saveUserObjectForUser:[PFUser currentUser] withLocation:point];
+        [self saveUserObjectforUserWithLocation:point];
     }
 }
 
-- (void)saveUserObjectForUser:(PFUser *)currentUser withLocation:(PFGeoPoint *)point
+- (void)saveUserObjectforUserWithLocation:(PFGeoPoint *)point
 {
-    // add reach for cloud code execution
-    currentUser[@"reach"] = [NSNumber numberWithInt:7];
-    currentUser[@"highestPropagated"] = [NSNumber numberWithInt:0];
-    currentUser[@"notificationsToday"] = [NSNumber numberWithInt:0];
-    currentUser[@"reachLevel"] = @"Sea Serpent";
-    currentUser[@"score"] = [NSNumber numberWithInt:3];
-    currentUser[@"followingNumber"] = [NSNumber numberWithInt:0];
-    [[PFUser currentUser] setObject:point forKey:@"location"];
+    if (self.getLocationOnce)
+    {
+        self.getLocationOnce = NO;
+        
+        // add reach for cloud code execution
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:7] forKey:@"reach"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"highestPropagated"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"notificationsToday"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"followingNumber"];
+        [[PFUser currentUser] setObject:@"Sea Serpent" forKey:@"reachLevel"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:3] forKey:@"score"];
+        [[PFUser currentUser] setObject:point forKey:@"location"];
 
-    NSArray *followingArray = [NSArray arrayWithObject:@"qqyvLOFvNT"];
-    [[PFUser currentUser] setObject:followingArray forKey:@"following"];
-
-    
-    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (self.getLocationOnce)
-        {
-            NSLog(@"just finished getting location first time");
-            self.getLocationOnce = NO;
+        NSArray *followingArray = [NSArray arrayWithObject:@"qqyvLOFvNT"];
+        [[PFUser currentUser] setObject:followingArray forKey:@"following"];
+        [[PFUser currentUser] saveInBackground];
+        NSLog(@"just finished getting location first time");
+        
+        // call method to create ripples with block to reload
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            // call method to create ripples with block to reload
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self getNearestRipplesOnLoad];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"finished getNearestRipplesOnFirstLoad");
-                    self.isFirstRun = NO;
-                    // [self updateView];
-                   //  [self.activityIndicator stopAnimating];
-                    //[self.activityIndicator setHidden:NO];
-                });
+            [self getNearestRipplesOnLoad];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"finished getNearestRipplesOnFirstLoad");
+                self.isFirstRun = NO;
+                    
+                if(!self.isFirstRunPostInteractiveTutorial)
+                    [self updateView];
+                    // [self.activityIndicator stopAnimating];
+                    // [self.activityIndicator setHidden:NO];
             });
-        }
-    }];
+        });
+    }
     
     // Associate the device with a user
     PFInstallation *installation = [PFInstallation currentInstallation];
-    if (installation[@"user"] != currentUser)
+    if (installation[@"user"] != [PFUser currentUser])
     {
-        installation[@"user"] = currentUser;
+        installation[@"user"] = [PFUser currentUser];
         [installation saveInBackground];
         
     }
@@ -1718,6 +1717,7 @@ int PARSE_PAGE_SIZE = 25;
 {
     if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
         [self presentNeedsLocation];
+    
     NSLog(@"error: %@", error.description);
 }
 
@@ -1729,8 +1729,6 @@ int PARSE_PAGE_SIZE = 25;
     self.rippleSegmentControl.enabled = NO;
     [self.activityIndicator stopAnimating];
     [self.tableView setAlpha:0.1];
-    
-    
     
     // show text box with  message to enable
     self.noRipplesTextView.text = @"Bellow needs location to share ripples with people nearby. In your phone settings, tap on Bellow and allow location services";
@@ -2035,11 +2033,10 @@ int PARSE_PAGE_SIZE = 25;
     [self.barBtn setUserInteractionEnabled:YES];
     [self.rippleSegmentControl setUserInteractionEnabled:YES];
     
-    self.isFirstRunPostInteractiveTutorial = NO;
-    
     // show alert signaling end of tutorial
     UIAlertView *doneTutorial = [[UIAlertView alloc] initWithTitle:@"You finished the tutorial" message:@"Welcome to Bellow!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
+    self.isFirstRun = NO;
     [self pageSetup];
     [self updateView];
     [doneTutorial show];

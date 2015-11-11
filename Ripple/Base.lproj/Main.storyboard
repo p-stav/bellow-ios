@@ -2581,7 +2581,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <animations/>
                                         </activityIndicatorView>
                                         <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-cM-Z8A">
-                                            <rect key="frame" x="8" y="218" width="304" height="50"/>
+                                            <rect key="frame" x="8" y="208" width="304" height="50"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="myQ-cA-lyt"/>
@@ -2664,22 +2664,6 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <constraint firstAttribute="width" constant="70" id="sSY-eK-GNI"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfe-rQ-Nf6">
-                                            <rect key="frame" x="16" y="63" width="53" height="20"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="1" green="0.69179224439999998" blue="0.040244564019999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="mKU-on-O5G"/>
-                                                <constraint firstAttribute="width" constant="53" id="vQg-HL-7wx"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
-                                            <state key="normal" title="edit">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didPressEditImage:" destination="jLm-es-HZl" eventType="touchUpInside" id="EMW-pm-19D"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tW-dn-plN">
                                             <rect key="frame" x="104" y="41" width="45" height="30"/>
                                             <animations/>
@@ -2704,40 +2688,8 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="4dT-xs-kln"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZF-7h-5eX">
-                                            <rect key="frame" x="9" y="137" width="53" height="20"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="1" green="0.69179224442023901" blue="0.040244564022650309" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="PhH-zT-cgP"/>
-                                                <constraint firstAttribute="width" constant="53" id="gBb-HZ-dK0"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                            <state key="normal" title="edit">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didPressEditAbout:" destination="jLm-es-HZl" eventType="touchUpInside" id="AvS-Vs-e1s"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIZ-Wf-CYc">
-                                            <rect key="frame" x="83" y="177" width="53" height="20"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="1" green="0.69179224439999998" blue="0.040244564019999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="bt5-hW-Uul"/>
-                                                <constraint firstAttribute="width" constant="53" id="eaQ-Ml-SVU"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                            <state key="normal" title="edit">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didPresssEditInterests:" destination="jLm-es-HZl" eventType="touchUpInside" id="wxl-Av-GRx"/>
-                                            </connections>
-                                        </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-I3-3zB">
-                                            <rect key="frame" x="3" y="191" width="314" height="32"/>
+                                            <rect key="frame" x="3" y="181" width="314" height="32"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="xw5-yg-3kJ"/>
@@ -2746,7 +2698,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vef-9B-uVl">
-                                            <rect key="frame" x="8" y="177" width="67" height="24"/>
+                                            <rect key="frame" x="8" y="167" width="67" height="24"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="67" id="K0y-Yp-VMy"/>
@@ -2757,7 +2709,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcQ-Tt-IER">
-                                            <rect key="frame" x="5" y="151" width="310" height="31"/>
+                                            <rect key="frame" x="5" y="141" width="310" height="31"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="oFv-3r-st0"/>
@@ -2769,7 +2721,6 @@ If you have any questions regarding privacy while using the Application, or have
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="kfe-rQ-Nf6" firstAttribute="leading" secondItem="uOs-hr-oB6" secondAttribute="trailing" constant="-62" id="14I-9c-EOe"/>
                                         <constraint firstItem="HZd-Tg-n5C" firstAttribute="centerX" secondItem="tlh-v7-hP4" secondAttribute="centerX" id="1tY-r8-EdP"/>
                                         <constraint firstItem="8tW-dn-plN" firstAttribute="centerX" secondItem="xIQ-L3-9S1" secondAttribute="centerX" id="3jU-5H-ST2"/>
                                         <constraint firstAttribute="trailing" secondItem="Dzq-I3-3zB" secondAttribute="trailing" constant="3" id="619-wd-og7"/>
@@ -2779,15 +2730,12 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstItem="Ldi-2d-D6I" firstAttribute="centerX" secondItem="86g-4d-Kjp" secondAttribute="centerX" id="BfP-Gm-NXd"/>
                                         <constraint firstAttribute="trailing" secondItem="Fbi-cM-Z8A" secondAttribute="trailing" constant="8" id="CqE-fh-7wB"/>
                                         <constraint firstItem="8tW-dn-plN" firstAttribute="top" secondItem="xIQ-L3-9S1" secondAttribute="bottom" constant="-7" id="EDi-sa-Dok"/>
-                                        <constraint firstItem="uIZ-Wf-CYc" firstAttribute="top" secondItem="vef-9B-uVl" secondAttribute="top" id="FXH-6M-ZP1"/>
                                         <constraint firstAttribute="trailing" secondItem="Dzq-I3-3zB" secondAttribute="trailing" constant="3" id="Igk-S1-Fqp"/>
-                                        <constraint firstItem="sZF-7h-5eX" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="Jeq-4l-ycJ"/>
                                         <constraint firstItem="Dzq-I3-3zB" firstAttribute="top" secondItem="vef-9B-uVl" secondAttribute="bottom" constant="-10" id="M8p-yr-RKx"/>
                                         <constraint firstItem="Fbi-cM-Z8A" firstAttribute="top" secondItem="Dzq-I3-3zB" secondAttribute="bottom" constant="-5" id="NHK-Kr-RQ8"/>
                                         <constraint firstItem="vef-9B-uVl" firstAttribute="top" secondItem="DcQ-Tt-IER" secondAttribute="bottom" constant="-5" id="NdR-jV-Nzj"/>
                                         <constraint firstItem="xIQ-L3-9S1" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="22" id="Ogq-aq-bna"/>
                                         <constraint firstItem="lLq-Pg-9LT" firstAttribute="centerX" secondItem="g8Z-SB-5v2" secondAttribute="centerX" id="Qp6-BP-0iT"/>
-                                        <constraint firstItem="sZF-7h-5eX" firstAttribute="top" secondItem="aAS-do-INq" secondAttribute="bottom" constant="16" id="Qsi-u8-kdR"/>
                                         <constraint firstItem="Dzq-I3-3zB" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="3" id="SDM-xk-6gD"/>
                                         <constraint firstItem="Ldi-2d-D6I" firstAttribute="centerY" secondItem="86g-4d-Kjp" secondAttribute="centerY" id="VWx-ZX-WVV"/>
                                         <constraint firstItem="Fbi-cM-Z8A" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="8" id="VjJ-vf-s8q"/>
@@ -2795,15 +2743,13 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstAttribute="trailing" secondItem="tlh-v7-hP4" secondAttribute="trailing" constant="1" id="b7s-yH-qlV"/>
                                         <constraint firstItem="JyA-pq-6sM" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="b9Y-1R-tl2"/>
                                         <constraint firstItem="HZd-Tg-n5C" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="41" id="c20-o7-IX8"/>
-                                        <constraint firstItem="uOs-hr-oB6" firstAttribute="top" secondItem="kfe-rQ-Nf6" secondAttribute="bottom" constant="-75" id="cfE-1Y-Jlj"/>
                                         <constraint firstItem="aAS-do-INq" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="cwV-Hs-rCa"/>
-                                        <constraint firstItem="DcQ-Tt-IER" firstAttribute="top" secondItem="sZF-7h-5eX" secondAttribute="bottom" constant="-6" id="eko-CG-G1m"/>
+                                        <constraint firstItem="DcQ-Tt-IER" firstAttribute="top" secondItem="aAS-do-INq" secondAttribute="bottom" constant="20" id="d1h-KP-A4j"/>
                                         <constraint firstItem="g8Z-SB-5v2" firstAttribute="leading" secondItem="xIQ-L3-9S1" secondAttribute="trailing" constant="26" id="imT-zf-dyQ"/>
                                         <constraint firstItem="uOs-hr-oB6" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="8" id="jDi-AM-4lz"/>
                                         <constraint firstAttribute="trailing" secondItem="aAS-do-INq" secondAttribute="trailing" constant="111" id="nVY-NY-2BJ"/>
                                         <constraint firstItem="jNz-KP-Ng7" firstAttribute="leading" secondItem="JyA-pq-6sM" secondAttribute="trailing" constant="5" id="o1Q-YX-DGI"/>
                                         <constraint firstItem="g8Z-SB-5v2" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="22" id="qAU-Sq-Xhj"/>
-                                        <constraint firstItem="uIZ-Wf-CYc" firstAttribute="leading" secondItem="vef-9B-uVl" secondAttribute="trailing" constant="8" id="rmf-N3-ufX"/>
                                         <constraint firstItem="tlh-v7-hP4" firstAttribute="leading" secondItem="g8Z-SB-5v2" secondAttribute="trailing" constant="26" id="vWs-2K-mjE"/>
                                         <constraint firstItem="tlh-v7-hP4" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="22" id="wLg-Te-x2k"/>
                                         <constraint firstItem="vef-9B-uVl" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="8" id="wVS-6l-GlB"/>
@@ -3029,9 +2975,6 @@ If you have any questions regarding privacy while using the Application, or have
                         <outlet property="aboutText" destination="DcQ-Tt-IER" id="TAD-wh-N25"/>
                         <outlet property="activityIndicator" destination="Ldi-2d-D6I" id="arQ-d0-cRd"/>
                         <outlet property="containerViewHeightConstraint" destination="myQ-cA-lyt" id="oj2-0b-oBZ"/>
-                        <outlet property="editAbout" destination="sZF-7h-5eX" id="btv-9t-Eeu"/>
-                        <outlet property="editImage" destination="kfe-rQ-Nf6" id="6A1-Oz-jo9"/>
-                        <outlet property="editInterests" destination="uIZ-Wf-CYc" id="SR3-OG-AVo"/>
                         <outlet property="followersLabel" destination="lLq-Pg-9LT" id="dcR-3C-hOz"/>
                         <outlet property="followersNum" destination="g8Z-SB-5v2" id="NtF-gx-Vep"/>
                         <outlet property="followingLabel" destination="HZd-Tg-n5C" id="1KV-SH-Sif"/>

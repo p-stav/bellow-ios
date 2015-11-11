@@ -118,7 +118,7 @@
     if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)) //&& [CLLocationManager authorizationStatus] != kCLAuthorizationStatusNotDetermined))
     {
     
-        if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]])
+        if ([PFUser currentUser][@"reach"] != nil && ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]])
         {
             // present modal window
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -207,33 +207,25 @@
 }
 
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
-    // initiate user refresh
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Add code here to do background processing
-        [[PFUser currentUser] fetch];
-        
-        //referral
-        if (![user[@"additional"] isEqualToString:@""])
-        {
-           self.referralNum = [BellowService acceptReferral:user[@"additional"]];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // initiate user user refresh
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"justLoggedIn" object:nil];
-            
-            if (![user[@"additional"] isEqualToString:@""])
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReferralAlert" object:[NSNumber numberWithInt: self.referralNum]];
+    //referral
+    if (![[PFUser currentUser][@"additional"] isEqualToString:@""])
+    {
+       self.referralNum = [BellowService acceptReferral:[PFUser currentUser][@"additional"]];
+    }
+    
+    // initiate user user refresh
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"justLoggedIn" object:nil];
+    
+    if (![[PFUser currentUser][@"additional"] isEqualToString:@""])
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReferralAlert" object:[NSNumber numberWithInt: self.referralNum]];
 
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
-            [[PFUser currentUser] setObject:[[PFUser currentUser].username lowercaseString] forKey:@"canonicalUsername"];
-            
-            NSArray *followingArray = [NSArray arrayWithObject:@"qqyvLOFvNT"];
-            [[PFUser currentUser] setObject:followingArray forKey:@"following"];
-            
-            [[PFUser currentUser] saveInBackground];
-        });
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *lowercase = [[PFUser currentUser].username lowercaseString];
+    [[PFUser currentUser] setObject:lowercase forKey:@"canonicalUsername"];
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[PFUser currentUser] save];
     });
 }
 

@@ -1606,8 +1606,8 @@
                 [self.imageView addGestureRecognizer:self.tapImageRecognizer];
             
             if (!self.viewDidLoadJustRan && !self.commentsUp) {
-                // make it show 1/3 of the way
-                self.mapOverlayTopConstraint.constant = (self.view.frame.size.height - 64)*0.66;
+                // make it show 1/4 of the way
+                self.mapOverlayTopConstraint.constant = (self.view.frame.size.height - 64)*0.15;
             }
             
             else if (self.ripple.numberComments == 0)

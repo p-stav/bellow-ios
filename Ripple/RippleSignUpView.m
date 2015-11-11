@@ -67,9 +67,6 @@
 {
     [super viewDidAppear:animated];
 
-    // additionall field
-    self.signUpView.additionalField.frame = CGRectMake(self.signUpView.center.x - (self.signUpView.frame.size.width - 40)/2, [UIScreen mainScreen].bounds.size.height-140, self.signUpView.frame.size.width - 40, self.signUpView.emailField.frame.size.height);
-    
     // textview to explain referral code
     UITextView *referralText = [[UITextView alloc] init];
     referralText.frame = CGRectMake(self.signUpView.additionalField.frame.origin.x, self.signUpView.additionalField.frame.origin.y - 30, self.signUpView.additionalField.frame.size.width, 30);
@@ -102,6 +99,11 @@
     self.signUpView.emailField.frame = CGRectMake(self.signUpView.center.x - (self.signUpView.frame.size.width - 40)/2, self.signUpView.emailField.frame.origin.y - 5 , self.signUpView.emailField.frame.size.width - 40, self.signUpView.emailField.frame.size.height);
     self.signUpView.signUpButton.frame = CGRectMake(self.signUpView.center.x - (self.signUpView.frame.size.width - 40)/2, [UIScreen mainScreen].bounds.size.height-80, self.signUpView.frame.size.width - 40, self.signUpView.signUpButton.frame.size.height);
     self.signUpView.logo.frame = CGRectMake(self.signUpView.logo.frame.origin.x, self.signUpView.logo.frame.origin.y - 40, self.signUpView.logo.frame.size.width, self.signUpView.logo.frame.size.height);
+    
+    // additionall field
+    self.signUpView.additionalField.frame = CGRectMake(self.signUpView.emailField.frame.origin.x, [UIScreen mainScreen].bounds.size.height - 140, self.signUpView.frame.size.width - 40, self.signUpView.emailField.frame.size.height);
+    
+
     
     // place holders
     self.signUpView.emailField.placeholder = @"Email";

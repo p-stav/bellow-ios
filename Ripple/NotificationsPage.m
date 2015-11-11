@@ -172,7 +172,10 @@
     
     if ([notification.type isEqualToString:@"User"])
     {
-        [self.tabBarController setSelectedIndex:4];
+        if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]])
+            [self.tabBarController setSelectedIndex:4];
+        else
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginSignup" object:nil];
     }
     
     // update cell

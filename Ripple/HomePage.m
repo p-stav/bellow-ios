@@ -699,6 +699,11 @@ int PARSE_PAGE_SIZE = 25;
         case 0:
             //[Flurry logEvent:@"View_Pending"];
             //[self.filterView setHidden:YES];
+            
+            if (self.isOverlayTutorial) {
+                self.isOverlayTutorial = NO;
+                [self removeFirstRunOverlay];
+            }
             self.selectedRippleArray = self.pendingRipples;
             self.tableView.allowsSelection = YES;
         
@@ -1139,10 +1144,22 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell addSubview:tap];
             [tap setAlpha:0.0];
             
-            [UIView animateKeyframesWithDuration:0.8 delay:0.3 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
+            [propagateCell.rippleMainView.layer setBorderColor:[UIColor colorWithRed:254.0f/255.0 green:155.0f/255.0 blue:0.0 alpha:1.0].CGColor];
+            
+            [UIView animateKeyframesWithDuration:0.8 delay:0.0 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
                 [tap setAlpha:1.0];
+                
+                CABasicAnimation *width = [CABasicAnimation animationWithKeyPath:@"borderWidth"];
+                // animate from 2pt to 4pt wide border ...
+                width.fromValue = @2;
+                width.toValue   = @4;
+                width.duration = 2;
+                width.repeatCount = 100;
+                [propagateCell.rippleMainView.layer addAnimation:width forKey:@"widthAnim"];
+                
             } completion:^(BOOL finished){
                 [tap removeFromSuperview];
+                
             }];
         }
         

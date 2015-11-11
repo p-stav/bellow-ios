@@ -198,6 +198,7 @@
             [locationTitle setBackgroundColor:[UIColor clearColor]];
             [locationTitle setFont:[UIFont fontWithName:@"Avenir-Roman" size:30.0]];
             [locationTitle setTextAlignment:NSTextAlignmentCenter];
+            [locationTitle setUserInteractionEnabled:NO];
             
             
             UITextView *location = [[UITextView alloc] initWithFrame:CGRectMake(8, locationTitle.frame.origin.y + locationTitle.frame.size.height + 10, self.view.frame.size.width - 8, 120)];

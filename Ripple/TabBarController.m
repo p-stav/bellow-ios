@@ -57,6 +57,7 @@
     [[[UITabBar appearance].items objectAtIndex:0] setImageInsets:UIEdgeInsetsMake(9, 0, -9, 0)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTabBar) name:@"hideTabBar" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTabBar) name:@"showTabBar" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLogInAndSignUpViewProfile) name:@"showLoginSignup" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inactiveTabBar) name:@"inactiveTabBarController" object:nil];
 }
 
@@ -117,29 +118,39 @@
     
     if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)) //&& [CLLocationManager authorizationStatus] != kCLAuthorizationStatusNotDetermined))
     {
-    
-        if ([PFUser currentUser][@"reach"] != nil && ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]])
+        if (self.tabBar.alpha == 1)
         {
-            // present modal window
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"Start A Post"];
-            // self.navigationController.navigationBarHidden=NO;
-            [self presentViewController:obj animated:YES completion:nil];
-        }
-        
-        else
-        {
-            UIAlertView *signInPlease = [[UIAlertView alloc] initWithTitle:@"Login or sign up!" message:@"You must have an account to start ripples" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [self showLogInAndSignUpView];
-            [signInPlease show];
+            if ([PFUser currentUser][@"reach"] != nil && ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]])
+            {
+                // present modal window
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"Start A Post"];
+                // self.navigationController.navigationBarHidden=NO;
+                [self presentViewController:obj animated:YES completion:nil];
+            }
+            
+            else
+            {
+                UIAlertView *signInPlease = [[UIAlertView alloc] initWithTitle:@"Login or sign up!" message:@"You must have an account to start ripples" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [self showLogInAndSignUpView];
+                [signInPlease show];
 
-            [self showLogInAndSignUpView];
+                [self showLogInAndSignUpView];
+            }
         }
     }
 }
 
 
 #pragma Mark - login and signup
+- (void)showLogInAndSignUpViewProfile
+{
+    UIAlertView *signIn = [[UIAlertView alloc] initWithTitle:@"Login or Sign up!" message:@"Login or sign up to see your profile!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    [signIn show];
+    
+    [self showLogInAndSignUpView];
+}
 - (void)showLogInAndSignUpView
 {
     // Create the log in view controller
@@ -338,10 +349,14 @@
     if (self.interactionDisabled)
     {
         self.interactionDisabled = NO;
+        [self.tabBar setAlpha:1.0];
+        [self.button setAlpha:1.0];
     }
     else
     {
         self.interactionDisabled = YES;
+        [self.tabBar setAlpha:0.5];
+        [self.button setAlpha:0.5];
     }
 }
 

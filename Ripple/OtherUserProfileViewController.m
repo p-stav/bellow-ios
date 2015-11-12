@@ -471,10 +471,7 @@ NSDictionary *socialMediaIconToName;
     }
 
     // size the table header
-    additionalHeaderHeight =self.interstsHeightConstraint.constant + self.aboutHeightConstraint.constant;
-    if ([self.user[@"accessibleProfiles"] count] >0)
-        additionalHeaderHeight += 50;
-
+    additionalHeaderHeight =self.interstsHeightConstraint.constant + self.aboutHeightConstraint.constant + 50;
     
     self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 100 + additionalHeaderHeight);
     [self.tableView setTableHeaderView:self.tableHeader];

@@ -235,22 +235,36 @@ BOOL _propagateOnDragRelease;
     // animate cell all the way over
     [UIView animateWithDuration:0.3 animations:^{
         self.frame = CGRectMake(self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
-        
         //self.dismissButton.frame = CGRectMake( self.buttonsView.frame.size.width/2 - self.dismissButton.frame.size.width/2, self.dismissButton.frame.origin.y, self.dismissButton.frame.size.width, self.dismissButton.frame.size.height);
-       
-       // self.spreadButton.frame = CGRectMake( self.buttonsView.frame.size.width/2 - self.spreadButton.frame.size.width/2, self.spreadButton.frame.origin.y, self.spreadButton.frame.size.width, self.spreadButton.frame.size.height);
-
-
-       // self.dismissButtonRightConstaint.constant = 25;
-        //self.spreadButtonLeftConstraint.constant = 25;
+        // self.spreadButton.frame = CGRectMake( self.buttonsView.frame.size.width/2 - self.spreadButton.frame.size.width/2, self.spreadButton.frame.origin.y, self.spreadButton.frame.size.width, self.spreadButton.frame.size.height);
+        // self.dismissButtonRightConstaint.constant = 25;
+        // self.spreadButtonLeftConstraint.constant = 25;
+        
         [self.spreadButton.layer setZPosition:1.0];
         [self.spreadButton.layer setZPosition:0];
         [self.spreadButton setUserInteractionEnabled:NO];
         [self.spreadButton setAlpha:1.0];
         [self.dismissButton setAlpha:0.0];
     }completion:^(BOOL finished) {
-        [self.propagateImageView setHidden:YES];
-        [self.spreadButton setImage:[UIImage imageNamed:@"propagateButton.png"] forState:UIControlStateNormal];
+        
+        if ([self.currentRipple.rippleId isEqualToString:@"FakeRippleSpread"])
+        {
+            [self.reachSpreadLabel setAlpha:1.0];
+            // animate in place
+            [UIView animateWithDuration:10 animations:^{
+                self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+            }completion:^(BOOL finished) {
+                [self.delegate ripplePropagated:self.currentRipple];
+            }];
+        }
+        
+        else
+        {
+            [self.propagateImageView setHidden:YES];
+            [self.spreadButton setImage:[UIImage imageNamed:@"propagateButton.png"] forState:UIControlStateNormal];
+        }
+
+        
     }];
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -270,7 +284,8 @@ BOOL _propagateOnDragRelease;
             innerCircle.alpha = 0;
         }
     }completion:^(BOOL finished) {
-        [self.delegate ripplePropagated:self.currentRipple];
+        if (![self.currentRipple.rippleId isEqualToString:@"FakeRippleSpread"])
+            [self.delegate ripplePropagated:self.currentRipple];
     }];
 }
 

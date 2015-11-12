@@ -240,7 +240,6 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
     // BOOLs
     [self.barBtn setHidden:YES];
@@ -437,7 +436,6 @@ int PARSE_PAGE_SIZE = 25;
         
         self.rippleSegmentControl.userInteractionEnabled = YES;
         [self.rippleSegmentControl setAlpha:1.0];
-        [self.noRipplesTextView setHidden:YES];
         [self.tableView setHidden:NO];
         self.rippleSegmentControl.enabled = YES;
         [self.tableView setAlpha:1.0];
@@ -453,7 +451,6 @@ int PARSE_PAGE_SIZE = 25;
         
         self.rippleSegmentControl.userInteractionEnabled = YES;
         [self.rippleSegmentControl setAlpha:1.0];
-        
         
         if ([self.selectedRippleArray count] == 0)
         {
@@ -476,6 +473,7 @@ int PARSE_PAGE_SIZE = 25;
             dispatch_async( dispatch_get_main_queue(), ^{
                 // reload table and check if pending ripples
                 // [self checkRemainingRipples];
+                [self.noRipplesTextView setHidden:YES];
                 [self updateBadgeNumber];
                 [self checkBarrier];
                 
@@ -1074,6 +1072,7 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.spreadLabel setHidden:YES];
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentCenter];
             
             // setup image
             UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
@@ -1091,13 +1090,14 @@ int PARSE_PAGE_SIZE = 25;
         }
         
         // animations
-        if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"] && indexPath.row == 0)
+        else if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"] && indexPath.row == 0)
         {
             [propagateCell.rippleMainView setAlpha:1.0];
             [propagateCell.dismissImageView setAlpha:1.0];
             [propagateCell.dismissLabel setAlpha:1.0];
             [propagateCell.dismissButton setAlpha:0.2];
             [propagateCell.spreadButton setAlpha:0.2];
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentCenter];
             
             [propagateCell.cityLabel setHidden:YES];
             [propagateCell.timeLabel setHidden:YES];
@@ -1124,7 +1124,7 @@ int PARSE_PAGE_SIZE = 25;
         }
         
         // animations
-        if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleTap"] && indexPath.row == 0)
+        else if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleTap"] && indexPath.row == 0)
         {
             [propagateCell.cityLabel setHidden:YES];
             [propagateCell.timeLabel setHidden:YES];
@@ -1132,6 +1132,7 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.spreadLabel setHidden:YES];
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentCenter];
             
             [propagateCell.dismissButton setAlpha:0.2];
             [propagateCell.spreadButton setAlpha:0.2];
@@ -1160,6 +1161,8 @@ int PARSE_PAGE_SIZE = 25;
                 
             }];
         }
+        else
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentLeft];
         
         if (self.isOverlayTutorial)
             propagateCell.alpha = 0.1;
@@ -1568,6 +1571,7 @@ int PARSE_PAGE_SIZE = 25;
     {
         self.rippleSegmentControl.userInteractionEnabled = YES;
         [self.rippleSegmentControl setAlpha:1.0];
+        [self.tableView setAlpha:1.0];
         [self.noRipplesTextView setHidden:YES];
         self.rippleSegmentControl.enabled = YES;
         [self.tableView setHidden:NO];
@@ -1610,6 +1614,8 @@ int PARSE_PAGE_SIZE = 25;
         });
         [self addNotificationsBadge];
     }
+    else
+        [self.tableView reloadData];
 }
 
 #pragma mark - Log in and sign up
@@ -1688,7 +1694,7 @@ int PARSE_PAGE_SIZE = 25;
         self.getLocationOnce = NO;
         
         // add reach for cloud code execution
-        [[PFUser currentUser] setObject:[NSNumber numberWithInt:7] forKey:@"reach"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:10] forKey:@"reach"];
         [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"highestPropagated"];
         [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"notificationsToday"];
         [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"followingNumber"];
@@ -1992,13 +1998,14 @@ int PARSE_PAGE_SIZE = 25;
     [titleView addSubview:titleLabel];
     self.navigationItem.titleView = titleView;
     [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 - self.navigationItem.titleView.frame.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
+    [self.tableView setAlpha:1.0];
+    [self.noRipplesTextView setHidden:YES];
     
     // housekeeping
     [self.tableView setScrollEnabled:NO];
     [self.activityIndicator stopAnimating];
     [self.tableView setHidden:NO];
     [self.rippleSegmentControl setAlpha:0.3];
-    
     [self.barBtn setUserInteractionEnabled:NO];
     [self.rippleSegmentControl setUserInteractionEnabled:NO];
     

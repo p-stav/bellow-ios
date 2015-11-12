@@ -180,6 +180,8 @@ BOOL isLaunch;
             else
                 [self goToMyRipple:rippleId];
         }];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshNotificationsBadge" object:nil];
     }
 }
 

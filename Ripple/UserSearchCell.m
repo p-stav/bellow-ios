@@ -34,8 +34,9 @@
     {
         self.isFollowing = YES;
         [self.followerImage setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];
+        NSLog([NSString stringWithFormat:@"%@", [PFUser currentUser][@"following"]]);
         if ([PFUser currentUser][@"following"] != nil)
-            [[PFUser currentUser][@"following"] addObject:self.objectId];
+            [[PFUser currentUser] addObject:self.objectId forKey:@"following"];
         else
         {
             NSMutableArray *following = [[NSMutableArray alloc] initWithObjects:self.objectId, nil];

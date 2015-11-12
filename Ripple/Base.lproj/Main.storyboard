@@ -22,7 +22,7 @@
                                         <rect key="frame" x="0.0" y="86" width="320" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nk4-Mt-AaE" id="hDe-VO-kuN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="169.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYG-Au-Cde">
@@ -81,7 +81,7 @@
                                         <rect key="frame" x="0.0" y="300" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dbQ-9V-akb" id="kjN-bJ-pR5">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrowReal.png" translatesAutoresizingMaskIntoConstraints="NO" id="Biy-5b-5eO">
@@ -145,7 +145,7 @@
                                         <rect key="frame" x="0.0" y="350" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z3Y-81-dm2" id="bL8-h8-Cs6">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbq-UA-KkS">
@@ -202,7 +202,7 @@
                                         <rect key="frame" x="0.0" y="400" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c07-pB-fm3" id="rFG-xC-qkQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrowReal.png" translatesAutoresizingMaskIntoConstraints="NO" id="tNj-Wn-waZ">
@@ -262,7 +262,7 @@
                                         <rect key="frame" x="0.0" y="450" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PtX-Ak-o8n" id="Tci-Wa-Vcy">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPK-NI-jDH">
@@ -319,7 +319,7 @@
                                         <rect key="frame" x="0.0" y="500" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="26T-bA-MYk" id="S92-pu-SWv">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrowReal.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xkh-d6-cdr">
@@ -425,7 +425,7 @@
                                 <rect key="frame" x="0.0" y="22" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1h-Hg-yxf" id="ax6-7h-DHX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="104.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userNotification.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jq3-9q-qpp">
@@ -876,7 +876,7 @@
                                         <rect key="frame" x="0.0" y="320" width="320" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kgu-Vh-fPN" id="UV1-aR-Pm7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o49-tT-Nzn">
@@ -989,7 +989,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dyc-bb-dQZ" id="Utr-y5-gPd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" fixedFrame="YES" placeholder="search for a user..." translatesAutoresizingMaskIntoConstraints="NO" id="iWE-Cg-Yc7">
@@ -1071,7 +1071,7 @@
                                     <constraint firstAttribute="height" constant="20" id="mKS-gT-UYh"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I8u-9N-QTD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I8u-9N-QTD">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -1264,7 +1264,7 @@
                                         <rect key="frame" x="0.0" y="145" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I7B-UN-o2U" id="zyP-Wu-EkE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="29.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="29"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TheOneWhoKnock's recent ripples" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-Id-ea6">
@@ -1388,7 +1388,7 @@
                                 <rect key="frame" x="8" y="64" width="304" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">BELLOW TERMS OF USE
+                                <string key="text">BELLOW TERMS OF USE
 These Terms and Conditions (the “Terms”) are a contract between you and KEFI LABS LLC. This document explains how you are permitted to use the Bellow mobile application and services and any content found on it (the “Services”). Unless otherwise specified, all references to the “Services” include the services available through the Bellow mobile application as well as any software that KEFI LABS LLC provides to you that allows you to access the Services from a mobile device. By using the Services, you are agreeing to all of the Terms; if you do not agree with any of these Terms, do not access or otherwise use the Services.
 
 KEFI LABS LLC may make changes to the content and Services at any time. KEFI LABS LLC can change, update, add or remove provisions of these Terms, at any time by posting the updated Terms on the Services or by notifying you via the App. By using the Services after KEFI LABS LLC has updated the Terms, you are agreeing to all the updated Terms; if you do not agree with any of the updated Terms, you must stop using Services.
@@ -1454,7 +1454,7 @@ Bellow uses the hand icon created by Roman Zubakov from the Noun project. The ph
 Bellow uses icons from Catalin Fertu’s BigMug Line in Interface. The icon set can be found here: http://www.flaticon.com/packs/bigmug-line/. Bellow uses these icons throughout the service. 
 
 CONTACT US
-If you have any questions about these Terms or otherwise need to contact KEFI LABS LLC for any reason, you can reach us at getBellow@gmail.com</mutableString>
+If you have any questions about these Terms or otherwise need to contact KEFI LABS LLC for any reason, you can reach us at getBellow@gmail.com</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
@@ -1530,7 +1530,7 @@ If you have any questions about these Terms or otherwise need to contact KEFI LA
                                 <rect key="frame" x="8" y="64" width="304" height="496"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">BELLOW PRIVACY STATEMENT
+                                <string key="text">BELLOW PRIVACY STATEMENT
 
 This privacy policy governs your use of the software application Bellow (“Application”) for mobile devices that was created by Kefi Labs LLC. The Application allows users to post content and send it to fellow users nearby. 
 
@@ -1571,7 +1571,7 @@ YOUR CONSENT
 By using the Application, you are consenting to our processing of your information as set forth in this Privacy Policy now and as amended by us. "Processing,” means using cookies on a computer/hand held device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining and disclosing information, all of which activities will take place in the United States. If you reside outside the United States your information will be transferred, processed and stored there under United States privacy standards. 
 
 CONTACT US
-If you have any questions regarding privacy while using the Application, or have questions about our practices, please contact us via email at getBellow@gmail.com</mutableString>
+If you have any questions regarding privacy while using the Application, or have questions about our practices, please contact us via email at getBellow@gmail.com</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
@@ -1988,7 +1988,7 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <rect key="frame" x="0.0" y="294" width="296" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="Hgw-rp-LST" id="6BE-q4-i7e">
-                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="99.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="99"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qV-Yg-C4N">
@@ -2655,6 +2655,9 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <constraint firstAttribute="height" constant="26" id="Xxf-8s-fJn"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                            <connections>
+                                                <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="wQF-Zh-dg1"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userSilhouette.png" translatesAutoresizingMaskIntoConstraints="NO" id="uOs-hr-oB6" customClass="PFImageView">
                                             <rect key="frame" x="8" y="8" width="70" height="70"/>
@@ -2675,6 +2678,9 @@ If you have any questions regarding privacy while using the Application, or have
                                             <state key="normal" title="reach">
                                                 <color key="titleColor" red="0.0" green="0.4823529412" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="Fvp-Wt-DZn"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNz-KP-Ng7">
                                             <rect key="frame" x="34" y="94" width="20" height="20"/>
@@ -2764,7 +2770,7 @@ If you have any questions regarding privacy while using the Application, or have
                                         <rect key="frame" x="0.0" y="252" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RqR-Or-WxN" id="81w-9v-gQg">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOM-sb-Zpr">
@@ -3364,7 +3370,7 @@ If you have any questions regarding privacy while using the Application, or have
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DDf-xU-inH" id="KTL-88-aIr">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -3428,7 +3434,7 @@ If you have any questions regarding privacy while using the Application, or have
         <scene sceneID="0GK-5Q-20n">
             <objects>
                 <navigationController title="Trending" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="SXv-va-N01" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trending" image="Search" id="Nef-sM-Zgb"/>
+                    <tabBarItem key="tabBarItem" title="Trending" image="flame" id="Nef-sM-Zgb"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
@@ -3510,7 +3516,6 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="Home" width="30" height="30"/>
         <image name="Me" width="30" height="30"/>
         <image name="Notification" width="60" height="60"/>
-        <image name="Search" width="30" height="30"/>
         <image name="addImage.png" width="200" height="200"/>
         <image name="alreadyDismissed.png" width="62" height="50"/>
         <image name="caution.png" width="100" height="88"/>
@@ -3521,6 +3526,7 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="downKeyboard.png" width="100" height="100"/>
         <image name="facebook.png" width="97" height="95"/>
         <image name="feedback.png" width="200" height="200"/>
+        <image name="flame" width="30" height="30"/>
         <image name="follow.png" width="100" height="100"/>
         <image name="getPoints.png" width="100" height="100"/>
         <image name="instagram.png" width="97" height="95"/>
@@ -3530,7 +3536,7 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="pebble.png" width="110" height="110"/>
         <image name="propagateButtonUnselected.png" width="180" height="180"/>
         <image name="questionMark.png" width="50" height="50"/>
-        <image name="referral.png" width="229" height="229"/>
+        <image name="referral.png" width="50" height="50"/>
         <image name="rightArrowReal.png" width="21" height="35"/>
         <image name="share.png" width="250" height="250"/>
         <image name="shareWithFriends.png" width="47" height="49"/>
@@ -3540,16 +3546,16 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="userSilhouette.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AcY-H4-hdD"/>
-        <segue reference="A5N-Q5-ixn"/>
-        <segue reference="Wu2-Fk-dQS"/>
-        <segue reference="5Ul-7i-rda"/>
-        <segue reference="zDq-cr-Pt1"/>
         <segue reference="Pwq-H4-Kfq"/>
-        <segue reference="9de-MY-sDe"/>
-        <segue reference="d1h-wJ-aQE"/>
-        <segue reference="sDS-I7-BZ3"/>
         <segue reference="ddR-cu-Xrf"/>
+        <segue reference="Vjc-ZB-AvE"/>
+        <segue reference="AcY-H4-hdD"/>
+        <segue reference="dba-bl-yJ2"/>
+        <segue reference="Ubg-9a-Zfa"/>
+        <segue reference="A5N-Q5-ixn"/>
+        <segue reference="2ux-5b-Cwf"/>
+        <segue reference="hJL-5N-K1N"/>
+        <segue reference="Wu2-Fk-dQS"/>
         <segue reference="4EZ-l1-4gK"/>
     </inferredMetricsTieBreakers>
 </document>

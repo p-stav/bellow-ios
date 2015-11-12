@@ -368,6 +368,7 @@ int PARSE_PAGE_SIZE = 25;
     // Set up notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyNewRipple:) name:@"goToProfile" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPendingRipples:) name:@"AppToForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNotificationsBadge) name:@"refreshNotificationsBadge" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBarBtn) name:@"updateBarBtn" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incrementScore) name:@"incrementScore" object:nil];
 

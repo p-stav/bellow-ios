@@ -1000,11 +1000,6 @@ int PARSE_PAGE_SIZE = 25;
     [cell.dismissButton setAlpha:1.0];
     [cell.dismissButton setHidden:NO];
     
-    // add border to username
-    /*[cell.userLabel.layer setBorderColor:[[UIColor colorWithWhite:0.9 alpha:1.0] CGColor]];
-    [cell.userLabel.layer setBorderWidth:1.0];
-    cell.userLabel.layer.cornerRadius = 5.0;*/
-    
     return cell;
 }
 
@@ -1154,9 +1149,9 @@ int PARSE_PAGE_SIZE = 25;
                 
                 CABasicAnimation *width = [CABasicAnimation animationWithKeyPath:@"borderWidth"];
                 // animate from 2pt to 4pt wide border ...
-                width.fromValue = @2;
-                width.toValue   = @4;
-                width.duration = 2;
+                width.fromValue = @0;
+                width.toValue   = @3;
+                width.duration = 1.55;
                 width.repeatCount = 100;
                 [propagateCell.rippleMainView.layer addAnimation:width forKey:@"widthAnim"];
                 
@@ -2073,7 +2068,7 @@ int PARSE_PAGE_SIZE = 25;
     [self.rippleSegmentControl setUserInteractionEnabled:YES];
     
     // show alert signaling end of tutorial
-    UIAlertView *doneTutorial = [[UIAlertView alloc] initWithTitle:@"You finished the tutorial" message:@"Welcome to Bellow!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *doneTutorial = [[UIAlertView alloc] initWithTitle:@"You finished the tutorial" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
     self.isFirstRun = NO;
     [self pageSetup];

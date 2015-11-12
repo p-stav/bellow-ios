@@ -530,6 +530,8 @@
 			children = (
 				DAE13D5E1A0ED167005D59DE /* HomePage.h */,
 				DAE13D5F1A0ED167005D59DE /* HomePage.m */,
+				DADB74FA1BC1A96D00749DAA /* SearchViewController.h */,
+				DADB74FB1BC1A96D00749DAA /* SearchViewController.m */,
 				DA2B0EE01A86925100879B1E /* ShareRippleSheet.h */,
 				DA2B0EE11A86925100879B1E /* ShareRippleSheet.m */,
 				DADDFFF81A800B3200E49BC1 /* PointsViewController.h */,
@@ -576,8 +578,8 @@
 		0DFB080919C17FC700A57630 = {
 			isa = PBXGroup;
 			children = (
-				DA45F4A21ADF5A3200363A28 /* Flurry */,
 				0DFB081B19C17FC700A57630 /* Bellow */,
+				DA45F4A21ADF5A3200363A28 /* Flurry */,
 				0DFB083A19C17FC700A57630 /* BellowTests */,
 				0DFB081419C17FC700A57630 /* Frameworks */,
 				0DFB081319C17FC700A57630 /* Products */,
@@ -843,8 +845,6 @@
 				DADB75011BC218C400749DAA /* HeaderCollectionReusableView.m */,
 				DADB74FD1BC1DD2C00749DAA /* TrendingCollectionViewCell.h */,
 				DADB74FE1BC1DD2C00749DAA /* TrendingCollectionViewCell.m */,
-				DADB74FA1BC1A96D00749DAA /* SearchViewController.h */,
-				DADB74FB1BC1A96D00749DAA /* SearchViewController.m */,
 			);
 			name = Explore;
 			sourceTree = "<group>";

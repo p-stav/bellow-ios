@@ -1,4 +1,4 @@
-//
+    //
 //  ProfilePageTableViewController.m
 //  Bellow
 //
@@ -56,9 +56,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *questionLevelsButton;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImage;
-@property (weak, nonatomic) IBOutlet UIButton *editImage;
-@property (weak, nonatomic) IBOutlet UIButton *editAbout;
-@property (weak, nonatomic) IBOutlet UIButton *editInterests;
 @property (weak, nonatomic) IBOutlet UITextView *aboutText;
 @property (weak, nonatomic) IBOutlet UITextView *interestText;
 @property (weak, nonatomic) IBOutlet UILabel *interestsLabel;
@@ -291,7 +288,7 @@ UIImagePickerController *picker;
     // navigtion bar stuff
     self.navigationItem.hidesBackButton = NO;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    [self checkFirstTimeProfile];
+    //[self checkFirstTimeProfile];
     
     // set up bar button
     UIButton *barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
@@ -337,9 +334,6 @@ UIImagePickerController *picker;
     [self.interestsLabel setHidden:YES];
     [self.interestText setHidden:YES];
     [self.aboutText setHidden:YES];
-    [self.editAbout setHidden:YES];
-    [self.editInterests setHidden:YES];
-    [self.editImage setHidden:YES];
     [self.pointsToNextLevel setHidden:YES];
     [self.progressBackground setHidden:YES];
     [self.questionLevelsButton setHidden:YES];
@@ -481,7 +475,14 @@ UIImagePickerController *picker;
     
     // initiate user refresh. Alot of data we show depends on the user.
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PFUser currentUser] fetch];
+        
+        // check userdata to see if we fetch
+        NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+        NSNumber *savedUserData = [userData objectForKey:@"justSavedUserData"];
+        
+        if (![savedUserData boolValue])
+            [[PFUser currentUser] fetch];
+        
         self.currentUser = [PFUser currentUser];
         
         dispatch_async( dispatch_get_main_queue(), ^{
@@ -544,11 +545,6 @@ UIImagePickerController *picker;
             NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:myFont, NSFontAttributeName,nil];
             CGSize stringSize = [pointsString sizeWithAttributes:attributesDictionary];
             self.progressBarLabelWidthConstraint.constant = stringSize.width;
-            
-            // style edit buttons
-            [self.editAbout.layer setCornerRadius:5.0];
-            [self.editInterests.layer setCornerRadius:5.0];
-            [self.editImage.layer setCornerRadius:5.0];
 
             // image
             [self.profileImage.layer setCornerRadius:self.profileImage.frame.size.height/2];
@@ -567,7 +563,7 @@ UIImagePickerController *picker;
             // set about and interests text and height
             if ([PFUser currentUser][@"aboutMe"] == nil || [[PFUser currentUser][@"aboutMe"] length] == 0)
             {
-                [self.aboutText setText:@"Add a description about yourself"];
+                [self.aboutText setText:@"Tap to add a description about yourself"];
                 [self.aboutText setTextColor:[UIColor grayColor]];
             }
             else
@@ -579,7 +575,7 @@ UIImagePickerController *picker;
             
             if ([PFUser currentUser][@"interests"] == nil || [[PFUser currentUser][@"interests"] length] == 0)
             {
-                [self.interestText setText:@"Share your interests"];
+                [self.interestText setText:@"Tap to add interests"];
                 [self.interestText setTextColor:[UIColor grayColor]];
             }
             else
@@ -621,13 +617,27 @@ UIImagePickerController *picker;
                 [self.interestsLabel setHidden:NO];
                 [self.interestText setHidden:NO];
                 [self.aboutText setHidden:NO];
-                [self.editAbout setHidden:NO];
-                [self.editImage setHidden:NO];
-                [self.editInterests setHidden:NO];
                 [self.pointsToNextLevel setHidden:NO];
                 [self.progressBackground setHidden:NO];
                 [self.questionLevelsButton setHidden:NO];
             }
+            
+            // set up gesture recognizers
+            [self.profileImage setUserInteractionEnabled:YES];
+            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressEditImage:)];
+            imageTap.delegate = self;
+            [self.profileImage addGestureRecognizer:imageTap];
+            
+            [self.aboutText setUserInteractionEnabled:YES];
+            UITapGestureRecognizer *aboutTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressEditAbout:)];
+            aboutTap.delegate = self;
+            [self.aboutText addGestureRecognizer:aboutTap];
+            
+            [self.interestText setUserInteractionEnabled:YES];
+            UITapGestureRecognizer *interestTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPresssEditInterests:)];
+            interestTap.delegate = self;
+            [self.interestText addGestureRecognizer:interestTap];
+        
         });
     });
 }
@@ -1475,7 +1485,7 @@ UIImagePickerController *picker;
     UIAlertView *about = [[UIAlertView alloc] initWithTitle:@"Edit About Me" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
     about.alertViewStyle = UIAlertViewStylePlainTextInput;
     
-    if (self.aboutText.text != nil && ![self.aboutText.text isEqualToString:@"Add a description about yourself"])
+    if (self.aboutText.text != nil && ![self.aboutText.text isEqualToString:@"Tap to add a description about yourself"])
         [[about textFieldAtIndex:0] setText:self.aboutText.text];
     [about show];
     
@@ -1486,7 +1496,7 @@ UIImagePickerController *picker;
     UIAlertView *about = [[UIAlertView alloc] initWithTitle:@"Edit Interests" message:@"What makes you tick?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
     about.alertViewStyle = UIAlertViewStylePlainTextInput;
     
-    if (self.interestText.text != nil && ![self.interestText.text isEqualToString:@"Share your interests"])
+    if (self.interestText.text != nil && ![self.interestText.text isEqualToString:@"Tap to add interests"])
         [[about textFieldAtIndex:0] setText:self.interestText.text];
     [about show];
 
@@ -1496,7 +1506,7 @@ UIImagePickerController *picker;
     // show libary/take photo actionsheet
     UIActionSheet *pickImageMethod;
 
-    pickImageMethod = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Photo Library",@"Take Photo", nil];
+    pickImageMethod = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Add Photo from Library",@"Take Photo", nil];
     
     [pickImageMethod showInView:self.view];
 
@@ -1581,14 +1591,14 @@ UIImagePickerController *picker;
     if(buttonIndex == 0)
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    if (buttonIndex == 0 || buttonIndex == 1)
+        [self presentViewController:picker animated:YES completion:NULL];
 }
 
 
 - (void)justLoggedIn
 {
     self.currentUser = [PFUser currentUser];
-     [self setupHeaderView];
      [self refreshList];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"justLoggedIn" object:nil];
 }
@@ -1783,6 +1793,16 @@ UIImagePickerController *picker;
     [self.progressBar setHidden:NO];
     [self.activityIndicator stopAnimating];
     [self.activityIndicator setHidden:YES];
+    [self.aboutText setHidden:NO];
+    [self.interestText setHidden:NO];
+    [self.interestsLabel setHidden:NO];
+    [self.questionLevelsButton setHidden:NO];
+    [self.reachLabel setHidden:NO];
+    [self.reachValue setHidden:NO];
+    [self.profileImage setHidden:NO];
+    
+    
+    self.isOverlayTutorial = NO;
 }
 
 @end

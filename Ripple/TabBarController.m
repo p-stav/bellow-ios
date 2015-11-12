@@ -57,6 +57,7 @@
     [[[UITabBar appearance].items objectAtIndex:0] setImageInsets:UIEdgeInsetsMake(9, 0, -9, 0)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTabBar) name:@"hideTabBar" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTabBar) name:@"showTabBar" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLogInAndSignUpViewProfile) name:@"showLoginSignup" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inactiveTabBar) name:@"inactiveTabBarController" object:nil];
 }
 
@@ -117,29 +118,39 @@
     
     if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)) //&& [CLLocationManager authorizationStatus] != kCLAuthorizationStatusNotDetermined))
     {
-    
-        if (![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]])
+        if (self.tabBar.alpha == 1)
         {
-            // present modal window
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"Start A Post"];
-            // self.navigationController.navigationBarHidden=NO;
-            [self presentViewController:obj animated:YES completion:nil];
-        }
-        
-        else
-        {
-            UIAlertView *signInPlease = [[UIAlertView alloc] initWithTitle:@"Login or sign up!" message:@"You must have an account to start ripples" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [self showLogInAndSignUpView];
-            [signInPlease show];
+            if ([PFUser currentUser][@"reach"] != nil && ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]])
+            {
+                // present modal window
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"Start A Post"];
+                // self.navigationController.navigationBarHidden=NO;
+                [self presentViewController:obj animated:YES completion:nil];
+            }
+            
+            else
+            {
+                UIAlertView *signInPlease = [[UIAlertView alloc] initWithTitle:@"Login or sign up!" message:@"You must have an account to create posts" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [self showLogInAndSignUpView];
+                [signInPlease show];
 
-            [self showLogInAndSignUpView];
+                [self showLogInAndSignUpView];
+            }
         }
     }
 }
 
 
 #pragma Mark - login and signup
+- (void)showLogInAndSignUpViewProfile
+{
+    UIAlertView *signIn = [[UIAlertView alloc] initWithTitle:@"Login or Sign up!" message:@"Login or sign up to see your profile!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    [signIn show];
+    
+    [self showLogInAndSignUpView];
+}
 - (void)showLogInAndSignUpView
 {
     // Create the log in view controller
@@ -187,7 +198,7 @@
 - (void) presentUsernameAlert
 {
     // we need to prompt them for a user name
-    UIAlertView *usernameAlert = [[UIAlertView alloc]initWithTitle:@"Pick a username!" message:@"Your username will be shown everytime you start a ripple or comment on one.\n\nHave a referral code? Enter it as well." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *usernameAlert = [[UIAlertView alloc]initWithTitle:@"Pick a username!" message:@"Your username will be shown everytime you create a post or comment on one.\n\nHave a referral code? Enter it as well." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     usernameAlert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     [[usernameAlert textFieldAtIndex:1] setSecureTextEntry:NO];
     [[usernameAlert textFieldAtIndex:0] setPlaceholder:@"username"];
@@ -207,34 +218,24 @@
 }
 
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
-    // initiate user refresh
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Add code here to do background processing
-        [[PFUser currentUser] fetch];
-        
-        //referral
-        if (![user[@"additional"] isEqualToString:@""])
-        {
-           self.referralNum = [BellowService acceptReferral:user[@"additional"]];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // initiate user user refresh
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"justLoggedIn" object:nil];
-            
-            if (![user[@"additional"] isEqualToString:@""])
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReferralAlert" object:[NSNumber numberWithInt: self.referralNum]];
+    //referral
+    if (![[PFUser currentUser][@"additional"] isEqualToString:@""])
+    {
+       self.referralNum = [BellowService acceptReferral:[PFUser currentUser][@"additional"]];
+    }
+    
+    // initiate user user refresh
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"justLoggedIn" object:nil];
+    
+    if (![[PFUser currentUser][@"additional"] isEqualToString:@""])
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReferralAlert" object:[NSNumber numberWithInt: self.referralNum]];
 
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
-            [[PFUser currentUser] setObject:[[PFUser currentUser].username lowercaseString] forKey:@"canonicalUsername"];
-            
-            NSArray *followingArray = [NSArray arrayWithObject:@"qqyvLOFvNT"];
-            [[PFUser currentUser] setObject:followingArray forKey:@"following"];
-            
-            [[PFUser currentUser] saveInBackground];
-        });
-    });
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *lowercase = [[PFUser currentUser].username lowercaseString];
+    [[PFUser currentUser] setObject:lowercase forKey:@"canonicalUsername"];
+    
+    [[PFUser currentUser] saveInBackground];
 }
 
 
@@ -348,10 +349,14 @@
     if (self.interactionDisabled)
     {
         self.interactionDisabled = NO;
+        [self.tabBar setAlpha:1.0];
+        [self.button setAlpha:1.0];
     }
     else
     {
         self.interactionDisabled = YES;
+        [self.tabBar setAlpha:0.5];
+        [self.button setAlpha:0.5];
     }
 }
 

@@ -778,7 +778,7 @@
                                     <constraint firstAttribute="height" constant="20" id="n5L-NP-Hq2"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HE8-0t-wAu">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HE8-0t-wAu">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -786,65 +786,64 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="298"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gain points to increase your level &amp; reach" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eg7-cQ-JTg">
-                                            <rect key="frame" x="8" y="80" width="321" height="24"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gat-EH-xHN">
+                                            <rect key="frame" x="20" y="198" width="300" height="56"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="OV4-rC-azr"/>
-                                                <constraint firstAttribute="width" constant="321" id="dvT-q6-kst"/>
+                                                <constraint firstAttribute="height" constant="56" id="BFv-hX-m1b"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                            <string key="text">-  The number of people who receive posts you 
+   create or spread</string>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" so your posts spread to more people" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGb-Jh-eqq">
+                                            <rect key="frame" x="6" y="256" width="314" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Hgl-e5-LsE"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.58039215686274503" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" to increase your reach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ih-Il-3Ea">
+                                            <rect key="frame" x="8" y="183" width="203" height="24"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="203" id="IEL-XZ-m9n"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.58039215686274503" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Earn points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eg7-cQ-JTg">
+                                            <rect key="frame" x="8" y="110" width="304" height="24"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="Nqb-4v-8ui"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.58039215686274503" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yx-t6-tuW">
-                                            <rect key="frame" x="6" y="98" width="308" height="105"/>
+                                            <rect key="frame" x="20" y="125" width="292" height="53"/>
                                             <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="105" id="lId-Pv-n8f"/>
+                                                <constraint firstAttribute="height" constant="53" id="12d-na-6GM"/>
                                             </constraints>
-                                            <string key="text">Earn points when you spread and dismiss ripples, and when people spread your ripples. Points increase your "level" and "reach" - the higher your reach, the more people receive ripples you start or spread!</string>
+                                            <string key="text">-  By swiping posts
+-  Each time your posts are spread</string>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJq-Ev-fnn">
-                                            <rect key="frame" x="47" y="208" width="252" height="30"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-vn-Jz8">
+                                            <rect key="frame" x="6" y="13" width="308" height="87"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="252" id="gUP-Vt-nlu"/>
-                                                <constraint firstAttribute="height" constant="30" id="qWO-9C-HWm"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
-                                            <state key="normal" title="Share Bellow with friends!">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Earn points when friends sign in using your username as a referral code. Get points when they invite their friends, too. " selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gat-EH-xHN">
-                                            <rect key="frame" x="5" y="230" width="310" height="83"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="83" id="eoM-Ix-wwJ"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqC-UR-p3Q">
-                                            <rect key="frame" x="10" y="210" width="25" height="25"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="clC-Kq-3kK"/>
-                                                <constraint firstAttribute="height" constant="25" id="loN-zS-6d0"/>
-                                            </constraints>
-                                            <state key="normal" image="shareWithFriends.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-vn-Jz8">
-                                            <rect key="frame" x="6" y="13" width="308" height="63"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="308" id="Kkm-uH-RhC"/>
-                                                <constraint firstAttribute="height" constant="63" id="ZoB-4b-s7o"/>
+                                                <constraint firstAttribute="height" constant="87" id="8cI-Ci-l5q"/>
                                             </constraints>
                                             <color key="textColor" red="0.16862745100000001" green="0.52549019610000003" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
@@ -853,93 +852,65 @@
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstItem="Kpb-vn-Jz8" firstAttribute="top" secondItem="jnr-M4-Bif" secondAttribute="top" constant="13" id="6zG-ZJ-dxD"/>
-                                        <constraint firstItem="GJq-Ev-fnn" firstAttribute="top" secondItem="9yx-t6-tuW" secondAttribute="bottom" constant="5" id="7bi-ia-OJV"/>
-                                        <constraint firstAttribute="trailing" secondItem="Kpb-vn-Jz8" secondAttribute="trailing" constant="6" id="Bpd-0o-urL"/>
-                                        <constraint firstItem="Eg7-cQ-JTg" firstAttribute="top" secondItem="Kpb-vn-Jz8" secondAttribute="bottom" constant="4" id="DvH-8g-W75"/>
-                                        <constraint firstItem="dqC-UR-p3Q" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="10" id="NeT-SP-yzf"/>
-                                        <constraint firstItem="gat-EH-xHN" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="5" id="Oqp-4y-42U"/>
-                                        <constraint firstAttribute="trailing" secondItem="gat-EH-xHN" secondAttribute="trailing" constant="5" id="Otu-y9-o4n"/>
-                                        <constraint firstAttribute="trailing" secondItem="9yx-t6-tuW" secondAttribute="trailing" constant="6" id="RUh-Nv-FRF"/>
-                                        <constraint firstItem="Eg7-cQ-JTg" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="8" id="SEs-lV-Kyx"/>
-                                        <constraint firstItem="dqC-UR-p3Q" firstAttribute="top" secondItem="9yx-t6-tuW" secondAttribute="bottom" constant="7" id="Sv6-qT-3uT"/>
-                                        <constraint firstItem="9yx-t6-tuW" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="6" id="X3S-Uw-9nJ"/>
-                                        <constraint firstItem="9yx-t6-tuW" firstAttribute="top" secondItem="Kpb-vn-Jz8" secondAttribute="bottom" constant="22" id="dv7-lY-tsb"/>
-                                        <constraint firstItem="Kpb-vn-Jz8" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="6" id="fXm-JY-9c6"/>
-                                        <constraint firstItem="GJq-Ev-fnn" firstAttribute="leading" secondItem="dqC-UR-p3Q" secondAttribute="trailing" constant="12" id="j2d-NQ-JZD"/>
-                                        <constraint firstItem="gat-EH-xHN" firstAttribute="top" secondItem="9yx-t6-tuW" secondAttribute="bottom" constant="27" id="xsx-uO-SbC"/>
+                                        <constraint firstItem="BGb-Jh-eqq" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="6" id="2br-Yn-Y9k"/>
+                                        <constraint firstItem="3ih-Il-3Ea" firstAttribute="top" secondItem="9yx-t6-tuW" secondAttribute="bottom" constant="5" id="7wI-p3-AfF"/>
+                                        <constraint firstAttribute="trailing" secondItem="Kpb-vn-Jz8" secondAttribute="trailing" constant="6" id="CMP-26-Jvj"/>
+                                        <constraint firstItem="Kpb-vn-Jz8" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="6" id="Fej-yF-STD"/>
+                                        <constraint firstItem="gat-EH-xHN" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="20" id="J4q-Py-FR6"/>
+                                        <constraint firstItem="Kpb-vn-Jz8" firstAttribute="top" secondItem="jnr-M4-Bif" secondAttribute="top" constant="13" id="LaB-GM-6MU"/>
+                                        <constraint firstItem="9yx-t6-tuW" firstAttribute="top" secondItem="Eg7-cQ-JTg" secondAttribute="bottom" constant="-9" id="UQ7-kh-RI5"/>
+                                        <constraint firstItem="BGb-Jh-eqq" firstAttribute="top" secondItem="gat-EH-xHN" secondAttribute="bottom" constant="2" id="UuQ-0f-8He"/>
+                                        <constraint firstItem="9yx-t6-tuW" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="20" id="WOh-ih-inh"/>
+                                        <constraint firstItem="Eg7-cQ-JTg" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="8" id="Xl9-J5-MGd"/>
+                                        <constraint firstItem="Eg7-cQ-JTg" firstAttribute="top" secondItem="Kpb-vn-Jz8" secondAttribute="bottom" constant="10" id="Yff-yc-ZeG"/>
+                                        <constraint firstAttribute="trailing" secondItem="Eg7-cQ-JTg" secondAttribute="trailing" constant="8" id="fKe-Ql-JVi"/>
+                                        <constraint firstAttribute="trailing" secondItem="gat-EH-xHN" secondAttribute="trailing" id="gzG-dK-Gvi"/>
+                                        <constraint firstAttribute="trailing" secondItem="9yx-t6-tuW" secondAttribute="trailing" constant="8" id="iNn-ur-u2X"/>
+                                        <constraint firstItem="3ih-Il-3Ea" firstAttribute="leading" secondItem="jnr-M4-Bif" secondAttribute="leading" constant="8" id="lJd-V0-QMK"/>
+                                        <constraint firstItem="gat-EH-xHN" firstAttribute="top" secondItem="3ih-Il-3Ea" secondAttribute="bottom" constant="-9" id="rSo-Kq-oNK"/>
+                                        <constraint firstAttribute="trailing" secondItem="BGb-Jh-eqq" secondAttribute="trailing" id="x58-Zl-dwU"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="levelCell" rowHeight="97" id="Kgu-Vh-fPN" customClass="LevelCell">
-                                        <rect key="frame" x="0.0" y="320" width="320" height="97"/>
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="levelCell" rowHeight="58" id="Kgu-Vh-fPN" customClass="LevelCell">
+                                        <rect key="frame" x="0.0" y="320" width="320" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kgu-Vh-fPN" id="UV1-aR-Pm7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lady of the Lake" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rj-Ay-yUc">
-                                                    <rect key="frame" x="8" y="8" width="69" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o49-tT-Nzn">
+                                                    <rect key="frame" x="8" y="18" width="131" height="21"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Qs9-Lb-kEq"/>
-                                                        <constraint firstAttribute="width" constant="69" id="Vze-No-IuW"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 points" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o49-tT-Nzn">
-                                                    <rect key="frame" x="181" y="67" width="131" height="21"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="131" id="OIB-a3-9sx"/>
-                                                        <constraint firstAttribute="height" constant="21" id="cSe-Pl-ICJ"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zla-jP-2Xh">
-                                                    <rect key="frame" x="8" y="36" width="156" height="21"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="54o-fG-Ot1"/>
-                                                        <constraint firstAttribute="width" constant="156" id="mfr-G9-NUe"/>
+                                                        <constraint firstAttribute="width" constant="131" id="aNi-vB-Rft"/>
+                                                        <constraint firstAttribute="height" constant="21" id="uBr-nA-Whx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10x reach" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXk-lx-0zn">
-                                                    <rect key="frame" x="8" y="67" width="110" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10x reach" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXk-lx-0zn">
+                                                    <rect key="frame" x="202" y="18" width="110" height="21"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="110" id="SuL-mx-QfN"/>
-                                                        <constraint firstAttribute="height" constant="21" id="smh-oL-MJv"/>
+                                                        <constraint firstAttribute="width" constant="110" id="Btv-1J-yS7"/>
+                                                        <constraint firstAttribute="height" constant="21" id="pw0-ak-Eph"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="9Rj-Ay-yUc" firstAttribute="top" secondItem="UV1-aR-Pm7" secondAttribute="top" constant="8" id="2Lk-hj-XRS"/>
-                                                <constraint firstAttribute="bottom" secondItem="GXk-lx-0zn" secondAttribute="bottom" constant="8" id="7g7-HS-3ON"/>
-                                                <constraint firstItem="GXk-lx-0zn" firstAttribute="leading" secondItem="UV1-aR-Pm7" secondAttribute="leading" constant="8" id="Gyy-CX-X57"/>
-                                                <constraint firstItem="9Rj-Ay-yUc" firstAttribute="leading" secondItem="UV1-aR-Pm7" secondAttribute="leading" constant="8" id="RWM-KP-NmZ"/>
-                                                <constraint firstItem="zla-jP-2Xh" firstAttribute="top" secondItem="9Rj-Ay-yUc" secondAttribute="bottom" constant="-2" id="S4k-7n-zWb"/>
-                                                <constraint firstAttribute="trailing" secondItem="o49-tT-Nzn" secondAttribute="trailing" constant="8" id="hCP-eZ-s5w"/>
-                                                <constraint firstItem="zla-jP-2Xh" firstAttribute="leading" secondItem="UV1-aR-Pm7" secondAttribute="leading" constant="8" id="jLu-9A-goI"/>
-                                                <constraint firstAttribute="bottom" secondItem="o49-tT-Nzn" secondAttribute="bottom" constant="8" id="otR-Oc-NGF"/>
+                                                <constraint firstAttribute="trailing" secondItem="GXk-lx-0zn" secondAttribute="trailing" constant="8" id="LtJ-SA-wJ5"/>
+                                                <constraint firstItem="GXk-lx-0zn" firstAttribute="centerY" secondItem="UV1-aR-Pm7" secondAttribute="centerY" id="hoR-Vw-5u5"/>
+                                                <constraint firstItem="o49-tT-Nzn" firstAttribute="leading" secondItem="UV1-aR-Pm7" secondAttribute="leading" constant="8" id="lz9-4P-3ow"/>
+                                                <constraint firstItem="o49-tT-Nzn" firstAttribute="centerY" secondItem="UV1-aR-Pm7" secondAttribute="centerY" id="vTE-C3-3gW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <outlet property="levelLabel" destination="9Rj-Ay-yUc" id="jiP-75-wLg"/>
-                                            <outlet property="levelLabelWidthConstraint" destination="Vze-No-IuW" id="sKD-a5-VOU"/>
-                                            <outlet property="levelNumber" destination="zla-jP-2Xh" id="iDU-N3-FGd"/>
                                             <outlet property="pointsLabel" destination="o49-tT-Nzn" id="v9c-e3-h76"/>
                                             <outlet property="reachLabel" destination="GXk-lx-0zn" id="6dG-x1-EKf"/>
                                         </connections>
@@ -964,8 +935,6 @@
                     </view>
                     <connections>
                         <outlet property="pointsLevelText" destination="Kpb-vn-Jz8" id="kMG-hl-9Qs"/>
-                        <outlet property="shareImage" destination="dqC-UR-p3Q" id="20w-y6-uDD"/>
-                        <outlet property="shareRipple" destination="GJq-Ev-fnn" id="e74-Eu-y3d"/>
                         <outlet property="tableView" destination="HE8-0t-wAu" id="lEH-sF-FPy"/>
                     </connections>
                 </viewController>
@@ -1085,7 +1054,7 @@
         <!--Other User Profile View Controller-->
         <scene sceneID="jST-VB-aYz">
             <objects>
-                <viewController storyboardIdentifier="OtherUserProfilesView" extendedLayoutIncludesOpaqueBars="YES" id="Uot-JS-E4r" customClass="OtherUserProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OtherUserProfileView" extendedLayoutIncludesOpaqueBars="YES" id="Uot-JS-E4r" customClass="OtherUserProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="POV-8P-kct"/>
                         <viewControllerLayoutGuide type="bottom" id="JAH-Bq-koe"/>
@@ -1123,7 +1092,7 @@
                                             <animations/>
                                         </activityIndicatorView>
                                         <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbD-pa-OTQ">
-                                            <rect key="frame" x="8" y="110" width="304" height="50"/>
+                                            <rect key="frame" x="8" y="115" width="304" height="50"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="2Lj-p4-j69"/>
@@ -1236,7 +1205,7 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ib5-p7-VAi">
-                                            <rect key="frame" x="8" y="91" width="67" height="24"/>
+                                            <rect key="frame" x="8" y="96" width="67" height="24"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="67" id="LMg-A9-MZD"/>
@@ -1247,7 +1216,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3S-nZ-RcY">
-                                            <rect key="frame" x="3" y="105" width="251" height="10"/>
+                                            <rect key="frame" x="3" y="110" width="251" height="10"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="10" id="9D0-Xh-Nsy"/>
@@ -1285,7 +1254,7 @@
                                         <constraint firstAttribute="trailing" secondItem="zbD-pa-OTQ" secondAttribute="trailing" constant="8" id="is7-QA-gzJ"/>
                                         <constraint firstItem="81S-DB-dj6" firstAttribute="leading" secondItem="CTc-pg-CbR" secondAttribute="leading" constant="3" id="mQf-mH-paS"/>
                                         <constraint firstItem="GkZ-r2-V6P" firstAttribute="top" secondItem="vw7-a1-TDw" secondAttribute="bottom" constant="-6" id="q4U-7S-BLl"/>
-                                        <constraint firstItem="ib5-p7-VAi" firstAttribute="top" secondItem="81S-DB-dj6" secondAttribute="bottom" constant="-5" id="qgi-2L-tRh"/>
+                                        <constraint firstItem="ib5-p7-VAi" firstAttribute="top" secondItem="81S-DB-dj6" secondAttribute="bottom" id="qgi-2L-tRh"/>
                                         <constraint firstItem="o5k-pm-vGg" firstAttribute="top" secondItem="CVc-VZ-DrZ" secondAttribute="bottom" constant="21" id="sBe-Zz-el9"/>
                                         <constraint firstItem="81S-DB-dj6" firstAttribute="top" secondItem="Ijx-T0-KA4" secondAttribute="bottom" constant="8" id="vME-kD-ZVH"/>
                                     </constraints>
@@ -1367,6 +1336,8 @@
                         <outlet property="reachValue" destination="RX4-KS-zhq" id="V62-lE-H2w"/>
                         <outlet property="tableHeader" destination="CTc-pg-CbR" id="Uq4-fG-FYV"/>
                         <outlet property="tableView" destination="I8u-9N-QTD" id="AKS-0Q-qiJ"/>
+                        <segue destination="bYJ-Ra-7Uu" kind="modal" identifier="RippleImageView" id="jCm-i5-TEx"/>
+                        <segue destination="Ake-oW-h52" kind="push" identifier="MapViewSegue" id="KDg-TI-RSI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13N-zg-7Sw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1417,7 +1388,7 @@
                                 <rect key="frame" x="8" y="64" width="304" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">RIPPLE TERMS OF USE
+                                <string key="text">BELLOW TERMS OF USE
 These Terms and Conditions (the “Terms”) are a contract between you and KEFI LABS LLC. This document explains how you are permitted to use the Bellow mobile application and services and any content found on it (the “Services”). Unless otherwise specified, all references to the “Services” include the services available through the Bellow mobile application as well as any software that KEFI LABS LLC provides to you that allows you to access the Services from a mobile device. By using the Services, you are agreeing to all of the Terms; if you do not agree with any of these Terms, do not access or otherwise use the Services.
 
 KEFI LABS LLC may make changes to the content and Services at any time. KEFI LABS LLC can change, update, add or remove provisions of these Terms, at any time by posting the updated Terms on the Services or by notifying you via the App. By using the Services after KEFI LABS LLC has updated the Terms, you are agreeing to all the updated Terms; if you do not agree with any of the updated Terms, you must stop using Services.
@@ -1431,7 +1402,7 @@ You are responsible for your uses of the Services, or any Content you post to th
 CONTENT
 The Services consist of features that allow users to create, post, and spread Content. You are responsible for any information, opinions, messages, comments, photos, videos, graphics, sounds and other Content or material that you submit, post, spread, or otherwise make available on or through the Services (each a “Submission”) and through the Services available in connection with the Services. We reserve the right to retain your Submissions, even after they have expired from view within the App or even after you have deleted them. However, you agree that we have no obligation to retain any Submission for any period of time, nor shall we be responsible or liable to you or any third party for any lost Content or losses related to the expiration or deletion of a Submission.
 You may not upload, post or otherwise make available on the Services any material protected by copyright, trademark, or any other proprietary right without the express permission of the owner of such copyright, trademark or other proprietary right owned by a third-party, and the burden of determining whether any material is protected by any such right is on you. You shall be solely liable for any damage resulting from any infringement of copyrights, trademarks, proprietary rights, violation of contract, privacy or publicity rights or any other harm resulting from any Submission that you make. You have full responsibility for each Submission you make, including its legality, reliability and appropriateness. Under no circumstances will KEFI LABS LLC be liable in any way for any Content, including, but not limited to, any errors or omissions in any Content, or any loss or damage of any kind incurred as a result of the use of any Content posted, emailed, transmitted, or otherwise made available the Services. 
-Unless otherwise explicitly stated herein, you agree that any Submission provided by you in connection with the Services is provided on a non-proprietary and non-confidential basis. You hereby grant to KEFI LABS LLC a non-exclusive, perpetual, royalty-free, fully paid-up, worldwide license (including the right to sublicense through multiple tiers) to use, reproduce, process, adapt, publicly perform, publicly display, modify, prepare derivative works, publish, transmit and distribute each of your Submissions, or any portion thereof, in any form, medium or distribution method now known or hereafter existing, known or developed, and authorize others to use the Submissions. We may change or modify Submissions in order to transmit, display or distribute them over computer networks and in various media and/or make changes to the Submissions as necessary to conform and adapt them to any requirements or limitations of any networks, devices, services or media. PLEASE NOTE THAT IF YOU FIND US USING SUBMISSIONS OF YOURS IN A WAY THAT DOES NOT MAKE YOU COMFORTABLE, WE WILL CEASE TO USE IT OR ALTER IT UPON REQUEST. Please email wellripplemethis@gmail.com for inquiries.
+Unless otherwise explicitly stated herein, you agree that any Submission provided by you in connection with the Services is provided on a non-proprietary and non-confidential basis. You hereby grant to KEFI LABS LLC a non-exclusive, perpetual, royalty-free, fully paid-up, worldwide license (including the right to sublicense through multiple tiers) to use, reproduce, process, adapt, publicly perform, publicly display, modify, prepare derivative works, publish, transmit and distribute each of your Submissions, or any portion thereof, in any form, medium or distribution method now known or hereafter existing, known or developed, and authorize others to use the Submissions. We may change or modify Submissions in order to transmit, display or distribute them over computer networks and in various media and/or make changes to the Submissions as necessary to conform and adapt them to any requirements or limitations of any networks, devices, services or media. PLEASE NOTE THAT IF YOU FIND US USING SUBMISSIONS OF YOURS IN A WAY THAT DOES NOT MAKE YOU COMFORTABLE, WE WILL CEASE TO USE IT OR ALTER IT UPON REQUEST. Please email getBellow@gmail.com for inquiries.
 You agree to pay for all royalties, fees, damages and any other monies owing any person by reason of any Submissions posted by you to or through the Services. When you provide Submissions you agree that those Submissions shall not be in violation of the “Unauthorized Activities” paragraph below. Those prohibitions do not require KEFI LABS LLC to monitor, police or remove any Submissions or other information submitted by you or any other user.
 
 
@@ -1483,7 +1454,7 @@ Bellow uses the hand icon created by Roman Zubakov from the Noun project. The ph
 Bellow uses icons from Catalin Fertu’s BigMug Line in Interface. The icon set can be found here: http://www.flaticon.com/packs/bigmug-line/. Bellow uses these icons throughout the service. 
 
 CONTACT US
-If you have any questions about these Terms or otherwise need to contact KEFI LABS LLC for any reason, you can reach us at wellRippleMeThis@gmail.com</string>
+If you have any questions about these Terms or otherwise need to contact KEFI LABS LLC for any reason, you can reach us at getBellow@gmail.com</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
@@ -1559,7 +1530,7 @@ If you have any questions about these Terms or otherwise need to contact KEFI LA
                                 <rect key="frame" x="8" y="64" width="304" height="496"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">RIPPLE PRIVACY STATEMENT
+                                <string key="text">BELLOW PRIVACY STATEMENT
 
 This privacy policy governs your use of the software application Bellow (“Application”) for mobile devices that was created by Kefi Labs LLC. The Application allows users to post content and send it to fellow users nearby. 
 
@@ -1571,7 +1542,7 @@ such as when you create a game, post a comment, or take a picture of someone in 
 We may also use the information you provided us to contact you from time to time to provide you with important information, required notices and marketing promotions.
 
 LOCATION INFORMATION
-When you visit the mobile application, we use GPS technology (or other similar technology) to roughly determine your current location in order to determine your general vicinity. We obstruct your current location by a 500 meter radius to protect you. We utilize this data to send your Ripples to users near you, as well as send you nearby Ripples from other users. We will not share your current location with other partners or corporate entities. 
+When you visit the mobile application, we use GPS technology (or other similar technology) to roughly determine your current location in order to determine your general vicinity. We obstruct your current location by a 500 meter radius to protect you. We utilize this data to send your posts to users near you, as well as send you nearby posts from other users. We will not share your current location with other partners or corporate entities. 
 Bellow makes use of technology which updates your location once you have travelled than 500 meters. Bellow also monitors location changes while in the background. To change this behavior, you should toggle off the option to always use location service, and choose the one which allows for location services while using the application in your mobile phone system settings.
 
 THIRD PARTY INFORMATION ACCESS
@@ -1585,10 +1556,10 @@ We may disclose User Provided and Automatically Collected Information:
 OPT-OUT RIGHTS
 You can stop all collection of information by the Application easily by uninstalling the Application. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network. 
 MANAGING YOUR INFORMATION
-We will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. We will retain Automatically Collected information for up to 48 months and thereafter may store it in aggregate. If you’d like us to delete User Provided Data that you have provided via the Application, please contact us at wellRippleMeThis@gmail.com and we will respond in a reasonable time. Please note that some or all of the User Provided Data may be required in order for the Application to function properly.
+We will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. We will retain Automatically Collected information for up to 48 months and thereafter may store it in aggregate. If you’d like us to delete User Provided Data that you have provided via the Application, please contact us at getBellow@gmail.com and we will respond in a reasonable time. Please note that some or all of the User Provided Data may be required in order for the Application to function properly.
 
 CHILDREN
-We do not use the Application to knowingly solicit data from or market to children under the age of 13. If a parent or guardian becomes aware that his or her child has provided us with information without their consent, he or she should contact us at wellRippleMeThis@@gmail.com. We will delete such information from our files within a reasonable time.
+We do not use the Application to knowingly solicit data from or market to children under the age of 13. If a parent or guardian becomes aware that his or her child has provided us with information without their consent, he or she should contact us at getBellow@gmail.com. We will delete such information from our files within a reasonable time.
 
 SECURITY
 We are concerned about safeguarding the confidentiality of your information. We provide physical, electronic, and procedural safeguards to protect information we process and maintain. For example, we limit access to this information to authorized employees and contractors who need to know that information in order to operate, develop or improve our Application. Please be aware that, although we endeavor provide reasonable security for information we process and maintain, no security system can prevent all potential security breaches.
@@ -1598,8 +1569,9 @@ This Privacy Policy may be updated from time to time for any reason. We will not
  
 YOUR CONSENT
 By using the Application, you are consenting to our processing of your information as set forth in this Privacy Policy now and as amended by us. "Processing,” means using cookies on a computer/hand held device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining and disclosing information, all of which activities will take place in the United States. If you reside outside the United States your information will be transferred, processed and stored there under United States privacy standards. 
+
 CONTACT US
-If you have any questions regarding privacy while using the Application, or have questions about our practices, please contact us via email at wellRippleMeThis@gmail.com</string>
+If you have any questions regarding privacy while using the Application, or have questions about our practices, please contact us via email at getBellow@gmail.com</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
@@ -1702,9 +1674,9 @@ If you have any questions regarding privacy while using the Application, or have
                             <constraint firstItem="QcU-XF-WMb" firstAttribute="top" secondItem="k7c-hs-0bX" secondAttribute="bottom" id="cV9-wj-8aj"/>
                             <constraint firstItem="qhY-Og-Ee4" firstAttribute="top" secondItem="k7c-hs-0bX" secondAttribute="bottom" id="goI-Jp-EMF"/>
                             <constraint firstItem="YhD-Xn-q5p" firstAttribute="leading" secondItem="Dde-L2-pUx" secondAttribute="leading" id="iRe-XC-XZm"/>
+                            <constraint firstItem="k7c-hs-0bX" firstAttribute="top" secondItem="YhD-Xn-q5p" secondAttribute="bottom" id="jMW-tA-kRA"/>
                             <constraint firstAttribute="trailing" secondItem="QcU-XF-WMb" secondAttribute="trailing" id="kS0-EI-BFy"/>
                             <constraint firstItem="QcU-XF-WMb" firstAttribute="leading" secondItem="Dde-L2-pUx" secondAttribute="leading" id="uqo-w8-vh6"/>
-                            <constraint firstItem="k7c-hs-0bX" firstAttribute="top" secondItem="tXF-l4-Rm0" secondAttribute="bottom" id="zoo-aC-gPs"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2607,12 +2579,12 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="ymc-Oc-Nf5"/>
                                             </connections>
                                         </button>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-2d-D6I">
-                                            <rect key="frame" x="150" y="149" width="20" height="20"/>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-2d-D6I">
+                                            <rect key="frame" x="150" y="105" width="20" height="20"/>
                                             <animations/>
                                         </activityIndicatorView>
                                         <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-cM-Z8A">
-                                            <rect key="frame" x="8" y="218" width="304" height="50"/>
+                                            <rect key="frame" x="8" y="208" width="304" height="50"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="myQ-cA-lyt"/>
@@ -2629,7 +2601,6 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <constraint firstAttribute="width" constant="65" id="gg6-Ab-ckO"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                            <state key="normal" title="23"/>
                                             <connections>
                                                 <action selector="didPressFollower:" destination="jLm-es-HZl" eventType="touchUpInside" id="0vw-Bs-9tx"/>
                                             </connections>
@@ -2642,7 +2613,6 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <constraint firstAttribute="width" constant="52" id="pVS-MQ-OYo"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                            <state key="normal" title="63"/>
                                             <connections>
                                                 <action selector="didPressFollowing:" destination="jLm-es-HZl" eventType="touchUpInside" id="Jkw-Yj-CE9"/>
                                             </connections>
@@ -2685,7 +2655,9 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <constraint firstAttribute="height" constant="26" id="Xxf-8s-fJn"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                            <state key="normal" title="1000"/>
+                                            <connections>
+                                                <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="wQF-Zh-dg1"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userSilhouette.png" translatesAutoresizingMaskIntoConstraints="NO" id="uOs-hr-oB6" customClass="PFImageView">
                                             <rect key="frame" x="8" y="8" width="70" height="70"/>
@@ -2695,22 +2667,6 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <constraint firstAttribute="width" constant="70" id="sSY-eK-GNI"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfe-rQ-Nf6">
-                                            <rect key="frame" x="16" y="63" width="53" height="20"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="1" green="0.69179224439999998" blue="0.040244564019999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="mKU-on-O5G"/>
-                                                <constraint firstAttribute="width" constant="53" id="vQg-HL-7wx"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
-                                            <state key="normal" title="edit">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didPressEditImage:" destination="jLm-es-HZl" eventType="touchUpInside" id="EMW-pm-19D"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tW-dn-plN">
                                             <rect key="frame" x="104" y="41" width="45" height="30"/>
                                             <animations/>
@@ -2722,6 +2678,9 @@ If you have any questions regarding privacy while using the Application, or have
                                             <state key="normal" title="reach">
                                                 <color key="titleColor" red="0.0" green="0.4823529412" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="Fvp-Wt-DZn"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNz-KP-Ng7">
                                             <rect key="frame" x="34" y="94" width="20" height="20"/>
@@ -2735,40 +2694,8 @@ If you have any questions regarding privacy while using the Application, or have
                                                 <action selector="didPressNextLevelButton:" destination="jLm-es-HZl" eventType="touchUpInside" id="4dT-xs-kln"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZF-7h-5eX">
-                                            <rect key="frame" x="9" y="137" width="53" height="20"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="1" green="0.69179224442023901" blue="0.040244564022650309" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="PhH-zT-cgP"/>
-                                                <constraint firstAttribute="width" constant="53" id="gBb-HZ-dK0"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                            <state key="normal" title="edit">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didPressEditAbout:" destination="jLm-es-HZl" eventType="touchUpInside" id="AvS-Vs-e1s"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIZ-Wf-CYc">
-                                            <rect key="frame" x="83" y="177" width="53" height="20"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="1" green="0.69179224439999998" blue="0.040244564019999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="bt5-hW-Uul"/>
-                                                <constraint firstAttribute="width" constant="53" id="eaQ-Ml-SVU"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                            <state key="normal" title="edit">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didPresssEditInterests:" destination="jLm-es-HZl" eventType="touchUpInside" id="wxl-Av-GRx"/>
-                                            </connections>
-                                        </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-I3-3zB">
-                                            <rect key="frame" x="3" y="191" width="314" height="32"/>
+                                            <rect key="frame" x="3" y="181" width="314" height="32"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="xw5-yg-3kJ"/>
@@ -2777,7 +2704,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vef-9B-uVl">
-                                            <rect key="frame" x="8" y="177" width="67" height="24"/>
+                                            <rect key="frame" x="8" y="167" width="67" height="24"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="67" id="K0y-Yp-VMy"/>
@@ -2788,7 +2715,7 @@ If you have any questions regarding privacy while using the Application, or have
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcQ-Tt-IER">
-                                            <rect key="frame" x="5" y="151" width="310" height="31"/>
+                                            <rect key="frame" x="5" y="141" width="310" height="31"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="oFv-3r-st0"/>
@@ -2800,7 +2727,6 @@ If you have any questions regarding privacy while using the Application, or have
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="kfe-rQ-Nf6" firstAttribute="leading" secondItem="uOs-hr-oB6" secondAttribute="trailing" constant="-62" id="14I-9c-EOe"/>
                                         <constraint firstItem="HZd-Tg-n5C" firstAttribute="centerX" secondItem="tlh-v7-hP4" secondAttribute="centerX" id="1tY-r8-EdP"/>
                                         <constraint firstItem="8tW-dn-plN" firstAttribute="centerX" secondItem="xIQ-L3-9S1" secondAttribute="centerX" id="3jU-5H-ST2"/>
                                         <constraint firstAttribute="trailing" secondItem="Dzq-I3-3zB" secondAttribute="trailing" constant="3" id="619-wd-og7"/>
@@ -2810,15 +2736,12 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstItem="Ldi-2d-D6I" firstAttribute="centerX" secondItem="86g-4d-Kjp" secondAttribute="centerX" id="BfP-Gm-NXd"/>
                                         <constraint firstAttribute="trailing" secondItem="Fbi-cM-Z8A" secondAttribute="trailing" constant="8" id="CqE-fh-7wB"/>
                                         <constraint firstItem="8tW-dn-plN" firstAttribute="top" secondItem="xIQ-L3-9S1" secondAttribute="bottom" constant="-7" id="EDi-sa-Dok"/>
-                                        <constraint firstItem="uIZ-Wf-CYc" firstAttribute="top" secondItem="vef-9B-uVl" secondAttribute="top" id="FXH-6M-ZP1"/>
                                         <constraint firstAttribute="trailing" secondItem="Dzq-I3-3zB" secondAttribute="trailing" constant="3" id="Igk-S1-Fqp"/>
-                                        <constraint firstItem="sZF-7h-5eX" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="Jeq-4l-ycJ"/>
                                         <constraint firstItem="Dzq-I3-3zB" firstAttribute="top" secondItem="vef-9B-uVl" secondAttribute="bottom" constant="-10" id="M8p-yr-RKx"/>
                                         <constraint firstItem="Fbi-cM-Z8A" firstAttribute="top" secondItem="Dzq-I3-3zB" secondAttribute="bottom" constant="-5" id="NHK-Kr-RQ8"/>
                                         <constraint firstItem="vef-9B-uVl" firstAttribute="top" secondItem="DcQ-Tt-IER" secondAttribute="bottom" constant="-5" id="NdR-jV-Nzj"/>
                                         <constraint firstItem="xIQ-L3-9S1" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="22" id="Ogq-aq-bna"/>
                                         <constraint firstItem="lLq-Pg-9LT" firstAttribute="centerX" secondItem="g8Z-SB-5v2" secondAttribute="centerX" id="Qp6-BP-0iT"/>
-                                        <constraint firstItem="sZF-7h-5eX" firstAttribute="top" secondItem="aAS-do-INq" secondAttribute="bottom" constant="16" id="Qsi-u8-kdR"/>
                                         <constraint firstItem="Dzq-I3-3zB" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="3" id="SDM-xk-6gD"/>
                                         <constraint firstItem="Ldi-2d-D6I" firstAttribute="centerY" secondItem="86g-4d-Kjp" secondAttribute="centerY" id="VWx-ZX-WVV"/>
                                         <constraint firstItem="Fbi-cM-Z8A" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="8" id="VjJ-vf-s8q"/>
@@ -2826,15 +2749,13 @@ If you have any questions regarding privacy while using the Application, or have
                                         <constraint firstAttribute="trailing" secondItem="tlh-v7-hP4" secondAttribute="trailing" constant="1" id="b7s-yH-qlV"/>
                                         <constraint firstItem="JyA-pq-6sM" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="b9Y-1R-tl2"/>
                                         <constraint firstItem="HZd-Tg-n5C" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="41" id="c20-o7-IX8"/>
-                                        <constraint firstItem="uOs-hr-oB6" firstAttribute="top" secondItem="kfe-rQ-Nf6" secondAttribute="bottom" constant="-75" id="cfE-1Y-Jlj"/>
                                         <constraint firstItem="aAS-do-INq" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="9" id="cwV-Hs-rCa"/>
-                                        <constraint firstItem="DcQ-Tt-IER" firstAttribute="top" secondItem="sZF-7h-5eX" secondAttribute="bottom" constant="-6" id="eko-CG-G1m"/>
+                                        <constraint firstItem="DcQ-Tt-IER" firstAttribute="top" secondItem="aAS-do-INq" secondAttribute="bottom" constant="20" id="d1h-KP-A4j"/>
                                         <constraint firstItem="g8Z-SB-5v2" firstAttribute="leading" secondItem="xIQ-L3-9S1" secondAttribute="trailing" constant="26" id="imT-zf-dyQ"/>
                                         <constraint firstItem="uOs-hr-oB6" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="8" id="jDi-AM-4lz"/>
                                         <constraint firstAttribute="trailing" secondItem="aAS-do-INq" secondAttribute="trailing" constant="111" id="nVY-NY-2BJ"/>
                                         <constraint firstItem="jNz-KP-Ng7" firstAttribute="leading" secondItem="JyA-pq-6sM" secondAttribute="trailing" constant="5" id="o1Q-YX-DGI"/>
                                         <constraint firstItem="g8Z-SB-5v2" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="22" id="qAU-Sq-Xhj"/>
-                                        <constraint firstItem="uIZ-Wf-CYc" firstAttribute="leading" secondItem="vef-9B-uVl" secondAttribute="trailing" constant="8" id="rmf-N3-ufX"/>
                                         <constraint firstItem="tlh-v7-hP4" firstAttribute="leading" secondItem="g8Z-SB-5v2" secondAttribute="trailing" constant="26" id="vWs-2K-mjE"/>
                                         <constraint firstItem="tlh-v7-hP4" firstAttribute="top" secondItem="86g-4d-Kjp" secondAttribute="top" constant="22" id="wLg-Te-x2k"/>
                                         <constraint firstItem="vef-9B-uVl" firstAttribute="leading" secondItem="86g-4d-Kjp" secondAttribute="leading" constant="8" id="wVS-6l-GlB"/>
@@ -3060,9 +2981,6 @@ If you have any questions regarding privacy while using the Application, or have
                         <outlet property="aboutText" destination="DcQ-Tt-IER" id="TAD-wh-N25"/>
                         <outlet property="activityIndicator" destination="Ldi-2d-D6I" id="arQ-d0-cRd"/>
                         <outlet property="containerViewHeightConstraint" destination="myQ-cA-lyt" id="oj2-0b-oBZ"/>
-                        <outlet property="editAbout" destination="sZF-7h-5eX" id="btv-9t-Eeu"/>
-                        <outlet property="editImage" destination="kfe-rQ-Nf6" id="6A1-Oz-jo9"/>
-                        <outlet property="editInterests" destination="uIZ-Wf-CYc" id="SR3-OG-AVo"/>
                         <outlet property="followersLabel" destination="lLq-Pg-9LT" id="dcR-3C-hOz"/>
                         <outlet property="followersNum" destination="g8Z-SB-5v2" id="NtF-gx-Vep"/>
                         <outlet property="followingLabel" destination="HZd-Tg-n5C" id="1KV-SH-Sif"/>
@@ -3516,7 +3434,7 @@ If you have any questions regarding privacy while using the Application, or have
         <scene sceneID="0GK-5Q-20n">
             <objects>
                 <navigationController title="Trending" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="SXv-va-N01" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trending" image="Search" id="Nef-sM-Zgb"/>
+                    <tabBarItem key="tabBarItem" title="Trending" image="flame" id="Nef-sM-Zgb"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
@@ -3598,7 +3516,6 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="Home" width="30" height="30"/>
         <image name="Me" width="30" height="30"/>
         <image name="Notification" width="60" height="60"/>
-        <image name="Search" width="30" height="30"/>
         <image name="addImage.png" width="200" height="200"/>
         <image name="alreadyDismissed.png" width="62" height="50"/>
         <image name="caution.png" width="100" height="88"/>
@@ -3609,6 +3526,7 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="downKeyboard.png" width="100" height="100"/>
         <image name="facebook.png" width="97" height="95"/>
         <image name="feedback.png" width="200" height="200"/>
+        <image name="flame" width="30" height="30"/>
         <image name="follow.png" width="100" height="100"/>
         <image name="getPoints.png" width="100" height="100"/>
         <image name="instagram.png" width="97" height="95"/>
@@ -3618,7 +3536,7 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="pebble.png" width="110" height="110"/>
         <image name="propagateButtonUnselected.png" width="180" height="180"/>
         <image name="questionMark.png" width="50" height="50"/>
-        <image name="referral.png" width="229" height="229"/>
+        <image name="referral.png" width="50" height="50"/>
         <image name="rightArrowReal.png" width="21" height="35"/>
         <image name="share.png" width="250" height="250"/>
         <image name="shareWithFriends.png" width="47" height="49"/>
@@ -3628,15 +3546,15 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="userSilhouette.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BQt-lq-G7y"/>
-        <segue reference="AcY-H4-hdD"/>
-        <segue reference="Ubg-9a-Zfa"/>
+        <segue reference="Pwq-H4-Kfq"/>
+        <segue reference="ddR-cu-Xrf"/>
         <segue reference="Vjc-ZB-AvE"/>
-        <segue reference="A5N-Q5-ixn"/>
-        <segue reference="wlf-Iq-ZyU"/>
-        <segue reference="hJL-5N-K1N"/>
+        <segue reference="AcY-H4-hdD"/>
         <segue reference="dba-bl-yJ2"/>
-        <segue reference="Chv-7s-49J"/>
+        <segue reference="Ubg-9a-Zfa"/>
+        <segue reference="A5N-Q5-ixn"/>
+        <segue reference="2ux-5b-Cwf"/>
+        <segue reference="hJL-5N-K1N"/>
         <segue reference="Wu2-Fk-dQS"/>
         <segue reference="4EZ-l1-4gK"/>
     </inferredMetricsTieBreakers>

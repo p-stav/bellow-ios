@@ -219,7 +219,7 @@
         });
     });
     
-    [self checkFirstTimeMap];
+    //[self checkFirstTimeMap];
     [self grabComments];
     
     // navigation bar items, constraints
@@ -1606,8 +1606,8 @@
                 [self.imageView addGestureRecognizer:self.tapImageRecognizer];
             
             if (!self.viewDidLoadJustRan && !self.commentsUp) {
-                // make it show 1/3 of the way
-                self.mapOverlayTopConstraint.constant = (self.view.frame.size.height - 64)*0.66;
+                // make it show 1/4 of the way
+                self.mapOverlayTopConstraint.constant = (self.view.frame.size.height - 64)*0.1;
             }
             
             else if (self.ripple.numberComments == 0)
@@ -1687,7 +1687,7 @@
 }
 
 #pragma mark- first run
-- (void)checkFirstTimeMap
+/*- (void)checkFirstTimeMap
 {
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
     NSNumber *firstTime = [userData objectForKey:@"firstTimeMap"];
@@ -1762,6 +1762,6 @@
     [self.mapView setAlpha:1.0];
     self.isOverlayTutorial = NO;
     [self.overlay removeFromSuperview];
-}
+}*/
 
 @end

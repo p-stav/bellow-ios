@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LevelCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *reachLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *levelNumber;
+//@property (weak, nonatomic) IBOutlet UILabel *levelNumber;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *levelLabelWidthConstraint;
 @end

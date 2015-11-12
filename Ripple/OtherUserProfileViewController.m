@@ -471,10 +471,7 @@ NSDictionary *socialMediaIconToName;
     }
 
     // size the table header
-    additionalHeaderHeight =self.interstsHeightConstraint.constant + self.aboutHeightConstraint.constant;
-    if ([self.user[@"accessibleProfiles"] count] >0)
-        additionalHeaderHeight += 50;
-
+    additionalHeaderHeight =self.interstsHeightConstraint.constant + self.aboutHeightConstraint.constant + 50;
     
     self.tableHeader.frame = CGRectMake(self.tableHeader.frame.origin.x, self.tableHeader.frame.origin.y, self.tableHeader.frame.size.width, 100 + additionalHeaderHeight);
     [self.tableView setTableHeaderView:self.tableHeader];
@@ -1104,65 +1101,73 @@ NSDictionary *socialMediaIconToName;
     
     if (firstTimeCheck == 0)
     {
-        self.isOverlayTutorial = YES;
-        
-        //show overlay
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-        [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
-        
-        // add textview explaining
-        UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 80, [UIScreen mainScreen].bounds.size.width - 16, 50)];
-        [topPosts setUserInteractionEnabled:NO];
-        [topPosts setScrollEnabled:NO];
-        [topPosts setTextColor:[UIColor whiteColor]];
-        [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
-        [topPosts setText:@"User profile page"];
-        [topPosts setTextAlignment:NSTextAlignmentCenter];
-        [topPosts setBackgroundColor:[UIColor clearColor]];
-        
-        UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
-        [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-        [ok setTitle:@"Got it" forState:UIControlStateNormal];
-        [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
-        [ok.layer setCornerRadius:5.0];
-        
-        
-        UILabel *swipe = [[UILabel alloc] initWithFrame:CGRectMake(8,[UIScreen mainScreen].bounds.size.height - 150, [UIScreen mainScreen].bounds.size.width - 16, 40)];
-        [swipe setUserInteractionEnabled:NO];
-        [swipe setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
-        [swipe setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-        [swipe setText:@"You can swipe posts from a user's profile."];
-        [swipe setTextAlignment:NSTextAlignmentCenter];
-        [swipe setBackgroundColor:[UIColor clearColor]];
-        
-        UIImageView *swipeImg= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
-        [swipeImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-20, swipe.frame.origin.y + 40, 40, 40)];
-        
-        UIImageView *followImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
-        [followImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 200, 40, 40)];
-        
-        UILabel *follow = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 250, followImg.frame.origin.y+ 35, [UIScreen mainScreen].bounds.size.width, 40)];
-        [follow setUserInteractionEnabled:NO];
-        [follow setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
-        [follow setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-        [follow setText:@"Tap here to follow a user."];
-        [follow setTextAlignment:NSTextAlignmentCenter];
-        [follow setBackgroundColor:[UIColor clearColor]];
-        
-        
-        [self.overlay addSubview:swipeImg];
-        [self.overlay addSubview:swipe];
-        [self.overlay addSubview:followImg];
-        [self.overlay addSubview:follow];
-        [self.overlay addSubview:topPosts];
-        [self.overlay addSubview:ok];
-        [self.view addSubview:self.overlay];
-        [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeOtherUserProfile"];
-        [userData synchronize];
-        
-        [self.activityIndicator stopAnimating];
-        [self.activityIndicator setHidden:YES];
+        if ([[PFUser currentUser][@"points"] integerValue] < 300)
+        {
+            self.isOverlayTutorial = YES;
+            
+            //show overlay
+            self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+            [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
+            
+            // add textview explaining
+            UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 80, [UIScreen mainScreen].bounds.size.width - 16, 50)];
+            [topPosts setUserInteractionEnabled:NO];
+            [topPosts setScrollEnabled:NO];
+            [topPosts setTextColor:[UIColor whiteColor]];
+            [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+            [topPosts setText:@"User profile page"];
+            [topPosts setTextAlignment:NSTextAlignmentCenter];
+            [topPosts setBackgroundColor:[UIColor clearColor]];
+            
+            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
+            [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
+            [ok setTitle:@"Got it" forState:UIControlStateNormal];
+            [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+            [ok.layer setCornerRadius:5.0];
+            
+            
+            UILabel *swipe = [[UILabel alloc] initWithFrame:CGRectMake(8,[UIScreen mainScreen].bounds.size.height - 150, [UIScreen mainScreen].bounds.size.width - 16, 40)];
+            [swipe setUserInteractionEnabled:NO];
+            [swipe setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+            [swipe setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+            [swipe setText:@"You can swipe posts from a user's profile."];
+            [swipe setTextAlignment:NSTextAlignmentCenter];
+            [swipe setBackgroundColor:[UIColor clearColor]];
+            
+            UIImageView *swipeImg= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
+            [swipeImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-20, swipe.frame.origin.y + 40, 40, 40)];
+            
+            UIImageView *followImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
+            [followImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 200, 40, 40)];
+            
+            UILabel *follow = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 250, followImg.frame.origin.y+ 35, [UIScreen mainScreen].bounds.size.width, 40)];
+            [follow setUserInteractionEnabled:NO];
+            [follow setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
+            [follow setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
+            [follow setText:@"Tap here to follow a user."];
+            [follow setTextAlignment:NSTextAlignmentCenter];
+            [follow setBackgroundColor:[UIColor clearColor]];
+            
+            
+            [self.overlay addSubview:swipeImg];
+            [self.overlay addSubview:swipe];
+            [self.overlay addSubview:followImg];
+            [self.overlay addSubview:follow];
+            [self.overlay addSubview:topPosts];
+            [self.overlay addSubview:ok];
+            [self.view addSubview:self.overlay];
+            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeOtherUserProfile"];
+            [userData synchronize];
+            
+            [self.activityIndicator stopAnimating];
+            [self.activityIndicator setHidden:YES];
+        }
+        else
+        {
+            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeOtherUserProfile"];
+            [userData synchronize];
+        }
     }
 }
 
@@ -1177,6 +1182,11 @@ NSDictionary *socialMediaIconToName;
     [self.followersNum setHidden:NO];
     [self.activityIndicator stopAnimating];
     [self.activityIndicator setHidden:YES];
+    [self.reachLabel setHidden:NO];
+    [self.reachValue setHidden:NO];
+    [self.profileImage setHidden:NO];
+    [self.followButton setHidden:NO];
 }
 
 @end
+    

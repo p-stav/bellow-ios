@@ -126,6 +126,7 @@ int PARSE_PAGE_SIZE = 25;
     // protect from double call to goToMapView on tutorial tap
     if ([ripple.rippleId isEqualToString:@"FakeRippleTap"] && self.isFirstRunPostInteractiveTutorial)
     {
+        self.isFirstRunPostInteractiveTutorial = NO;
         [self incrementScore];
         [self endTutorial];
         return;
@@ -244,7 +245,6 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
     // BOOLs
     [self.barBtn setHidden:YES];
@@ -290,6 +290,17 @@ int PARSE_PAGE_SIZE = 25;
         }
 
         self.isActive = YES;
+        
+        // set user data
+        NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+        NSNumber *savedUserData = [userData objectForKey:@"justSavedUserData"];
+        
+        if ([savedUserData boolValue])
+        {
+            [userData setObject:[NSNumber numberWithBool:NO] forKey:@"justSavedUserData"];
+            [userData synchronize];
+        }
+        
         // check to see user is inactive
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[PFUser currentUser] fetch];
@@ -304,7 +315,7 @@ int PARSE_PAGE_SIZE = 25;
             }
             
             dispatch_async( dispatch_get_main_queue(), ^{
-                if (!self.isActive)
+                if (!self.isActive && [PFUser currentUser][@"reach"] != nil)
                 {
                     [PFUser currentUser][@"isActive"] = [NSNumber numberWithBool:YES];
                     [[PFUser currentUser] saveInBackground];
@@ -362,6 +373,7 @@ int PARSE_PAGE_SIZE = 25;
     // Set up notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyNewRipple:) name:@"goToProfile" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPendingRipples:) name:@"AppToForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNotificationsBadge) name:@"refreshNotificationsBadge" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBarBtn) name:@"updateBarBtn" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incrementScore) name:@"incrementScore" object:nil];
 
@@ -430,7 +442,6 @@ int PARSE_PAGE_SIZE = 25;
         
         self.rippleSegmentControl.userInteractionEnabled = YES;
         [self.rippleSegmentControl setAlpha:1.0];
-        [self.noRipplesTextView setHidden:YES];
         [self.tableView setHidden:NO];
         self.rippleSegmentControl.enabled = YES;
         [self.tableView setAlpha:1.0];
@@ -446,7 +457,6 @@ int PARSE_PAGE_SIZE = 25;
         
         self.rippleSegmentControl.userInteractionEnabled = YES;
         [self.rippleSegmentControl setAlpha:1.0];
-        
         
         if ([self.selectedRippleArray count] == 0)
         {
@@ -469,10 +479,10 @@ int PARSE_PAGE_SIZE = 25;
             dispatch_async( dispatch_get_main_queue(), ^{
                 // reload table and check if pending ripples
                 // [self checkRemainingRipples];
+                [self.noRipplesTextView setHidden:YES];
                 [self updateBadgeNumber];
                 [self checkBarrier];
                 
-                self.isFirstRunPostInteractiveTutorial = NO;
                 if (!self.viewDidLoadJustRan)
                     self.viewDidLoadJustRan = YES;
                 
@@ -693,12 +703,20 @@ int PARSE_PAGE_SIZE = 25;
         case 0:
             //[Flurry logEvent:@"View_Pending"];
             //[self.filterView setHidden:YES];
+            
+            if (self.isOverlayTutorial)
+                [self removeFirstRunOverlay];
+            
             self.selectedRippleArray = self.pendingRipples;
             self.tableView.allowsSelection = YES;
         
             break;
 
         case 1:
+            
+            if (self.isOverlayTutorial)
+                [self checkFirstTimeFollowing];
+            
             //[Flurry logEvent:@"View_Rippled"];
             self.selectedRippleArray = self.followingRipples;
             self.tableView.allowsSelection = YES;
@@ -893,11 +911,6 @@ int PARSE_PAGE_SIZE = 25;
     [cell.dismissButton setAlpha:1.0];
     [cell.dismissButton setHidden:NO];
     
-    // add border to username
-    /*[cell.userLabel.layer setBorderColor:[[UIColor colorWithWhite:0.9 alpha:1.0] CGColor]];
-    [cell.userLabel.layer setBorderWidth:1.0];
-    cell.userLabel.layer.cornerRadius = 5.0;*/
-    
     return cell;
 }
 
@@ -964,6 +977,7 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.spreadLabel setHidden:YES];
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentCenter];
             
             // setup image
             UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
@@ -998,13 +1012,14 @@ int PARSE_PAGE_SIZE = 25;
         }
         
         // animations
-        if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"] && indexPath.row == 0)
+        else if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleDismiss"] && indexPath.row == 0)
         {
             [propagateCell.rippleMainView setAlpha:1.0];
             [propagateCell.dismissImageView setAlpha:1.0];
             [propagateCell.dismissLabel setAlpha:1.0];
             [propagateCell.dismissButton setAlpha:0.2];
             [propagateCell.spreadButton setAlpha:0.2];
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentCenter];
             
             [propagateCell.cityLabel setHidden:YES];
             [propagateCell.timeLabel setHidden:YES];
@@ -1043,7 +1058,7 @@ int PARSE_PAGE_SIZE = 25;
         }
         
         // animations
-        if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleTap"] && indexPath.row == 0)
+        else if ([propagateCell.currentRipple.rippleId isEqualToString:@"FakeRippleTap"] && indexPath.row == 0)
         {
             [propagateCell.cityLabel setHidden:YES];
             [propagateCell.timeLabel setHidden:YES];
@@ -1051,6 +1066,7 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell.spreadLabel setHidden:YES];
             [propagateCell.commentsButton setHidden:YES];
             [propagateCell.numberOfCommentsButton setHidden:YES];
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentCenter];
             
             // add animation for tap
             UIImageView *tap = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
@@ -1058,16 +1074,26 @@ int PARSE_PAGE_SIZE = 25;
             [propagateCell addSubview:tap];
             [tap setAlpha:0.0];
             
-            [UIView animateWithDuration:0.5 delay:1.0 options:0  animations:^{
+
+            [propagateCell.rippleMainView.layer setBorderColor:[UIColor colorWithRed:254.0f/255.0 green:155.0f/255.0 blue:0.0 alpha:1.0].CGColor];
+            
+            [UIView animateKeyframesWithDuration:0.8 delay:0.0 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
                 [tap setAlpha:1.0];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
-                    [tap setAlpha:0.0];
-                } completion:^(BOOL finished) {
-                    // noop
-                }];
+                
+                CABasicAnimation *width = [CABasicAnimation animationWithKeyPath:@"borderWidth"];
+                // animate from 2pt to 4pt wide border ...
+                width.fromValue = @0;
+                width.toValue   = @3;
+                width.duration = 1.55;
+                width.repeatCount = 100;
+                [propagateCell.rippleMainView.layer addAnimation:width forKey:@"widthAnim"];
+                
+            } completion:^(BOOL finished){
+                [tap removeFromSuperview];
             }];
         }
+        else
+            [propagateCell.rippleTextView setTextAlignment:NSTextAlignmentLeft];
         
         if (self.isOverlayTutorial)
             propagateCell.alpha = 0.1;
@@ -1462,6 +1488,7 @@ int PARSE_PAGE_SIZE = 25;
     {
         self.rippleSegmentControl.userInteractionEnabled = YES;
         [self.rippleSegmentControl setAlpha:1.0];
+        [self.tableView setAlpha:1.0];
         [self.noRipplesTextView setHidden:YES];
         self.rippleSegmentControl.enabled = YES;
         [self.tableView setHidden:NO];
@@ -1504,6 +1531,8 @@ int PARSE_PAGE_SIZE = 25;
         });
         [self addNotificationsBadge];
     }
+    else
+        [self.tableView reloadData];
 }
 
 #pragma mark - Log in and sign up
@@ -1528,11 +1557,8 @@ int PARSE_PAGE_SIZE = 25;
     if ([PFUser currentUser][@"location"])
     {
         [[PFUser currentUser] setObject:point forKey:@"location"];
+        
         [[PFUser currentUser] saveInBackground];
-        
-        // increment score
-        [self incrementScore];
-        
     }
     
     else // no location, and first time getting it; also create ripples
@@ -1549,7 +1575,7 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)saveAnonymousUser:(BOOL)isAnonymous withPoint:(PFGeoPoint *)point
 {
-    self.noRipplesTextView.text = @"Getting your first ripples...";
+    self.noRipplesTextView.text = @"Getting your first posts...";
     [self.noRipplesTextView setHidden:NO];
     [self.noRipplesTextView setFont:[UIFont fontWithName:@"AvenirNext-DemiBold" size:26.0]];
     self.noTextTopConstraint.constant = 40;
@@ -1566,7 +1592,7 @@ int PARSE_PAGE_SIZE = 25;
             }
             else
             {
-                [self saveUserObjectForUser:currentUser withLocation:point];
+                [self saveUserObjectforUserWithLocation:point];
             }
         }];
     }
@@ -1574,50 +1600,60 @@ int PARSE_PAGE_SIZE = 25;
     else if([PFUser currentUser] && !self.creatingAnonymousUser)
     {
         self.creatingAnonymousUser = YES;
-        [self saveUserObjectForUser:[PFUser currentUser] withLocation:point];
+        [self saveUserObjectforUserWithLocation:point];
     }
 }
 
-- (void)saveUserObjectForUser:(PFUser *)currentUser withLocation:(PFGeoPoint *)point
+- (void)saveUserObjectforUserWithLocation:(PFGeoPoint *)point
 {
-    // add reach for cloud code execution
-    currentUser[@"reach"] = [NSNumber numberWithInt:7];
-    currentUser[@"highestPropagated"] = [NSNumber numberWithInt:0];
-    currentUser[@"notificationsToday"] = [NSNumber numberWithInt:0];
-    currentUser[@"reachLevel"] = @"Sea Serpent";
-    currentUser[@"score"] = [NSNumber numberWithInt:3];
-    currentUser[@"followingNumber"] = [NSNumber numberWithInt:0];
-    [[PFUser currentUser] setObject:point forKey:@"location"];
+    if (self.getLocationOnce)
+    {
+        self.getLocationOnce = NO;
+        
+        // add reach for cloud code execution
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:10] forKey:@"reach"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"highestPropagated"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"notificationsToday"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"followingNumber"];
+        [[PFUser currentUser] setObject:@"Sea Serpent" forKey:@"reachLevel"];
+        [[PFUser currentUser] setObject:[NSNumber numberWithInt:3] forKey:@"score"];
+        [[PFUser currentUser] setObject:point forKey:@"location"];
 
-    NSArray *followingArray = [NSArray arrayWithObject:@"qqyvLOFvNT"];
-    [[PFUser currentUser] setObject:followingArray forKey:@"following"];
+        NSArray *followingArray = [NSArray arrayWithObject:@"qqyvLOFvNT"];
+        [[PFUser currentUser] setObject:followingArray forKey:@"following"];
+        [[PFUser currentUser] saveInBackground];
+        NSLog(@"just finished getting location first time");
+        
+        
+        // set user data
+        NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+        [userData setObject:[NSNumber numberWithBool:YES] forKey:@"justSavedUserData"];
+        [userData synchronize];
 
     
-    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (self.getLocationOnce)
-        {
-            NSLog(@"just finished getting location first time");
-            self.getLocationOnce = NO;
+        
+        // call method to create ripples with block to reload
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            // call method to create ripples with block to reload
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self getNearestRipplesOnLoad];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"finished getNearestRipplesOnFirstLoad");
-                    self.isFirstRun = NO;
-                    // [self updateView];
-                   //  [self.activityIndicator stopAnimating];
-                    //[self.activityIndicator setHidden:NO];
-                });
+            [self getNearestRipplesOnLoad];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"finished getNearestRipplesOnFirstLoad");
+                self.isFirstRun = NO;
+                    
+                if(!self.isFirstRunPostInteractiveTutorial)
+                    [self updateView];
+                    // [self.activityIndicator stopAnimating];
+                    // [self.activityIndicator setHidden:NO];
             });
-        }
-    }];
+        });
+    }
     
     // Associate the device with a user
     PFInstallation *installation = [PFInstallation currentInstallation];
-    if (installation[@"user"] != currentUser)
+    if (installation[@"user"] != [PFUser currentUser])
     {
-        installation[@"user"] = currentUser;
+        installation[@"user"] = [PFUser currentUser];
         [installation saveInBackground];
         
     }
@@ -1638,6 +1674,7 @@ int PARSE_PAGE_SIZE = 25;
 {
     if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
         [self presentNeedsLocation];
+    
     NSLog(@"error: %@", error.description);
 }
 
@@ -1649,8 +1686,6 @@ int PARSE_PAGE_SIZE = 25;
     self.rippleSegmentControl.enabled = NO;
     [self.activityIndicator stopAnimating];
     [self.tableView setAlpha:0.1];
-    
-    
     
     // show text box with  message to enable
     self.noRipplesTextView.text = @"Bellow needs location to share ripples with people nearby. In your phone settings, tap on Bellow and allow location services";
@@ -1880,13 +1915,14 @@ int PARSE_PAGE_SIZE = 25;
     [titleView addSubview:titleLabel];
     self.navigationItem.titleView = titleView;
     [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 - self.navigationItem.titleView.frame.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
+    [self.tableView setAlpha:1.0];
+    [self.noRipplesTextView setHidden:YES];
     
     // housekeeping
     [self.tableView setScrollEnabled:NO];
     [self.activityIndicator stopAnimating];
     [self.tableView setHidden:NO];
     [self.rippleSegmentControl setAlpha:0.3];
-    
     [self.barBtn setUserInteractionEnabled:NO];
     [self.rippleSegmentControl setUserInteractionEnabled:NO];
     
@@ -1926,7 +1962,7 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowTap = [[Bellow alloc] init];
     bellowTap.rippleId = @"FakeRippleTap";
-    bellowTap.text = @"\nTap posts to see where they've travelled and to see comments.\n\n";
+    bellowTap.text = @"\nTap post for more details\n\n";
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
@@ -1957,11 +1993,10 @@ int PARSE_PAGE_SIZE = 25;
     [self.barBtn setUserInteractionEnabled:YES];
     [self.rippleSegmentControl setUserInteractionEnabled:YES];
     
-    self.isFirstRunPostInteractiveTutorial = NO;
-    
     // show alert signaling end of tutorial
-    UIAlertView *doneTutorial = [[UIAlertView alloc] initWithTitle:@"You finished the tutorial" message:@"Welcome to Bellow!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *doneTutorial = [[UIAlertView alloc] initWithTitle:@"You finished the tutorial" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
+    self.isFirstRun = NO;
     [self pageSetup];
     [self updateView];
     [doneTutorial show];
@@ -1990,7 +2025,7 @@ int PARSE_PAGE_SIZE = 25;
             [followingPosts setScrollEnabled:NO];
             [followingPosts setTextColor:[UIColor whiteColor]];
             [followingPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
-            [followingPosts setText:@"This is the following tab.\n\nView and swipe posts from people you follow."];
+            [followingPosts setText:@"You're currently following Bellow!"];
             [followingPosts setTextAlignment:NSTextAlignmentCenter];
             [followingPosts setBackgroundColor:[UIColor clearColor]];
             
@@ -2000,7 +2035,7 @@ int PARSE_PAGE_SIZE = 25;
             [search setScrollEnabled:NO];
             [search setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
             [search setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-            [search setText:@"Search for users to follow"];
+            [search setText:@"Search people to follow"];
             [search setTextAlignment:NSTextAlignmentLeft];
             [search setBackgroundColor:[UIColor clearColor]];
             
@@ -2011,9 +2046,9 @@ int PARSE_PAGE_SIZE = 25;
                 
             
             // add button to overlay
-            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, followingPosts.frame.origin.y + followingPosts.frame.size.height, 100, 40)];
+            UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 75, followingPosts.frame.origin.y + followingPosts.frame.size.height, 150, 60)];
             [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-            [ok setTitle:@"Got it" forState:UIControlStateNormal];
+            [ok setTitle:@"Okay" forState:UIControlStateNormal];
             [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
             [ok.layer setCornerRadius:5.0];
@@ -2023,8 +2058,6 @@ int PARSE_PAGE_SIZE = 25;
             [self.overlay addSubview:followingPosts];
             [self.overlay addSubview:ok];
             [self.view addSubview:self.overlay];
-            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeFollowing"];
-            [userData synchronize];
         }
     }
 }
@@ -2034,6 +2067,10 @@ int PARSE_PAGE_SIZE = 25;
     [self.overlay removeFromSuperview];
     self.isOverlayTutorial = NO;
     [self.tableView reloadData];
+    
+    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+    [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeFollowing"];
+    [userData synchronize];
 }
 
 #pragma mark - share and action items from profile view

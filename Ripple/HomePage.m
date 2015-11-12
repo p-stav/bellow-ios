@@ -817,6 +817,15 @@ int PARSE_PAGE_SIZE = 25;
     CGSize stringSize = [cell.currentRipple.creatorName sizeWithAttributes:attributesDictionary];
     cell.userLabelWidthConstraint.constant = stringSize.width + 3; //[UIScreen mainScreen].bounds.size.width;
     
+    if ([PFUser currentUser][@"reach"] != nil)
+        [cell.reachSpreadLabel setText:[NSString stringWithFormat:@"spread to %@ people",[PFUser currentUser][@"reach"]]];
+    else
+        [cell.reachSpreadLabel setText:@"spread to 7 people"];
+    
+    [cell.reachSpreadLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
+    [cell.dismissLabel setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:13.0]];
+
+    
     // hide everything
     [cell.spreadCommentView setHidden:YES];
     [cell.userLabel setHidden:YES];

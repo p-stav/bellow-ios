@@ -141,7 +141,7 @@ UIImagePickerController *picker;
 
 - (void) goToImageView: (Bellow *)ripple
 {
-    if (!self.isChoosingSort)
+    /*if (!self.isChoosingSort)
     {
         
         if (ripple.imageFile)
@@ -149,7 +149,9 @@ UIImagePickerController *picker;
             [self performSegueWithIdentifier:@"RippleImageView" sender:ripple];
             [Flurry logEvent:@"Image_Open_Profile"];
         }
-    }
+    }*/
+    
+    [self goToMapView:ripple withComments:YES];
 }
 
 - (void) goToUserProfile: (Bellow *)ripple

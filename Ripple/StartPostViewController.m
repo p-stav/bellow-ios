@@ -55,10 +55,11 @@
 @property (strong, nonatomic) NSArray *tableData;
 @property float originalbottomConstraintStoneButton;
 @property float originalRippleBackgroundViewHeight;
-
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-
+//first run
+@property (nonatomic) BOOL isOverlayTutorial;
+@property (strong,nonatomic) UIView *overlay;
 
 // @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraintStoneButton;
 @end
@@ -149,6 +150,8 @@ UIImagePickerController *picker;
     self.postToInstagramOrNah = NO;
     self.keyboardOrNah = NO;
     self.isEditing = NO;
+    
+    [self checkFirstTimeStart];
 }
 
 - (IBAction)startRippleSwipe:(UISwipeGestureRecognizer *)sender {
@@ -725,4 +728,58 @@ UIImagePickerController *picker;
 - (IBAction)dismissModalView:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - check first time visiting
+- (void)checkFirstTimeStart
+{
+    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
+    NSNumber *firstTime = [userData objectForKey:@"firstTimeStart"];
+    int firstTimeCheck = [firstTime intValue];
+    
+    if (firstTimeCheck == 0)
+    {
+        self.isOverlayTutorial = YES;
+        [self.rippleTextView setHidden:YES];
+        [self.twitterButton setHidden:YES];
+        
+        //show overlay
+        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.7]];
+        
+        // add textview explaining
+        UITextView *topPosts = [[UITextView alloc] initWithFrame:CGRectMake(8, 60, [UIScreen mainScreen].bounds.size.width - 16, 2000)];
+        [topPosts setUserInteractionEnabled:NO];
+        [topPosts setScrollEnabled:NO];
+        [topPosts setTextColor:[UIColor whiteColor]];
+        [topPosts setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
+        [topPosts setText:@"Start a post!\n\nIt is sent to users nearby and people following you.\n\nThey can spread it to more people around the world."];
+        [topPosts setTextAlignment:NSTextAlignmentCenter];
+        [topPosts setBackgroundColor:[UIColor clearColor]];
+        
+        // add button to overlay
+        UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 75, [UIScreen mainScreen].bounds.size.height/2 +30, 150, 60)];
+        [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
+        [ok setTitle:@"OK" forState:UIControlStateNormal];
+        [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
+        [ok.layer setCornerRadius:5.0];
+        
+        [self.overlay addSubview:topPosts];
+        [self.overlay addSubview:ok];
+        [self.view addSubview:self.overlay];
+        
+        [userData setObject:[NSNumber numberWithInteger:1] forKey:@"firstTimeStart"];
+        [userData synchronize];
+    }
+}
+
+- (void)removeFirstRunOverlay
+{
+    self.isOverlayTutorial = NO;
+    [self.rippleTextView setHidden:NO];
+    [self.twitterButton setHidden:NO];
+    
+    [self.overlay removeFromSuperview];
+}
+
 @end

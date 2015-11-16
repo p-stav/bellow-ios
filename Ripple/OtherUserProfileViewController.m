@@ -119,11 +119,13 @@ NSDictionary *socialMediaIconToName;
 
 - (void) goToImageView: (Bellow *)ripple
 {
-    if (ripple.imageFile)
+    /*if (ripple.imageFile)
     {
         [self performSegueWithIdentifier:@"RippleImageView" sender:ripple];
         [Flurry logEvent:@"Image_Open_Profile"];
-    }
+    }*/
+    
+    [self goToMapView:ripple withComments:YES];
 }
 
 - (void) goToUserProfile: (Bellow *)ripple
@@ -1103,6 +1105,7 @@ NSDictionary *socialMediaIconToName;
     {
         if ([[PFUser currentUser][@"points"] integerValue] < 300)
         {
+            [self.followButton setHidden:NO];
             self.isOverlayTutorial = YES;
             
             //show overlay
@@ -1121,7 +1124,7 @@ NSDictionary *socialMediaIconToName;
             
             UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, topPosts.frame.origin.y + topPosts.frame.size.height, 100, 40)];
             [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-            [ok setTitle:@"Got it" forState:UIControlStateNormal];
+            [ok setTitle:@"OK" forState:UIControlStateNormal];
             [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
             [ok.layer setCornerRadius:5.0];

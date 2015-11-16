@@ -773,20 +773,19 @@
 {
     // get email from facebook
     if ([FBSDKAccessToken currentAccessToken]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id,name,email, picture"}]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id,name,email, picture.width(100)"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              
              // put email
              if ([PFUser currentUser].email == nil)
              {
                  [[PFUser currentUser] setEmail:result[@"email"]];
-                 [[PFUser currentUser] saveInBackground];
              }
              
              if ([PFUser currentUser][@"profileImg"] == nil)
              {
                  // get url and convert to data
-                 NSString *pictureURL = [NSString stringWithFormat:@"%@",[result objectForKey:@"picture"]];
+                 NSString *pictureURL = [NSString stringWithFormat:@"%@",[result objectForKey:@"picture"][@"data"][@"url"]];
                  NSData  *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:pictureURL]];
                  
                  // TODO: RESIZE
@@ -795,6 +794,8 @@
                  PFFile *imgFile = [PFFile fileWithName:@"profile.jpg" data:data];
                  [[PFUser currentUser]setObject:imgFile forKey:@"profileImg"];
              }
+             
+             [[PFUser currentUser] saveInBackground];
              
          }];
     }

@@ -2216,6 +2216,7 @@ If you have any questions regarding privacy while using the Application, or have
                         <outlet property="rippleTextTopConstraint" destination="GGC-ec-0Bd" id="5w9-qI-lwe"/>
                         <outlet property="rippleTextView" destination="BY9-gj-UVu" id="hCQ-9P-3sN"/>
                         <outlet property="rippleUsername" destination="Xhy-vY-ewO" id="Ld4-Gc-Juw"/>
+                        <outlet property="shareButton" destination="Wo4-s9-hT9" id="OMr-1T-1nE"/>
                         <outlet property="spreadCommenTopConstraint" destination="UE9-UK-86h" id="gbl-Ti-AHO"/>
                         <outlet property="spreadCommentView" destination="HcP-qd-Ims" id="RHf-xF-xqb"/>
                         <outlet property="spreadLabel" destination="m6v-Fs-qTq" id="Im6-2h-7YC"/>
@@ -3546,15 +3547,15 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="userSilhouette.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pwq-H4-Kfq"/>
-        <segue reference="ddR-cu-Xrf"/>
-        <segue reference="Vjc-ZB-AvE"/>
         <segue reference="AcY-H4-hdD"/>
-        <segue reference="dba-bl-yJ2"/>
-        <segue reference="Ubg-9a-Zfa"/>
-        <segue reference="A5N-Q5-ixn"/>
+        <segue reference="ddR-cu-Xrf"/>
         <segue reference="2ux-5b-Cwf"/>
+        <segue reference="A5N-Q5-ixn"/>
         <segue reference="hJL-5N-K1N"/>
+        <segue reference="Vjc-ZB-AvE"/>
+        <segue reference="7yi-Va-b1e"/>
+        <segue reference="Chv-7s-49J"/>
+        <segue reference="aHu-cA-FrR"/>
         <segue reference="Wu2-Fk-dQS"/>
         <segue reference="4EZ-l1-4gK"/>
     </inferredMetricsTieBreakers>

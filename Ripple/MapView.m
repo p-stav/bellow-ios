@@ -64,7 +64,7 @@
 @property (strong, nonatomic) NSMutableArray *overlays;
 @property (strong, nonatomic) NSMutableArray *lineOverlays;
 @property (strong, nonatomic) TTTTimeIntervalFormatter *timeIntervalFormatter;
-@property (strong, nonatomic) UIButton *shareButton;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, nonatomic) UIButton *pathButton;
 @property BOOL keyboardOrNah;
 @property BOOL commentsShowingOrNah;
@@ -219,7 +219,7 @@
         });
     });
     
-    //[self checkFirstTimeMap];
+    [self checkFirstTimeMap];
     [self grabComments];
     
     // navigation bar items, constraints
@@ -268,14 +268,19 @@
         int firstMapVisitCheck = [firstMapVisit intValue];
         
         // if we recently updated, return
-        if (firstMapVisitCheck != 1)
+        if (firstMapVisitCheck == 5)
         {
             // setup alert
-            //UIAlertView *pathsToggleAlert = [[UIAlertView alloc] initWithTitle:@"see a ripple's path!" message:@"Tap the button on the top right to show/hide path lines." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            //[pathsToggleAlert show];
+            UIAlertView *pathsToggleAlert = [[UIAlertView alloc] initWithTitle:@"See a ripple's path!" message:@"Tap the button on the top right to show/hide path lines." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [pathsToggleAlert show];
             
-            // set to 1
-            [userData setObject:[NSNumber numberWithInteger:1] forKey:@"visitFirstMap"];
+            [userData setObject:[NSNumber numberWithInteger: firstMapVisitCheck + 1] forKey:@"visitFirstMap"];
+            [userData synchronize];
+        }
+        else if (firstMapVisitCheck < 5)
+        {
+            // increment
+            [userData setObject:[NSNumber numberWithInteger: firstMapVisitCheck + 1] forKey:@"visitFirstMap"];
             [userData synchronize];
         }
         
@@ -1277,11 +1282,15 @@
     if (self.ripple.city)
     {
         // set city label hidden
-        [self.cityLabel setHidden:NO];
+        if (!self.isOverlayTutorial)
+            [self.cityLabel setHidden:NO];
+        
         self.cityLabel.text = self.ripple.city;
         
         self.rippleDate.text = [NSString stringWithFormat:@"%@", [self.timeIntervalFormatter stringForTimeInterval:timeInterval]];
-        [self.rippleDate setHidden:NO];
+        
+        if (!self.isOverlayTutorial)
+            [self.rippleDate setHidden:NO];
     }
     else
     {
@@ -1414,7 +1423,8 @@
         [self.tapImageRecognizer setDelegate:self];
         
         // unhide
-        [self.imageView setHidden:NO];
+        if (!self.isOverlayTutorial)
+            [self.imageView setHidden:NO];
         
         // place spreadCommentView in the right place, along with text
         self.spreadCommenTopConstraint.constant = imageHeight + self.outerImageFile.frame.origin.y;
@@ -1499,7 +1509,9 @@
         [self.view layoutIfNeeded];
         
         [self.outerImageFile setHidden:NO];
-        [self.imageView setHidden:NO];
+        
+        if(!self.isOverlayTutorial)
+            [self.imageView setHidden:NO];
     }
 }
 
@@ -1606,7 +1618,7 @@
                 [self.imageView addGestureRecognizer:self.tapImageRecognizer];
             
             if (!self.viewDidLoadJustRan && !self.commentsUp) {
-                // make it show 1/4 of the way
+                // make it show 10% of the way of the way
                 self.mapOverlayTopConstraint.constant = (self.view.frame.size.height - 64)*0.1;
             }
             
@@ -1687,7 +1699,7 @@
 }
 
 #pragma mark- first run
-/*- (void)checkFirstTimeMap
+- (void)checkFirstTimeMap
 {
     NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
     NSNumber *firstTime = [userData objectForKey:@"firstTimeMap"];
@@ -1697,41 +1709,48 @@
     {
         self.isOverlayTutorial = YES;
         [self.mapView setAlpha:0.4];
+        [self.imageView setHidden:YES];
+        [self.spreadCommentView setHidden:YES];
+        [self.shareButton setHidden:YES];
+        [self.reportDeleteButton setHidden:YES];
+        [self.cityLabel setHidden:YES];
+        [self.rippleDate setHidden:YES];
+        [self.rippleTextView setHidden:YES];
         
         //show overlay
         self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
         [self.overlay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.6]];
         
         // add textview explaining
-        UITextView *map = [[UITextView alloc] initWithFrame:CGRectMake(8, [UIScreen mainScreen].bounds.size.height/2 - 100, [UIScreen mainScreen].bounds.size.width - 16, 80)];
+        UITextView *map = [[UITextView alloc] initWithFrame:CGRectMake(8, [UIScreen mainScreen].bounds.size.height/2, [UIScreen mainScreen].bounds.size.width - 16, 80)];
         [map setUserInteractionEnabled:NO];
         [map setScrollEnabled:NO];
         [map setTextColor:[UIColor whiteColor]];
         [map setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0]];
-        [map setText:@"See where posts have travelled\nand leave a comment."];
+        [map setText:@"Leave a comment and see where posts have travelled."];
         [map setTextAlignment:NSTextAlignmentCenter];
         [map setBackgroundColor:[UIColor clearColor]];
         
         // add button to overlay
         UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 50, map.frame.origin.y + map.frame.size.height, 100, 40)];
         [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-        [ok setTitle:@"Got it" forState:UIControlStateNormal];
+        [ok setTitle:@"OK" forState:UIControlStateNormal];
         [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
         [ok.layer setCornerRadius:5.0];
         
         // add directions
-        UITextView *tap = [[UITextView alloc] initWithFrame:CGRectMake(60, [UIScreen mainScreen].bounds.size.height*0.66 -5, [UIScreen mainScreen].bounds.size.width - 50, 40)];
+        UITextView *tap = [[UITextView alloc] initWithFrame:CGRectMake(8, 70, [UIScreen mainScreen].bounds.size.width - 16, 100)];
         [tap setUserInteractionEnabled:NO];
         [tap setScrollEnabled:NO];
         [tap setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
         [tap setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];
-        [tap setText:@"Tap the post to see comments."];
-        [tap setTextAlignment:NSTextAlignmentLeft];
+        [tap setText:@"Tap the background or swipe down to see where this post has reached."];
+        [tap setTextAlignment:NSTextAlignmentCenter];
         [tap setBackgroundColor:[UIColor clearColor]];
         
         UIImageView *tapImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
-        [tapImage setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 20, [UIScreen mainScreen].bounds.size.height*0.66 + 30, 40, 40)];
+        [tapImage setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 20, tap.frame.origin.y + 30, 40, 40)];
         
         UITextView *path = [[UITextView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 290, 70, [UIScreen mainScreen].bounds.size.width, 40)];
         [path setUserInteractionEnabled:NO];
@@ -1745,10 +1764,10 @@
         UIImageView *pathImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
         [pathImage setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 40, 66, 40, 40)];
         
-        [self.overlay addSubview:path];
-        [self.overlay addSubview:pathImage];
+       // [self.overlay addSubview:path];
+        //[self.overlay addSubview:pathImage];
         [self.overlay addSubview:tap];
-        [self.overlay addSubview:tapImage];
+        //[self.overlay addSubview:tapImage];
         [self.overlay addSubview:map];
         [self.overlay addSubview:ok];
         [self.view addSubview:self.overlay];
@@ -1759,9 +1778,17 @@
 
 - (void)removeFirstRunOverlay
 {
+    [self.imageView setHidden:NO];
+    [self.spreadCommentView setHidden:NO];
+    [self.shareButton setHidden:NO];
+    [self.reportDeleteButton setHidden:NO];
+    [self.cityLabel setHidden:NO];
+    [self.rippleDate setHidden:NO];
+    [self.rippleTextView setHidden:NO];
+    
     [self.mapView setAlpha:1.0];
     self.isOverlayTutorial = NO;
     [self.overlay removeFromSuperview];
-}*/
+}
 
 @end

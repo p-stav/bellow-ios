@@ -99,7 +99,7 @@
     cell.isFollowing =[user[@"isFollowing"] boolValue];
     cell.objectId = user[@"objectId"];
     cell.username.text = user[@"username"];
-    cell.level.text = user[@"level"];
+    cell.level.text = [NSString stringWithFormat:@"%@ reach", user[@"reach"]];
     
     if ((BOOL) cell.isFollowing == YES)
         [cell.followerImage setImage:[UIImage imageNamed:@"following.png"] forState:UIControlStateNormal];

@@ -96,7 +96,10 @@ int PARSE_PAGE_SIZE = 25;
     if ([segue.identifier isEqualToString:@"unwindToHomeViewFromTutorial"])
     {
         if ([PFUser currentUser] && [PFUser currentUser][@"location"])
+        {
+            self.isFirstRun = NO;
             [self updateView];
+        }
         else if ([PFUser currentUser] && ![PFUser currentUser][@"location"])
         {
             // signed up. Follow same process
@@ -142,11 +145,13 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void) goToImageView: (Bellow *)ripple
 {
-    if (ripple.imageFile)
+    /*if (ripple.imageFile)
     {
         [self performSegueWithIdentifier:@"RippleImageView" sender:ripple];
         [Flurry logEvent:@"Image_Open_Feed"];
-    }
+    }*/
+    
+    [self goToMapView:ripple withComments:YES];
 }
 
 - (void) goToUserProfile: (Bellow *)ripple
@@ -323,10 +328,6 @@ int PARSE_PAGE_SIZE = 25;
                 [self.barBtn setTitle:[NSString stringWithFormat:@"%d", self.currentScore] forState:UIControlStateNormal];
                 [self.barBtn setHidden:NO];
                 
-                //TODO: delete
-                //[self presentHomeTutorial];
-                //self.isFirstRunPostInteractiveTutorial = YES;
-                
                 [self updateView];
             });
         });
@@ -414,11 +415,15 @@ int PARSE_PAGE_SIZE = 25;
     self.segueToRippleForPropagateCell = nil;
     
     if (![PFUser currentUser])
+    {
+        self.isFirstRun = YES;
         [self createAnonymousUser];
-    
-    else if (([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]] && [PFUser currentUser][@"reach"] == nil) ||
-             ([PFTwitterUtils isLinkedWithUser:[PFUser currentUser]] && [PFUser currentUser][@"reach"] == nil))
+    }
+    else if ([PFUser currentUser][@"reach"] == nil)
+    {
+        self.isFirstRun = YES;
         [self createAnonymousUser];
+    }
     
     
     
@@ -504,57 +509,61 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void)checkBarrier
 {
-    switch ([self.rippleSegmentControl selectedSegmentIndex])
+    if (!self.isFirstRunPostInteractiveTutorial)
     {
-        case 0:
-            self.selectedRippleArray = self.pendingRipples;
-            [self.tableView reloadData];
-            [self.activityIndicator stopAnimating];
-            
-            if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
-            {
-                self.isAllHomeRipples = YES;
-                
-                if ([self.selectedRippleArray count] == 0)
-                    [self setNoRipplesText];
-            }
-            else
-            {
-                self.isAllHomeRipples = NO;
-            }
-            
-            
-            break;
-            
-         
-        case 1:
-            self.selectedRippleArray = self.followingRipples;
-            [self.tableView reloadData];
-            [self.activityIndicator stopAnimating];
-            
-            if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
-            {
-                self.isAllFollowingRipples = YES;
-                
-                if ([self.selectedRippleArray count] == 0)
-                    [self setNoRipplesText];
-            }
-            else
-            {
-                self.isAllFollowingRipples = NO;
-            }
-            
-            break;
         
-        case 2:
-            self.selectedRippleArray = self.topRipples;
-            [self.tableView reloadData];
-            [self.activityIndicator stopAnimating];
-            break;
+        switch ([self.rippleSegmentControl selectedSegmentIndex])
+        {
+            case 0:
+                self.selectedRippleArray = self.pendingRipples;
+                [self.tableView reloadData];
+                [self.activityIndicator stopAnimating];
+                
+                if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
+                {
+                    self.isAllHomeRipples = YES;
+                    
+                    if ([self.selectedRippleArray count] == 0)
+                        [self setNoRipplesText];
+                }
+                else
+                {
+                    self.isAllHomeRipples = NO;
+                }
+                
+                
+                break;
+                
+             
+            case 1:
+                self.selectedRippleArray = self.followingRipples;
+                [self.tableView reloadData];
+                [self.activityIndicator stopAnimating];
+                
+                if ([self.selectedRippleArray count] <25) // PARSE_PAGE_SIZE)
+                {
+                    self.isAllFollowingRipples = YES;
+                    
+                    if ([self.selectedRippleArray count] == 0)
+                        [self setNoRipplesText];
+                }
+                else
+                {
+                    self.isAllFollowingRipples = NO;
+                }
+                
+                break;
             
-        default:
-            [self.activityIndicator stopAnimating];
-            break;
+            case 2:
+                self.selectedRippleArray = self.topRipples;
+                [self.tableView reloadData];
+                [self.activityIndicator stopAnimating];
+                break;
+                
+            default:
+                [self.activityIndicator stopAnimating];
+                break;
+        }
     }
     
     self.continueRippleMapAnimation = NO;
@@ -2016,7 +2025,7 @@ int PARSE_PAGE_SIZE = 25;
     // create ripple!
     Bellow *bellowSpread = [[Bellow alloc] init];
     bellowSpread.rippleId = @"FakeRippleSpread";
-    bellowSpread.text = @"\nSwipe right to spread post\n\n";
+    bellowSpread.text = @"\nSwipe right to spread posts to more people near you\n\n";
     bellowSpread.imageFile = nil;
     bellowSpread.imageHeight = 0;
     bellowSpread.imageWidth = 0;
@@ -2031,7 +2040,7 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowDismiss = [[Bellow alloc] init];
     bellowDismiss.rippleId = @"FakeRippleDismiss";
-    bellowDismiss.text = @"\nSwipe left to dismiss post\n\n";
+    bellowDismiss.text = @"\nSwipe left to dismiss posts\n\n";
     bellowDismiss.imageFile = nil;
     bellowDismiss.imageHeight = 0;
     bellowDismiss.imageWidth = 0;
@@ -2046,7 +2055,7 @@ int PARSE_PAGE_SIZE = 25;
     
     Bellow *bellowTap = [[Bellow alloc] init];
     bellowTap.rippleId = @"FakeRippleTap";
-    bellowTap.text = @"\nTap post for more details\n\n";
+    bellowTap.text = @"\nTap posts for more details\n\n";
     bellowTap.imageFile = nil;
     bellowTap.imageHeight = 0;
     bellowTap.imageWidth = 0;
@@ -2130,7 +2139,7 @@ int PARSE_PAGE_SIZE = 25;
             // add button to overlay
             UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 75, followingPosts.frame.origin.y + followingPosts.frame.size.height, 150, 60)];
             [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-            [ok setTitle:@"Okay" forState:UIControlStateNormal];
+            [ok setTitle:@"OK" forState:UIControlStateNormal];
             [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
             [ok.layer setCornerRadius:5.0];
@@ -2180,7 +2189,7 @@ int PARSE_PAGE_SIZE = 25;
     
     if ([alertView.title isEqualToString:@"Congratulations"])
     {
-        //    TODO: point to new view controller
+        // point to new view controller
     }
     
     if ([alertView.title isEqualToString:@"Uh Oh!"])

@@ -531,7 +531,7 @@
         // add button to overlay
         UIButton *ok = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 75, 2.56*topPosts.frame.origin.y + topPosts.frame.size.height, 150, 60)];
         [ok setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:156.0/255.0f blue:0.0/255.0f alpha:1.0]];
-        [ok setTitle:@"Okay" forState:UIControlStateNormal];
+        [ok setTitle:@"OK" forState:UIControlStateNormal];
         [ok setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [ok addTarget:self action:@selector(removeFirstRunOverlay) forControlEvents:UIControlEventTouchUpInside];
         [ok.layer setCornerRadius:5.0];

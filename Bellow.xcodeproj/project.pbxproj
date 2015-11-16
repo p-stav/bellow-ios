@@ -1288,6 +1288,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ripple/Flurry",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kefi.Ripple;
 				PRODUCT_NAME = Bellow;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ripple/Ripple-Bridging-Header.h";
@@ -1319,6 +1320,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ripple/Flurry",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kefi.Ripple;
 				PRODUCT_NAME = Bellow;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ripple/Ripple-Bridging-Header.h";

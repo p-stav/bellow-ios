@@ -11,12 +11,12 @@
             <rect key="frame" x="0.0" y="0.0" width="397" height="641"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="step2.png" translatesAutoresizingMaskIntoConstraints="NO" id="XQy-c4-kh9">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="step2.png" translatesAutoresizingMaskIntoConstraints="NO" id="XQy-c4-kh9">
                     <rect key="frame" x="0.0" y="0.0" width="578" height="641"/>
                     <animations/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
-                <view alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zG3-d9-7aS">
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zG3-d9-7aS">
                     <rect key="frame" x="0.0" y="0.0" width="397" height="641"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,8 +59,16 @@
                 <constraint firstItem="69W-Qd-TXz" firstAttribute="top" secondItem="Krl-VA-CNW" secondAttribute="bottom" constant="-4" id="H1l-XZ-ztC"/>
                 <constraint firstItem="Krl-VA-CNW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OmQ-F7-5UG"/>
                 <constraint firstItem="69W-Qd-TXz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SdE-NE-dhi"/>
+                <constraint firstAttribute="trailing" secondItem="XQy-c4-kh9" secondAttribute="trailing" constant="-181" id="Tpl-kL-xaU"/>
+                <constraint firstItem="XQy-c4-kh9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UiX-ED-YKX"/>
+                <constraint firstItem="zG3-d9-7aS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="WXF-wc-aan"/>
+                <constraint firstAttribute="bottom" secondItem="XQy-c4-kh9" secondAttribute="bottom" id="eP3-Un-fRe"/>
+                <constraint firstAttribute="trailing" secondItem="zG3-d9-7aS" secondAttribute="trailing" id="jKh-aJ-plW"/>
+                <constraint firstItem="zG3-d9-7aS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="moa-zH-Ucc"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" id="o2i-jV-xuh"/>
+                <constraint firstAttribute="bottom" secondItem="zG3-d9-7aS" secondAttribute="bottom" id="t1w-jt-CrM"/>
                 <constraint firstAttribute="centerX" secondItem="69W-Qd-TXz" secondAttribute="centerX" id="vVr-TV-Crc"/>
+                <constraint firstItem="XQy-c4-kh9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xrc-Fc-R2g"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

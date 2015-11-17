@@ -1144,7 +1144,7 @@ NSDictionary *socialMediaIconToName;
             UIImageView *followImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap"]];
             [followImg setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 200, 40, 40)];
             
-            UILabel *follow = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 250, followImg.frame.origin.y+ 35, [UIScreen mainScreen].bounds.size.width, 40)];
+            UILabel *follow = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 250, followImg.frame.origin.y+ 35, 320, 40)];
             [follow setUserInteractionEnabled:NO];
             [follow setTextColor:[UIColor colorWithRed:1.0f green:156.0/255.0f blue:0.0f alpha:1.0]];
             [follow setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:14.0]];

@@ -139,7 +139,11 @@
             continueBtn.layer.cornerRadius = 10;
             continueBtn.clipsToBounds = YES;
             
-            UILabel *haveAccount = [[UILabel alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 180, [UIScreen mainScreen].bounds.size.width, 15)];
+            UILabel *haveAccount = [[UILabel alloc] init];
+            if ([UIScreen mainScreen].bounds.size.height <= 480)
+                haveAccount.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 150, [UIScreen mainScreen].bounds.size.width, 15);
+            else
+                haveAccount.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 180, [UIScreen mainScreen].bounds.size.width, 15);
             [haveAccount setText:@"Have an account?"];
             [haveAccount setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:15.0]];
             [haveAccount setTextColor:[UIColor whiteColor]];

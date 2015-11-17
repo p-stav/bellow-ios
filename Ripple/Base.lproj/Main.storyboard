@@ -992,7 +992,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <searchBar contentMode="redraw" fixedFrame="YES" placeholder="search for a user..." translatesAutoresizingMaskIntoConstraints="NO" id="iWE-Cg-Yc7">
+                                                <searchBar contentMode="redraw" placeholder="search for a user..." translatesAutoresizingMaskIntoConstraints="NO" id="iWE-Cg-Yc7">
                                                     <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
                                                     <animations/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1004,6 +1004,11 @@
                                                 </searchBar>
                                             </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstItem="iWE-Cg-Yc7" firstAttribute="leading" secondItem="Utr-y5-gPd" secondAttribute="leading" id="1EF-n2-neb"/>
+                                                <constraint firstAttribute="trailing" secondItem="iWE-Cg-Yc7" secondAttribute="trailing" id="QNC-S3-bd0"/>
+                                                <constraint firstItem="iWE-Cg-Yc7" firstAttribute="centerY" secondItem="Utr-y5-gPd" secondAttribute="centerY" id="ly4-nd-JNU"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
@@ -3548,14 +3553,14 @@ If you have any questions regarding privacy while using the Application, or have
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AcY-H4-hdD"/>
+        <segue reference="9de-MY-sDe"/>
+        <segue reference="d1h-wJ-aQE"/>
+        <segue reference="zDq-cr-Pt1"/>
+        <segue reference="Pwq-H4-Kfq"/>
         <segue reference="ddR-cu-Xrf"/>
         <segue reference="2ux-5b-Cwf"/>
         <segue reference="A5N-Q5-ixn"/>
-        <segue reference="hJL-5N-K1N"/>
         <segue reference="Vjc-ZB-AvE"/>
-        <segue reference="7yi-Va-b1e"/>
-        <segue reference="Chv-7s-49J"/>
-        <segue reference="aHu-cA-FrR"/>
         <segue reference="Wu2-Fk-dQS"/>
         <segue reference="4EZ-l1-4gK"/>
     </inferredMetricsTieBreakers>

@@ -48,9 +48,19 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>1045874098762913</string>
+	<string>${APP_FACEBOOK_ID}</string>
 	<key>FacebookDisplayName</key>
 	<string>Ripple</string>
+	<key>TwitterClientID</key>
+	<string>${APP_TWITTER_ID}</string>
+	<key>TwitterClientSecret</key>
+	<string>${APP_TWITTER_SECRET}</string>
+	<key>FlurryAppID</key>
+	<string>${APP_FLURRY_ID}</string>
+	<key>ParseClientID</key>
+	<string>${PARSE_APP_ID}</string>
+	<key>ParseClientSecret</key>
+	<string>${PARSE_CLIENT_KEY}</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

@@ -369,6 +369,7 @@
 		DAC9F6AC1BF12DAB0025D6C4 /* SocialMediaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaCollectionViewCell.m; sourceTree = "<group>"; };
 		DAC9F6AE1BF12EDB0025D6C4 /* SocialMediaCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaCollectionView.h; sourceTree = "<group>"; };
 		DAC9F6AF1BF12EDB0025D6C4 /* SocialMediaCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaCollectionView.m; sourceTree = "<group>"; };
+		DACC06CF1C0E5FA2009B9475 /* Bellow.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Bellow.xcconfig; sourceTree = "<group>"; };
 		DAD00FDD1B8D4B6600725666 /* InstagramAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InstagramAdd.png; sourceTree = "<group>"; };
 		DADB74FA1BC1A96D00749DAA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		DADB74FB1BC1A96D00749DAA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SearchViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -653,6 +654,7 @@
 		0DFB081C19C17FC700A57630 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DACC06CE1C0E5F7A009B9475 /* Configuration */,
 				DADD00001A818CD300E49BC1 /* TwitterService.h */,
 				DADD00011A818CD300E49BC1 /* TwitterService.m */,
 				DA7B68121ACE0A2600160141 /* FacebookService.h */,
@@ -884,6 +886,14 @@
 				DAC9F6A21BF049010025D6C4 /* OtherUserProfileViewController.m */,
 			);
 			name = "Other User Profile";
+			sourceTree = "<group>";
+		};
+		DACC06CE1C0E5F7A009B9475 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				DACC06CF1C0E5FA2009B9475 /* Bellow.xcconfig */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1267,6 +1277,7 @@
 		};
 		0DFB084519C17FC700A57630 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DACC06CF1C0E5FA2009B9475 /* Bellow.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1299,6 +1310,7 @@
 		};
 		0DFB084619C17FC700A57630 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DACC06CF1C0E5FA2009B9475 /* Bellow.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

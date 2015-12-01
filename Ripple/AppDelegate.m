@@ -34,15 +34,20 @@ BOOL isLaunch;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // access keys from .pList and config file
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSString *twitterClientId = [info objectForKey:@"TwitterClientID"];
+    NSString *twitterClientSecret = [info objectForKey:@"TwitterClientSecret"];
+    NSString *parseClientId = [info objectForKey:@"ParseClientID"];
+    NSString *parseClientSecret = [info objectForKey:@"ParseClientSecret"];
+    NSString *flurryId = [info objectForKey:@"FlurryAppID"];
+    
     [ParseCrashReporting enable];
-    [Parse setApplicationId:@"NYPXQtFR0BBY0TEbfcpgn61l2IGHJXQkrY1bu8PM"
-                  clientKey:@"5y2OJ6lebvn63U7RSeuqfsMOUPmlG7O0LU4h6Yrq"];
+    [Parse setApplicationId:parseClientId clientKey:parseClientSecret];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [Flurry logEvent:@"App_Open"];
-    [PFTwitterUtils initializeWithConsumerKey:@"R66yYLF5hUGn5hiyfefAYUQGj"
-                               consumerSecret:@"QwSqaeMUnHFUXO0JrpqameE6r3aDAliz4jvzfHaqm1X4RCCBgZ"];
-    [Flurry startSession:@"485SSQF645WH6BCQ63QM"];
+    [PFTwitterUtils initializeWithConsumerKey:twitterClientId consumerSecret:twitterClientSecret];
+    [Flurry startSession:flurryId];
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     
     // fabric

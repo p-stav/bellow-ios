@@ -1,0 +1,14 @@
+//
+//  Bellow.xcconfig
+//  Bellow
+//
+//  Created by Paul Stavropoulos on 12/1/15.
+//  Copyright © 2015 Kefi Labs. All rights reserved.
+//
+
+APP_FACEBOOK_ID = 1045874098762913
+APP_TWITTER_ID = R66yYLF5hUGn5hiyfefAYUQGj
+APP_TWITTER_SECRET = QwSqaeMUnHFUXO0JrpqameE6r3aDAliz4jvzfHaqm1X4RCCBgZ
+PARSE_APP_ID = NYPXQtFR0BBY0TEbfcpgn61l2IGHJXQkrY1bu8PM
+PARSE_CLIENT_KEY = 5y2OJ6lebvn63U7RSeuqfsMOUPmlG7O0LU4h6Yrq
+APP_FLURRY_ID = 485SSQF645WH6BCQ63QM

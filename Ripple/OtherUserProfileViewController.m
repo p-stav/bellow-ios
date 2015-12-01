@@ -393,20 +393,20 @@ NSDictionary *socialMediaIconToName;
     
     // set up followers and following and reach
     if (self.currentUser[@"followingNumber"] == nil)
-        [self.followingNum setTitle:@"0" forState:UIControlStateNormal];
+        [self.followersNum setTitle:@"0" forState:UIControlStateNormal];
     else
-        [self.followingNum setTitle:[NSString stringWithFormat:@"%u",[self.currentUser[@"followingNumber"] integerValue]] forState:UIControlStateNormal];
+        [self.followersNum setTitle:[NSString stringWithFormat:@"%u",[self.currentUser[@"followingNumber"] integerValue]] forState:UIControlStateNormal];
     
     [self.followingLabel setTitle:@"following" forState:UIControlStateNormal];
     
-    NSArray *followers = [NSArray arrayWithArray:self.currentUser[@"following"]];
-    int followerscount = [followers count];
-    [self.followersNum setTitle:[NSString stringWithFormat:@"%d", followerscount] forState :UIControlStateNormal];
+    NSArray *following = [NSArray arrayWithArray:self.currentUser[@"following"]];
+    int followingCount = [following count];
+    [self.followingNum setTitle:[NSString stringWithFormat:@"%d", followingCount] forState :UIControlStateNormal];
     
-    if ([self.followingNum.titleLabel.text isEqualToString:@"1"])
-        [self.followingLabel setTitle:@"follower" forState:UIControlStateNormal];
+    if ([self.followersNum.titleLabel.text isEqualToString:@"1"])
+        [self.followersLabel setTitle:@"follower" forState:UIControlStateNormal];
     else
-        [self.followingLabel setTitle:@"followers" forState:UIControlStateNormal];
+        [self.followersLabel setTitle:@"followers" forState:UIControlStateNormal];
     
     if (self.currentUser[@"reach"] != nil)
         [self.reachValue setTitle:[NSString stringWithFormat:@"%ld", [self.currentUser[@"reach"] integerValue]] forState:UIControlStateNormal];
@@ -880,6 +880,9 @@ NSDictionary *socialMediaIconToName;
 - (void)refreshList
 {
     [self updateView];
+    
+    // call service and update table
+    [self.refreshControl endRefreshing];
 }
 
 - (void)checkRemainingRipples
@@ -1043,10 +1046,10 @@ NSDictionary *socialMediaIconToName;
         [self.followingNum setTitle:[NSString stringWithFormat:@"%d",[self.currentUser[@"followingNumber"]integerValue]] forState:UIControlStateNormal];
     }
     
-    if ([self.followingNum.titleLabel.text isEqualToString:@"1"])
-        [self.followingLabel setTitle:@"follower" forState:UIControlStateNormal];
+    if ([self.followersNum.titleLabel.text isEqualToString:@"1"])
+        [self.followersLabel setTitle:@"follower" forState:UIControlStateNormal];
     else
-        [self.followingLabel setTitle:@"followers" forState:UIControlStateNormal];
+        [self.followersLabel setTitle:@"followers" forState:UIControlStateNormal];
     
     [[PFUser currentUser] saveInBackground];
     

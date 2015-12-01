@@ -70,20 +70,6 @@ NSString *defaultString;
 UIImagePickerController *picker;
 
 
-
-- (IBAction)unwindToStartRippleView:(UIStoryboardSegue *)segue {
-    
-    /* if ([segue.identifier isEqualToString:@"UnwindToCameraAfterSnipe"])
-    {
-        if ([segue.sourceViewController isKindOfClass:[SnipeSubmitView class]])
-        {
-            SnipeSubmitView *ssv = (SnipeSubmitView *)segue.sourceViewController;
-            self.goToGameId = ssv.selectedGameId;
-        }
-    } 
-    */
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -130,20 +116,6 @@ UIImagePickerController *picker;
     
     [PFAnalytics trackEvent:@"StartARippleLoaded" dimensions:nil];
     
-    // remove twitter account ***DANGER***
-    /*
-    [PFTwitterUtils unlinkUserInBackground:[PFUser currentUser] block:^(BOOL succeeded, NSError *error) {
-        if (!error && succeeded) {
-            NSLog(@"The user is no longer associated with their Twitter account.");
-        }
-    }];
-    */
-    
-    // remove facebook  account ***DANGER***
-    /*
-    [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
-    */
-    
     // set bools to correct value
     self.postToTwitterOrNah = NO;
     self.postToFacebookOrNah = NO;
@@ -167,7 +139,6 @@ UIImagePickerController *picker;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"goToProfile" object:nil];
         
         // series of checks to make sure we don't ripple dumb things
-        // don't ripple nothing or space
         if (([self.rippleTextView.text isEqualToString:@" "] || [self.rippleTextView.text isEqualToString:@""] || [self.rippleTextView.text isEqualToString:@"  "] || [self.rippleTextView.text isEqualToString:@"   "] || [self.rippleTextView.text isEqualToString:defaultString]))
         {
             UIAlertView *needTextAlert = [[UIAlertView alloc] initWithTitle:@"Empty ripple" message:@"You must enter text!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -184,13 +155,7 @@ UIImagePickerController *picker;
         else
             [self rippleAnimation];
         
-       
-        
         [self endEditing];
-        
-        
-        
-        
 
         // user settings to determine if sent first ripple
         // 1 = just sent first Bellow, 2 = already sent it
@@ -282,22 +247,14 @@ UIImagePickerController *picker;
     for (int i = 0; i < 5; i ++)
     {
         
-        UIView *outerCircle = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x - 1.1,
-                                                                       100 - 1.1,
-                                                                       2.2,
-                                                                       2.2)];
+        UIView *outerCircle = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x - 1.1,100 - 1.1,2.2,2.2)];
         outerCircle.alpha = 0.3;
         outerCircle.layer.cornerRadius = 1.1;
         
         
-        UIView *innerCircle = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x - 1,
-                                                                       100 - 1,
-                                                                       2,
-                                                                       2)];
+        UIView *innerCircle = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x - 1,100 - 1,2,2)];
         innerCircle.alpha = 0.3;
         innerCircle.layer.cornerRadius = 1;
-        
-        
         
         
         [self.view addSubview:outerCircle];
@@ -627,39 +584,6 @@ UIImagePickerController *picker;
     }
 }
 
-
-/*
- - (void) postFbMessage
-{
-    if (!self.postToFbOrNah)
-    {
-        self.postToFbOrNah = YES;
-        
-        if (![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
-        {
-            //sign up with facebook!
-            [PFFacebookUtils linkUser:[PFUser currentUser] permissions:@[@"publish_actions"] block:^(BOOL succeeded, NSError *error) {
-                if(succeeded)
-                {
-                    NSLog(@"woohoo, loggedin w/ fb");
-                    [self redisplayTable];
-                }
-                else
-                    NSLog(@"%@", error);
-            }];
-        }
-        
-        [self redisplayTable];
-    }
-    
-    else
-    {
-        self.postToFbOrNah = NO;
-        [self redisplayTable];
-    }
-}
-*/
-
 - (void)sendTweet
 {
     if ([PFTwitterUtils isLinkedWithUser:[PFUser currentUser]])
@@ -714,17 +638,6 @@ UIImagePickerController *picker;
     }
 }
 
-/*
-- (void)sendFbMessage
-{
-    if ([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
-    {
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [FacebookService postMessage:self.rippleTextView.text withImage:self.originalImage];
-        });
-    }
-}
-*/
 - (IBAction)dismissModalView:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

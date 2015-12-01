@@ -51,7 +51,6 @@
 
 // int PARSE_PAGE_SIZE = 25;
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"MapViewSegue"]) {
@@ -99,20 +98,6 @@
     [titleView addSubview:titleLabel];
     self.navigationItem.titleView = titleView;
     [self.navigationItem.titleView setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.navigationController.navigationBar.frame.size.height/2)];
-
-    /*
-    UIView *titleView = [[UIView alloc] initWithFrame: CGRectMake(0,40,[UIScreen mainScreen].bounds.size.width - 80, 44)];
-    self.searchField = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, titleView.frame.size.width, titleView.frame.size.height)];
-    [self.searchField setBackgroundImage:[UIImage new]];
-    [self.searchField setTranslucent:YES];
-    [self.searchField setPlaceholder:@"search for a user..."];
-    [self.searchField setTintColor:[UIColor whiteColor]];
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor colorWithRed:3.0/255.0f green:123.0f/255 blue:255.0f/255 alpha:1.0]];
-    
-    [self.searchDisplayController.searchBar setSearchBarStyle:UISearchBarStyleMinimal];
-    [titleView addSubview:self.searchField];
-    self.navigationItem.titleView = titleView;
-    */
     
     
     // delegates and table setup
@@ -236,41 +221,6 @@
     
     return [self.trendingRipples count];
 }
-
-/*
--(UIView *)CollectionView
-{
-    UILabel *myLabel = [[UILabel alloc] init];
-    myLabel.frame = CGRectMake(10, 5, [UIScreen mainScreen].bounds.size.width-40, 20);
-    myLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:14];
-    
-    // text
-    if (self.isSearching)
-        myLabel.text = [NSString stringWithFormat:@"search results for \"%@\"",self.searchField.text];
-    
-    else
-    {
-        if ([[PFUser currentUser][@"following"] count] != 1)
-            myLabel.text = [NSString stringWithFormat:@"following %u people", [[PFUser currentUser][@"following"] count]];
-        else
-            myLabel.text = [NSString stringWithFormat:@"following %u person", [[PFUser currentUser][@"following"] count]];
-    }
-
-    
-    UIView *headerView = [[UIView alloc] init];
-    [headerView setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
-    [headerView addSubview:myLabel];
-    
-    
-    return headerView;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 30;
-}
- */
 
 - (TrendingCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -451,7 +401,7 @@
     {
         if (buttonIndex == 1)
         {
-            NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Bellow and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getRipple.io" , [PFUser currentUser][@"username"]];
+            NSString *shareText = [NSString stringWithFormat:@"Hey, I just downloaded the app Bellow and you should also try it out! Use my referral code \"%@\" to get 200 points when you sign in. Download it on the iOS or Google Play store, or at www.getBellow.com" , [PFUser currentUser][@"username"]];
             
             UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:shareText];
             [self presentViewController:shareController animated:YES completion:nil];
@@ -548,7 +498,6 @@
         
         UIImageView *tapImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tap.png"]];
         [tapImage setFrame:CGRectMake(tap.frame.origin.x - 40, tap.frame.origin.y + 2, 40, 40)];
-
         [self.overlay addSubview:tap];
         [self.overlay addSubview:tapImage];
         [self.overlay addSubview:topPosts];
@@ -566,20 +515,5 @@
     [self.collectionView reloadData];
 }
 
-/*- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
- {
- UICollectionReusableView *reusableview = nil;
- 
- if (kind == UICollectionElementKindSectionHeader)
- {
- HeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"sectionHeader" forIndexPath:indexPath];
- 
- [headerView.headerLabel setText:@"Trending Ripples:"];
- 
- reusableview = headerView;
- }
- 
- return reusableview;
- }
- */
+
 @end

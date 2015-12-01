@@ -949,12 +949,7 @@
     [Flurry logEvent:@"Ripple_Spread" withParameters:[NSDictionary dictionaryWithObject:@"map_view" forKey:@"feed"]];
     
     [UIView animateWithDuration:0.4 animations:^{
-        /*
-         self.dismissButton.frame = CGRectMake(22, 0, 40, 40);
-         self.propagateButton.frame = CGRectMake(22, 0, 40, 40);
-         self.dismissButtonRightConstraint.constant = 22;
-         self.propagateButtonLeftConstraint.constant = 22;
-         */
+
     }completion:^(BOOL finished) {
         
         [UIView animateWithDuration:0.3 animations:^{
@@ -988,12 +983,6 @@
     
     
     [UIView animateWithDuration:0.3 animations:^{
-        /*
-         self.dismissButton.frame = CGRectMake(22, 0, 40, 40);
-        self.propagateButton.frame = CGRectMake(22, 0, 40, 40);
-        self.dismissButtonRightConstraint.constant = 22;
-        self.propagateButtonLeftConstraint.constant = 22;
-         */
         
     }completion:^(BOOL finished) {
         [UIView animateWithDuration:0.3 animations:^{
@@ -1095,13 +1084,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     // move commentUnderlay accordingly
-    /*
-    CGFloat difference = scrollView.contentOffset.y - self.lastContentOffset;
-    // self.topHeaderUnderlayTopConstraint.constant = self.topHeaderUnderlayTopConstraint.constant - difference;
-    
-     if (!self.noCommentsLabel.isHidden)
-        self.noCommentsLabelTopConstraint.constant = self.noCommentsLabelTopConstraint.constant - difference;
-    */
     self.contentOffset = scrollView.contentOffset.y;
     
 }
@@ -1171,9 +1153,7 @@
     
 
     // there is an image and text
-
-    
-    NSString *shareText = [NSString stringWithFormat:@"%@ - Shared on Bellow by %@; http://www.getripple.io/ripple.html?id=%@", self.ripple.text,self.ripple.creatorName, self.ripple.rippleId];
+    NSString *shareText = [NSString stringWithFormat:@"%@ - Shared on Bellow by %@; http://www.getBellow.com/ripple.html?id=%@", self.ripple.text,self.ripple.creatorName, self.ripple.rippleId];
     
     if (self.ripple.imageFile)
     {
@@ -1434,7 +1414,6 @@
         self.leftSpreadCommentViewConStraint.constant = 0;
         
         // border image
-        // [self.outerImageFile.layer setCornerRadius:5.0];
         [self.outerImageFile.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
         [self.outerImageFile.layer setBorderWidth:1.0];
         
@@ -1524,12 +1503,6 @@
     [tapRecognizerMoreInfo setDelegate:self];
     [self.topTableViewHeader addGestureRecognizer:tapRecognizerMoreInfo];
     
-    // add selector for mapOverlayView Once and tableview once
-    /*self.tapMapOverlayOnce = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(PressMapOverlayOnce:)];
-    [self.tapMapOverlayOnce setNumberOfTapsRequired:1];
-    [self.tapMapOverlayOnce setDelegate:self];
-    [self.mapOverlayView addGestureRecognizer:self.tapMapOverlayOnce];*/
-    
     // add selector for map
     self.tapRecognizerMap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(PressMapView:)];
     [self.tapRecognizerMap setNumberOfTapsRequired:1];
@@ -1568,14 +1541,6 @@
     
     return NO;
 }
-
-/*- (void) PressMapOverlayOnce: (id)sender
-{
-    if (!self.didTapMapOverlayOnce)
-        [self showHideMapToggle:sender];
-    
-    [self.mapOverlayView removeGestureRecognizer:self.tapMapOverlayOnce];
-}*/
 
 - (void)PressMoreInfoView:(id)sender
 {

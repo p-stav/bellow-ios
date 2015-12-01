@@ -739,7 +739,6 @@ int PARSE_PAGE_SIZE = 25;
     
     [self.tableView reloadData];
     [self updateViewConstraints];
-    [self ChangeColorOfSegment:self.rippleSegmentControl];
     [self.activityIndicator stopAnimating];
     
     if (self.selectedRippleArray.count > 0)
@@ -764,20 +763,6 @@ int PARSE_PAGE_SIZE = 25;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self setPropagatedCell:tableView withIndexPath:indexPath];
-    
-    /*
-    switch (self.rippleSegmentControl.selectedSegmentIndex)
-    {
-        // Pending ripples
-        case 0:
-            return [self setPropagatedCell:tableView withIndexPath:indexPath];
-            break;
-        // My ripples
-        default:
-            return [self setMyRippleCell:tableView withIndexPath:indexPath];
-            break;
-    }
-    */
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -1314,7 +1299,7 @@ int PARSE_PAGE_SIZE = 25;
         return;
     }
     
-    if (self.rippleSegmentControl.selectedSegmentIndex ==0)
+    if (self.rippleSegmentControl.selectedSegmentIndex == 0)
         [BellowService dismissRipple:ripple];
     else
         [BellowService dismissSwipeableRipple:ripple];
@@ -1426,11 +1411,6 @@ int PARSE_PAGE_SIZE = 25;
             [AGPushNoteView setMessageAction:^(NSString *message) {
             }];
         }
-        
-        /*else if (spreadFirstRippleCheck == 3) {
-            UIAlertView *tapOnRipple = [[UIAlertView alloc]initWithTitle:@"Tap on a Bellow!" message:@"See a map of where that ripple has spread and leave a comment"delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [tapOnRipple show];
-        }*/
         
         else if (spreadFirstRippleCheck == 50) {
             
@@ -1544,6 +1524,8 @@ int PARSE_PAGE_SIZE = 25;
     }
 }
 
+
+// check to see if we update view with number of points 
 -(void)referralAlert:(NSNotification *)notification {
     
     NSNumber *referral = (NSNumber *)[notification object];
@@ -1855,26 +1837,6 @@ int PARSE_PAGE_SIZE = 25;
     
     //set notifications badge number on load
     [self addNotificationsBadge];
-}
-
-- (void)ChangeColorOfSegment:(UISegmentedControl *)segmentControl
-{
-    /*
-    [self.rippleSegmentControl setImage:[ImageCropping imageWithImage:[UIImage imageNamed:@"unselectedFeed.png"] scaledToSize:CGSizeMake(self.rippleSegmentControl.frame.size.height, self.rippleSegmentControl.frame.size.height) withColor:[UIColor colorWithWhite:1.0 alpha:0.45]] forSegmentAtIndex:0];
-    [self.rippleSegmentControl setImage:[ImageCropping imageWithImage:[UIImage imageNamed:@"unselectedTrending.png"] scaledToSize:CGSizeMake(self.rippleSegmentControl.frame.size.height, self.rippleSegmentControl.frame.size.height) withColor:[UIColor colorWithWhite:1.0 alpha:0.45]] forSegmentAtIndex:1];
-    
-    
-    
-    if (self.rippleSegmentControl.selectedSegmentIndex == 0)
-        
-        [self.rippleSegmentControl setImage:[ImageCropping imageWithImage:[UIImage imageNamed:@"unselectedTrending.png"] scaledToSize:CGSizeMake(self.rippleSegmentControl.frame.size.height, self.rippleSegmentControl.frame.size.height) withColor:[UIColor colorWithWhite:1.0 alpha:1.0]]  forSegmentAtIndex:1];
-    
-    
-    [self.rippleSegmentControl.layer setZPosition:10.0];
-    [self.tableView.layer setZPosition:1.0];
-    [self.view setNeedsLayout];
-     
-    */
 }
 
 - (void)refreshList
@@ -2220,7 +2182,7 @@ int PARSE_PAGE_SIZE = 25;
         
         if (buttonIndex == 1)
         {
-            UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:[NSString stringWithFormat:@"I'm now a %@ on Bellow. Check it out! http://getRipple.io @RippleMeThis", [PFUser currentUser][@"reachLevel"]]];
+            UIActivityViewController *shareController = [ShareRippleSheet shareRippleSheet:[NSString stringWithFormat:@"I'm now a %@ on Bellow. Check it out! http://getBellow.com, @getBellow", [PFUser currentUser][@"reachLevel"]]];
             
             [self presentViewController:shareController animated:YES completion:nil];
             
@@ -2265,54 +2227,6 @@ int PARSE_PAGE_SIZE = 25;
 - (void)notifyNewRipple:(NSNotification *)notification {
     
     [self.tabBarController setSelectedIndex:4];
-
-    
-    
-    /*// determine if this was first ripple user sent
-    NSUserDefaults *userData = [NSUserDefaults standardUserDefaults];
-    
-    NSNumber *sentFirstRipple = [userData objectForKey:@"sentFirstRipple"];
-    int sentFirstRippleCheck = [sentFirstRipple intValue];
-    
-    // if we recently updated, return
-    if ([PFUser currentUser][@"score"] <[NSNumber numberWithInt:3] && sentFirstRippleCheck != 2)
-    {
-        //increment point
-        [[PFUser currentUser] incrementKey:@"score"];
-        [[PFUser currentUser] saveInBackground];
-        
-        
-        // show alert saying you got a point, and take to user page
-        UIAlertView *sentFirstRipple = [[UIAlertView alloc] initWithTitle:@"Congratulations" message:@"You just sent a ripple. Here's a point! Read more about points here" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        
-        [sentFirstRipple show];
-        
-         [userData setObject:[NSNumber numberWithInteger:2] forKey:@"sentFirstRipple"];
-         [userData synchronize];
-    }
-    
-    // if 15 ripples, ask for  a review
-    if (sentFirstRippleCheck == 3)
-    {
-        UIAlertView *reviewRipple = [[UIAlertView alloc] initWithTitle:@"Review Bellow" message:@"Enjoying Bellow? Rate and review us!" delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Rate or review", nil];
-        
-        [Flurry logEvent:@"Ask_For_Review"];
-        
-        [reviewRipple show];
-    }*/
-    
-    // DELETE AFTER VIDEO:
-    /*
-     [AGPushNoteView showWithNotificationMessage:[NSString stringWithFormat:@"You have new ripples"]];
-     
-     [AGPushNoteView setMessageAction:^(NSString *message) {
-     self.selectedRippleArray = self.pendingRipples;
-     
-     [self.rippleSegmentControl setSelectedSegmentIndex:1];
-     [self chosenRippleSegmentChanged:nil];
-     
-     }];
-     */
 }
 
 

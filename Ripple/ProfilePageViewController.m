@@ -505,20 +505,20 @@ UIImagePickerController *picker;
             
             // set up followers and following, and reach
             if (self.currentUser[@"followingNumber"] == nil)
-                [self.followingNum setTitle:@"0" forState:UIControlStateNormal];
+                [self.followersNum setTitle:@"0" forState:UIControlStateNormal];
             else
-                [self.followingNum setTitle:[NSString stringWithFormat:@"%u",[self.currentUser[@"followingNumber"] integerValue]] forState:UIControlStateNormal];
+                [self.followersNum setTitle:[NSString stringWithFormat:@"%u",[self.currentUser[@"followingNumber"] integerValue]] forState:UIControlStateNormal];
+            
+            if ([self.followersNum.titleLabel.text isEqualToString:@"1"])
+                [self.followersLabel setTitle:@"follower" forState:UIControlStateNormal];
+            else
+                [self.followersLabel setTitle:@"followers" forState:UIControlStateNormal];
+            
             
             [self.followingLabel setTitle:@"following" forState:UIControlStateNormal];
-            
-            NSArray *followers = [NSArray arrayWithArray:self.currentUser[@"following"]];
-            int followerscount = [followers count];
-            [self.followersNum setTitle:[NSString stringWithFormat:@"%d", followerscount] forState :UIControlStateNormal];
-            
-            if ([self.followingNum.titleLabel.text isEqualToString:@"1"])
-                [self.followingLabel setTitle:@"follower" forState:UIControlStateNormal];
-            else
-                [self.followingLabel setTitle:@"followers" forState:UIControlStateNormal];
+            NSArray *following = [NSArray arrayWithArray:self.currentUser[@"following"]];
+            int followingcount = [following count];
+            [self.followingNum setTitle:[NSString stringWithFormat:@"%d", followingcount] forState :UIControlStateNormal];
             
             if (self.currentUser[@"reach"] != nil)
                 [self.reachValue setTitle:[NSString stringWithFormat:@"%ld", [[PFUser currentUser][@"reach"] integerValue]] forState:UIControlStateNormal];
@@ -565,7 +565,7 @@ UIImagePickerController *picker;
             // set about and interests text and height
             if ([PFUser currentUser][@"aboutMe"] == nil || [[PFUser currentUser][@"aboutMe"] length] == 0)
             {
-                [self.aboutText setText:@"Tap to add a description about yourself"];
+                [self.aboutText setText:@"Add a description about yourself"];
                 [self.aboutText setTextColor:[UIColor grayColor]];
             }
             else
@@ -577,7 +577,7 @@ UIImagePickerController *picker;
             
             if ([PFUser currentUser][@"interests"] == nil || [[PFUser currentUser][@"interests"] length] == 0)
             {
-                [self.interestText setText:@"Tap to add interests"];
+                [self.interestText setText:@"Add your interests"];
                 [self.interestText setTextColor:[UIColor grayColor]];
             }
             else

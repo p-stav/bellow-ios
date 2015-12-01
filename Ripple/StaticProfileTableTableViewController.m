@@ -41,7 +41,7 @@
 
 - (IBAction)feedbackButtonPressed:(id)sender
 {
-    NSString *urlString = @"mailto:wellRippleMeThis@gmail.com?subject=Feedback%20On%20Ripple";
+    NSString *urlString = @"mailto:getBellow@gmail.com?subject=Feedback%20On%20Ripple";
     NSURL *url = [NSURL URLWithString:urlString];
     [[UIApplication sharedApplication] openURL:url];
 }
@@ -64,7 +64,7 @@
     //sharae to website
     UIStoryboard *mainstoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     WebViewViewController *wvc = [mainstoryboard instantiateViewControllerWithIdentifier:@"WebViewController"];
-    wvc.url = [NSURL URLWithString:@"http://www.getripple.io/faq.html"];
+    wvc.url = [NSURL URLWithString:@"http://www.getBellow.com/faq.html"];
     
     [self presentViewController:wvc animated:YES completion:nil];
     
@@ -86,6 +86,7 @@
     }
     
 }
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if ([alertView.title isEqualToString:@"Woohoo!"])
@@ -124,10 +125,6 @@
                     else
                     {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReferralAlert" object:[NSNumber numberWithInt: self.referralNum]];
-                        
-                        //UIAlertView *referralPoints = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:[NSString stringWithFormat:@"You've just earned %d points. Invite your friends to earn more", self.referralNum] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Invite", nil];
-                        
-                        //[referralPoints show];
                     }
                     
                 });

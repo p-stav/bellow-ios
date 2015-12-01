@@ -172,21 +172,6 @@
             [self.tosButton setHidden:NO];
             [self.privacyButton setHidden:NO];
             [self.andLabel setHidden:NO];
-
-            
-            /*
-            UITextView *comment = [[UITextView alloc] initWithFrame:CGRectMake(frame.origin.x + 8, self.imageView0.frame.origin.y - 60, self.view.frame.size.width - 8, 120)];
-            [comment setEditable:NO];
-            [comment setSelectable:NO];
-            
-            [comment setText:@"Tap a ripple to see a map of where it spread."];
-            [comment setTextColor:[UIColor whiteColor]];
-            [comment setBackgroundColor:[UIColor clearColor]];
-            [comment setFont:[UIFont fontWithName:@"Avenir-Roman" size:18.0]];
-            [comment setTextAlignment:NSTextAlignmentCenter];
-            
-            [self.tutorialScrollView addSubview:comment];
-            */
         }
         
         if (i == 1)

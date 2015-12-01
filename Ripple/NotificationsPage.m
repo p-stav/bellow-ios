@@ -104,7 +104,6 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 1;
@@ -212,35 +211,14 @@
     // call service and update table
     [self.refreshControl endRefreshing];
     
-    // [self.noRipplesTextView setHidden:YES];
-    // [self.tableView setAlpha:1.0];
-    
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Add code here to do background processing
         self.notificationArray = [BellowService getNotifications];
 
         dispatch_async( dispatch_get_main_queue(), ^{
-           /* if ([self.selectedRippleArray count] > 0)
-                [self.noRipplesTextView setHidden:YES];
-            else
-            {
-                [self displayNoRipplesViewForSort];
-            }
-            */
             
             if ([self.notificationArray count] == 0) {
-                // show noripplestextview
-                /*self.noNotificationsText = [[UITextView alloc] initWithFrame:CGRectMake(16, self.tableView.frame.origin.y + 100, [UIScreen mainScreen].bounds.size.width - 32, 300)];
-                [self.noNotificationsText setUserInteractionEnabled:NO];
-                [self.noNotificationsText setScrollEnabled:NO];
-                [self.noNotificationsText setBackgroundColor:[UIColor clearColor]];
-                [self.noNotificationsText setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:25]];
-                [self.noNotificationsText setTextAlignment:NSTextAlignmentCenter];
-                [self.noNotificationsText setTextColor:[UIColor blackColor]];
-                [self.noNotificationsText setText:@"You have no notifications"];
-                [self.view addSubview:self.noNotificationsText];*/
                 [self.tableView reloadData];
-                
             }
             else
             {

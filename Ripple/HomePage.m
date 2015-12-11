@@ -82,14 +82,6 @@ int PARSE_PAGE_SIZE = 25;
 
 @synthesize locationManager;
 
-- (NSMutableArray *)pendingRipples
-{
-    if (!_pendingRipples)
-    {
-        _pendingRipples = [[NSMutableArray alloc] init];
-    }
-    return _pendingRipples;
-}
 
 - (IBAction)unwindToPropagateRippleTableView:(UIStoryboardSegue *)segue
 {
@@ -145,11 +137,6 @@ int PARSE_PAGE_SIZE = 25;
 
 - (void) goToImageView: (Bellow *)ripple
 {
-    /*if (ripple.imageFile)
-    {
-        [self performSegueWithIdentifier:@"RippleImageView" sender:ripple];
-        [Flurry logEvent:@"Image_Open_Feed"];
-    }*/
     
     [self goToMapView:ripple withComments:YES];
 }
@@ -530,8 +517,6 @@ int PARSE_PAGE_SIZE = 25;
                 {
                     self.isAllHomeRipples = NO;
                 }
-                
-                
                 break;
                 
              
@@ -651,8 +636,6 @@ int PARSE_PAGE_SIZE = 25;
             if (self.continueRippleMapAnimation)
                 [self.view insertSubview:circle belowSubview:groundZeroCircle];
             [self.circles addObject:circle];
-            
-            
         }
         
     });
@@ -694,7 +677,6 @@ int PARSE_PAGE_SIZE = 25;
         {
             [self.circles[i] removeFromSuperview];
         }
-        
     });
 }
 

@@ -3552,16 +3552,16 @@ If you have any questions regarding privacy while using the Application, or have
         <image name="userSilhouette.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wu2-Fk-dQS"/>
-        <segue reference="AcY-H4-hdD"/>
-        <segue reference="Pwq-H4-Kfq"/>
-        <segue reference="sDS-I7-BZ3"/>
-        <segue reference="jCm-i5-TEx"/>
-        <segue reference="KDg-TI-RSI"/>
-        <segue reference="ddR-cu-Xrf"/>
         <segue reference="2ux-5b-Cwf"/>
         <segue reference="Ubg-9a-Zfa"/>
         <segue reference="A5N-Q5-ixn"/>
+        <segue reference="Pwq-H4-Kfq"/>
+        <segue reference="sDS-I7-BZ3"/>
+        <segue reference="KDg-TI-RSI"/>
+        <segue reference="jCm-i5-TEx"/>
+        <segue reference="ddR-cu-Xrf"/>
         <segue reference="4EZ-l1-4gK"/>
+        <segue reference="ZkM-ej-zwb"/>
+        <segue reference="Wu2-Fk-dQS"/>
     </inferredMetricsTieBreakers>
 </document>

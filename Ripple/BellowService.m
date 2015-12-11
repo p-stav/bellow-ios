@@ -788,8 +788,6 @@
                  NSString *pictureURL = [NSString stringWithFormat:@"%@",[result objectForKey:@"picture"][@"data"][@"url"]];
                  NSData  *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:pictureURL]];
                  
-                 // TODO: RESIZE
-                 
                  
                  PFFile *imgFile = [PFFile fileWithName:@"profile.jpg" data:data];
                  [[PFUser currentUser]setObject:imgFile forKey:@"profileImg"];
